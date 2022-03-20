@@ -1,7 +1,12 @@
 import React from "react";
+import Link from "next/link";
 
 const contact = () => {
-  return <div>contact</div>;
+  return (
+    <Link href="/">
+      <a>Home</a>
+    </Link>
+  );
 };
 
 export default contact;
