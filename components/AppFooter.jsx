@@ -1,7 +1,28 @@
-import React from "react";
+import { Box, Container, Typography, useTheme } from "@mui/material";
+import { useState } from "react";
+import SocialLinks from "./SocialLinks";
 
 const AppFooter = () => {
-  return <div>AppFooter</div>;
+  const [year] = useState(new Date().getFullYear());
+  const theme = useTheme();
+  const { palette } = theme;
+  return (
+    <Box sx={{ backgroundColor: palette.primary.main }}>
+      <Container>
+        <SocialLinks />
+        <Box
+          sx={{ textAlign: "center", borderTop: "solid 1px #e5e8eb40", p: 3 }}
+        >
+          <Typography
+            variant="caption"
+            sx={{ color: palette.primary.contrastText }}
+          >
+            Resolutio © Copyright {year}. All Rights Reserved.
+          </Typography>
+        </Box>
+      </Container>
+    </Box>
+  );
 };
 
 export default AppFooter;
