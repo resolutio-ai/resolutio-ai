@@ -30,7 +30,6 @@ const AppHeader = () => {
   };
 
   return (
-    // <ThemeProvider theme={lightTheme}>
     <AppBar position="sticky">
       <Container className="AppBar">
         <Toolbar disableGutters>
@@ -107,7 +106,6 @@ const AppHeader = () => {
         </Toolbar>
       </Container>
     </AppBar>
-    // </ThemeProvider>
   );
 };
 export default AppHeader;
