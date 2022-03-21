@@ -27,6 +27,7 @@ const SocialLinks = () => {
         <Box
           component="a"
           sx={{ mx: 2 }}
+          target="_blank"
           href="https://twitter.com/resolutio_nft"
         >
           <TwitterIcon sx={styles.iconStyle} fontSize="large" />
@@ -34,11 +35,17 @@ const SocialLinks = () => {
         <Box
           component="a"
           sx={{ mx: 2 }}
+          target="_blank"
           href="https://www.linkedin.com/company/dec-resolutio/"
         >
           <Image src={Discord} alt="discord" height="35" />
         </Box>
-        <Box component="a" sx={{ mx: 2 }} href="">
+        <Box
+          component="a"
+          sx={{ mx: 2 }}
+          target="_blank"
+          href="https://www.linkedin.com/company/dec-resolutio/"
+        >
           <LinkedInIcon sx={styles.iconStyle} fontSize="large" />
         </Box>
         <Box component="a" sx={{ mx: 2 }} href="mailto:resolutio.zs@gmail.com">

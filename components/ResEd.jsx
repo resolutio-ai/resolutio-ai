@@ -15,6 +15,7 @@ const ResEd = () => {
     {
       id: 1,
       title: "PFP NFTs — what rights do they give you ?",
+      link: "https://medium.com/resolutio-nft/pfp-nfts-what-rights-do-they-give-you-d523e2baffe7",
       description:
         "To help you understand rights associated with PFP NFTs, we decrypt licenses of three top PFP NFT projects.",
       imageURL: "https://cdn-images-1.medium.com/max/400/0*kDDbRnbeXWw7MRrl",
@@ -22,6 +23,7 @@ const ResEd = () => {
     {
       id: 2,
       title: "Confused about your NFT rights ?",
+      link: "https://medium.com/resolutio-nft/confused-about-your-nft-rights-e31242d5c714",
       description:
         "To help you understand rights associated with PFP NFTs, we decrypt licenses of three top PFP NFT projects.",
       imageURL:
@@ -30,6 +32,7 @@ const ResEd = () => {
     {
       id: 3,
       title: "Death of the NFT Artist",
+      link: "https://medium.com/resolutio-nft/death-of-the-nft-artist-f9dcc7fdd087",
       description:
         "To help you understand rights associated with PFP NFTs, we decrypt licenses of three top PFP NFT projects.",
       imageURL: "https://cdn-images-1.medium.com/max/400/0*yBv6PZWFaFHmsOjm",
@@ -52,7 +55,10 @@ const ResEd = () => {
                 sm={4}
                 xs={12}
                 key={article.id}
-                sx={{ display: "flex" }}
+                sx={{ display: "flex", textDecoration: "none" }}
+                component="a"
+                href={article.link}
+                target="_blank"
               >
                 <Card>
                   <CardActionArea>
