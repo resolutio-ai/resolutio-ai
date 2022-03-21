@@ -9,9 +9,6 @@ import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import * as React from "react";
 
-// import './AppHeader.css'
-
-// const pages = ['Home', 'Res Educate', 'Community'];
 const pages = [
   { text: "home", url: "/" },
   { text: "Res Educate", url: "/about" },
@@ -27,16 +24,9 @@ const AppHeader = () => {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   return (
