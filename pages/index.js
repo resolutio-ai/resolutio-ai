@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import OurTeam from "../components/OurTeam";
+import ResEd from "../components/ResEd";
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
       <Link href="/contact">
         <a>Contact</a>
       </Link>
+      <ResEd />
       <OurTeam />
     </div>
   );

@@ -6,7 +6,7 @@ import Zarreen from "../public/zarreen.jpg";
 
 const OurTeam = () => {
   return (
-    <Box sx={{ textAlign: "center", my: 4 }}>
+    <Box sx={{ textAlign: "center", my: 12 }}>
       <Typography variant="h5">Meet Our Team</Typography>
       <Box sx={{ mt: 2, display: "flex", justifyContent: "center" }}>
         <Box sx={{ mr: 2 }}>
