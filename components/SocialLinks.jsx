@@ -6,39 +6,24 @@ import Image from "next/image";
 import React from "react";
 import Discord from "../public/social/discord.svg";
 
-const useStyles = (palette) => ({
+const useStyles = (theme) => ({
   textLine: {
-    display: "flex",
-    alignItems: "center",
-    color: palette.primary.contrastText,
-    "&::before": {
-      content: '""',
-      flex: "1 1",
-      borderBottom: "solid 1px #e5e8eb40",
-      marginRight: "10px",
-    },
-    "&::after": {
-      content: '""',
-      flex: "1 1",
-      borderBottom: "solid 1px #e5e8eb40",
-      marginLeft: "10px",
-    },
+    color: theme.palette.primary.contrastText,
   },
   iconStyle: {
-    color: "white",
+    color: theme.palette.primary.contrastText,
   },
 });
 
 const SocialLinks = () => {
   const theme = useTheme();
-  const { palette } = theme;
-  const styles = useStyles(palette);
+  const styles = useStyles(theme);
   return (
-    <Box sx={{ py: 3 }}>
+    <Box sx={{ pt: 3, textAlign: "center", mb: 6 }}>
       <Typography variant="h6" sx={styles.textLine}>
         Join Our Community
       </Typography>
-      <Box sx={{ p: 2, textAlign: "center" }}>
+      <Box sx={{ p: 2 }}>
         <Box component="span" sx={{ mx: 2 }}>
           <TwitterIcon sx={styles.iconStyle} fontSize="large" />
         </Box>
