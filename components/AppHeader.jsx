@@ -43,7 +43,7 @@ const AppHeader = () => {
   };
 
   return (
-    <ThemeProvider theme={lightTheme}>
+    // <ThemeProvider theme={lightTheme}>
       <AppBar position="sticky">
         <Container className='AppBar'>
           <Toolbar disableGutters>
@@ -86,7 +86,7 @@ const AppHeader = () => {
                 }}
               >
                 {pages.map((page) => (
-                  <MenuItem key={page.url} onClick={handleCloseNavMenu} className="themeColor">
+                  <MenuItem key={page.text} onClick={handleCloseNavMenu} className="themeColor">
                     <Typography textAlign="center">{page.text}</Typography>
                   </MenuItem>
                 ))}
@@ -115,7 +115,7 @@ const AppHeader = () => {
           </Toolbar>
         </Container>
       </AppBar>
-    </ThemeProvider>
+    // </ThemeProvider>
   );
 };
 export default AppHeader;
