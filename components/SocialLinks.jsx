@@ -21,19 +21,27 @@ const SocialLinks = () => {
   return (
     <Box sx={{ pt: 3, textAlign: "center", mb: 6 }}>
       <Typography variant="h6" sx={styles.textLine}>
-        Join Our Community
+        Follow us
       </Typography>
       <Box sx={{ p: 2 }}>
-        <Box component="span" sx={{ mx: 2 }}>
+        <Box
+          component="a"
+          sx={{ mx: 2 }}
+          href="https://twitter.com/resolutio_nft"
+        >
           <TwitterIcon sx={styles.iconStyle} fontSize="large" />
         </Box>
-        <Box component="span" sx={{ mx: 2 }}>
+        <Box
+          component="a"
+          sx={{ mx: 2 }}
+          href="https://www.linkedin.com/company/dec-resolutio/"
+        >
           <Image src={Discord} alt="discord" height="35" />
         </Box>
-        <Box component="span" sx={{ mx: 2 }}>
+        <Box component="a" sx={{ mx: 2 }} href="">
           <LinkedInIcon sx={styles.iconStyle} fontSize="large" />
         </Box>
-        <Box component="span" sx={{ mx: 2 }}>
+        <Box component="a" sx={{ mx: 2 }} href="mailto:resolutio.zs@gmail.com">
           <EmailIcon sx={styles.iconStyle} fontSize="large" />
         </Box>
       </Box>
