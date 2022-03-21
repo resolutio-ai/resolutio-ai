@@ -1,0 +1,15 @@
+.AppBar {
+  width: 100vw !important;
+}
+
+@media (min-width: 1200px) {
+  .AppBar {
+    max-width: 100vw !important;
+  }
+}
+
+header {
+  background-color: white !important;
+  color: #0078ff !important;
+}
+
