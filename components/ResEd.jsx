@@ -44,7 +44,7 @@ const ResEd = () => {
         deal with NFT thefts.
       </Typography>
       <Box sx={{ py: 4 }}>
-        <Grid container columnSpacing={2}>
+        <Grid container spacing={2}>
           {mediumArticle.map((article) => {
             return (
               <Grid
