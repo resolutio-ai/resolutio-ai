@@ -36,7 +36,7 @@ const SocialLinks = () => {
           component="a"
           sx={{ mx: 2 }}
           target="_blank"
-          href="https://www.linkedin.com/company/dec-resolutio/"
+          href="https://discord.com/invite/RdN9zWQ4AA"
         >
           <Image src={Discord} alt="discord" height="35" />
         </Box>
