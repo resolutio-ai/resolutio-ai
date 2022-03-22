@@ -1,3 +1,4 @@
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import MenuIcon from "@mui/icons-material/Menu";
 import { AppBar, Typography, useTheme } from "@mui/material";
 import Box from "@mui/material/Box";
@@ -7,8 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
-
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import Link from "next/link";
 import * as React from "react";
 
 const pages = [
@@ -23,7 +23,7 @@ const useStyles = (theme) => ({
   },
   iconStyle: {
     color: theme.text.primary,
-    fontSize: '20px'
+    fontSize: "20px",
   },
 });
 const AppHeader = () => {
@@ -31,7 +31,7 @@ const AppHeader = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const theme = useTheme();
   const { text } = theme;
-  
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -104,18 +104,19 @@ const AppHeader = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Button
-                href={page.url}
-                onClick={handleCloseNavMenu}
-                className="themeColor"
-                sx={{ my: 2, color: text.primary, display: "block" }}
-                key={page.text}
-              >
-                {page.text}
-              </Button>
+              <Link href={page.url} key={page.text} passHref>
+                <Button
+                  href={page.url}
+                  onClick={handleCloseNavMenu}
+                  className="themeColor"
+                  sx={{ my: 2, color: text.primary, display: "block" }}
+                >
+                  {page.text}
+                </Button>
+              </Link>
             ))}
           </Box>
-        <AccountBalanceWalletIcon sx={styles.iconStyle} fontSize="large" />
+          <AccountBalanceWalletIcon sx={styles.iconStyle} fontSize="large" />
         </Toolbar>
       </Container>
     </AppBar>
