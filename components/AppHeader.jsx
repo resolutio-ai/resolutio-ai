@@ -12,18 +12,22 @@ import Link from "next/link";
 import * as React from "react";
 
 const pages = [
-  { text: "home", url: "/" },
   { text: "Res Educate", url: "/about" },
   { text: "Community", url: "/contact" },
 ];
 
 const useStyles = (theme) => ({
+  logostyles: {
+    textDecoration: "none",
+    color: theme.palette.primary.main,
+  },
   textLine: {
     color: theme.palette.primary.contrastText,
   },
   iconStyle: {
     color: theme.text.primary,
     fontSize: "20px",
+    ml: "5px",
   },
 });
 const AppHeader = () => {
@@ -45,15 +49,17 @@ const AppHeader = () => {
     <AppBar position="sticky">
       <Container className="AppBar">
         <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
-          >
-            resolutio
-          </Typography>
-
+          <Link href="/" passHref>
+            <Box sx={styles.logostyles} component="a">
+              <Typography
+                variant="h6"
+                noWrap
+                sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+              >
+                resolutio
+              </Typography>
+            </Box>
+          </Link>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -100,13 +106,12 @@ const AppHeader = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
           >
-            LOGO
+            resolutio
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Link href={page.url} key={page.text} passHref>
                 <Button
-                  href={page.url}
                   onClick={handleCloseNavMenu}
                   className="themeColor"
                   sx={{ my: 2, color: text.primary, display: "block" }}
@@ -116,6 +121,24 @@ const AppHeader = () => {
               </Link>
             ))}
           </Box>
+          <Link href="/about" passHref>
+            <Button
+              className="themeColor"
+              sx={{ my: 2, color: text.primary, display: "block" }}
+            >
+              Verify NFT
+            </Button>
+          </Link>
+          {"|"}
+          <Link href="/about" passHref>
+            <Button
+              className="themeColor"
+              sx={{ my: 2, color: text.primary, display: "block" }}
+            >
+              Initiate Dispute
+            </Button>
+          </Link>
+          {"|"}
           <AccountBalanceWalletIcon sx={styles.iconStyle} fontSize="large" />
         </Toolbar>
       </Container>
