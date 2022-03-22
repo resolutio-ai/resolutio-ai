@@ -121,7 +121,7 @@ const AppHeader = () => {
               </Link>
             ))}
           </Box>
-          <Link href="/about" passHref>
+          <Link href="/verify-nft" passHref>
             <Button
               className="themeColor"
               sx={{ my: 2, color: text.primary, display: "block" }}
@@ -130,7 +130,7 @@ const AppHeader = () => {
             </Button>
           </Link>
           {"|"}
-          <Link href="/about" passHref>
+          <Link href="/initiate-dispute" passHref>
             <Button
               className="themeColor"
               sx={{ my: 2, color: text.primary, display: "block" }}
