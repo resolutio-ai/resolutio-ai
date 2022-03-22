@@ -7,6 +7,8 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
+
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import * as React from "react";
 
 const pages = [
@@ -15,15 +17,25 @@ const pages = [
   { text: "Community", url: "/contact" },
 ];
 
+const useStyles = (theme) => ({
+  textLine: {
+    color: theme.palette.primary.contrastText,
+  },
+  iconStyle: {
+    color: theme.text.primary,
+    fontSize: '20px'
+  },
+});
 const AppHeader = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const theme = useTheme();
   const { text } = theme;
-
+  
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+  const styles = useStyles(theme);
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
@@ -103,6 +115,7 @@ const AppHeader = () => {
               </Button>
             ))}
           </Box>
+        <AccountBalanceWalletIcon sx={styles.iconStyle} fontSize="large" />
         </Toolbar>
       </Container>
     </AppBar>
