@@ -1,6 +1,6 @@
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import MenuIcon from "@mui/icons-material/Menu";
-import { AppBar, Typography, useTheme } from "@mui/material";
+import { AppBar, Tooltip, Typography, useTheme } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
@@ -8,10 +8,17 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
+
+// import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import Link from "next/link";
 import * as React from "react";
 
+
+import NextLink from 'next/link'
+import { Link as MuiLink } from '@mui/material'
+
 const pages = [
+  // { text: "home", url: "/" },
   { text: "Res Educate", url: "/about" },
   { text: "Community", url: "/contact" },
 ];
@@ -26,13 +33,13 @@ const useStyles = (theme) => ({
   },
   iconStyle: {
     color: theme.text.primary,
-    fontSize: "20px",
+    fontSize: '20px',
+    cursor: 'pointer',
     ml: "5px",
   },
 });
 const AppHeader = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
   const theme = useTheme();
   const { text } = theme;
 
@@ -89,13 +96,15 @@ const AppHeader = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
+              {pages.map((page, index) => (
                 <MenuItem
-                  key={page.text}
+                  key={index}
                   onClick={handleCloseNavMenu}
                   className="themeColor"
                 >
-                  <Typography textAlign="center">{page.text}</Typography>
+                  <NextLink href={page.url} passHref >
+                    <MuiLink underline="none" color="inherit" sx={{ color: text.primary }}>{page.text}</MuiLink>
+                  </NextLink>
                 </MenuItem>
               ))}
             </Menu>
@@ -139,7 +148,14 @@ const AppHeader = () => {
             </Button>
           </Link>
           {"|"}
-          <AccountBalanceWalletIcon sx={styles.iconStyle} fontSize="large" />
+          <Link href="/wallet" passHref>
+            <Button
+              className="themeColor"
+              sx={{ my: 2, color: text.primary, display: "flex", padding: '6px 8px'  }}
+            >
+             <AccountBalanceWalletIcon sx={styles.iconStyle} fontSize="large" />
+            </Button>
+          </Link>
         </Toolbar>
       </Container>
     </AppBar>
