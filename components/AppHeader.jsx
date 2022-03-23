@@ -1,3 +1,4 @@
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import MenuIcon from "@mui/icons-material/Menu";
 import { AppBar, Tooltip, Typography, useTheme } from "@mui/material";
 import Box from "@mui/material/Box";
@@ -8,8 +9,8 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-import Link from 'next/link'
+// import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import Link from "next/link";
 import * as React from "react";
 
 
@@ -23,13 +24,18 @@ const pages = [
 ];
 
 const useStyles = (theme) => ({
+  logostyles: {
+    textDecoration: "none",
+    color: theme.palette.primary.main,
+  },
   textLine: {
     color: theme.palette.primary.contrastText,
   },
   iconStyle: {
     color: theme.text.primary,
     fontSize: '20px',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    ml: "5px",
   },
 });
 const AppHeader = () => {
@@ -50,18 +56,17 @@ const AppHeader = () => {
     <AppBar position="sticky">
       <Container className="AppBar">
         <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ mr: 2, display: { xs: "none", md: "flex", cursor: 'pointer' } }}
-          >
-            <Link href="/">
-              <span>resolutio</span>
-            </Link>
-
-          </Typography>
-
+          <Link href="/" passHref>
+            <Box sx={styles.logostyles} component="a">
+              <Typography
+                variant="h6"
+                noWrap
+                sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+              >
+                resolutio
+              </Typography>
+            </Box>
+          </Link>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -110,26 +115,47 @@ const AppHeader = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
           >
-            <Link href="/">
-              <span>resolutio</span>
-            </Link>
+            resolutio
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page, index) => (
-              <NextLink href={page.url} passHref key={index}>
-                <MuiLink underline="none" color="inherit" sx={{ my: 2, color: text.primary, display: "block", padding: '6px 8px' }}>{page.text}</MuiLink>
-              </NextLink>
+            {pages.map((page) => (
+              <Link href={page.url} key={page.text} passHref>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  className="themeColor"
+                  sx={{ my: 2, color: text.primary, display: "block" }}
+                >
+                  {page.text}
+                </Button>
+              </Link>
             ))}
           </Box>
-
-          <NextLink href='/wallet' passHref >
-            <MuiLink underline="none" color="inherit" sx={{ my: 2, color: text.primary, display: "block", padding: '6px 8px' }}>
-              <Tooltip title="Wallet">
-                <AccountBalanceWalletIcon sx={styles.iconStyle} fontSize="large" />
-              </Tooltip>
-            </MuiLink>
-          </NextLink>
-
+          <Link href="/verify-nft" passHref>
+            <Button
+              className="themeColor"
+              sx={{ my: 2, color: text.primary, display: "block" }}
+            >
+              Verify NFT
+            </Button>
+          </Link>
+          {"|"}
+          <Link href="/initiate-dispute" passHref>
+            <Button
+              className="themeColor"
+              sx={{ my: 2, color: text.primary, display: "block" }}
+            >
+              Initiate Dispute
+            </Button>
+          </Link>
+          {"|"}
+          <Link href="/wallet" passHref>
+            <Button
+              className="themeColor"
+              sx={{ my: 2, color: text.primary, display: "flex", padding: '6px 8px'  }}
+            >
+             <AccountBalanceWalletIcon sx={styles.iconStyle} fontSize="large" />
+            </Button>
+          </Link>
         </Toolbar>
       </Container>
     </AppBar>
