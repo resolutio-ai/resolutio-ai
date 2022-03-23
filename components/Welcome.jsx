@@ -38,6 +38,7 @@ const Welcome = () => {
   return (
     <Box>
       <h2>Welcome</h2>
+      <p>We are a community of artists, NFT collectors, developers, lawyers and other NFT enthusiasts, working together to tackle art theft and demystify NFT rights. </p>
       <Box fontSize="200px" sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
         <Link href="#res-ed" passHref>
           <Button sx={styles.iconStyle}>
