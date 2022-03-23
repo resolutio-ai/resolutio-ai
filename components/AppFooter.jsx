@@ -8,7 +8,7 @@ const AppFooter = () => {
   const { palette } = theme;
   return (
     <Box sx={{ backgroundColor: palette.primary.main }}>
-      <Container>
+      <Container className="footer">
         <SocialLinks />
         <Box
           sx={{ textAlign: "center", borderTop: "solid 1px #e5e8eb40", p: 3 }}
