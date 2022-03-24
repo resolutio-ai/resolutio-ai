@@ -1,7 +1,8 @@
 import React from "react";
+import ComingSoon from "../components/ComingSoon";
 
 const VerifyNFT = () => {
-  return <div>Verify NFT</div>;
+  return <ComingSoon />;
 };
 
 export default VerifyNFT;
