@@ -41,7 +41,7 @@ const ResEd = () => {
 
   return (
     <Box sx={{ textAlign: "center", mt: 12 }}>
-      <Typography variant="h5">Get Educated</Typography>
+      <Typography variant="h5">Know Your Rights</Typography>
       <Typography variant="body1">
         With Res Educate, get educated on NFT copyrights, IP rights and how to
         deal with NFT thefts.

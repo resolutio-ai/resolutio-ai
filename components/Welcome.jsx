@@ -59,7 +59,7 @@ const Welcome = () => {
         <Link href="#justice" passHref>
           <Button sx={styles.iconStyle}>
             <BalanceIcon sx={styles.logostyles} fontSize="inherit" />
-            <Typography sx={styles.iconText}>Art theft</Typography>
+            <Typography sx={styles.iconText}>Dispute Resolution</Typography>
           </Button>
         </Link>
         <Link href="#community" passHref>

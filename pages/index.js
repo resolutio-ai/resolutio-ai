@@ -14,6 +14,7 @@ const Home = () => {
       <Welcome />
       <ResEd />
       <OurTeam />
+      
     </div>
   );
 };
