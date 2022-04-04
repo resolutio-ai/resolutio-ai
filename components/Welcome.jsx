@@ -44,7 +44,7 @@ const Welcome = () => {
           justifyContent: "space-between",
         }}
       >
-        <Link href="#res-ed" passHref>
+        <Link href="/res-ed" passHref>
           <Button sx={styles.iconStyle}>
             <Image
               sx={styles.logostyles}
@@ -56,17 +56,19 @@ const Welcome = () => {
             <Typography sx={styles.iconText}>Res Ed</Typography>
           </Button>
         </Link>
-        <Link href="#justice" passHref>
+        <Link href="/initiate-dispute" passHref>
           <Button sx={styles.iconStyle}>
             <BalanceIcon sx={styles.logostyles} fontSize="inherit" />
             <Typography sx={styles.iconText}>Dispute Resolution</Typography>
           </Button>
         </Link>
-        <Link href="#community" passHref>
+        <Link href="https://discord.com/invite/RdN9zWQ4AA" passHref>
+        <a target="_blank">
           <Button sx={styles.iconStyle}>
             <ForumIcon sx={styles.logostyles} fontSize="inherit" />
             <Typography sx={styles.iconText}>Join our community</Typography>
           </Button>
+          </a>
         </Link>
       </Box>
     </Box>
