@@ -4,6 +4,13 @@ import SchoolIcon from "@mui/icons-material/School";
 import { Box, Grid, IconButton, Typography } from "@mui/material";
 import Link from "next/link";
 import React from "react";
+import {
+  DISCORD_TEXT,
+  DISPUTE_TEXT,
+  RESED_TEXT,
+  WELCOME_DESC,
+  WELCOME_HEADING,
+} from "../constants/strings";
 
 const useStyles = () => ({
   iconStyles: {
@@ -25,12 +32,8 @@ const Welcome = () => {
 
   return (
     <Box sx={{ textAlign: "center" }}>
-      <h2>Welcome</h2>
-      <p>
-        We are a community of artists, NFT collectors, developers, lawyers and
-        other NFT enthusiasts, working together to tackle art theft and
-        demystify NFT rights.
-      </p>
+      <h2>{WELCOME_HEADING}</h2>
+      <p>{WELCOME_DESC}</p>
       <Grid container spacing={2}>
         <Grid item xs={4}>
           <Link href="/res-ed" passHref>
@@ -39,7 +42,7 @@ const Welcome = () => {
                 <SchoolIcon sx={styles.iconStyles} />
               </IconButton>
               <Typography sx={styles.iconText} color="primary">
-                Res Ed
+                {RESED_TEXT}
               </Typography>
             </Box>
           </Link>
@@ -51,7 +54,7 @@ const Welcome = () => {
                 <BalanceIcon sx={styles.iconStyles} />
               </IconButton>
               <Typography sx={styles.iconText} color="primary">
-                Dispute Resolution
+                {DISPUTE_TEXT}
               </Typography>
             </Box>
           </Link>
@@ -63,7 +66,7 @@ const Welcome = () => {
                 <ForumIcon sx={styles.iconStyles} />
               </IconButton>
               <Typography sx={styles.iconText} color="primary">
-                Join our community
+                {DISCORD_TEXT}
               </Typography>
             </Box>
           </Link>
