@@ -4,6 +4,7 @@ import SchoolIcon from "@mui/icons-material/School";
 import { Box, Grid, IconButton, Typography } from "@mui/material";
 import Link from "next/link";
 import React from "react";
+import { DISCORD_LINK } from "../constants/constants";
 import {
   DISCORD_TEXT,
   DISPUTE_TEXT,
@@ -60,7 +61,13 @@ const Welcome = () => {
           </Link>
         </Grid>
         <Grid item xs={4}>
-          <Link href="https://discord.com/invite/RdN9zWQ4AA" passHref>
+          <Box
+            component="a"
+            sx={{ textDecoration: "none" }}
+            href={DISCORD_LINK}
+            target="_blank"
+            rel="noreferrer"
+          >
             <Box>
               <IconButton color="primary">
                 <ForumIcon sx={styles.iconStyles} />
@@ -69,7 +76,7 @@ const Welcome = () => {
                 {DISCORD_TEXT}
               </Typography>
             </Box>
-          </Link>
+          </Box>
         </Grid>
       </Grid>
     </Box>

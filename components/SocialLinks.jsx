@@ -4,6 +4,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import { Box, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
 import React from "react";
+import { DISCORD_LINK } from "../constants/constants";
 import Discord from "../public/social/discord.svg";
 
 const useStyles = (theme) => ({
@@ -32,12 +33,7 @@ const SocialLinks = () => {
         >
           <TwitterIcon sx={styles.iconStyle} fontSize="large" />
         </Box>
-        <Box
-          component="a"
-          sx={{ mx: 2 }}
-          target="_blank"
-          href="https://discord.com/invite/RdN9zWQ4AA"
-        >
+        <Box component="a" sx={{ mx: 2 }} target="_blank" href={DISCORD_LINK}>
           <Image src={Discord} alt="discord" height="35" />
         </Box>
         <Box
