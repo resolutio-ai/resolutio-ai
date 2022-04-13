@@ -3,7 +3,7 @@
     "id": 1,
     "name": "Arisa Forest",
     "description": "Foodie | Music Lover | Web3 Lawyer",
-    "imgSrc": "Arisa.txt",
+    "imgSrc": "Arisa.png",
     "social": {
       "linkedIn": "https://www.linkedin.com/in/arisabanks/",
       "twitter": "https://twitter.com/ArisaForestEsq"
@@ -53,7 +53,7 @@
     "id": 6,
     "name": "Nicole Fernandez Prada",
     "description": "Pre-Law student | Entrepreneur",
-    "imgSrc": "Nicole.txt",
+    "imgSrc": "Nicole.png",
     "social": {
       "linkedIn": "https://www.linkedin.com/in/nicole-fernandez-prada/",
       "twitter": "https://twitter.com/arrivings"
