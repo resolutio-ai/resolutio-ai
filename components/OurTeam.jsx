@@ -1,20 +1,18 @@
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import React from "react";
-import Sneha from "../public/sneha.jpg";
-import Zarreen from "../public/zarreen.jpg";
 
 const OurTeam = () => {
   const members = [
     {
       id: 1,
-      imageSrc: Sneha,
+      imageSrc: "/sneha.jpg",
       name: "Sneha Vijayan",
       profileURL: "https://www.linkedin.com/in/sneha-vijayan-0a8608169/",
     },
     {
       id: 2,
-      imageSrc: Zarreen,
+      imageSrc: "/zarreen.jpg",
       name: "Zarreen Reza",
       profileURL: "https://www.linkedin.com/in/zarreennreza/",
     },

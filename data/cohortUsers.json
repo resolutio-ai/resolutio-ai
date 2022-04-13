@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "name": "Arisa Forest",
+    "description": "Foodie | Music Lover | Web3 Lawyer",
+    "imgSrc": "Arisa.txt",
+    "social": {
+      "linkedIn": "https://www.linkedin.com/in/arisabanks/",
+      "twitter": "https://twitter.com/ArisaForestEsq"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Sushruti Verma",
+    "description": "Y4 Law Student, Jindal Global Law School",
+    "imgSrc": "Susruthi.jpeg",
+    "social": {
+      "linkedIn": "https://www.linkedin.com/in/sushruti-verma-452575160/",
+      "twitter": null
+    }
+  },
+  {
+    "id": 3,
+    "name": "Felix Yuen",
+    "description": "Wine Connoisseur | IP Lawyer | Constant Learner",
+    "imgSrc": "Felix.jpeg",
+    "social": {
+      "linkedIn": "https://www.linkedin.com/in/felixyuen/",
+      "twitter": null
+    }
+  },
+  {
+    "id": 4,
+    "name": "Adarsh Vijayakumaran",
+    "description": "Y4 Law Student, National University of Advanced Legal Studies",
+    "imgSrc": "Adarsh.jpeg",
+    "social": {
+      "linkedIn": "https://www.linkedin.com/in/adarshvijayakumaran/",
+      "twitter": null
+    }
+  },
+  {
+    "id": 5,
+    "name": "Nikita Mary Abraham",
+    "description": "Traveler | Tech & IP Lawyer | Foodie",
+    "imgSrc": "Nikita.png",
+    "social": {
+      "linkedIn": "https://www.linkedin.com/in/nikita-mary-abraham-705b56b6/",
+      "twitter": null
+    }
+  },
+  {
+    "id": 6,
+    "name": "Nicole Fernandez Prada",
+    "description": "Pre-Law student | Entrepreneur",
+    "imgSrc": "Nicole.txt",
+    "social": {
+      "linkedIn": "https://www.linkedin.com/in/nicole-fernandez-prada/",
+      "twitter": "https://twitter.com/arrivings"
+    }
+  },
+  {
+    "id": 7,
+    "name": "Michael Komuczky",
+    "description": "University Lecturer | Attorney | Conflict Resolver | Tech & Web3 Lawyer",
+    "imgSrc": "Micheal.jpeg",
+    "social": {
+      "linkedIn": "https://www.linkedin.com/in/michael-komuczky-5156a7100/",
+      "twitter": null
+    }
+  },
+  {
+    "id": 8,
+    "name": "Thuwaraka Ganeshan",
+    "description": "Lawyer | Classical Dancer | Life-Long-Learner",
+    "imgSrc": "Thuwaraka.png",
+    "social": {
+      "linkedIn": "https://www.linkedin.com/in/thuwaraka-ganeshan-43927a18b/",
+      "twitter": null
+    }
+  }
+]

@@ -5,8 +5,8 @@ const lightTheme = createTheme({
     mode: "light",
   },
   text: {
-    primary: '#3e6085',
-    secondary: '#FFA136',
+    primary: "#3e6085",
+    secondary: "#FFA136",
   },
   typography: {
     h5: {

@@ -1,30 +1,32 @@
+import { Box, Grid } from "@mui/material";
 import React from "react";
-//import ComingSoon from "../components/ComingSoon";
-
-import { Box, Button, Typography, useTheme } from "@mui/material";
-import Image from "next/image";
-import Link from "next/link";
-import Scroll from "../public/icons8-scroll.svg";
+import UserCard from "../components/UserCard";
+import users from "../data/cohortUsers.json";
 
 const ResEdPage = () => {
-  //return <ComingSoon />;
-
   return (
-    <Box sx={{ textAlign: "center" }}>
+    <Box sx={{ textAlign: "center", my: 5 }}>
       <h2>Res Educate Cohort Programme</h2>
       <p>
-        Last year, over $44 billion worth of cryptocurrency was spent on NFTs. Despite the 
-        popularity of NFTs, artists, collectors and other stakeholders continue to get 
-        confused about rights pertaining to NFTs. Moreover, active groups which discuss NFT 
-        rights remain unknown to persons in the NFT Community. To promote conversations and 
-        spread awareness on NFT rights, and bridge the gap between stakeholders who seek 
-        knowledge and NFT rights experts, we are hosting resolutio’s first res educate 
-        cohort programme.{" "}
+        Last year, over $44 billion worth of cryptocurrency was spent on NFTs.
+        Despite the popularity of NFTs, artists, collectors and other
+        stakeholders continue to get confused about rights pertaining to NFTs.
+        Moreover, active groups which discuss NFT rights remain unknown to
+        persons in the NFT Community. To promote conversations and spread
+        awareness on NFT rights, and bridge the gap between stakeholders who
+        seek knowledge and NFT rights experts, we are hosting resolutio’s first
+        res educate cohort programme.
       </p>
-      <h3>Res Ed Cohort 2022 - Announcing soon!</h3>
-      </Box>
-
-      );
+      <h3>Res Ed Cohort 2022</h3>
+      <Grid container spacing={3} alignItems="flex-end">
+        {users.map((user) => (
+          <Grid item xs={12} sm={6} md={4} lg={3} key={user.id}>
+            <UserCard user={user} key={user.id} />
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
+  );
 };
 
 export default ResEdPage;
