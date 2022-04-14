@@ -2,6 +2,7 @@
   {
     "id": 1,
     "name": "Arisa Forest",
+    "title": "Founder and Managing Member, Aligned Legal LLC",
     "description": "Foodie | Music Lover | Web3 Lawyer",
     "imgSrc": "Arisa.png",
     "social": {
@@ -12,7 +13,8 @@
   {
     "id": 2,
     "name": "Sushruti Verma",
-    "description": "Y4 Law Student, Jindal Global Law School",
+    "title": "Y4 Law Student, Jindal Global Law School",
+    "description": "Geek | Coder | Artist",
     "imgSrc": "Susruthi.jpeg",
     "social": {
       "linkedIn": "https://www.linkedin.com/in/sushruti-verma-452575160/",
@@ -22,6 +24,7 @@
   {
     "id": 3,
     "name": "Felix Yuen",
+    "title": "Managing Director and Principle Consultant, Fruba IP",
     "description": "Wine Connoisseur | IP Lawyer | Constant Learner",
     "imgSrc": "Felix.jpeg",
     "social": {
@@ -32,7 +35,8 @@
   {
     "id": 4,
     "name": "Adarsh Vijayakumaran",
-    "description": "Y4 Law Student, National University of Advanced Legal Studies",
+    "title": "Y4 Law Student, National University of Advanced Legal Studies",
+    "description": "Fintech, Securities & Web 3.0 Enthusiast",
     "imgSrc": "Adarsh.jpeg",
     "social": {
       "linkedIn": "https://www.linkedin.com/in/adarshvijayakumaran/",
@@ -42,6 +46,7 @@
   {
     "id": 5,
     "name": "Nikita Mary Abraham",
+    "title": "Legal Consultant",
     "description": "Traveler | Tech & IP Lawyer | Foodie",
     "imgSrc": "Nikita.png",
     "social": {
@@ -52,7 +57,8 @@
   {
     "id": 6,
     "name": "Nicole Fernandez Prada",
-    "description": "Pre-Law student | Entrepreneur",
+    "title": "Pre-law student and  Founder, USA Trading Distributors.",
+    "description": "Community Builder | Milk Chocolate Lover | Learner",
     "imgSrc": "Nicole.png",
     "social": {
       "linkedIn": "https://www.linkedin.com/in/nicole-fernandez-prada/",
@@ -62,7 +68,8 @@
   {
     "id": 7,
     "name": "Michael Komuczky",
-    "description": "University Lecturer | Attorney | Conflict Resolver | Tech & Web3 Lawyer",
+    "title": "Attorney at Law, MK Legal and University Lecturer",
+    "description": "Attorney | Conflict Resolver | Tech & Web3 Lawyer",
     "imgSrc": "Micheal.jpeg",
     "social": {
       "linkedIn": "https://www.linkedin.com/in/michael-komuczky-5156a7100/",
@@ -72,6 +79,7 @@
   {
     "id": 8,
     "name": "Thuwaraka Ganeshan",
+    "title": "Associate, Tiruchelvam Associates and University Lecturer",
     "description": "Lawyer | Classical Dancer | Life-Long-Learner",
     "imgSrc": "Thuwaraka.png",
     "social": {

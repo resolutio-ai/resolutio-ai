@@ -23,7 +23,8 @@ const UserCard = ({ user }) => {
           className="rounded"
         />
         <Typography fontWeight="bold">{user.name}</Typography>
-        <Typography variant="body2">{user.description}</Typography>
+        <Typography variant="body1">{user.title}</Typography>
+        <Typography variant="caption">{user.description}</Typography>
       </CardContent>
       <CardActions sx={{ justifyContent: "center" }}>
         <a href={user.social.linkedIn} target="_blank" rel="noreferrer">
