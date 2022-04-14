@@ -20,7 +20,7 @@ const SocialLinks = () => {
   const theme = useTheme();
   const styles = useStyles(theme);
   return (
-    <Box sx={{ pt: 3, textAlign: "center", mb: 6 }}>
+    <Box sx={{ pt: 3, textAlign: "center", mb: 3 }}>
       <Typography variant="h6" sx={styles.textLine}>
         Follow us
       </Typography>

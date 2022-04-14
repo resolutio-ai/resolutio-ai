@@ -2,11 +2,12 @@ import { Box, Grid } from "@mui/material";
 import React from "react";
 import UserCard from "../components/UserCard";
 import users from "../data/cohortUsers.json";
+import { RESED_HEADING } from "../constants/strings";
 
 const ResEdPage = () => {
   return (
     <Box sx={{ textAlign: "center", my: 5 }}>
-      <h2>Res Educate Cohort Programme</h2>
+      <h2>{RESED_HEADING}</h2>
       <p>
         Last year, over $44 billion worth of cryptocurrency was spent on NFTs.
         Despite the popularity of NFTs, artists, collectors and other

@@ -7,3 +7,5 @@ export const DISPUTE_TEXT = "Dispute Resolution";
 export const DISCORD_TEXT = "Join our community";
 
 export const COMING_SOON_TEXT = "Coming soon!";
+
+export const RESED_HEADING = "Res Educate Cohort Programme";
