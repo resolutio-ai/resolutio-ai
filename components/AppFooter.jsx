@@ -19,7 +19,7 @@ const AppFooter = () => {
             variant="caption"
             sx={{ color: palette.primary.contrastText }}
           >
-            Resolutio © Copyright {year}. All Rights Reserved.
+            resolutio © Copyright {year}. All Rights Reserved.
           </Typography>
         </Box>
       </Container>
