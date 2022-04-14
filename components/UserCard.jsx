@@ -12,7 +12,14 @@ import React from "react";
 
 const UserCard = ({ user }) => {
   return (
-    <Card sx={{}}>
+    <Card
+      sx={{
+        display: "flex",
+        flex: "0 0 100%",
+        justifyContent: "space-between",
+        flexDirection: "column",
+      }}
+    >
       <CardContent>
         <Image
           src={`/profiles/${user.imgSrc}`}

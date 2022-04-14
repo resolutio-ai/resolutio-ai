@@ -18,9 +18,17 @@ const ResEdPage = () => {
         res educate cohort programme.
       </p>
       <h3>Res Ed Cohort 2022</h3>
-      <Grid container spacing={3} alignItems="flex-end">
+      <Grid container spacing={3}>
         {users.map((user) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={user.id}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}
+            key={user.id}
+            sx={{ display: "flex" }}
+          >
             <UserCard user={user} key={user.id} />
           </Grid>
         ))}
