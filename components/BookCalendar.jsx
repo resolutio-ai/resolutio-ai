@@ -1,6 +1,7 @@
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import React from "react";
+import { SETUP_CALL_TEXT } from "../constants/strings";
 
 const useStyles = (theme) => ({
   textLine: {
@@ -19,7 +20,7 @@ const BookCalendar = () => {
   return (
     <Box sx={{ textAlign: "center" }}>
       <Typography variant="body1" sx={styles.textLine} fontWeight="bold">
-        Want to learn more ? set up a call with us
+        {SETUP_CALL_TEXT}
       </Typography>
       <a href="https://calendly.com/resolutio" target="_blank" rel="noreferrer">
         <IconButton color="primary">
