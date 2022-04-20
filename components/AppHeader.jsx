@@ -11,7 +11,10 @@ import Toolbar from "@mui/material/Toolbar";
 import { default as Link, default as NextLink } from "next/link";
 import * as React from "react";
 
-const pages = [];
+const pages = [
+  { text: "Verify NFT", url: "/verify-nft" },
+  { text: "Initiate Dispute", url: "/initiate-dispute" },
+];
 
 const useStyles = (theme) => ({
   logostyles: {
@@ -68,6 +71,7 @@ const AppHeader = () => {
             >
               <MenuIcon />
             </IconButton>
+            {/* Mobile view */}
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -105,45 +109,36 @@ const AppHeader = () => {
               ))}
             </Menu>
           </Box>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
-          >
-            resolutio
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Link href={page.url} key={page.text} passHref>
-                <Button
-                  onClick={handleCloseNavMenu}
-                  className="themeColor"
-                  sx={{ my: 2, color: text.primary, display: "block" }}
-                >
-                  {page.text}
-                </Button>
-              </Link>
+          <Link href="/" passHref >
+            <Box component="a" sx={{ flexGrow: 1, display: { xs: "flex", md: "none" }, textDecoration: "none", color: theme.palette.primary.main, }}>
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
+              >
+                resolutio
+              </Typography>
+            </Box>
+          </Link>
+          {/* Desktop menu */}
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex", alignItems: "baseline", justifyContent: "flex-end" } }}>
+            {pages.map((page, index) => (
+              < >
+                <Link href={page.url} key={index} passHref>
+                  <Button
+                    onClick={handleCloseNavMenu}
+                    className="themeColor"
+
+                    sx={{ my: 2, color: text.primary, display: "block" }}
+                  >
+                    {page.text}
+                  </Button>
+                </Link>
+                {"|"}
+              </>
             ))}
           </Box>
-          <Link href="/verify-nft" passHref>
-            <Button
-              className="themeColor"
-              sx={{ my: 2, color: text.primary, display: "block" }}
-            >
-              Verify NFT
-            </Button>
-          </Link>
-          {"|"}
-          <Link href="/initiate-dispute" passHref>
-            <Button
-              className="themeColor"
-              sx={{ my: 2, color: text.primary, display: "block" }}
-            >
-              Initiate Dispute
-            </Button>
-          </Link>
-          {"|"}
           <Link href="/wallet" passHref>
             <Button
               className="themeColor"
