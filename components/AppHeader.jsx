@@ -14,6 +14,7 @@ import * as React from "react";
 const pages = [
   { text: "Verify NFT", url: "/verify-nft" },
   { text: "Initiate Dispute", url: "/initiate-dispute" },
+  { text: "Image Verification", url: "/image-verification" },
 ];
 
 const useStyles = (theme) => ({
