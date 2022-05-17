@@ -141,9 +141,11 @@ const ImageVerification = () => {
       <TabPanel value={value} index={1}>
         <ComingSoon />
       </TabPanel>
-      <Box sx={{ p: "1.5rem" }}>
+      <Box sx={{ p: "1.5rem", textAlign: "center" }}>
         {open ? (
-          <CircularProgress color="inherit" size={20} />
+          <Box sx={{ textAlign: "center" }}>
+            <CircularProgress />
+          </Box>
         ) : (
           <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={6}>
