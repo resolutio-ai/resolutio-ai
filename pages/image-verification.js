@@ -18,7 +18,7 @@ import { useCallback, useState } from "react";
 import ComingSoon from "../components/ComingSoon";
 import verificationImage from "../public/verification.svg";
 
-function TabPanel(props) {
+const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
 
   return (
@@ -36,7 +36,7 @@ function TabPanel(props) {
       )}
     </div>
   );
-}
+};
 
 TabPanel.propTypes = {
   children: PropTypes.node,
@@ -44,12 +44,12 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-function a11yProps(index) {
+const a11yProps = (index) => {
   return {
     id: `simple-tab-${index}`,
     "aria-controls": `simple-tabpanel-${index}`,
   };
-}
+};
 
 const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
   console.log(IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY);
