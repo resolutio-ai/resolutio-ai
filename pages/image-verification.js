@@ -52,12 +52,11 @@ const a11yProps = (index) => {
 };
 
 const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
-  console.log(IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY);
   const instance = Axios.create({
-    baseURL: "https://api.nftport.xyz/v0/",
+    baseURL: IMG_VERIFY_BASE_URL,
     headers: {
       "Content-Type": "application/json",
-      Authorization: "a7e303a5-7023-41fb-a7a0-8fb93a6af965",
+      Authorization: IMG_VERIFY_API_KEY,
     },
   });
 
@@ -79,7 +78,7 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
         url: imageURL,
         page_number: 1,
         page_size: 50,
-        threshold: 0.9,
+        threshold: 0.95,
       });
       console.log(res.data.similar_nfts);
       setImages(res.data.similar_nfts);
@@ -109,7 +108,6 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
           onChange={handleChange}
           aria-label="Image Verification Tabs"
           centered
-          focusRipple
           variant="standard"
         >
           <Tab icon={<InsertLinkIcon />} label="INPUT URL" {...a11yProps(0)} />
@@ -176,10 +174,6 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
 
 export async function getStaticProps() {
   // Pass env variables to the page via props
-  console.log(
-    process.env.IMG_VERIFICATION_BASE_URL,
-    process.env.IMG_VERIFICATION_API_KEY
-  );
   return {
     props: {
       IMG_VERIFY_BASE_URL: process.env.IMG_VERIFICATION_BASE_URL,
