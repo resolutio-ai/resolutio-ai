@@ -110,8 +110,16 @@ const AppHeader = () => {
               ))}
             </Menu>
           </Box>
-          <Link href="/" passHref >
-            <Box component="a" sx={{ flexGrow: 1, display: { xs: "flex", md: "none" }, textDecoration: "none", color: theme.palette.primary.main, }}>
+          <Link href="/" passHref>
+            <Box
+              component="a"
+              sx={{
+                flexGrow: 1,
+                display: { xs: "flex", md: "none" },
+                textDecoration: "none",
+                color: theme.palette.primary.main,
+              }}
+            >
               <Typography
                 variant="h6"
                 noWrap
@@ -123,14 +131,23 @@ const AppHeader = () => {
             </Box>
           </Link>
           {/* Desktop menu */}
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex", alignItems: "baseline", justifyContent: "flex-end" } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: {
+                xs: "none",
+                md: "flex",
+                alignItems: "baseline",
+                justifyContent: "flex-end",
+              },
+            }}
+          >
             {pages.map((page, index) => (
-              < >
+              <>
                 <Link href={page.url} key={index} passHref>
                   <Button
                     onClick={handleCloseNavMenu}
                     className="themeColor"
-
                     sx={{ my: 2, color: text.primary, display: "block" }}
                   >
                     {page.text}
