@@ -15,7 +15,8 @@ import * as Axios from "axios";
 import Image from "next/image";
 import PropTypes from "prop-types";
 import { useCallback, useState } from "react";
-import comingSoonImage from "../public/verification.svg";
+import ComingSoon from "../components/ComingSoon";
+import verificationImage from "../public/verification.svg";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -65,7 +66,8 @@ const ImageVerification = () => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (_event, newValue) => {
+    setImages([]);
     setValue(newValue);
   };
 
@@ -97,7 +99,7 @@ const ImageVerification = () => {
   return (
     <Box sx={{ minHeight: "70vh" }}>
       <Box sx={{ textAlign: "center", my: "2rem" }}>
-        <Image src={comingSoonImage} height="100" alt="coming Soon Image" />
+        <Image src={verificationImage} height="100" alt="coming Soon Image" />
         <Typography variant="h1">Image Verification</Typography>
       </Box>
       <Box>
@@ -137,7 +139,7 @@ const ImageVerification = () => {
         </Box>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Box>Image Upload</Box>
+        <ComingSoon />
       </TabPanel>
       <Box sx={{ p: "1.5rem" }}>
         {open ? (
