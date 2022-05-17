@@ -9,7 +9,7 @@ import * as Axios from "axios";
 import Image from "next/image";
 import * as React from "react";
 
-const ImageVerification = (props) => {
+const ImageVerification = () => {
   const instance = Axios.create({
     baseURL: "https://api.nftport.xyz/v0/",
     // timeout: 1000,
@@ -82,14 +82,6 @@ const ImageVerification = (props) => {
             </Grid>
           ))}
         </Grid>
-
-        {/* <ol>
-        {posts?.map((post, index) => (
-          <li key={index}>
-            <img src={post.cached_file_url} alt="Italian Trulli" />
-          </li>
-        ))}
-      </ol> */}
       </Box>
     </Box>
   );
