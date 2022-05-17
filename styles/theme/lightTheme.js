@@ -9,8 +9,9 @@ const lightTheme = createTheme({
     secondary: "#FFA136",
   },
   typography: {
+    h1: { fontSize: "2.5rem", fontWeight: 500 },
     h5: {
-      fontWeight: "bold",
+      fontWeight: 500,
     },
   },
 });

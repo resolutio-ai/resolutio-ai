@@ -5,10 +5,12 @@ import {
   Grid,
   ImageListItemBar,
   TextField,
+  Typography,
 } from "@mui/material";
 import * as Axios from "axios";
 import Image from "next/image";
 import { useCallback, useState } from "react";
+import comingSoonImage from "../public/verification.svg";
 
 const ImageVerification = () => {
   const instance = Axios.create({
@@ -51,7 +53,11 @@ const ImageVerification = () => {
 
   return (
     <Box sx={{ minHeight: "70vh" }}>
-      <h2>Image Verification</h2>
+      <Box sx={{ textAlign: "center", my: "2rem" }}>
+        <Image src={comingSoonImage} height="100" alt="coming Soon Image" />
+        <Typography variant="h1">Image Verification</Typography>
+      </Box>
+
       <Box sx={{ display: "flex", my: "2rem" }}>
         <TextField
           id="outlined-basic"
