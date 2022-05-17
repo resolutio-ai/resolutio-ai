@@ -8,44 +8,46 @@ import {
 } from "@mui/material";
 import * as Axios from "axios";
 import Image from "next/image";
-import * as React from "react";
+import { useCallback, useState } from "react";
 
 const ImageVerification = () => {
   const instance = Axios.create({
     baseURL: "https://api.nftport.xyz/v0/",
-    // timeout: 1000,
     headers: {
       "Content-Type": "application/json",
       Authorization: "a7e303a5-7023-41fb-a7a0-8fb93a6af965",
     },
   });
 
-  const [imageURL, setURL] = React.useState("");
-  const [images, setImages] = React.useState([]);
+  const [imageURL, setURL] = useState("");
+  const [images, setImages] = useState([]);
 
-  const [open, setOpen] = React.useState(false);
-  const loading = open && images.length === 0;
+  const [open, setOpen] = useState(false);
 
   const handleSearch = async () => {
-    setOpen(true);
-    const res = await instance.post("duplicates/urls", {
-      url: imageURL,
-      page_number: 1,
-      page_size: 50,
-      threshold: 0.9,
-    });
-    console.log("input change api call");
-    console.log(res.data.similar_nfts);
-    setImages(res.data.similar_nfts);
-    setOpen(false);
-    return {
-      props: { data: res.data.similar_nfts },
-    };
+    if (imageURL.length !== 0) {
+      setOpen(true);
+      const res = await instance.post("duplicates/urls", {
+        url: imageURL,
+        page_number: 1,
+        page_size: 50,
+        threshold: 0.9,
+      });
+      console.log(res.data.similar_nfts);
+      setImages(res.data.similar_nfts);
+      setOpen(false);
+      setURL("");
+    } else {
+      setImages([]);
+    }
   };
 
-  const handleURLChange = (event) => {
-    setURL(event.target.value);
-  };
+  const handleURLChange = useCallback(
+    (event) => {
+      setURL(event.target.value);
+    },
+    [setURL]
+  );
 
   return (
     <Box sx={{ minHeight: "70vh" }}>
@@ -67,7 +69,7 @@ const ImageVerification = () => {
           Search
         </Button>
       </Box>
-      {loading ? <CircularProgress color="inherit" size={20} /> : null}
+      {open && <CircularProgress color="inherit" size={20} />}
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={6}>
           {images?.map((item, index) => (
