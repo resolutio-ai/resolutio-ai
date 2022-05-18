@@ -23,12 +23,11 @@ const useStyles = () => ({
   },
 });
 
-const ImageUpload = ({ setImageFile, handleSearch }) => {
+const ImageUpload = ({ imageFile, setImageFile, handleSearch }) => {
   const styles = useStyles();
   const onDrop = useCallback(
     (acceptedFiles) => {
       setImageFile(acceptedFiles);
-      console.log(acceptedFiles);
     },
     [setImageFile]
   );
@@ -61,13 +60,13 @@ const ImageUpload = ({ setImageFile, handleSearch }) => {
       <Box sx={{ my: "1rem", textAlign: "center" }}>
         <Button
           variant="contained"
-          disabled={!acceptedFiles.length}
+          disabled={!imageFile.length}
           onClick={handleSearch}
           sx={{ px: "2rem" }}
         >
           Search
         </Button>
-        {acceptedFiles.map((file) => {
+        {imageFile.map((file) => {
           return (
             <Typography variant="caption" component="p" key={file.path}>
               {file.path}

@@ -154,6 +154,7 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
         <ImageUpload
           setImageFile={setImageFile}
           handleSearch={handleImageSearch}
+          imageFile={imageFile}
         />
       </TabPanel>
       <Box sx={{ p: "1.5rem", textAlign: "center" }}>
