@@ -57,13 +57,7 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
     [setImages, setValue]
   );
 
-  const request = axios.create({
-    baseURL: IMG_VERIFY_BASE_URL,
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: IMG_VERIFY_API_KEY,
-    },
-  });
+  const params = { page_number: 1, page_size: 50, threshold: 0.95 };
 
   const orderBySimilarityDesc = (a, b) => {
     if (a.similarity < b.similarity) {
@@ -78,12 +72,15 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
   const handleURLSearch = async () => {
     if (imageURL.length !== 0) {
       setOpen(true);
-      const res = await request.post("duplicates/urls", {
-        url: imageURL,
-        page_number: 1,
-        page_size: 50,
-        threshold: 0.95,
-      });
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: IMG_VERIFY_API_KEY,
+      };
+      const res = await axios.post(
+        "https://api.nftport.xyz/v0/duplicates/urls",
+        { url: imageURL, ...params },
+        { headers }
+      );
       const { similar_nfts } = res.data;
       console.log(similar_nfts);
       const sortedImages = similar_nfts.sort(orderBySimilarityDesc);
@@ -92,6 +89,31 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
       setImageURL("");
     } else {
       setImages([]);
+    }
+  };
+
+  const handleImageSearch = async () => {
+    if (imageFile.length !== 0) {
+      const formData = new FormData();
+      formData.append("file", imageFile[0]);
+      setOpen(true);
+
+      const headers = {
+        "Content-Type": "multipart/form-data",
+        Authorization: IMG_VERIFY_API_KEY,
+      };
+
+      const res = await axios.post(
+        "https://api.nftport.xyz/v0/duplicates/files",
+        formData,
+        { params, headers }
+      );
+      const { similar_nfts } = res.data;
+      console.log(similar_nfts);
+      const sortedImages = similar_nfts.sort(orderBySimilarityDesc);
+      setImages(sortedImages);
+      setOpen(false);
+      setImageFile([]);
     }
   };
 
@@ -129,7 +151,10 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
         />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <ImageUpload />
+        <ImageUpload
+          setImageFile={setImageFile}
+          handleSearch={handleImageSearch}
+        />
       </TabPanel>
       <Box sx={{ p: "1.5rem", textAlign: "center" }}>
         {open ? (

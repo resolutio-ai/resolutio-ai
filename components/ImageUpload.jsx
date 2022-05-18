@@ -23,12 +23,15 @@ const useStyles = () => ({
   },
 });
 
-const ImageUpload = () => {
+const ImageUpload = ({ setImageFile, handleSearch }) => {
   const styles = useStyles();
-  const onDrop = useCallback((acceptedFiles) => {
-    // Do something with the files
-    console.log(acceptedFiles);
-  }, []);
+  const onDrop = useCallback(
+    (acceptedFiles) => {
+      setImageFile(acceptedFiles);
+      console.log(acceptedFiles);
+    },
+    [setImageFile]
+  );
   const { acceptedFiles, getRootProps, getInputProps, isDragActive } =
     useDropzone({
       accept: { "image/*": [] },
@@ -59,6 +62,7 @@ const ImageUpload = () => {
         <Button
           variant="contained"
           disabled={!acceptedFiles.length}
+          onClick={handleSearch}
           sx={{ px: "2rem" }}
         >
           Search
