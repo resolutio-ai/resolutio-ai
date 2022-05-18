@@ -12,9 +12,9 @@ import { default as Link, default as NextLink } from "next/link";
 import * as React from "react";
 
 const pages = [
-  { text: "Verify NFT", url: "/verify-nft" },
-  { text: "Initiate Dispute", url: "/initiate-dispute" },
-  { text: "Image Verification", url: "/image-verification" },
+  { id: 1, text: "Verify NFT", url: "/verify-nft" },
+  { id: 2, text: "Initiate Dispute", url: "/initiate-dispute" },
+  { id: 3, text: "Image Verification", url: "/image-verification" },
 ];
 
 const useStyles = (theme) => ({
@@ -91,9 +91,9 @@ const AppHeader = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page, index) => (
+              {pages.map((page) => (
                 <MenuItem
-                  key={index}
+                  key={page.id}
                   onClick={handleCloseNavMenu}
                   className="themeColor"
                 >
@@ -142,9 +142,9 @@ const AppHeader = () => {
               },
             }}
           >
-            {pages.map((page, index) => (
+            {pages.map((page) => (
               <>
-                <Link href={page.url} key={index} passHref>
+                <Link href={page.url} key={page.id} passHref>
                   <Button
                     onClick={handleCloseNavMenu}
                     className="themeColor"
