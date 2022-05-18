@@ -29,25 +29,49 @@ const ImageUpload = () => {
     // Do something with the files
     console.log(acceptedFiles);
   }, []);
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    accept: { "image/*": [] },
-    multiple: false,
-    onDrop,
-  });
+  const { acceptedFiles, getRootProps, getInputProps, isDragActive } =
+    useDropzone({
+      accept: { "image/*": [] },
+      multiple: false,
+      onDrop,
+    });
 
   return (
-    <Box sx={styles.dropzone} {...getRootProps()}>
-      <input {...getInputProps()} />
-      <Typography variant="body1">Drag and drop image here</Typography>
-      {!isDragActive && (
-        <>
-          <Typography variant="body2">or</Typography>
-          <Button variant="outlined" color="secondary">
-            Select a image
-          </Button>
-        </>
-      )}
-    </Box>
+    <>
+      <Box sx={styles.dropzone} {...getRootProps()}>
+        <input {...getInputProps()} />
+        <Typography variant="body1">Drag and drop image here</Typography>
+        {!isDragActive && (
+          <>
+            <Typography variant="body2" sx={{ my: ".5rem" }}>
+              or
+            </Typography>
+            <Button variant="outlined" color="secondary">
+              Select an image
+            </Button>
+          </>
+        )}
+        <Typography variant="caption" sx={{ my: ".5rem" }}>
+          (Only *.jpeg and *.png images will be accepted)
+        </Typography>
+      </Box>
+      <Box sx={{ my: "1rem", textAlign: "center" }}>
+        <Button
+          variant="contained"
+          disabled={!acceptedFiles.length}
+          sx={{ px: "2rem" }}
+        >
+          Search
+        </Button>
+        {acceptedFiles.map((file) => {
+          return (
+            <Typography variant="caption" component="p" key={file.path}>
+              {file.path}
+            </Typography>
+          );
+        })}
+      </Box>
+    </>
   );
 };
 

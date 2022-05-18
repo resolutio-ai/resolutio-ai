@@ -4,7 +4,6 @@ import { Box, CircularProgress, Tab, Tabs, Typography } from "@mui/material";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { useCallback, useState } from "react";
-import ComingSoon from "../components/ComingSoon";
 import ImageUpload from "../components/ImageUpload";
 import ImageURLInput from "../components/ImageURLInput";
 import ImageVerificationHeader from "../components/ImageVerificationHeader";
@@ -44,7 +43,8 @@ TabPanel.propTypes = {
 };
 
 const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
-  const [imageURL, setURL] = useState("");
+  const [imageURL, setImageURL] = useState("");
+  const [imageFile, setImageFile] = useState([]);
   const [images, setImages] = useState([]);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0);
@@ -75,7 +75,7 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
     return 0;
   };
 
-  const handleSearch = async () => {
+  const handleURLSearch = async () => {
     if (imageURL.length !== 0) {
       setOpen(true);
       const res = await request.post("duplicates/urls", {
@@ -89,7 +89,7 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
       const sortedImages = similar_nfts.sort(orderBySimilarityDesc);
       setImages(sortedImages);
       setOpen(false);
-      setURL("");
+      setImageURL("");
     } else {
       setImages([]);
     }
@@ -97,9 +97,9 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
 
   const handleURLChange = useCallback(
     (event) => {
-      setURL(event.target.value);
+      setImageURL(event.target.value);
     },
-    [setURL]
+    [setImageURL]
   );
 
   return (
@@ -125,12 +125,11 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
         <ImageURLInput
           handleURLChange={handleURLChange}
           imageURL={imageURL}
-          handleSearch={handleSearch}
+          handleSearch={handleURLSearch}
         />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <ImageUpload />
-        <ComingSoon />
       </TabPanel>
       <Box sx={{ p: "1.5rem", textAlign: "center" }}>
         {open ? (
