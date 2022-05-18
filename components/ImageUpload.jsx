@@ -30,18 +30,20 @@ const ImageUpload = () => {
     console.log(acceptedFiles);
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    accept: { "image/*": [] },
+    multiple: false,
     onDrop,
   });
 
   return (
     <Box sx={styles.dropzone} {...getRootProps()}>
       <input {...getInputProps()} />
-      <Typography variant="body1">Drag and drop file here</Typography>
+      <Typography variant="body1">Drag and drop image here</Typography>
       {!isDragActive && (
         <>
           <Typography variant="body2">or</Typography>
           <Button variant="outlined" color="secondary">
-            Select a file
+            Select a image
           </Button>
         </>
       )}
