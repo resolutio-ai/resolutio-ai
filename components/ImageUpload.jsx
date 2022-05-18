@@ -31,12 +31,11 @@ const ImageUpload = ({ imageFile, setImageFile, handleSearch }) => {
     },
     [setImageFile]
   );
-  const { acceptedFiles, getRootProps, getInputProps, isDragActive } =
-    useDropzone({
-      accept: { "image/*": [] },
-      multiple: false,
-      onDrop,
-    });
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    accept: { "image/*": [] },
+    multiple: false,
+    onDrop,
+  });
 
   return (
     <>

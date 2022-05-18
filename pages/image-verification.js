@@ -77,7 +77,7 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
         Authorization: IMG_VERIFY_API_KEY,
       };
       const res = await axios.post(
-        "https://api.nftport.xyz/v0/duplicates/urls",
+        `${IMG_VERIFY_BASE_URL}duplicates/urls`,
         { url: imageURL, ...params },
         { headers }
       );
@@ -104,7 +104,7 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
       };
 
       const res = await axios.post(
-        "https://api.nftport.xyz/v0/duplicates/files",
+        `${IMG_VERIFY_BASE_URL}duplicates/files`,
         formData,
         { params, headers }
       );
