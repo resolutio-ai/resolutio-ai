@@ -1,10 +1,10 @@
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import InsertLinkIcon from "@mui/icons-material/InsertLink";
 import { Box, CircularProgress, Tab, Tabs, Typography } from "@mui/material";
-import * as Axios from "axios";
+import axios from "axios";
 import PropTypes from "prop-types";
 import { useCallback, useState } from "react";
-import ComingSoon from "../components/ComingSoon";
+import ImageUpload from "../components/ImageUpload";
 import ImageURLInput from "../components/ImageURLInput";
 import ImageVerificationHeader from "../components/ImageVerificationHeader";
 import SimilarImageList from "../components/SimilarImageList";
@@ -29,12 +29,6 @@ const TabPanel = (props) => {
   );
 };
 
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
-
 const a11yProps = (index) => {
   return {
     id: `simple-tab-${index}`,
@@ -42,49 +36,92 @@ const a11yProps = (index) => {
   };
 };
 
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
 const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
-  const instance = Axios.create({
-    baseURL: IMG_VERIFY_BASE_URL,
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: IMG_VERIFY_API_KEY,
-    },
-  });
-
-  const [imageURL, setURL] = useState("");
+  const [imageURL, setImageURL] = useState("");
+  const [imageFile, setImageFile] = useState([]);
   const [images, setImages] = useState([]);
-
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0);
 
-  const handleChange = (_event, newValue) => {
-    setImages([]);
-    setValue(newValue);
+  const handleChange = useCallback(
+    (_event, newValue) => {
+      setImages([]);
+      setValue(newValue);
+    },
+    [setImages, setValue]
+  );
+
+  const params = { page_number: 1, page_size: 50, threshold: 0.95 };
+
+  const orderBySimilarityDesc = (a, b) => {
+    if (a.similarity < b.similarity) {
+      return 1;
+    }
+    if (a.similarity > b.similarity) {
+      return -1;
+    }
+    return 0;
   };
 
-  const handleSearch = async () => {
+  const handleURLSearch = async () => {
     if (imageURL.length !== 0) {
       setOpen(true);
-      const res = await instance.post("duplicates/urls", {
-        url: imageURL,
-        page_number: 1,
-        page_size: 50,
-        threshold: 0.95,
-      });
-      console.log(res.data.similar_nfts);
-      setImages(res.data.similar_nfts);
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: IMG_VERIFY_API_KEY,
+      };
+      const res = await axios.post(
+        `${IMG_VERIFY_BASE_URL}duplicates/urls`,
+        { url: imageURL, ...params },
+        { headers }
+      );
+      const { similar_nfts } = res.data;
+      console.log(similar_nfts);
+      const sortedImages = similar_nfts.sort(orderBySimilarityDesc);
+      setImages(sortedImages);
       setOpen(false);
-      setURL("");
+      setImageURL("");
     } else {
       setImages([]);
     }
   };
 
+  const handleImageSearch = async () => {
+    if (imageFile.length !== 0) {
+      const formData = new FormData();
+      formData.append("file", imageFile[0]);
+      setOpen(true);
+
+      const headers = {
+        "Content-Type": "multipart/form-data",
+        Authorization: IMG_VERIFY_API_KEY,
+      };
+
+      const res = await axios.post(
+        `${IMG_VERIFY_BASE_URL}duplicates/files`,
+        formData,
+        { params, headers }
+      );
+      const { similar_nfts } = res.data;
+      console.log(similar_nfts);
+      const sortedImages = similar_nfts.sort(orderBySimilarityDesc);
+      setImages(sortedImages);
+      setOpen(false);
+      setImageFile([]);
+    }
+  };
+
   const handleURLChange = useCallback(
     (event) => {
-      setURL(event.target.value);
+      setImageURL(event.target.value);
     },
-    [setURL]
+    [setImageURL]
   );
 
   return (
@@ -110,11 +147,15 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
         <ImageURLInput
           handleURLChange={handleURLChange}
           imageURL={imageURL}
-          handleSearch={handleSearch}
+          handleSearch={handleURLSearch}
         />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <ComingSoon />
+        <ImageUpload
+          setImageFile={setImageFile}
+          handleSearch={handleImageSearch}
+          imageFile={imageFile}
+        />
       </TabPanel>
       <Box sx={{ p: "1.5rem", textAlign: "center" }}>
         {open ? (
@@ -129,7 +170,7 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
   );
 };
 
-export async function getStaticProps() {
+export const getStaticProps = async () => {
   // Pass env variables to the page via props
   return {
     props: {
@@ -137,6 +178,6 @@ export async function getStaticProps() {
       IMG_VERIFY_API_KEY: process.env.IMG_VERIFICATION_API_KEY,
     },
   };
-}
+};
 
 export default ImageVerification;

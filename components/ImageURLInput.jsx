@@ -16,6 +16,7 @@ const ImageURLInput = ({ imageURL, handleURLChange, handleSearch }) => {
         variant="contained"
         sx={{ ml: "1rem", px: "2rem" }}
         onClick={handleSearch}
+        disabled={!imageURL}
       >
         Search
       </Button>
