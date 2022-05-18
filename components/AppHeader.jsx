@@ -1,15 +1,20 @@
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import MenuIcon from "@mui/icons-material/Menu";
-import { AppBar, Link as MuiLink, Typography, useTheme } from "@mui/material";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
-import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import Toolbar from "@mui/material/Toolbar";
+import {
+  AppBar,
+  Box,
+  Button,
+  Container,
+  IconButton,
+  Link as MuiLink,
+  Menu,
+  MenuItem,
+  Toolbar,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { default as Link, default as NextLink } from "next/link";
-import * as React from "react";
+import { useState } from "react";
 
 const pages = [
   { id: 1, text: "Verify NFT", url: "/verify-nft" },
@@ -33,7 +38,7 @@ const useStyles = (theme) => ({
   },
 });
 const AppHeader = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
   const theme = useTheme();
   const { text } = theme;
 

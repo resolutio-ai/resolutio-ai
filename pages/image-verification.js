@@ -5,6 +5,7 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import { useCallback, useState } from "react";
 import ComingSoon from "../components/ComingSoon";
+import ImageUpload from "../components/ImageUpload";
 import ImageURLInput from "../components/ImageURLInput";
 import ImageVerificationHeader from "../components/ImageVerificationHeader";
 import SimilarImageList from "../components/SimilarImageList";
@@ -128,6 +129,7 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
         />
       </TabPanel>
       <TabPanel value={value} index={1}>
+        <ImageUpload />
         <ComingSoon />
       </TabPanel>
       <Box sx={{ p: "1.5rem", textAlign: "center" }}>
