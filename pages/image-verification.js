@@ -173,4 +173,18 @@ const ImageVerification = () => {
   );
 };
 
+export async function getStaticProps() {
+  // Pass env variables to the page via props
+  console.log(
+    process.env.IMG_VERIFICATION_BASE_URL,
+    process.env.IMG_VERIFICATION_API_KEY
+  );
+  return {
+    props: {
+      IMG_VERIFY_BASE_URL: process.env.IMG_VERIFICATION_BASE_URL,
+      IMG_VERIFY_API_KEY: process.env.IMG_VERIFICATION_API_KEY,
+    },
+  };
+}
+
 export default ImageVerification;
