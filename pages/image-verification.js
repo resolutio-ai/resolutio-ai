@@ -51,7 +51,8 @@ function a11yProps(index) {
   };
 }
 
-const ImageVerification = () => {
+const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
+  console.log(IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY);
   const instance = Axios.create({
     baseURL: "https://api.nftport.xyz/v0/",
     headers: {
