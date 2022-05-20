@@ -24,6 +24,7 @@ const Meta = ({
       <meta charSet="utf-8"></meta>
       <link rel="icon" href="/favicon.ico"></link>
       <title>{title}</title>
+      <link rel="icon" href="/favicon.jpeg" />
     </Head>
   );
 };

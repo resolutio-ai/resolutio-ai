@@ -7,6 +7,7 @@ import { useCallback, useState } from "react";
 import ImageUpload from "../components/ImageUpload";
 import ImageURLInput from "../components/ImageURLInput";
 import ImageVerificationHeader from "../components/ImageVerificationHeader";
+import Meta from "../components/seo/Meta";
 import SimilarImageList from "../components/SimilarImageList";
 
 const TabPanel = (props) => {
@@ -125,48 +126,55 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
   );
 
   return (
-    <Box sx={{ minHeight: "70vh" }}>
-      <ImageVerificationHeader />
-      <Box>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="Image Verification Tabs"
-          centered
-          variant="standard"
-        >
-          <Tab icon={<InsertLinkIcon />} label="INPUT URL" {...a11yProps(0)} />
-          <Tab
-            icon={<CloudUploadIcon />}
-            label="UPLOAD IMAGE"
-            {...a11yProps(1)}
+    <>
+      <Meta title="Image Verification" />
+      <Box sx={{ minHeight: "70vh" }}>
+        <ImageVerificationHeader />
+        <Box>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label="Image Verification Tabs"
+            centered
+            variant="standard"
+          >
+            <Tab
+              icon={<InsertLinkIcon />}
+              label="INPUT URL"
+              {...a11yProps(0)}
+            />
+            <Tab
+              icon={<CloudUploadIcon />}
+              label="UPLOAD IMAGE"
+              {...a11yProps(1)}
+            />
+          </Tabs>
+        </Box>
+        <TabPanel value={value} index={0}>
+          <ImageURLInput
+            handleURLChange={handleURLChange}
+            imageURL={imageURL}
+            handleSearch={handleURLSearch}
           />
-        </Tabs>
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <ImageUpload
+            setImageFile={setImageFile}
+            handleSearch={handleImageSearch}
+            imageFile={imageFile}
+          />
+        </TabPanel>
+        <Box sx={{ p: "1.5rem", textAlign: "center" }}>
+          {open ? (
+            <Box sx={{ textAlign: "center" }}>
+              <CircularProgress />
+            </Box>
+          ) : (
+            <SimilarImageList images={images} />
+          )}
+        </Box>
       </Box>
-      <TabPanel value={value} index={0}>
-        <ImageURLInput
-          handleURLChange={handleURLChange}
-          imageURL={imageURL}
-          handleSearch={handleURLSearch}
-        />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <ImageUpload
-          setImageFile={setImageFile}
-          handleSearch={handleImageSearch}
-          imageFile={imageFile}
-        />
-      </TabPanel>
-      <Box sx={{ p: "1.5rem", textAlign: "center" }}>
-        {open ? (
-          <Box sx={{ textAlign: "center" }}>
-            <CircularProgress />
-          </Box>
-        ) : (
-          <SimilarImageList images={images} />
-        )}
-      </Box>
-    </Box>
+    </>
   );
 };
 
