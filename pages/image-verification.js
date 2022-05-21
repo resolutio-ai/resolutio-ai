@@ -60,12 +60,21 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
   const [tabValue, setTabValue] = useState(0);
   const [alert, setAlert] = useState(false);
 
+  const resetValues = useCallback(() => {
+    setImageURL("");
+    setImageFile([]);
+    setImages([]);
+    setSearch(false);
+    setOpen(false);
+    setAlert(false);
+  }, [setImageURL, setImageFile, setImages, setSearch, setOpen, setAlert]);
+
   const handleChange = useCallback(
     (_event, newValue) => {
-      setImages([]);
+      resetValues();
       setTabValue(newValue);
     },
-    [setImages, setTabValue]
+    [setTabValue, resetValues]
   );
 
   const params = { page_number: 1, page_size: 50, threshold: 0.95 };
@@ -89,34 +98,33 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
   };
 
   const handleURLSearch = async () => {
-    if (imageURL.length !== 0) {
-      setOpen(true);
-      const headers = {
-        "Content-Type": "application/json",
-        Authorization: IMG_VERIFY_API_KEY,
-      };
-      try {
-        const res = await axios.post(
-          `${IMG_VERIFY_BASE_URL}duplicates/urls`,
-          { url: imageURL, ...params },
-          { headers }
-        );
-        const { similar_nfts } = res.data;
-        console.log(similar_nfts);
-        const sortedImages = similar_nfts.sort(orderBySimilarityDesc);
-        setImages(sortedImages);
-        setOpen(false);
-        setSearch(true);
-        setImageURL("");
-      } catch (error) {
-        console.log(error);
-        setAlert(true);
-      } finally {
-        setSearch(true);
-        setOpen(false);
-      }
-    } else {
+    if (imageURL.length === 0) return;
+
+    setOpen(true);
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: IMG_VERIFY_API_KEY,
+    };
+    try {
+      const res = await axios.post(
+        `${IMG_VERIFY_BASE_URL}duplicates/urls`,
+        { url: imageURL, ...params },
+        { headers }
+      );
+      const { similar_nfts } = res.data;
+      console.log(similar_nfts);
+      const sortedImages = similar_nfts.sort(orderBySimilarityDesc);
+      setImages(sortedImages);
+      setOpen(false);
+      setSearch(true);
+      setImageURL("");
+    } catch (error) {
+      console.log(error);
+      setAlert(true);
       setImages([]);
+    } finally {
+      setSearch(true);
+      setOpen(false);
     }
   };
 
