@@ -1,8 +1,10 @@
-import { Box, Grid, ImageListItemBar } from "@mui/material";
+import { Box, Grid, ImageListItemBar, Typography } from "@mui/material";
 import Image from "next/image";
 import React from "react";
+import { NO_IMAGE_SEARCH, START_IMAGE_SEARCH } from "../constants/strings";
 
-const SimilarImageList = ({ images }) => {
+const SimilarImageList = ({ images, isSearch }) => {
+  console.log(images);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={6}>
@@ -23,6 +25,15 @@ const SimilarImageList = ({ images }) => {
           </Grid>
         ))}
       </Grid>
+      {!isSearch &&
+        <Typography variant="body1" fontWeight="bold" paddingTop={3}>
+          {START_IMAGE_SEARCH}
+        </Typography>
+      }
+      {!!!images.length && isSearch &&
+        <Typography variant="body1" fontWeight="bold" paddingTop={3}>
+          {NO_IMAGE_SEARCH}
+        </Typography>}
     </Box>
   );
 };

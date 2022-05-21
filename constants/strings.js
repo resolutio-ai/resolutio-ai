@@ -10,3 +10,6 @@ export const COMING_SOON_TEXT = "Coming soon!";
 
 export const RESED_HEADING = "Res Educate Cohort Programme";
 export const SETUP_CALL_TEXT = "Want to learn more ? Set up a call with us.";
+
+export const START_IMAGE_SEARCH = "Add an image url or upload an image to search";
+export const NO_IMAGE_SEARCH = "No result has been found";

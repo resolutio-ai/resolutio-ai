@@ -1,6 +1,6 @@
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import InsertLinkIcon from "@mui/icons-material/InsertLink";
-import { Box, CircularProgress, Tab, Tabs, Typography } from "@mui/material";
+import { Alert, Box, CircularProgress, Snackbar, Tab, Tabs, Typography } from "@mui/material";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { useCallback, useState } from "react";
@@ -47,15 +47,17 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
   const [imageURL, setImageURL] = useState("");
   const [imageFile, setImageFile] = useState([]);
   const [images, setImages] = useState([]);
+  const [isSearch, setSearch] = useState(false);
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(0);
+  const [tabValue, setTabValue] = useState(0);
+  const [alert, setAlert] = useState(false);
 
   const handleChange = useCallback(
     (_event, newValue) => {
       setImages([]);
-      setValue(newValue);
+      setTabValue(newValue);
     },
-    [setImages, setValue]
+    [setImages, setTabValue]
   );
 
   const params = { page_number: 1, page_size: 50, threshold: 0.95 };
@@ -70,6 +72,14 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
     return 0;
   };
 
+  const handleAlertClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setAlert(false);
+  };
+
   const handleURLSearch = async () => {
     if (imageURL.length !== 0) {
       setOpen(true);
@@ -77,17 +87,26 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
         "Content-Type": "application/json",
         Authorization: IMG_VERIFY_API_KEY,
       };
-      const res = await axios.post(
-        `${IMG_VERIFY_BASE_URL}duplicates/urls`,
-        { url: imageURL, ...params },
-        { headers }
-      );
-      const { similar_nfts } = res.data;
-      console.log(similar_nfts);
-      const sortedImages = similar_nfts.sort(orderBySimilarityDesc);
-      setImages(sortedImages);
-      setOpen(false);
-      setImageURL("");
+      try {
+        const res = await axios.post(
+          `${IMG_VERIFY_BASE_URL}duplicates/urls`,
+          { url: imageURL, ...params },
+          { headers }
+        );
+        const { similar_nfts } = res.data;
+        console.log(similar_nfts);
+        const sortedImages = similar_nfts.sort(orderBySimilarityDesc);
+        setImages(sortedImages);
+        setOpen(false);
+        setSearch(true);
+        setImageURL("");
+      } catch (error) {
+        console.log(error);
+        setAlert(true);
+      } finally {
+        setSearch(true);
+        setOpen(false);
+      }
     } else {
       setImages([]);
     }
@@ -114,6 +133,7 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
       const sortedImages = similar_nfts.sort(orderBySimilarityDesc);
       setImages(sortedImages);
       setOpen(false);
+      setSearch(true);
       setImageFile([]);
     }
   };
@@ -132,7 +152,7 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
         <ImageVerificationHeader />
         <Box>
           <Tabs
-            value={value}
+            value={tabValue}
             onChange={handleChange}
             aria-label="Image Verification Tabs"
             centered
@@ -150,14 +170,14 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
             />
           </Tabs>
         </Box>
-        <TabPanel value={value} index={0}>
+        <TabPanel value={tabValue} index={0}>
           <ImageURLInput
             handleURLChange={handleURLChange}
             imageURL={imageURL}
             handleSearch={handleURLSearch}
           />
         </TabPanel>
-        <TabPanel value={value} index={1}>
+        <TabPanel value={tabValue} index={1}>
           <ImageUpload
             setImageFile={setImageFile}
             handleSearch={handleImageSearch}
@@ -170,10 +190,15 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
               <CircularProgress />
             </Box>
           ) : (
-            <SimilarImageList images={images} />
+            <SimilarImageList images={images} isSearch={isSearch} />
           )}
         </Box>
       </Box>
+      <Snackbar open={alert} autoHideDuration={6000} onClose={handleAlertClose} anchorOrigin={{ vertical:'top', horizontal:'center' }}>
+        <Alert onClose={handleAlertClose} severity="error" sx={{ width: '100%' }}>
+          Failed to fetch image
+        </Alert>
+      </Snackbar>
     </>
   );
 };
