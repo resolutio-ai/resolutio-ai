@@ -1,6 +1,14 @@
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import InsertLinkIcon from "@mui/icons-material/InsertLink";
-import { Alert, Box, CircularProgress, Snackbar, Tab, Tabs, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  CircularProgress,
+  Snackbar,
+  Tab,
+  Tabs,
+  Typography,
+} from "@mui/material";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { useCallback, useState } from "react";
@@ -72,8 +80,8 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
     return 0;
   };
 
-  const handleAlertClose = (event, reason) => {
-    if (reason === 'clickaway') {
+  const handleAlertClose = (_event, reason) => {
+    if (reason === "clickaway") {
       return;
     }
 
@@ -113,29 +121,29 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
   };
 
   const handleImageSearch = async () => {
-    if (imageFile.length !== 0) {
-      const formData = new FormData();
-      formData.append("file", imageFile[0]);
-      setOpen(true);
+    if (imageFile.length === 0) return;
 
-      const headers = {
-        "Content-Type": "multipart/form-data",
-        Authorization: IMG_VERIFY_API_KEY,
-      };
+    const formData = new FormData();
+    formData.append("file", imageFile[0]);
+    setOpen(true);
 
-      const res = await axios.post(
-        `${IMG_VERIFY_BASE_URL}duplicates/files`,
-        formData,
-        { params, headers }
-      );
-      const { similar_nfts } = res.data;
-      console.log(similar_nfts);
-      const sortedImages = similar_nfts.sort(orderBySimilarityDesc);
-      setImages(sortedImages);
-      setOpen(false);
-      setSearch(true);
-      setImageFile([]);
-    }
+    const headers = {
+      "Content-Type": "multipart/form-data",
+      Authorization: IMG_VERIFY_API_KEY,
+    };
+
+    const res = await axios.post(
+      `${IMG_VERIFY_BASE_URL}duplicates/files`,
+      formData,
+      { params, headers }
+    );
+    const { similar_nfts } = res.data;
+    console.log(similar_nfts);
+    const sortedImages = similar_nfts.sort(orderBySimilarityDesc);
+    setImages(sortedImages);
+    setOpen(false);
+    setSearch(true);
+    setImageFile([]);
   };
 
   const handleURLChange = useCallback(
@@ -194,8 +202,17 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
           )}
         </Box>
       </Box>
-      <Snackbar open={alert} autoHideDuration={6000} onClose={handleAlertClose} anchorOrigin={{ vertical:'top', horizontal:'center' }}>
-        <Alert onClose={handleAlertClose} severity="error" sx={{ width: '100%' }}>
+      <Snackbar
+        open={alert}
+        autoHideDuration={6000}
+        onClose={handleAlertClose}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          onClose={handleAlertClose}
+          severity="error"
+          sx={{ width: "100%" }}
+        >
           Failed to fetch image
         </Alert>
       </Snackbar>
