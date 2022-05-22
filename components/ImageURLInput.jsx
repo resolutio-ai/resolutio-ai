@@ -1,6 +1,9 @@
 import { Alert, Box, Button, TextField } from "@mui/material";
 import React from "react";
-import { SEARCH_IMAGE_BUTTON_LABEL } from "../constants/strings";
+import {
+  INVALID_URL_ERROR_MESSAGE,
+  SEARCH_IMAGE_BUTTON_LABEL,
+} from "../constants/strings";
 
 const ImageURLInput = ({
   imageURL,
@@ -30,8 +33,7 @@ const ImageURLInput = ({
       </Box>
       {!isValidURL && (
         <Alert severity="error" sx={{ backgroundColor: "white", p: 0 }}>
-          Please check the input URL. Only valid( *.jpeg, *.png, *.tif, *.tiff,
-          and *.webp) image URLs are accepted.
+          {INVALID_URL_ERROR_MESSAGE}
         </Alert>
       )}
     </>

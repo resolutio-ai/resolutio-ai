@@ -236,7 +236,7 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
           severity="error"
           sx={{ width: "100%" }}
         >
-          Failed to fetch image
+          Failed to perform image verification. Please check the URL/Image.
         </Alert>
       </Snackbar>
     </>
