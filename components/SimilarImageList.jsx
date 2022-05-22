@@ -1,7 +1,7 @@
 import { Box, Grid, ImageListItemBar, Typography } from "@mui/material";
 import Image from "next/image";
 import React from "react";
-import { NO_IMAGE_SEARCH, START_IMAGE_SEARCH } from "../constants/strings";
+import { NO_IMAGE_SEARCH } from "../constants/strings";
 
 const SimilarImageList = ({ images, isSearch }) => {
   console.log(images);
@@ -25,15 +25,11 @@ const SimilarImageList = ({ images, isSearch }) => {
           </Grid>
         ))}
       </Grid>
-      {!isSearch &&
-        <Typography variant="body1" fontWeight="bold" paddingTop={3}>
-          {START_IMAGE_SEARCH}
-        </Typography>
-      }
-      {!!!images.length && isSearch &&
+      {!!!images.length && isSearch && (
         <Typography variant="body1" fontWeight="bold" paddingTop={3}>
           {NO_IMAGE_SEARCH}
-        </Typography>}
+        </Typography>
+      )}
     </Box>
   );
 };
