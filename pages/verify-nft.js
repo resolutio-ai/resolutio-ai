@@ -1,8 +1,14 @@
 import React from "react";
 import ComingSoon from "../components/ComingSoon";
+import Meta from "../components/seo/Meta";
 
 const VerifyNFT = () => {
-  return <ComingSoon />;
+  return (
+    <>
+      <Meta title="Verify NFT" />
+      <ComingSoon />
+    </>
+  );
 };
 
 export default VerifyNFT;
