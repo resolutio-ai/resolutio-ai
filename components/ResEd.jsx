@@ -9,46 +9,21 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import {
+  READ_MORE_BUTTON_LABEL,
+  RESED_SECTION_DESC,
+  RESED_SECTION_HEADING,
+} from "../constants/strings";
+import articles from "../data/mediumArticles.json";
 
 const ResEd = () => {
-  const mediumArticle = [
-    {
-      id: 1,
-      title: "PFP NFTs — what rights do they give you ?",
-      link: "https://medium.com/resolutio-nft/pfp-nfts-what-rights-do-they-give-you-d523e2baffe7",
-      description:
-        "To help you understand rights associated with PFP NFTs, we decrypt licenses of three top PFP NFT projects.",
-      imageURL: "https://cdn-images-1.medium.com/max/400/0*kDDbRnbeXWw7MRrl",
-    },
-    {
-      id: 2,
-      title: "Confused about your NFT rights ?",
-      link: "https://medium.com/resolutio-nft/confused-about-your-nft-rights-e31242d5c714",
-      description:
-        "To help you understand rights associated with PFP NFTs, we decrypt licenses of three top PFP NFT projects.",
-      imageURL:
-        "https://cdn-images-1.medium.com/max/400/1*7TCLBjFSypF8VlZS0HitGQ.png",
-    },
-    {
-      id: 3,
-      title: "Death of the NFT Artist",
-      link: "https://medium.com/resolutio-nft/death-of-the-nft-artist-f9dcc7fdd087",
-      description:
-        "To help you understand rights associated with PFP NFTs, we decrypt licenses of three top PFP NFT projects.",
-      imageURL: "https://cdn-images-1.medium.com/max/400/0*yBv6PZWFaFHmsOjm",
-    },
-  ];
-
   return (
     <Box sx={{ textAlign: "center", mt: 12 }}>
-      <Typography variant="h5">Know Your Rights</Typography>
-      <Typography variant="body1">
-        With Res Educate, get educated on NFT copyrights, IP rights and how to
-        deal with NFT thefts.
-      </Typography>
+      <Typography variant="h5">{RESED_SECTION_HEADING}</Typography>
+      <Typography variant="body1">{RESED_SECTION_DESC}</Typography>
       <Box sx={{ py: 4 }}>
         <Grid container spacing={2}>
-          {mediumArticle.map((article) => {
+          {articles.map((article) => {
             return (
               <Grid
                 item
@@ -88,7 +63,7 @@ const ResEd = () => {
         target="_blank"
         href="https://medium.com/resolutio-nft"
       >
-        Read More
+        {READ_MORE_BUTTON_LABEL}
       </Button>
     </Box>
   );
