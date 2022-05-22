@@ -17,6 +17,10 @@ import ImageURLInput from "../components/ImageURLInput";
 import ImageVerificationHeader from "../components/ImageVerificationHeader";
 import Meta from "../components/seo/Meta";
 import SimilarImageList from "../components/SimilarImageList";
+import {
+  INPUT_URL_TAB_LABEL,
+  UPLOAD_IMAGE_TAB_LABEL,
+} from "../constants/strings";
 
 const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
@@ -175,29 +179,29 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
             variant="standard"
           >
             <Tab
-              icon={<InsertLinkIcon />}
-              label="INPUT URL"
+              icon={<CloudUploadIcon />}
+              label={UPLOAD_IMAGE_TAB_LABEL}
               {...a11yProps(0)}
             />
             <Tab
-              icon={<CloudUploadIcon />}
-              label="UPLOAD IMAGE"
+              icon={<InsertLinkIcon />}
+              label={INPUT_URL_TAB_LABEL}
               {...a11yProps(1)}
             />
           </Tabs>
         </Box>
         <TabPanel value={tabValue} index={0}>
-          <ImageURLInput
-            handleURLChange={handleURLChange}
-            imageURL={imageURL}
-            handleSearch={handleURLSearch}
-          />
-        </TabPanel>
-        <TabPanel value={tabValue} index={1}>
           <ImageUpload
             setImageFile={setImageFile}
             handleSearch={handleImageSearch}
             imageFile={imageFile}
+          />
+        </TabPanel>
+        <TabPanel value={tabValue} index={1}>
+          <ImageURLInput
+            handleURLChange={handleURLChange}
+            imageURL={imageURL}
+            handleSearch={handleURLSearch}
           />
         </TabPanel>
         <Box sx={{ p: "1.5rem", textAlign: "center" }}>
