@@ -21,6 +21,7 @@ import {
   INPUT_URL_TAB_LABEL,
   UPLOAD_IMAGE_TAB_LABEL,
 } from "../constants/strings";
+import { isInputImage } from "../utility/utils";
 
 const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
@@ -59,19 +60,21 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
   const [imageURL, setImageURL] = useState("");
   const [imageFile, setImageFile] = useState([]);
   const [images, setImages] = useState([]);
-  const [isSearch, setSearch] = useState(false);
+  const [isEmptySearch, setEmptySearch] = useState(false);
   const [open, setOpen] = useState(false);
   const [tabValue, setTabValue] = useState(0);
   const [alert, setAlert] = useState(false);
+  const [isValidURL, setValidURL] = useState(true);
 
   const resetValues = useCallback(() => {
     setImageURL("");
     setImageFile([]);
     setImages([]);
-    setSearch(false);
+    setEmptySearch(false);
     setOpen(false);
     setAlert(false);
-  }, [setImageURL, setImageFile, setImages, setSearch, setOpen, setAlert]);
+    setValidURL(true);
+  }, [setImageURL, setImageFile, setImages, setEmptySearch, setOpen, setAlert]);
 
   const handleChange = useCallback(
     (_event, newValue) => {
@@ -102,7 +105,15 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
   };
 
   const handleURLSearch = async () => {
+    setImages([]);
+    setEmptySearch(false);
+
     if (imageURL.length === 0) return;
+
+    const isValid = await isInputImage(imageURL);
+    setValidURL(isValid);
+
+    if (!isValid) return;
 
     setOpen(true);
     const headers = {
@@ -117,17 +128,16 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
       );
       const { similar_nfts } = res.data;
       console.log(similar_nfts);
+      if (!similar_nfts.length) setEmptySearch(true);
       const sortedImages = similar_nfts.sort(orderBySimilarityDesc);
       setImages(sortedImages);
       setOpen(false);
-      setSearch(true);
       setImageURL("");
     } catch (error) {
       console.log(error);
       setAlert(true);
       setImages([]);
     } finally {
-      setSearch(true);
       setOpen(false);
     }
   };
@@ -151,10 +161,10 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
     );
     const { similar_nfts } = res.data;
     console.log(similar_nfts);
+    if (!similar_nfts.length) setEmptySearch(true);
     const sortedImages = similar_nfts.sort(orderBySimilarityDesc);
     setImages(sortedImages);
     setOpen(false);
-    setSearch(true);
     setImageFile([]);
   };
 
@@ -202,6 +212,7 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
             handleURLChange={handleURLChange}
             imageURL={imageURL}
             handleSearch={handleURLSearch}
+            isValidURL={isValidURL}
           />
         </TabPanel>
         <Box sx={{ p: "1.5rem", textAlign: "center" }}>
@@ -210,7 +221,7 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
               <CircularProgress />
             </Box>
           ) : (
-            <SimilarImageList images={images} isSearch={isSearch} />
+            <SimilarImageList images={images} isEmptySearch={isEmptySearch} />
           )}
         </Box>
       </Box>

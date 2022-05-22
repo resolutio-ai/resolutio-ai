@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { NO_IMAGE_SEARCH } from "../constants/strings";
 
-const SimilarImageList = ({ images, isSearch }) => {
+const SimilarImageList = ({ images, isEmptySearch }) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={6}>
@@ -24,7 +24,7 @@ const SimilarImageList = ({ images, isSearch }) => {
           </Grid>
         ))}
       </Grid>
-      {!!!images.length && isSearch && (
+      {isEmptySearch && (
         <Typography variant="body1" fontWeight="bold" paddingTop={3}>
           {NO_IMAGE_SEARCH}
         </Typography>
