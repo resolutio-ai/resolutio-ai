@@ -1,6 +1,11 @@
 import { Box, Button, Typography } from "@mui/material";
 import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
+import {
+  ACCEPTED_IMAGE_FORMATS_LABEL,
+  SEARCH_IMAGE_BUTTON_LABEL,
+  SELECT_IMAGE_BUTTON_LABEL,
+} from "../constants/strings";
 
 const useStyles = () => ({
   dropzone: {
@@ -32,7 +37,13 @@ const ImageUpload = ({ imageFile, setImageFile, handleSearch }) => {
     [setImageFile]
   );
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    accept: { "image/*": [] },
+    accept: {
+      "image/jpeg": [],
+      "image/png": [],
+      "image/tiff": [],
+      "image/webp": [],
+      // missing types : ppm, bmp, pgm [Future work]
+    },
     multiple: false,
     onDrop,
   });
@@ -48,12 +59,12 @@ const ImageUpload = ({ imageFile, setImageFile, handleSearch }) => {
               or
             </Typography>
             <Button variant="outlined" color="secondary">
-              Select an image
+              {SELECT_IMAGE_BUTTON_LABEL}
             </Button>
           </>
         )}
         <Typography variant="caption" sx={{ my: ".5rem" }}>
-          (Only *.jpeg and *.png images will be accepted)
+          {ACCEPTED_IMAGE_FORMATS_LABEL}
         </Typography>
       </Box>
       <Box sx={{ my: "1rem", textAlign: "center" }}>
@@ -63,7 +74,7 @@ const ImageUpload = ({ imageFile, setImageFile, handleSearch }) => {
           onClick={handleSearch}
           sx={{ px: "2rem" }}
         >
-          Search
+          {SEARCH_IMAGE_BUTTON_LABEL}
         </Button>
         {imageFile.map((file) => {
           return (

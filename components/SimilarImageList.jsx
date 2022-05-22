@@ -4,7 +4,6 @@ import React from "react";
 import { NO_IMAGE_SEARCH } from "../constants/strings";
 
 const SimilarImageList = ({ images, isSearch }) => {
-  console.log(images);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={6}>

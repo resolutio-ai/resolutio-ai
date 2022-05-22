@@ -1,5 +1,6 @@
 import { Box, Button, TextField } from "@mui/material";
 import React from "react";
+import { SEARCH_IMAGE_BUTTON_LABEL } from "../constants/strings";
 
 const ImageURLInput = ({ imageURL, handleURLChange, handleSearch }) => {
   return (
@@ -18,7 +19,7 @@ const ImageURLInput = ({ imageURL, handleURLChange, handleSearch }) => {
         onClick={handleSearch}
         disabled={!imageURL}
       >
-        Search
+        {SEARCH_IMAGE_BUTTON_LABEL}
       </Button>
     </Box>
   );
