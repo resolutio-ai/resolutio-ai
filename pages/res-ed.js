@@ -8,7 +8,10 @@ import users from "../data/cohortUsers.json";
 const ResEdPage = () => {
   return (
     <>
-      <Meta title="Res Ed" />
+      <Meta
+        title="Res Ed"
+        keywords="NFT rights, NFT IP, NFT Theft, NFT Law, resolutio, ResEd, res Ed, Res Educate"
+      />
       <Box sx={{ textAlign: "center", my: 5 }}>
         <h2>{RESED_HEADING}</h2>
         <p>
