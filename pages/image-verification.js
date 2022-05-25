@@ -178,7 +178,7 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
   return (
     <>
       <Meta
-        title="Image Verification"
+        title="NFT Theft Check"
         keywords="NFT theft, NFT scam, NFT phishing, NFT image search, NFT duplication, NFT image verification, image duplication"
       />
       <Box sx={{ minHeight: "70vh" }}>

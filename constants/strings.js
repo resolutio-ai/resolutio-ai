@@ -28,6 +28,8 @@ export const SELECT_IMAGE_BUTTON_LABEL = "Select an image";
 export const ACCEPTED_IMAGE_FORMATS_LABEL =
   "(Only *.jpeg, *.png, *.tif, *.tiff, and *.webp images will be accepted.)";
 // missing types : *.ppm, *.bmp, *.pgm [Future work]
-export const IMAGE_VERIFICATION_HEADING = "Image Verification";
+export const IMAGE_VERIFICATION_HEADING = "NFT Theft Check";
+export const IMAGE_VERIFICATION_DESC =
+  "Verify whether your art has been tokenized or your NFT duplicated without consent on <b>Ethereum</b>, <b>Polygon</b> or <b>Tezos</b> blockchains.";
 export const INVALID_URL_ERROR_MESSAGE =
   "Please check the input URL. Only valid( *.jpeg, *.png, *.tif, *.tiff, and *.webp) image URLs are accepted.";

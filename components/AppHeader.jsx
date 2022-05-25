@@ -15,11 +15,12 @@ import {
 } from "@mui/material";
 import { default as Link, default as NextLink } from "next/link";
 import { useState } from "react";
+import { IMAGE_VERIFICATION_HEADING } from "../constants/strings";
 
 const pages = [
   { id: 1, text: "Verify NFT", url: "/verify-nft" },
   { id: 2, text: "Initiate Dispute", url: "/initiate-dispute" },
-  { id: 3, text: "Image Verification", url: "/image-verification" },
+  { id: 3, text: IMAGE_VERIFICATION_HEADING, url: "/image-verification" },
 ];
 
 const useStyles = (theme) => ({
