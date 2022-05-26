@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "imageSrc": "/team/sneha.jpg",
+    "name": "Sneha Vijayan",
+    "profileURL": "https://www.linkedin.com/in/sneha-vijayan-0a8608169/"
+  },
+  {
+    "id": 2,
+    "imageSrc": "/team/zarreen.jpg",
+    "name": "Zarreen Reza",
+    "profileURL": "https://www.linkedin.com/in/zarreennreza/"
+  },
+  {
+    "id": 3,
+    "imageSrc": "/team/placeholder-avatar.jpg",
+    "name": "Alex",
+    "profileURL": "https://www.linkedin.com/in/zarreennreza/"
+  },
+  {
+    "id": 4,
+    "imageSrc": "/team/placeholder-avatar.jpg",
+    "name": "Bestin John",
+    "profileURL": "https://www.linkedin.com/in/bestin-john/"
+  },
+  {
+    "id": 5,
+    "imageSrc": "/team/placeholder-avatar.jpg",
+    "name": "Anish Praveen",
+    "profileURL": "https://www.linkedin.com/in/anishprvn/"
+  }
+]

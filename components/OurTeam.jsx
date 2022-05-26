@@ -1,22 +1,9 @@
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import React from "react";
+import members from "../data/ourMembers.json";
 
 const OurTeam = () => {
-  const members = [
-    {
-      id: 1,
-      imageSrc: "/sneha.jpg",
-      name: "Sneha Vijayan",
-      profileURL: "https://www.linkedin.com/in/sneha-vijayan-0a8608169/",
-    },
-    {
-      id: 2,
-      imageSrc: "/zarreen.jpg",
-      name: "Zarreen Reza",
-      profileURL: "https://www.linkedin.com/in/zarreennreza/",
-    },
-  ];
   return (
     <Box sx={{ textAlign: "center", my: 12 }}>
       <Typography variant="h5">Meet Our Team</Typography>
@@ -40,8 +27,8 @@ const OurTeam = () => {
               <Image
                 src={member.imageSrc}
                 alt={member.name}
-                width={200}
-                height={200}
+                width="150"
+                height="150"
                 objectFit="cover"
                 className="rounded"
               />
