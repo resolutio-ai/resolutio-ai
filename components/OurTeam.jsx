@@ -32,7 +32,7 @@ const OurTeam = () => {
                 objectFit="cover"
                 className="rounded"
               />
-              <Typography variant="h6">{member.name}</Typography>
+              <Typography variant="h6" color="primary">{member.name}</Typography>
             </Box>
           );
         })}
