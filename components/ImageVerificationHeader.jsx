@@ -12,8 +12,7 @@ const ImageVerificationHeader = () => {
       {/* <Typography variant="body1">{IMAGE_VERIFICATION_DESC}</Typography> */}
       <Typography variant="body1">
         Verify whether your art has been tokenized or your NFT duplicated
-        without consent on <b>Ethereum</b>, <b>Polygon</b> or <b>Tezos</b>{" "}
-        blockchains.
+        without consent on <b>Ethereum</b>, <b>Polygon</b> or <b>Tezos</b>.
       </Typography>
     </Box>
   );
