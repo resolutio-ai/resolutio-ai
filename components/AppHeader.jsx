@@ -154,8 +154,8 @@ const AppHeader = () => {
           >
             {pages.map((page) => (
               <>
-                <Link href={page.url} key={page.id} passHref target={page.isExternal ? "_blank" : ""}>
-                  <Button
+                <Link href={page.url} key={page.id} passHref >
+                  <Button target={page.isExternal ? "_blank" : ""}
                     onClick={handleCloseNavMenu}
                     className="themeColor"
                     sx={{ my: 2, color: text.primary, display: "block" }}
