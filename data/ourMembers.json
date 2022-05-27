@@ -13,19 +13,19 @@
   },
   {
     "id": 3,
-    "imageSrc": "/team/placeholder-avatar.jpg",
-    "name": "Alex",
-    "profileURL": "https://www.linkedin.com/in/zarreennreza/"
+    "imageSrc": "/team/alex.jpg",
+    "name": "Ogubuike Alexandra Ozioma",
+    "profileURL": "https://www.linkedin.com/in/ogubuike-alex"
   },
   {
     "id": 4,
-    "imageSrc": "/team/placeholder-avatar.jpg",
+    "imageSrc": "/team/bestin.jpg",
     "name": "Bestin John",
     "profileURL": "https://www.linkedin.com/in/bestin-john/"
   },
   {
     "id": 5,
-    "imageSrc": "/team/placeholder-avatar.jpg",
+    "imageSrc": "/team/anish.png",
     "name": "Anish Praveen",
     "profileURL": "https://www.linkedin.com/in/anishprvn/"
   }
