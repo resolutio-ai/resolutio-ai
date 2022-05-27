@@ -10,6 +10,8 @@ export const RESED_SECTION_DESC =
   "With Res Educate, get educated on NFT copyrights, IP rights and how to deal with NFT thefts.";
 export const READ_MORE_BUTTON_LABEL = "Read more";
 
+//Header
+export const DISPUTE_RESOLUTION = "Dispute Resolution";
 // Coming Soon Section
 export const COMING_SOON_TEXT = "Coming soon!";
 

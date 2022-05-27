@@ -13,14 +13,17 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import Image from "next/image";
 import { default as Link, default as NextLink } from "next/link";
 import { useState } from "react";
-import { IMAGE_VERIFICATION_HEADING } from "../constants/strings";
+import { DISPUTE_RESOLUTION, IMAGE_VERIFICATION_HEADING } from "../constants/strings";
+import LogoLinear from "../public/logo linear.jpg";
 
 const pages = [
-  { id: 1, text: "Verify NFT", url: "/verify-nft" },
-  { id: 2, text: "Initiate Dispute", url: "/initiate-dispute" },
-  { id: 3, text: IMAGE_VERIFICATION_HEADING, url: "/image-verification" },
+  { id: 1, text: DISPUTE_RESOLUTION, url: "/initiate-dispute", isExternal: false },
+  { id: 2, text: 'Res Ed', url: "/res-ed", isExternal: false },
+  { id: 3, text: 'Community', url: "https://discord.com/invite/24my5DbuS9", isExternal: true },
+  // { id: 3, text: IMAGE_VERIFICATION_HEADING, url: "/image-verification" },
 ];
 
 const useStyles = (theme) => ({
@@ -63,7 +66,7 @@ const AppHeader = () => {
                 noWrap
                 sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
               >
-                resolutio
+                <Image src={LogoLinear} alt="resolutio" height={30} width={175} />
               </Typography>
             </Box>
           </Link>
@@ -103,8 +106,8 @@ const AppHeader = () => {
                   onClick={handleCloseNavMenu}
                   className="themeColor"
                 >
-                  <NextLink href={page.url} passHref>
-                    <MuiLink
+                  <NextLink href={page.url} passHref >
+                    <MuiLink target={page.isExternal ? "_blank" : ""}
                       underline="none"
                       color="inherit"
                       sx={{ color: text.primary }}
@@ -132,7 +135,8 @@ const AppHeader = () => {
                 component="div"
                 sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
               >
-                resolutio
+
+                <Image src={LogoLinear} alt="resolutio" height={27} width={175} />
               </Typography>
             </Box>
           </Link>
@@ -150,7 +154,7 @@ const AppHeader = () => {
           >
             {pages.map((page) => (
               <>
-                <Link href={page.url} key={page.id} passHref>
+                <Link href={page.url} key={page.id} passHref target={page.isExternal ? "_blank" : ""}>
                   <Button
                     onClick={handleCloseNavMenu}
                     className="themeColor"
