@@ -17,7 +17,7 @@ import Image from "next/image";
 import { default as Link, default as NextLink } from "next/link";
 import { useState } from "react";
 import { DISPUTE_RESOLUTION, IMAGE_VERIFICATION_HEADING } from "../constants/strings";
-import LogoLinear from "../public/logo linear.jpg";
+import LogoLinear from "../public/logo_full.jpg";
 
 const pages = [
   { id: 1, text: DISPUTE_RESOLUTION, url: "/initiate-dispute", isExternal: false },
@@ -167,7 +167,7 @@ const AppHeader = () => {
               </>
             ))}
           </Box>
-          <Link href="/wallet" passHref>
+          {/* <Link href="/wallet" passHref>
             <Button
               className="themeColor"
               sx={{
@@ -182,7 +182,7 @@ const AppHeader = () => {
                 fontSize="large"
               />
             </Button>
-          </Link>
+          </Link> */}
         </Toolbar>
       </Container>
     </AppBar>
