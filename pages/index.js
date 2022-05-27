@@ -15,7 +15,13 @@ const Home = () => {
       />
       {/* <Welcome /> */}
       <>
-        <Box sx={{ textAlign: "center", my: "2rem" }}>
+        <Box sx={{
+          textAlign: "center", my: "2rem",
+          border: "solid 2px #7c63a0",
+          padding: "25px",
+          borderRadius: "15px",
+          boxShadow: "4px 5px #ccc"
+        }}>
           <Typography variant="h5">
             {IMAGE_VERIFICATION_HEADING}
             <BetaBanner />
