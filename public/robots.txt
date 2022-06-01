@@ -1,1 +1,1 @@
-User-agent: * Allow: / Sitemap: https://resolutio.ai/api/site-map
+User-agent: * Allow: / Sitemap: https://resolutio.ai/sitemap.xml
