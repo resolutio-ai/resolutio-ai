@@ -1,4 +1,3 @@
-import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import MenuIcon from "@mui/icons-material/Menu";
 import {
   AppBar,
@@ -16,13 +15,23 @@ import {
 import Image from "next/image";
 import { default as Link, default as NextLink } from "next/link";
 import { useState } from "react";
-import { DISPUTE_RESOLUTION, IMAGE_VERIFICATION_HEADING } from "../constants/strings";
+import { DISPUTE_RESOLUTION } from "../constants/strings";
 import LogoLinear from "../public/logo_full.jpg";
 
 const pages = [
-  { id: 1, text: DISPUTE_RESOLUTION, url: "/initiate-dispute", isExternal: false },
-  { id: 2, text: 'Res Ed', url: "/res-ed", isExternal: false },
-  { id: 3, text: 'Community', url: "https://discord.com/invite/24my5DbuS9", isExternal: true },
+  {
+    id: 1,
+    text: DISPUTE_RESOLUTION,
+    url: "/initiate-dispute",
+    isExternal: false,
+  },
+  { id: 2, text: "Res Ed", url: "/res-ed", isExternal: false },
+  {
+    id: 3,
+    text: "Community",
+    url: "https://discord.com/invite/24my5DbuS9",
+    isExternal: true,
+  },
   // { id: 3, text: IMAGE_VERIFICATION_HEADING, url: "/image-verification" },
 ];
 
@@ -66,7 +75,12 @@ const AppHeader = () => {
                 noWrap
                 sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
               >
-                <Image src={LogoLinear} alt="resolutio" height={30} width={175} />
+                <Image
+                  src={LogoLinear}
+                  alt="resolutio"
+                  height={30}
+                  width={175}
+                />
               </Typography>
             </Box>
           </Link>
@@ -106,11 +120,13 @@ const AppHeader = () => {
                   onClick={handleCloseNavMenu}
                   className="themeColor"
                 >
-                  <NextLink href={page.url} passHref >
-                    <MuiLink target={page.isExternal ? "_blank" : ""}
+                  <NextLink href={page.url} passHref>
+                    <MuiLink
+                      target={page.isExternal ? "_blank" : ""}
                       underline="none"
                       color="inherit"
                       sx={{ color: text.primary }}
+                      rel={page.isExternal ? "noopener" : ""}
                     >
                       {page.text}
                     </MuiLink>
@@ -135,8 +151,12 @@ const AppHeader = () => {
                 component="div"
                 sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
               >
-
-                <Image src={LogoLinear} alt="resolutio" height={27} width={175} />
+                <Image
+                  src={LogoLinear}
+                  alt="resolutio"
+                  height={27}
+                  width={175}
+                />
               </Typography>
             </Box>
           </Link>
@@ -154,8 +174,10 @@ const AppHeader = () => {
           >
             {pages.map((page) => (
               <>
-                <Link href={page.url} key={page.id} passHref >
-                  <Button target={page.isExternal ? "_blank" : ""}
+                <Link href={page.url} key={page.id} passHref>
+                  <Button
+                    target={page.isExternal ? "_blank" : ""}
+                    rel={page.isExternal ? "noopener" : ""}
                     onClick={handleCloseNavMenu}
                     className="themeColor"
                     sx={{ my: 2, color: text.primary, display: "block" }}
