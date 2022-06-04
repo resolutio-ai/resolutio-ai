@@ -13,7 +13,7 @@ const AttachEvidence = ({ setFiles }) => {
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
   return (
-    <Box {...getRootProps()}>
+    <Box sx={{ display: "inline" }} {...getRootProps()}>
       <input {...getInputProps()} />
       <Button variant="contained">Attach Evidence</Button>
     </Box>

@@ -1,4 +1,5 @@
 import { Box, Button, Grid, TextField } from "@mui/material";
+import { jsPDF } from "jspdf";
 import { useCallback, useState } from "react";
 import AttachEvidence from "./AttachEvidence";
 
@@ -15,6 +16,28 @@ const defaultValues = {
 const DisputeResolutionForm = () => {
   const [formValues, setFormValues] = useState(defaultValues);
 
+  const createPDF = useCallback(() => {
+    const pdf = new jsPDF();
+    const pdfContent = [
+      { text: "NFT ID", key: "nft_id" },
+      { text: "NFT URL", key: "nft_url" },
+      { text: "Marketplace", key: "marketplace" },
+      {
+        text: "Information Pertaining to the Concerned Parties",
+        key: "info",
+      },
+      {
+        text: "Subject Matter(i.e. Art, Music, Document, etc.)",
+        key: "subject",
+      },
+      { text: "Case Details", key: "case_details" },
+    ];
+    pdfContent.map(({ text, key }, indx) => {
+      pdf.text(`${text}: ${formValues[key]}`, 10, 10 + indx * 10);
+    });
+    pdf.save("evidence.pdf");
+  }, [formValues]);
+
   const handleInputChange = useCallback(
     (e) => {
       const { name, value } = e.target;
@@ -26,12 +49,18 @@ const DisputeResolutionForm = () => {
     [setFormValues, formValues]
   );
 
+  const clearForm = useCallback(() => {
+    setFormValues(defaultValues);
+  }, [setFormValues]);
+
   const handleFormSubmit = useCallback(
     (event) => {
       event.preventDefault();
       console.log(formValues);
+      createPDF();
+      clearForm();
     },
-    [formValues]
+    [formValues, createPDF, clearForm]
   );
 
   const handleAttachEvidence = useCallback(
@@ -40,7 +69,6 @@ const DisputeResolutionForm = () => {
         ...formValues,
         files,
       });
-      console.log(files);
     },
     [setFormValues, formValues]
   );
