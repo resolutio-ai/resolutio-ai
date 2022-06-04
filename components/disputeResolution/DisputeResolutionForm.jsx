@@ -1,5 +1,6 @@
 import { Box, Button, Grid, TextField } from "@mui/material";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import AttachEvidence from "./AttachEvidence";
 
 const defaultValues = {
   nft_id: "",
@@ -8,22 +9,42 @@ const defaultValues = {
   info: "",
   subject: "",
   case_details: "",
+  files: [],
 };
 
 const DisputeResolutionForm = () => {
   const [formValues, setFormValues] = useState(defaultValues);
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues({
-      ...formValues,
-      [name]: value,
-    });
-  };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(formValues);
-  };
+  const handleInputChange = useCallback(
+    (e) => {
+      const { name, value } = e.target;
+      setFormValues({
+        ...formValues,
+        [name]: value,
+      });
+    },
+    [setFormValues, formValues]
+  );
+
+  const handleFormSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
+      console.log(formValues);
+    },
+    [formValues]
+  );
+
+  const handleAttachEvidence = useCallback(
+    (files) => {
+      setFormValues({
+        ...formValues,
+        files,
+      });
+      console.log(files);
+    },
+    [setFormValues, formValues]
+  );
+
   return (
     <Box
       sx={{
@@ -32,7 +53,7 @@ const DisputeResolutionForm = () => {
         margin: "2rem auto",
       }}
     >
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleFormSubmit}>
         <Grid container spacing={2} direction="column">
           <Grid item>
             <TextField
@@ -103,10 +124,12 @@ const DisputeResolutionForm = () => {
             />
           </Grid>
           <Grid item>
-            <Button variant="contained" component="label">
-              Upload File
-              <input type="file" hidden />
-            </Button>
+            <AttachEvidence setFiles={handleAttachEvidence} />
+            <ul>
+              {formValues.files.map((file) => (
+                <li key={file.size}>{file.name}</li>
+              ))}
+            </ul>
           </Grid>
           <Grid item>
             <Button variant="contained" color="primary" type="submit" fullWidth>
