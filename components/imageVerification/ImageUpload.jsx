@@ -5,7 +5,7 @@ import {
   ACCEPTED_IMAGE_FORMATS_LABEL,
   SEARCH_IMAGE_BUTTON_LABEL,
   SELECT_IMAGE_BUTTON_LABEL,
-} from "../constants/strings";
+} from "../../constants/strings";
 
 const useStyles = () => ({
   dropzone: {

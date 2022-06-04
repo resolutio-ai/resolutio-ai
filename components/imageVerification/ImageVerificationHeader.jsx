@@ -1,9 +1,9 @@
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import React from "react";
-import { IMAGE_VERIFICATION_HEADING } from "../constants/strings";
-import verificationImage from "../public/verification.svg";
-import BetaBanner from "./BetaBanner";
+import { IMAGE_VERIFICATION_HEADING } from "../../constants/strings";
+import verificationImage from "../../public/verification.svg";
+import BetaBanner from "../BetaBanner";
 
 const ImageVerificationHeader = () => {
   return (

@@ -1,12 +1,12 @@
 import React from "react";
-import ComingSoon from "../components/ComingSoon";
+import DisputeResolutionForm from "../components/DisputeResolutionForm";
 import Meta from "../components/seo/Meta";
 
 const InitateDispute = () => {
   return (
     <>
-      <Meta title="Initiate Dispute" />
-      <ComingSoon />
+      <Meta title="Dispute Resolution" />
+      <DisputeResolutionForm />
     </>
   );
 };

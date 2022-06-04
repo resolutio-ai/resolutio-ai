@@ -12,9 +12,9 @@ import {
 import axios from "axios";
 import PropTypes from "prop-types";
 import { useCallback, useState } from "react";
-import ImageUpload from "../components/ImageUpload";
-import ImageURLInput from "../components/ImageURLInput";
-import ImageVerificationHeader from "../components/ImageVerificationHeader";
+import ImageUpload from "../components/imageVerification/ImageUpload";
+import ImageURLInput from "../components/imageVerification/ImageURLInput";
+import ImageVerificationHeader from "../components/imageVerification/ImageVerificationHeader";
 import Meta from "../components/seo/Meta";
 import SimilarImageList from "../components/SimilarImageList";
 import {

@@ -3,7 +3,7 @@ import React from "react";
 import {
   INVALID_URL_ERROR_MESSAGE,
   SEARCH_IMAGE_BUTTON_LABEL,
-} from "../constants/strings";
+} from "../../constants/strings";
 
 const ImageURLInput = ({
   imageURL,
