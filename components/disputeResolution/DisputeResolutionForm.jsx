@@ -28,7 +28,7 @@ const DisputeResolutionForm = () => {
     <Box
       sx={{
         my: 2,
-        maxWidth: "30rem",
+        maxWidth: "45rem",
         margin: "2rem auto",
       }}
     >
