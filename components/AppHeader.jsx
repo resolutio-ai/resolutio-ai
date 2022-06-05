@@ -15,16 +15,10 @@ import {
 import Image from "next/image";
 import { default as Link, default as NextLink } from "next/link";
 import { useState } from "react";
-import { DISPUTE_RESOLUTION } from "../constants/strings";
 import LogoLinear from "../public/logo_full.jpg";
 
 const pages = [
-  {
-    id: 1,
-    text: DISPUTE_RESOLUTION,
-    url: "/initiate-dispute",
-    isExternal: false,
-  },
+  /*  { id: 1, text: DISPUTE_RESOLUTION, url: "/initiate-dispute", isExternal: false }, */
   { id: 2, text: "Res Ed", url: "/res-ed", isExternal: false },
   {
     id: 3,
