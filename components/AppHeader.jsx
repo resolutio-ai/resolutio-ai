@@ -33,6 +33,7 @@ const pages = [
 const useStyles = (theme) => ({
   logostyles: {
     marginTop: ".5rem",
+    display: { xs: "none", md: "block" },
   },
   textLine: {
     color: theme.palette.primary.contrastText,
