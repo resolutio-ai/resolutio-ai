@@ -16,6 +16,7 @@ import Image from "next/image";
 import { default as Link, default as NextLink } from "next/link";
 import { useState } from "react";
 import LogoLinear from "../public/logo_full.jpg";
+import logo from "../public/logo_icon.png";
 
 const pages = [
   /*  { id: 1, text: DISPUTE_RESOLUTION, url: "/initiate-dispute", isExternal: false }, */
@@ -31,8 +32,7 @@ const pages = [
 
 const useStyles = (theme) => ({
   logostyles: {
-    textDecoration: "none",
-    color: theme.palette.primary.main,
+    marginTop: ".5rem",
   },
   textLine: {
     color: theme.palette.primary.contrastText,
@@ -64,18 +64,7 @@ const AppHeader = () => {
         <Toolbar disableGutters>
           <Link href="/" passHref>
             <Box sx={styles.logostyles} component="a">
-              <Typography
-                variant="h6"
-                noWrap
-                sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
-              >
-                <Image
-                  src={LogoLinear}
-                  alt="resolutio"
-                  height={30}
-                  width={175}
-                />
-              </Typography>
+              <Image src={logo} alt="Resolutio logo" height={65} width={65} />
             </Box>
           </Link>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
