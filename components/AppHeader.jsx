@@ -16,7 +16,7 @@ import Image from "next/image";
 import { default as Link, default as NextLink } from "next/link";
 import { useState } from "react";
 import LogoLinear from "../public/logo_full.jpg";
-import logo from "../public/logo_icon.png";
+import logo from "../public/master_logo.svg";
 
 const pages = [
   /*  { id: 1, text: DISPUTE_RESOLUTION, url: "/initiate-dispute", isExternal: false }, */
