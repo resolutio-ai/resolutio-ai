@@ -1,6 +1,5 @@
-import { Box, Grid, ImageListItemBar, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import Image from "next/image";
-import React from "react";
 import { NO_IMAGE_SEARCH } from "../constants/strings";
 
 const SimilarImageList = ({ images, isEmptySearch }) => {
@@ -16,11 +15,11 @@ const SimilarImageList = ({ images, isEmptySearch }) => {
               src={item.cached_file_url}
               alt={item.title}
             />
-            <ImageListItemBar
-              title={`Similarity: ${item.similarity}`}
-              subtitle={<span>Chain: {item.chain}</span>}
-              position="below"
-            />
+            <Box>
+              <Typography variant="body1">{`Similarity: ${item.similarity}`}</Typography>
+              <Typography variant="body2">{`Chain: ${item.chain}`}</Typography>
+              <Typography variant="body2">{`Asset ID: ${item.token_id}`}</Typography>
+            </Box>
           </Grid>
         ))}
       </Grid>
