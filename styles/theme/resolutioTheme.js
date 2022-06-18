@@ -1,17 +1,26 @@
 import { createTheme } from "@mui/material/styles";
+import {
+  primaryDark,
+  primaryLight,
+  primaryMain,
+  secondaryDark,
+  secondaryLight,
+  secondaryMain,
+} from "../colors";
 
 const lightTheme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: "#604583",
-      light: "#7c63a0",
-      dark: "#b5abd4",
+      main: primaryMain,
+      light: primaryLight,
+      dark: primaryDark,
     },
-  },
-  text: {
-    primary: "#604583",
-    secondary: "#fdc870",
+    secondary: {
+      main: secondaryMain,
+      light: secondaryLight,
+      dark: secondaryDark,
+    },
   },
   typography: {
     h1: { fontSize: "2.5rem", fontWeight: 500, margin: "1rem 0" },
