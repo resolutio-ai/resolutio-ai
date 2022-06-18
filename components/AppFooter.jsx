@@ -8,7 +8,7 @@ const AppFooter = () => {
   const theme = useTheme();
   const { palette } = theme;
   return (
-    <Box sx={{ backgroundColor: palette.primary.main }}>
+    <Box sx={{ backgroundColor: palette.primary.dark }}>
       <Container className="footer">
         <SocialLinks />
         <BookCalendar />

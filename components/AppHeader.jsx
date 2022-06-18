@@ -39,7 +39,7 @@ const useStyles = (theme) => ({
     color: theme.palette.primary.contrastText,
   },
   iconStyle: {
-    color: theme.text.primary,
+    color: theme.palette.primary.dark,
     fontSize: "20px",
     cursor: "pointer",
     ml: "5px",
@@ -48,7 +48,7 @@ const useStyles = (theme) => ({
 const AppHeader = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const theme = useTheme();
-  const { text } = theme;
+  const { text, palette } = theme;
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -109,7 +109,7 @@ const AppHeader = () => {
                       target={page.isExternal ? "_blank" : ""}
                       underline="none"
                       color="inherit"
-                      sx={{ color: text.primary }}
+                      sx={{ color: palette.primary.dark }}
                       rel={page.isExternal ? "noopener" : ""}
                     >
                       {page.text}
@@ -126,7 +126,7 @@ const AppHeader = () => {
                 flexGrow: 1,
                 display: { xs: "flex", md: "none" },
                 textDecoration: "none",
-                color: theme.palette.primary.main,
+                color: palette.primary.main,
               }}
             >
               <Typography
@@ -164,7 +164,11 @@ const AppHeader = () => {
                     rel={page.isExternal ? "noopener" : ""}
                     onClick={handleCloseNavMenu}
                     className="themeColor"
-                    sx={{ my: 2, color: text.primary, display: "block" }}
+                    sx={{
+                      my: 2,
+                      color: palette.primary.dark,
+                      display: "block",
+                    }}
                   >
                     {page.text}
                   </Button>
