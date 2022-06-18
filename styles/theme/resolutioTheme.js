@@ -6,8 +6,8 @@ const lightTheme = createTheme({
     primary: {
       main: "#604583",
       light: "#7c63a0",
-      dark: "#b5abd4"
-    }
+      dark: "#b5abd4",
+    },
   },
   text: {
     primary: "#604583",
