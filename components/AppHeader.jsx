@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import { default as Link, default as NextLink } from "next/link";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import LogoLinear from "../public/logo_full.jpg";
 import logo from "../public/master_logo.svg";
 
@@ -157,8 +157,8 @@ const AppHeader = () => {
             }}
           >
             {pages.map((page) => (
-              <>
-                <Link href={page.url} key={page.id} passHref>
+              <Fragment key={page.id}>
+                <Link href={page.url} passHref>
                   <Button
                     target={page.isExternal ? "_blank" : ""}
                     rel={page.isExternal ? "noopener" : ""}
@@ -174,7 +174,7 @@ const AppHeader = () => {
                   </Button>
                 </Link>
                 {"|"}
-              </>
+              </Fragment>
             ))}
           </Box>
           {/* <Link href="/wallet" passHref>
