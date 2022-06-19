@@ -20,6 +20,12 @@ import logo from "../public/master_logo.svg";
 
 const pages = [
   /*  { id: 1, text: DISPUTE_RESOLUTION, url: "/initiate-dispute", isExternal: false }, */
+  {
+    id: 2,
+    text: "Arbiter Disputes",
+    url: "/raised-disputes",
+    isExternal: false,
+  },
   { id: 2, text: "Res Ed", url: "/res-ed", isExternal: false },
   {
     id: 3,
