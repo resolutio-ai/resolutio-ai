@@ -28,6 +28,20 @@ const lightTheme = createTheme({
       fontWeight: 500,
     },
   },
+  components: {
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          "& .hidden-area": {
+            height: 0,
+          },
+          "&:hover .hidden-area": {
+            height: "40px",
+          },
+        },
+      },
+    },
+  },
 });
 
 export default lightTheme;
