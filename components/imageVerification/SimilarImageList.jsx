@@ -1,5 +1,5 @@
 import { Box, Grid, Typography } from "@mui/material";
-import { NO_IMAGE_SEARCH } from "../constants/strings";
+import { NO_IMAGE_SEARCH } from "../../constants/strings";
 import ImageItem from "./ImageItem";
 
 const SimilarImageList = ({ images, isEmptySearch }) => {
