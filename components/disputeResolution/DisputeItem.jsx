@@ -6,7 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
 
-const DisputeItem = ({ dispute }) => {
+const DisputeItem = ({ dispute, openStakeDialog }) => {
   return (
     <Link
       href={dispute.isStakeTimeExpired ? "/dispute-details/123" : ""}
@@ -28,7 +28,11 @@ const DisputeItem = ({ dispute }) => {
         <CardActions>
           {!dispute.isStakeTimeExpired && (
             <>
-              <Button variant="contained" sx={{ mr: 2 }}>
+              <Button
+                variant="contained"
+                sx={{ mr: 2 }}
+                onClick={openStakeDialog}
+              >
                 stake
               </Button>
               <AccessAlarmIcon />
