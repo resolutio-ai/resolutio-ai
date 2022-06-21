@@ -7,8 +7,8 @@ const Layout = ({ children }) => {
   return (
     <Box className="root">
       <AppHeader />
-      <ScrollToTop />
       <Container component="main" className="content">
+        <ScrollToTop />
         {children}
       </Container>
       <AppFooter />

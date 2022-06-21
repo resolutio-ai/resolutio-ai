@@ -12,6 +12,8 @@ const useStyles = () => ({
     position: "fixed",
     bottom: "2rem",
     right: "2rem",
+    zIndex: "100",
+    display: { xs: "none", md: "block" },
   },
   scrollBtn: {
     border: 1,

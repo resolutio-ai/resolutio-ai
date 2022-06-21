@@ -8,7 +8,12 @@ const AppFooter = () => {
   const theme = useTheme();
   const { palette } = theme;
   return (
-    <Box sx={{ backgroundColor: palette.primary.dark }}>
+    <Box
+      component="footer"
+      sx={{
+        background: `linear-gradient(90deg, ${palette.secondary.dark} 0%, ${palette.primary.dark} 100%)`,
+      }}
+    >
       <Container className="footer">
         <SocialLinks />
         <BookCalendar />
