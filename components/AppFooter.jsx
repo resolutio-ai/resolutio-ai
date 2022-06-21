@@ -11,7 +11,8 @@ const AppFooter = () => {
     <Box
       component="footer"
       sx={{
-        background: `linear-gradient(90deg, ${palette.secondary.dark} 0%, ${palette.primary.dark} 100%)`,
+        // background: `linear-gradient(90deg, ${palette.secondary.dark} 0%, ${palette.primary.dark} 100%)`,
+        backgroundColor: '#5f437f'
       }}
     >
       <Container className="footer">
