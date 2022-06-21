@@ -22,9 +22,8 @@ const Meta = ({
       <meta property="og:url" content={ogUrl} />
       <meta property="og:image" content={ogImage} />
       <meta charSet="utf-8"></meta>
-      <link rel="icon" href="/favicon.ico"></link>
       <title>{title}</title>
-      <link rel="icon" href="/favicon.jpeg" />
+      <link rel="icon" href="/favicon.png" />
     </Head>
   );
 };

@@ -14,11 +14,18 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import { default as Link, default as NextLink } from "next/link";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import LogoLinear from "../public/logo_full.jpg";
+import logo from "../public/master_logo.svg";
 
 const pages = [
   /*  { id: 1, text: DISPUTE_RESOLUTION, url: "/initiate-dispute", isExternal: false }, */
+  /*  {
+    id: 1,
+    text: "Arbiter Disputes",
+    url: "/raised-disputes",
+    isExternal: false,
+  }, */
   { id: 2, text: "Res Ed", url: "/res-ed", isExternal: false },
   {
     id: 3,
@@ -31,14 +38,14 @@ const pages = [
 
 const useStyles = (theme) => ({
   logostyles: {
-    textDecoration: "none",
-    color: theme.palette.primary.main,
+    marginTop: ".5rem",
+    display: { xs: "none", md: "block" },
   },
   textLine: {
     color: theme.palette.primary.contrastText,
   },
   iconStyle: {
-    color: theme.text.primary,
+    color: theme.palette.primary.dark,
     fontSize: "20px",
     cursor: "pointer",
     ml: "5px",
@@ -47,7 +54,7 @@ const useStyles = (theme) => ({
 const AppHeader = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const theme = useTheme();
-  const { text } = theme;
+  const { text, palette } = theme;
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -64,18 +71,7 @@ const AppHeader = () => {
         <Toolbar disableGutters>
           <Link href="/" passHref>
             <Box sx={styles.logostyles} component="a">
-              <Typography
-                variant="h6"
-                noWrap
-                sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
-              >
-                <Image
-                  src={LogoLinear}
-                  alt="resolutio"
-                  height={30}
-                  width={175}
-                />
-              </Typography>
+              <Image src={logo} alt="Resolutio logo" height={65} width={65} />
             </Box>
           </Link>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -119,7 +115,7 @@ const AppHeader = () => {
                       target={page.isExternal ? "_blank" : ""}
                       underline="none"
                       color="inherit"
-                      sx={{ color: text.primary }}
+                      sx={{ color: palette.primary.dark }}
                       rel={page.isExternal ? "noopener" : ""}
                     >
                       {page.text}
@@ -136,7 +132,7 @@ const AppHeader = () => {
                 flexGrow: 1,
                 display: { xs: "flex", md: "none" },
                 textDecoration: "none",
-                color: theme.palette.primary.main,
+                color: palette.primary.main,
               }}
             >
               <Typography
@@ -167,20 +163,24 @@ const AppHeader = () => {
             }}
           >
             {pages.map((page) => (
-              <>
-                <Link href={page.url} key={page.id} passHref>
+              <Fragment key={page.id}>
+                <Link href={page.url} passHref>
                   <Button
                     target={page.isExternal ? "_blank" : ""}
                     rel={page.isExternal ? "noopener" : ""}
                     onClick={handleCloseNavMenu}
                     className="themeColor"
-                    sx={{ my: 2, color: text.primary, display: "block" }}
+                    sx={{
+                      my: 2,
+                      color: palette.primary.dark,
+                      display: "block",
+                    }}
                   >
                     {page.text}
                   </Button>
                 </Link>
                 {"|"}
-              </>
+              </Fragment>
             ))}
           </Box>
           {/* <Link href="/wallet" passHref>

@@ -15,8 +15,8 @@ import { useCallback, useState } from "react";
 import ImageUpload from "../components/imageVerification/ImageUpload";
 import ImageURLInput from "../components/imageVerification/ImageURLInput";
 import ImageVerificationHeader from "../components/imageVerification/ImageVerificationHeader";
+import SimilarImageList from "../components/imageVerification/SimilarImageList";
 import Meta from "../components/seo/Meta";
-import SimilarImageList from "../components/SimilarImageList";
 import {
   INPUT_URL_TAB_LABEL,
   UPLOAD_IMAGE_TAB_LABEL,
