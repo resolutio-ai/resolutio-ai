@@ -8,7 +8,7 @@ import { useState } from "react";
 import DisputesList from "../components/disputeResolution/DisputesList";
 import Meta from "../components/seo/Meta";
 
-const RaisedDisputes = () => {
+const UpcomingDisputes = () => {
   const [open, setOpen] = useState(false);
 
   const openStakeDialog = () => {
@@ -23,33 +23,39 @@ const RaisedDisputes = () => {
     console.log("Staked");
     closeStakeDialog();
   };
-  const onGoingDisputes = [
+  const upComingDisputes = [
     {
       id: "1",
-      title: "DA 01",
+      title: "Digital Art",
       description: "Comic created by artist tokenized ...",
-      stakeTime: 1655463271,
-      isStakeTimeExpired: true,
+      stakeTime: 1655636071,
+      isStakeTimeExpired: false,
     },
     {
       id: "2",
-      title: "DA 06",
+      title: "Music",
       description: "Part of the victim's song used ...",
-      stakeTime: 1655549671,
-      isStakeTimeExpired: true,
+      stakeTime: 1655722471,
+      isStakeTimeExpired: false,
+    },
+    {
+      id: "3",
+      title: "Movie",
+      description: "Copy of the victims short film NFT ...",
+      stakeTime: 1655808871,
+      isStakeTimeExpired: false,
     },
   ];
   return (
     <>
-      <Meta title="Raised Disputes" />
+      <Meta title="Upcoming Disputes" />
       <Box>
-        <Typography variant="h1">Ongoing Disputes</Typography>
+        <Typography variant="h1">Upcoming Disputes</Typography>
         <DisputesList
-          disputes={onGoingDisputes}
+          disputes={upComingDisputes}
           openStakeDialog={openStakeDialog}
         />
       </Box>
-
       <Dialog
         open={open}
         onClose={closeStakeDialog}
@@ -93,4 +99,4 @@ const RaisedDisputes = () => {
   );
 };
 
-export default RaisedDisputes;
+export default UpcomingDisputes;
