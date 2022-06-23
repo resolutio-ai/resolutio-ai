@@ -15,6 +15,7 @@ import {
 import Image from "next/image";
 import { default as Link, default as NextLink } from "next/link";
 import { Fragment, useState } from "react";
+import { useWeb3 } from "../hooks/useWeb3";
 import LogoLinear from "../public/logo_full.jpg";
 import logo from "../public/master_logo.svg";
 
@@ -55,6 +56,7 @@ const AppHeader = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const theme = useTheme();
   const { text, palette } = theme;
+  const { web3Provider, connect, disconnect } = useWeb3();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -182,6 +184,15 @@ const AppHeader = () => {
                 {"|"}
               </Fragment>
             ))}
+            {web3Provider ? (
+              <Button onClick={disconnect} variant="contained">
+                Disconnect
+              </Button>
+            ) : (
+              <Button onClick={connect} variant="contained">
+                Connect
+              </Button>
+            )}
           </Box>
           {/* <Link href="/wallet" passHref>
             <Button

@@ -17,7 +17,10 @@
     "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.1",
     "@react-pdf/renderer": "^2.2.0",
+    "@walletconnect/web3-provider": "^1.7.8",
+    "authereum": "^0.1.14",
     "axios": "^0.27.2",
+    "ethers": "^5.6.9",
     "ipfs-http-client": "^57.0.1",
     "jspdf": "^2.5.1",
     "next": "^12.1.0",
@@ -27,7 +30,8 @@
     "react-dom": "^17.0.2",
     "react-dropzone": "^14.2.1",
     "react-router-dom": "^6.3.0",
-    "sitemap": "^7.1.1"
+    "sitemap": "^7.1.1",
+    "web3modal": "^1.9.8"
   },
   "devDependencies": {
     "eslint": "8.11.0",
