@@ -1,23 +1,23 @@
+import ForumIcon from "@mui/icons-material/Forum";
 import MenuIcon from "@mui/icons-material/Menu";
+import SchoolIcon from "@mui/icons-material/School";
 import {
   AppBar,
   Box,
   Button,
   Container,
   IconButton,
-  Link as MuiLink,
-  Menu,
-  MenuItem,
   Toolbar,
   Typography,
   useTheme,
 } from "@mui/material";
 import Image from "next/image";
-import { default as Link, default as NextLink } from "next/link";
-import { Fragment, useState } from "react";
+import { default as Link } from "next/link";
+import { Fragment, useCallback, useState } from "react";
 import { useWeb3 } from "../hooks/useWeb3";
 import LogoLinear from "../public/logo_full.jpg";
 import logo from "../public/master_logo.svg";
+import MobileDrawer from "./MobileDrawer";
 
 const pages = [
   /*  { id: 1, text: DISPUTE_RESOLUTION, url: "/initiate-dispute", isExternal: false }, */
@@ -27,12 +27,19 @@ const pages = [
     url: "/raised-disputes",
     isExternal: false,
   }, */
-  { id: 2, text: "Res Ed", url: "/res-ed", isExternal: false },
+  {
+    id: 2,
+    text: "Res Ed",
+    url: "/res-ed",
+    isExternal: false,
+    icon: <SchoolIcon />,
+  },
   {
     id: 3,
     text: "Community",
     url: "https://discord.com/invite/24my5DbuS9",
     isExternal: true,
+    icon: <ForumIcon />,
   },
   // { id: 3, text: IMAGE_VERIFICATION_HEADING, url: "/image-verification" },
 ];
@@ -53,19 +60,19 @@ const useStyles = (theme) => ({
   },
 });
 const AppHeader = () => {
-  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [open, setOpen] = useState(false);
   const theme = useTheme();
-  const { text, palette } = theme;
+  const { palette } = theme;
+  const styles = useStyles(theme);
   const { web3Provider, connect, disconnect } = useWeb3();
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const styles = useStyles(theme);
+  const closeDrawer = useCallback(() => {
+    setOpen(false);
+  }, [setOpen]);
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+  const openDrawer = useCallback(() => {
+    setOpen(true);
+  }, [setOpen]);
 
   return (
     <AppBar position="sticky">
@@ -82,13 +89,18 @@ const AppHeader = () => {
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={handleOpenNavMenu}
+              onClick={openDrawer}
               color="inherit"
             >
               <MenuIcon />
             </IconButton>
+            <MobileDrawer
+              openDrawer={open}
+              closeDrawer={closeDrawer}
+              DrawerList={pages}
+            />
             {/* Mobile view */}
-            <Menu
+            {/*             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
@@ -125,7 +137,7 @@ const AppHeader = () => {
                   </NextLink>
                 </MenuItem>
               ))}
-            </Menu>
+            </Menu> */}
           </Box>
           <Link href="/" passHref>
             <Box
@@ -170,7 +182,6 @@ const AppHeader = () => {
                   <Button
                     target={page.isExternal ? "_blank" : ""}
                     rel={page.isExternal ? "noopener" : ""}
-                    onClick={handleCloseNavMenu}
                     className="themeColor"
                     sx={{
                       my: 2,
