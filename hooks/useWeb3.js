@@ -9,7 +9,7 @@ const providerOptions = {
   walletconnect: {
     package: WalletConnectProvider, // required
     options: {
-      infuraId: process.env.NEXT_PUBLIC_INFURA_ID,
+      infuraId: process.env.NEXT_PUBLIC_INFURA_ID_ETH,
     },
   },
 };
