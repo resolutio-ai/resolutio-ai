@@ -13,11 +13,12 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import { default as Link } from "next/link";
-import { Fragment, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { useWeb3 } from "../hooks/useWeb3";
 import LogoLinear from "../public/logo_full.jpg";
 import logo from "../public/master_logo.svg";
 import MobileDrawer from "./MobileDrawer";
+import SmartLink from "./SmartLink";
 
 const pages = [
   /*  { id: 1, text: DISPUTE_RESOLUTION, url: "/initiate-dispute", isExternal: false }, */
@@ -75,8 +76,8 @@ const AppHeader = () => {
   }, [setOpen]);
 
   return (
-    <AppBar position="sticky">
-      <Container className="AppBar">
+    <AppBar position="sticky" sx={{ backgroundColor: "white" }}>
+      <Container className="AppBar" maxWidth="xl">
         <Toolbar disableGutters>
           <Link href="/" passHref>
             <Box sx={styles.logostyles} component="a">
@@ -177,26 +178,25 @@ const AppHeader = () => {
             }}
           >
             {pages.map((page) => (
-              <Fragment key={page.id}>
-                <Link href={page.url} passHref>
-                  <Button
-                    target={page.isExternal ? "_blank" : ""}
-                    rel={page.isExternal ? "noopener" : ""}
-                    className="themeColor"
-                    sx={{
-                      my: 2,
-                      color: palette.primary.dark,
-                      display: "block",
-                    }}
-                  >
-                    {page.text}
-                  </Button>
-                </Link>
-                {"|"}
-              </Fragment>
+              <Box
+                key={page.id}
+                sx={{ borderRight: 1, color: theme.palette.primary.light }}
+              >
+                <SmartLink
+                  href={page.url}
+                  isExternal={page.isExternal}
+                  style={{
+                    display: "block",
+                    borderRadius: 0,
+                    padding: "0 0.5rem",
+                  }}
+                >
+                  {page.text}
+                </SmartLink>
+              </Box>
             ))}
             {web3Provider ? (
-              <Button onClick={disconnect} variant="contained">
+              <Button onClick={disconnect} variant="outlined">
                 Disconnect
               </Button>
             ) : (
