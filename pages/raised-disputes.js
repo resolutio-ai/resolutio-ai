@@ -6,8 +6,10 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 import DisputesList from "../components/disputeResolution/DisputesList";
+import RenderOnAnonymous from "../components/RenderOnAnonymous";
 import RenderOnAuthenticated from "../components/RenderOnAuthenticated";
 import Meta from "../components/seo/Meta";
+import Unauthorized from "../components/Unauthorized";
 
 const RaisedDisputes = () => {
   const [open, setOpen] = useState(false);
@@ -94,6 +96,9 @@ const RaisedDisputes = () => {
           </Dialog>
         </>
       </RenderOnAuthenticated>
+      <RenderOnAnonymous>
+        <Unauthorized />
+      </RenderOnAnonymous>
     </>
   );
 };
