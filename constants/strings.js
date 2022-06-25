@@ -10,7 +10,7 @@ export const RESED_SECTION_DESC =
   "With Res Educate, get educated on NFT copyrights, IP rights and how to deal with NFT thefts.";
 export const READ_MORE_BUTTON_LABEL = "Read more";
 
-//Header
+// Header
 export const DISPUTE_RESOLUTION = "Dispute Resolution";
 // Coming Soon Section
 export const COMING_SOON_TEXT = "Coming soon!";
@@ -35,3 +35,10 @@ export const IMAGE_VERIFICATION_DESC =
   "Verify whether your art has been tokenized or your NFT duplicated without consent on <b>Ethereum</b>, <b>Polygon</b> or <b>Tezos</b> blockchains.";
 export const INVALID_URL_ERROR_MESSAGE =
   "Please check the input URL. Only valid( *.jpeg, *.png, *.tif, *.tiff, and *.webp) image URLs are accepted.";
+
+// Unautorized Component
+export const UNAUTH_HEADING = "No authorization found.";
+export const UNAUTH_BODY_TEXT_1 = "This page is not publicly available.";
+export const UNAUTH_BODY_TEXT_2 =
+  "To access it please connect your wallet first.";
+export const BACK_HOME_BTN_TXT = "Return home";

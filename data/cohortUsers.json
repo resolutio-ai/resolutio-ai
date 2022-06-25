@@ -8,7 +8,8 @@
     "social": {
       "linkedIn": "https://www.linkedin.com/in/arisabanks/",
       "twitter": "https://twitter.com/ArisaForestEsq"
-    }
+    },
+    "placeholder": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOMd66vBwADzAGiDaTe+gAAAABJRU5ErkJggg=="
   },
   {
     "id": 2,
@@ -19,7 +20,8 @@
     "social": {
       "linkedIn": "https://www.linkedin.com/in/sushruti-verma-452575160/",
       "twitter": null
-    }
+    },
+    "placeholder": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOMd66vBwADzAGiDaTe+gAAAABJRU5ErkJggg=="
   },
   {
     "id": 3,
@@ -30,7 +32,8 @@
     "social": {
       "linkedIn": "https://www.linkedin.com/in/felixyuen/",
       "twitter": null
-    }
+    },
+    "placeholder": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOMd66vBwADzAGiDaTe+gAAAABJRU5ErkJggg=="
   },
   {
     "id": 4,
@@ -41,7 +44,8 @@
     "social": {
       "linkedIn": "https://www.linkedin.com/in/adarshvijayakumaran/",
       "twitter": null
-    }
+    },
+    "placeholder": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOMd66vBwADzAGiDaTe+gAAAABJRU5ErkJggg=="
   },
   {
     "id": 5,
@@ -52,7 +56,8 @@
     "social": {
       "linkedIn": "https://www.linkedin.com/in/nikita-mary-abraham-705b56b6/",
       "twitter": null
-    }
+    },
+    "placeholder": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOMd66vBwADzAGiDaTe+gAAAABJRU5ErkJggg=="
   },
   {
     "id": 6,
@@ -63,7 +68,8 @@
     "social": {
       "linkedIn": "https://www.linkedin.com/in/nicole-fernandez-prada/",
       "twitter": "https://twitter.com/arrivings"
-    }
+    },
+    "placeholder": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOMd66vBwADzAGiDaTe+gAAAABJRU5ErkJggg=="
   },
   {
     "id": 7,
@@ -74,7 +80,8 @@
     "social": {
       "linkedIn": "https://www.linkedin.com/in/michael-komuczky-5156a7100/",
       "twitter": null
-    }
+    },
+    "placeholder": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOMd66vBwADzAGiDaTe+gAAAABJRU5ErkJggg=="
   },
   {
     "id": 8,
@@ -85,6 +92,7 @@
     "social": {
       "linkedIn": "https://www.linkedin.com/in/thuwaraka-ganeshan-43927a18b/",
       "twitter": null
-    }
+    },
+    "placeholder": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOMd66vBwADzAGiDaTe+gAAAABJRU5ErkJggg=="
   }
 ]

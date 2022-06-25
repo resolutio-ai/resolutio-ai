@@ -124,6 +124,8 @@ const AppHeader = () => {
                 alt="Resolutio logo"
                 height={65}
                 width={65}
+                placeholder="blur"
+                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOMd66vBwADzAGiDaTe+gAAAABJRU5ErkJggg=="
               />
             </Box>
           </Link>
@@ -169,6 +171,8 @@ const AppHeader = () => {
                     alt="resolutio"
                     height={36}
                     width={36}
+                    placeholder="blur"
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOMd66vBwADzAGiDaTe+gAAAABJRU5ErkJggg=="
                   />
                 </Box>
               </Link>
