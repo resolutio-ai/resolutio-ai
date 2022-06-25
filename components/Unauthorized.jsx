@@ -16,7 +16,7 @@ const Unauthorized = () => {
         This page is not publicly available.
       </Typography>
       <Typography variant="body1" color="primary" sx={{ mb: 1 }}>
-        To access it please connect you wallet first.
+        To access it please connect your wallet first.
       </Typography>
       <SmartLink href="/" isExternal={false}>
         <Button variant="contained">Return Home</Button>
