@@ -1,7 +1,7 @@
-import { useWeb3 } from "../hooks/useWeb3";
+import { useWeb3Context } from "../context/Web3Context";
 
 const RenderOnAuthenticated = ({ children }) => {
-  const { web3Provider } = useWeb3();
+  const { web3Provider } = useWeb3Context();
   return web3Provider ? children : null;
 };
 

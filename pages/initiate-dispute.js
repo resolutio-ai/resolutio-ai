@@ -1,17 +1,19 @@
 import { Box } from "@mui/material";
-import React from "react";
 import DisputeResolutionForm from "../components/disputeResolution/DisputeResolutionForm";
 import DisputeResolutionHeader from "../components/disputeResolution/DisputeResolutionHeader";
+import RenderOnAuthenticated from "../components/RenderOnAuthenticated";
 import Meta from "../components/seo/Meta";
 
 const InitateDispute = () => {
   return (
     <>
       <Meta title="Dispute Resolution" />
-      <Box>
-        <DisputeResolutionHeader />
-        <DisputeResolutionForm />
-      </Box>
+      <RenderOnAuthenticated>
+        <Box>
+          <DisputeResolutionHeader />
+          <DisputeResolutionForm />
+        </Box>
+      </RenderOnAuthenticated>
     </>
   );
 };

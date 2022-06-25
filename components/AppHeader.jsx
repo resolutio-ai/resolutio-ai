@@ -1,23 +1,31 @@
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import ForumIcon from "@mui/icons-material/Forum";
 import MenuIcon from "@mui/icons-material/Menu";
 import SchoolIcon from "@mui/icons-material/School";
 import {
   AppBar,
+  Avatar,
   Box,
-  Button,
   Container,
   IconButton,
+  Menu,
+  MenuItem,
   Toolbar,
   Typography,
   useTheme,
 } from "@mui/material";
 import Image from "next/image";
 import { default as Link } from "next/link";
+import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
-import { useWeb3 } from "../hooks/useWeb3";
+import { useWeb3Context } from "../context/Web3Context";
 import LogoLinear from "../public/logo_full.jpg";
 import logo from "../public/master_logo.svg";
 import MobileDrawer from "./MobileDrawer";
+import RenderOnAnonymous from "./RenderOnAnonymous";
+import RenderOnAuthenticated from "./RenderOnAuthenticated";
 import SmartLink from "./SmartLink";
 
 const pages = [
@@ -33,14 +41,14 @@ const pages = [
     text: "Res Ed",
     url: "/res-ed",
     isExternal: false,
-    icon: <SchoolIcon />,
+    icon: <SchoolIcon color="primary" />,
   },
   {
     id: 3,
     text: "Community",
     url: "https://discord.com/invite/24my5DbuS9",
     isExternal: true,
-    icon: <ForumIcon />,
+    icon: <ForumIcon color="primary" />,
   },
   // { id: 3, text: IMAGE_VERIFICATION_HEADING, url: "/image-verification" },
 ];
@@ -65,7 +73,8 @@ const AppHeader = () => {
   const theme = useTheme();
   const { palette } = theme;
   const styles = useStyles(theme);
-  const { web3Provider, connect, disconnect } = useWeb3();
+  const { connect, disconnect } = useWeb3Context();
+  const router = useRouter();
 
   const closeDrawer = useCallback(() => {
     setOpen(false);
@@ -74,6 +83,35 @@ const AppHeader = () => {
   const openDrawer = useCallback(() => {
     setOpen(true);
   }, [setOpen]);
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const menuOpen = Boolean(anchorEl);
+  const handleOpenMenu = useCallback(
+    (event) => {
+      setAnchorEl(event.currentTarget);
+    },
+    [setAnchorEl]
+  );
+  const handleCloseMenu = useCallback(() => {
+    setAnchorEl(null);
+  }, [setAnchorEl]);
+
+  const handleProfileNavigation = useCallback(
+    (e) => {
+      e.preventDefault();
+      handleCloseMenu();
+      router.push("/raised-disputes");
+    },
+    [handleCloseMenu, router]
+  );
+  const handleDisconnect = useCallback(
+    (e) => {
+      e.preventDefault();
+      handleCloseMenu();
+      disconnect();
+    },
+    [handleCloseMenu, disconnect]
+  );
 
   return (
     <AppBar position="sticky" sx={{ backgroundColor: "white" }}>
@@ -84,6 +122,7 @@ const AppHeader = () => {
               <Image src={logo} alt="Resolutio logo" height={65} width={65} />
             </Box>
           </Link>
+          {/* Mobile View Start */}
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -91,7 +130,7 @@ const AppHeader = () => {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={openDrawer}
-              color="inherit"
+              color="primary"
             >
               <MenuIcon />
             </IconButton>
@@ -100,45 +139,6 @@ const AppHeader = () => {
               closeDrawer={closeDrawer}
               DrawerList={pages}
             />
-            {/* Mobile view */}
-            {/*             <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem
-                  key={page.id}
-                  onClick={handleCloseNavMenu}
-                  className="themeColor"
-                >
-                  <NextLink href={page.url} passHref>
-                    <MuiLink
-                      target={page.isExternal ? "_blank" : ""}
-                      underline="none"
-                      color="inherit"
-                      sx={{ color: palette.primary.dark }}
-                      rel={page.isExternal ? "noopener" : ""}
-                    >
-                      {page.text}
-                    </MuiLink>
-                  </NextLink>
-                </MenuItem>
-              ))}
-            </Menu> */}
           </Box>
           <Link href="/" passHref>
             <Box
@@ -165,7 +165,9 @@ const AppHeader = () => {
               </Typography>
             </Box>
           </Link>
-          {/* Desktop menu */}
+          {/* Mobile View End */}
+
+          {/* Desktop Menu */}
           <Box
             sx={{
               flexGrow: 1,
@@ -195,32 +197,63 @@ const AppHeader = () => {
                 </SmartLink>
               </Box>
             ))}
-            {web3Provider ? (
-              <Button onClick={disconnect} variant="outlined">
-                Disconnect
-              </Button>
-            ) : (
-              <Button onClick={connect} variant="contained">
-                Connect
-              </Button>
-            )}
+            <RenderOnAnonymous>
+              <Box>
+                <IconButton aria-label="Wallet Login" onClick={connect}>
+                  <AccountBalanceWalletIcon color="primary" />
+                </IconButton>
+              </Box>
+            </RenderOnAnonymous>
+            <RenderOnAuthenticated>
+              <Box>
+                <IconButton
+                  aria-label="Wallet Login"
+                  onClick={handleOpenMenu}
+                  aria-controls={menuOpen ? "account-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={menuOpen ? "true" : undefined}
+                >
+                  <Avatar
+                    alt="metamask"
+                    src="/metamask.svg"
+                    sx={{
+                      border: `1px solid ${palette.primary.dark}`,
+                      p: ".4rem",
+                      width: 36,
+                      height: 36,
+                    }}
+                  />
+                </IconButton>
+                <Menu
+                  id="basic-menu"
+                  anchorEl={anchorEl}
+                  open={menuOpen}
+                  onClose={handleCloseMenu}
+                  MenuListProps={{
+                    "aria-labelledby": "basic-button",
+                  }}
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "center",
+                  }}
+                >
+                  <MenuItem onClick={handleProfileNavigation}>
+                    <AccountBoxIcon color="primary" sx={{ mr: 1 }} />
+                    <Typography variant="button" color="primary">
+                      Profile
+                    </Typography>
+                  </MenuItem>
+                  <MenuItem onClick={handleDisconnect}>
+                    <ExitToAppIcon color="primary" sx={{ mr: 1 }} />
+                    <Typography variant="button" color="primary">
+                      Disconnect
+                    </Typography>
+                  </MenuItem>
+                </Menu>
+              </Box>
+            </RenderOnAuthenticated>
           </Box>
-          {/* <Link href="/wallet" passHref>
-            <Button
-              className="themeColor"
-              sx={{
-                my: 2,
-                color: text.primary,
-                display: "flex",
-                padding: "6px 8px",
-              }}
-            >
-              <AccountBalanceWalletIcon
-                sx={styles.iconStyle}
-                fontSize="large"
-              />
-            </Button>
-          </Link> */}
+          {/* Desktop Menu */}
         </Toolbar>
       </Container>
     </AppBar>

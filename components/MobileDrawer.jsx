@@ -6,8 +6,9 @@ import {
   ListItem,
   ListItemButton,
   ListItemIcon,
-  ListItemText,
+  Typography,
 } from "@mui/material";
+import SmartLink from "./SmartLink";
 
 const MobileDrawer = ({ openDrawer, closeDrawer, DrawerList }) => {
   const renderList = () => (
@@ -22,10 +23,14 @@ const MobileDrawer = ({ openDrawer, closeDrawer, DrawerList }) => {
       <List>
         {DrawerList.map(({ id, text, url, isExternal, icon }) => (
           <ListItem key={id} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>{icon}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
+            <SmartLink href={url} isExternal={isExternal}>
+              <ListItemButton>
+                <ListItemIcon>{icon}</ListItemIcon>
+                <Typography color="primary" variant="button">
+                  {text}
+                </Typography>
+              </ListItemButton>
+            </SmartLink>
           </ListItem>
         ))}
       </List>

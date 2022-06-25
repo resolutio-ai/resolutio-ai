@@ -6,6 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 import DisputesList from "../components/disputeResolution/DisputesList";
+import RenderOnAuthenticated from "../components/RenderOnAuthenticated";
 import Meta from "../components/seo/Meta";
 
 const UpcomingDisputes = () => {
@@ -49,52 +50,56 @@ const UpcomingDisputes = () => {
   return (
     <>
       <Meta title="Upcoming Disputes" />
-      <Box>
-        <Typography variant="h1">Upcoming Disputes</Typography>
-        <DisputesList
-          disputes={upComingDisputes}
-          openStakeDialog={openStakeDialog}
-        />
-      </Box>
-      <Dialog
-        open={open}
-        onClose={closeStakeDialog}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title" sx={{ textAlign: "center" }}>
-          {"Want to be an artbiter for this dispute?"}
-        </DialogTitle>
-        <DialogContent sx={{ textAlign: "center" }}>
-          <Box sx={{ mb: 2 }}>
-            <Typography variant="h6">Dispute Summary</Typography>
-            <Typography variant="body1">
-              Victim’s comic, which was first published on their social media
-              page in 2020, was allegedly minted as an NFT by another on 13 Feb
-              2022.{" "}
-            </Typography>
-          </Box>
+      <RenderOnAuthenticated>
+        <>
           <Box>
-            <Typography variant="h6">Stake</Typography>
-            <Typography variant="body1">
-              Stake <b>60 MATIC</b> to participate in the arbiter selection
-              process?
-            </Typography>
+            <Typography variant="h1">Upcoming Disputes</Typography>
+            <DisputesList
+              disputes={upComingDisputes}
+              openStakeDialog={openStakeDialog}
+            />
           </Box>
-        </DialogContent>
-        <DialogActions sx={{ justifyContent: "center", pb: 4 }}>
-          <Button
-            onClick={closeStakeDialog}
-            variant="contained"
-            color="secondary"
+          <Dialog
+            open={open}
+            onClose={closeStakeDialog}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
           >
-            No
-          </Button>
-          <Button onClick={handleStaking} autoFocus variant="contained">
-            Yes
-          </Button>
-        </DialogActions>
-      </Dialog>
+            <DialogTitle id="alert-dialog-title" sx={{ textAlign: "center" }}>
+              {"Want to be an artbiter for this dispute?"}
+            </DialogTitle>
+            <DialogContent sx={{ textAlign: "center" }}>
+              <Box sx={{ mb: 2 }}>
+                <Typography variant="h6">Dispute Summary</Typography>
+                <Typography variant="body1">
+                  Victim’s comic, which was first published on their social
+                  media page in 2020, was allegedly minted as an NFT by another
+                  on 13 Feb 2022.{" "}
+                </Typography>
+              </Box>
+              <Box>
+                <Typography variant="h6">Stake</Typography>
+                <Typography variant="body1">
+                  Stake <b>60 MATIC</b> to participate in the arbiter selection
+                  process?
+                </Typography>
+              </Box>
+            </DialogContent>
+            <DialogActions sx={{ justifyContent: "center", pb: 4 }}>
+              <Button
+                onClick={closeStakeDialog}
+                variant="contained"
+                color="secondary"
+              >
+                No
+              </Button>
+              <Button onClick={handleStaking} autoFocus variant="contained">
+                Yes
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </>
+      </RenderOnAuthenticated>
     </>
   );
 };

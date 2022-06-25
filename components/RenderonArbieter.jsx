@@ -1,7 +1,8 @@
 import { useCallback, useMemo } from "react";
+import { useWeb3Context } from "../context/Web3Context";
 
 const RenderonArbieter = () => {
-  const { web3Provider, address } = useWeb3();
+  const { web3Provider, address } = useWeb3Context();
 
   const checkArtbeiter = useCallback(() => {
     if (address) return false;

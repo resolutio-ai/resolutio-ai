@@ -5,7 +5,7 @@ const SmartLink = ({ isExternal, children, href, style }) => {
     textTransform: "uppercase",
     textDecoration: "none",
     fontWeight: 500,
-    fontSize: " 0.875rem",
+    fontSize: "0.875rem",
     lineHeight: 1.75,
     ...style,
   };
