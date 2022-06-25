@@ -21,8 +21,8 @@ import { default as Link } from "next/link";
 import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
 import { useWeb3Context } from "../context/Web3Context";
-import LogoLinear from "../public/logo_full.jpg";
-import logo from "../public/master_logo.svg";
+import desktopLogo from "../public/master_logo.svg";
+import mobileLogo from "../public/mobile_logo.png";
 import MobileDrawer from "./MobileDrawer";
 import RenderOnAnonymous from "./RenderOnAnonymous";
 import RenderOnAuthenticated from "./RenderOnAuthenticated";
@@ -119,52 +119,121 @@ const AppHeader = () => {
         <Toolbar disableGutters>
           <Link href="/" passHref>
             <Box sx={styles.logostyles} component="a">
-              <Image src={logo} alt="Resolutio logo" height={65} width={65} />
+              <Image
+                src={desktopLogo}
+                alt="Resolutio logo"
+                height={65}
+                width={65}
+              />
             </Box>
           </Link>
           {/* Mobile View Start */}
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={openDrawer}
-              color="primary"
-            >
-              <MenuIcon />
-            </IconButton>
-            <MobileDrawer
-              openDrawer={open}
-              closeDrawer={closeDrawer}
-              DrawerList={pages}
-            />
-          </Box>
-          <Link href="/" passHref>
-            <Box
-              component="a"
-              sx={{
-                flexGrow: 1,
-                display: { xs: "flex", md: "none" },
-                textDecoration: "none",
-                color: palette.primary.main,
-              }}
-            >
-              <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "flex", md: "none" },
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <Box>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={openDrawer}
+                color="primary"
               >
-                <Image
-                  src={LogoLinear}
-                  alt="resolutio"
-                  height={27}
-                  width={175}
-                />
-              </Typography>
+                <MenuIcon />
+              </IconButton>
+              <MobileDrawer
+                openDrawer={open}
+                closeDrawer={closeDrawer}
+                DrawerList={pages}
+              />
             </Box>
-          </Link>
+            <Box>
+              <Link href="/" passHref>
+                <Box
+                  component="a"
+                  sx={{
+                    flexGrow: 1,
+                    display: { xs: "flex", md: "none" },
+                    textDecoration: "none",
+                    color: palette.primary.main,
+                  }}
+                >
+                  <Image
+                    src={mobileLogo}
+                    alt="resolutio"
+                    height={36}
+                    width={36}
+                  />
+                </Box>
+              </Link>
+            </Box>
+            <Box>
+              <RenderOnAnonymous>
+                <Box>
+                  <IconButton aria-label="Wallet Login" onClick={connect}>
+                    <AccountBalanceWalletIcon
+                      color="primary"
+                      sx={{ fontSize: "1.75rem" }}
+                    />
+                  </IconButton>
+                </Box>
+              </RenderOnAnonymous>
+              <RenderOnAuthenticated>
+                <Box>
+                  <IconButton
+                    aria-label="Wallet Login"
+                    onClick={handleOpenMenu}
+                    aria-controls={menuOpen ? "account-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={menuOpen ? "true" : undefined}
+                  >
+                    <Avatar
+                      alt="metamask"
+                      src="/metamask.svg"
+                      sx={{
+                        border: `1px solid ${palette.primary.dark}`,
+                        p: ".4rem",
+                        width: 34,
+                        height: 34,
+                      }}
+                    />
+                  </IconButton>
+                  <Menu
+                    id="basic-menu"
+                    anchorEl={anchorEl}
+                    open={menuOpen}
+                    onClose={handleCloseMenu}
+                    MenuListProps={{
+                      "aria-labelledby": "basic-button",
+                    }}
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "center",
+                    }}
+                  >
+                    <MenuItem onClick={handleProfileNavigation}>
+                      <AccountBoxIcon color="primary" sx={{ mr: 1 }} />
+                      <Typography variant="button" color="primary">
+                        Profile
+                      </Typography>
+                    </MenuItem>
+                    <MenuItem onClick={handleDisconnect}>
+                      <ExitToAppIcon color="primary" sx={{ mr: 1 }} />
+                      <Typography variant="button" color="primary">
+                        Disconnect
+                      </Typography>
+                    </MenuItem>
+                  </Menu>
+                </Box>
+              </RenderOnAuthenticated>
+            </Box>
+          </Box>
           {/* Mobile View End */}
 
           {/* Desktop Menu */}
