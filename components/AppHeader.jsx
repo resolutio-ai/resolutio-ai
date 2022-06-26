@@ -182,8 +182,6 @@ const AppHeader = () => {
                     alt="resolutio"
                     height={36}
                     width={36}
-                    placeholder="blur"
-                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOMd66vBwADzAGiDaTe+gAAAABJRU5ErkJggg=="
                   />
                 </Box>
               </Link>
