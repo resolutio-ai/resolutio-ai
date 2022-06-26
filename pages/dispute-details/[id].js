@@ -1,5 +1,6 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
 import Meta from "../../components/seo/Meta";
+import SmartLink from "../../components/SmartLink";
 const DisputeDetails = () => {
   return (
     <>
@@ -18,9 +19,14 @@ const DisputeDetails = () => {
             </Button>
           </Grid>
           <Grid item md={4} sm={6} xs={12}>
-            <Button variant="contained" color="secondary">
-              Arbiter Tools
-            </Button>
+            <SmartLink
+              href="https://znreza-blockchain-transaction-search-app-4pp5e7.streamlitapp.com/"
+              isExternal={true}
+            >
+              <Button variant="contained" color="secondary">
+                Arbiter Tools
+              </Button>
+            </SmartLink>
           </Grid>
         </Grid>
       </Box>
