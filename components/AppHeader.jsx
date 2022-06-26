@@ -2,6 +2,7 @@ import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import ForumIcon from "@mui/icons-material/Forum";
+import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
 import MenuIcon from "@mui/icons-material/Menu";
 import SchoolIcon from "@mui/icons-material/School";
 import {
@@ -104,6 +105,16 @@ const AppHeader = () => {
     },
     [handleCloseMenu, router]
   );
+
+  const handleArbiterNavigation = useCallback(
+    (e) => {
+      e.preventDefault();
+      handleCloseMenu();
+      router.push("/upcoming-disputes");
+    },
+    [handleCloseMenu, router]
+  );
+
   const handleDisconnect = useCallback(
     (e) => {
       e.preventDefault();
@@ -310,6 +321,12 @@ const AppHeader = () => {
                     horizontal: "center",
                   }}
                 >
+                  <MenuItem onClick={handleArbiterNavigation}>
+                    <HistoryEduIcon color="primary" sx={{ mr: 1 }} />
+                    <Typography variant="button" color="primary">
+                      Arbiter disputes
+                    </Typography>
+                  </MenuItem>
                   <MenuItem onClick={handleProfileNavigation}>
                     <AccountBoxIcon color="primary" sx={{ mr: 1 }} />
                     <Typography variant="button" color="primary">
