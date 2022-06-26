@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import Image from "next/image";
-import React from "react";
+import { PLACEHOLDER_BLUR } from "../constants/constants";
 
 const UserCard = ({ user }) => {
   return (
@@ -28,6 +28,8 @@ const UserCard = ({ user }) => {
           height={100}
           objectFit="cover"
           className="rounded"
+          placeholder="blur"
+          blurDataURL={PLACEHOLDER_BLUR}
         />
         <Typography fontWeight="bold">{user.name}</Typography>
         <Typography variant="body1">{user.title}</Typography>

@@ -3,35 +3,30 @@
     "id": 1,
     "imageSrc": "/team/sneha.jpg",
     "name": "Sneha Vijayan",
-    "profileURL": "https://www.linkedin.com/in/sneha-vijayan-0a8608169/",
-    "placeholder": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOMd66vBwADzAGiDaTe+gAAAABJRU5ErkJggg=="
+    "profileURL": "https://www.linkedin.com/in/sneha-vijayan-0a8608169/"
   },
   {
     "id": 2,
     "imageSrc": "/team/zarreen.jpg",
     "name": "Zarreen Reza",
-    "profileURL": "https://www.linkedin.com/in/zarreennreza/",
-    "placeholder": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOMd66vBwADzAGiDaTe+gAAAABJRU5ErkJggg=="
+    "profileURL": "https://www.linkedin.com/in/zarreennreza/"
   },
   {
     "id": 3,
     "imageSrc": "/team/alex.jpg",
     "name": "Ogubuike Alexandra Ozioma",
-    "profileURL": "https://www.linkedin.com/in/ogubuike-alex",
-    "placeholder": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOMd66vBwADzAGiDaTe+gAAAABJRU5ErkJggg=="
+    "profileURL": "https://www.linkedin.com/in/ogubuike-alex"
   },
   {
     "id": 4,
     "imageSrc": "/team/bestin.jpg",
     "name": "Bestin John",
-    "profileURL": "https://www.linkedin.com/in/bestin-john/",
-    "placeholder": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOMd66vBwADzAGiDaTe+gAAAABJRU5ErkJggg=="
+    "profileURL": "https://www.linkedin.com/in/bestin-john/"
   },
   {
     "id": 5,
     "imageSrc": "/team/anish.png",
     "name": "Anish Praveen",
-    "profileURL": "https://www.linkedin.com/in/anishprvn/",
-    "placeholder": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOMd66vBwADzAGiDaTe+gAAAABJRU5ErkJggg=="
+    "profileURL": "https://www.linkedin.com/in/anishprvn/"
   }
 ]
