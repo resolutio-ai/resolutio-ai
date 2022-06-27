@@ -22,7 +22,7 @@ B. Storage of facts and evidence on IPFS
 
 C. Selection of arbiters from the NFT community
 
-D. evaluation of the case by arbiters
+D. Evaluation of the case by arbiters using Covalent API
 
 E. Voting 
 
@@ -53,7 +53,7 @@ If an arbiter is interested to take part in adjudication, they shall go to the A
 
 **D. Evaluation of case by arbiters**
 
-The selected arbiters are then provided the case details and evidence, via the IPFS link. The arbiters are also provided arbiter tools. They are provided **Covalent API plug-in** to identify with ease, transactions and wallets related to the relevant NFT(s). 
+The selected arbiters are then provided the case details and evidence, via the IPFS link. The arbiters are also provided arbiter tools. They are provided **Covalent API plug-in** to identify with ease, transactions and wallets related to the relevant NFT(s). [The codebase is available here.](https://github.com/znreza/blockchain-transaction-search)
 
 **E. Voting**
 
