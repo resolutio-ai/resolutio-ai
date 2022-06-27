@@ -4,7 +4,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 **[Image Verification](https://github.com/resolutio-ai/resolutio-ai/tree/main/components/imageVerification)**
 
-Millions of art gets minted as NFTs without artist consent or gets duplicated into fake NFTs. Sheer volume of such cases make it difficult for people to keep track of stolen art/NFTs. By using the *AI Powered ?? * Image Verification solution on our platform, you can verify whether your art has been stolen/duplicated. 
+Millions of art gets minted as NFTs without artist consent or gets duplicated into fake NFTs. Sheer volume of such cases make it difficult for people to keep track of stolen art/NFTs. By using the **AI-powered Image** Verification solution on our platform, you can verify whether your art has been stolen/duplicated. 
 
 If you find duplicate or unauthorised NFTs, you may choose to invalidate it through our decentralised dispute resolution mechanism. First you must identify the fake NFT Asset IDs. Thereafter, on clicking the fake ID’s, you will be taken to the dispute resolution page, where you will be asked to ‘initiate’ our NFT Community based dispute resolution process.
 
@@ -51,7 +51,7 @@ If an arbiter is interested to take part in adjudication, they shall go to the A
     This is determined by the decision NFTs in their wallet. After each dispute, the final decision is minted as NFTs and transferred to the (majority) arbiters in the case . Each NFT is tagged depending on the subject matter of the dispute. This tag helps the randomisation smart contract identify the subject matter expertise of the applicants
     
 
-**D. Evaluation of case by arbiters**
+**D. Evaluation of case by arbiters using Covalent API**
 
 The selected arbiters are then provided the case details and evidence, via the IPFS link. The arbiters are also provided arbiter tools. They are provided **Covalent API plug-in** to identify with ease, transactions and wallets related to the relevant NFT(s). [The codebase is available here.](https://github.com/znreza/blockchain-transaction-search)
 
