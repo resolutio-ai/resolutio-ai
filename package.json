@@ -16,13 +16,14 @@
     "@fontsource/roboto": "^4.5.3",
     "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.1",
+    "@nomiclabs/hardhat-ethers": "^2.0.6",
+    "@nomiclabs/hardhat-waffle": "^2.0.3",
+    "@openzeppelin/contracts": "^4.6.0",
     "@react-pdf/renderer": "^2.2.0",
     "@walletconnect/web3-provider": "^1.7.8",
-    "authereum": "^0.1.14",
     "axios": "^0.27.2",
     "ethers": "^5.6.9",
     "ipfs-http-client": "^57.0.1",
-    "jspdf": "^2.5.1",
     "next": "^12.1.0",
     "nft.storage": "^6.3.0",
     "prop-types": "^15.8.1",
@@ -36,6 +37,8 @@
   },
   "devDependencies": {
     "eslint": "8.11.0",
-    "eslint-config-next": "12.1.0"
+    "eslint-config-next": "12.1.0",
+    "ethereum-waffle": "^3.4.4",
+    "hardhat": "^2.9.9"
   }
 }
