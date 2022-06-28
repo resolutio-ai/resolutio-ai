@@ -79,7 +79,7 @@ export const useWeb3 = () => {
   useEffect(() => {
     if (provider?.on) {
       const handleAccountsChanged = (accounts) => {
-        toast.info("Changed Web3 Account");
+        // toast.info("Changed Web3 Account");
         dispatch({
           type: "SET_ADDRESS",
           address: accounts[0],
@@ -90,7 +90,7 @@ export const useWeb3 = () => {
       const handleChainChanged = (_hexChainId) => {
         if (typeof window !== "undefined") {
           console.log("switched to chain...", _hexChainId);
-          toast.info("Web3 Network Changed");
+          // toast.info("Web3 Network Changed");
           window.location.reload();
         } else {
           console.log("window is undefined");
