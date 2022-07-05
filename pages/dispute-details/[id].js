@@ -1,7 +1,6 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { useCallback, useState } from "react";
 import CountDownTimer from "../../components/CountDownTimer";
-import RenderOnAnonymous from "../../components/RenderOnAnonymous";
 import RenderOnAuthenticated from "../../components/RenderOnAuthenticated";
 import Meta from "../../components/seo/Meta";
 import SmartLink from "../../components/SmartLink";
@@ -67,9 +66,7 @@ const DisputeDetails = () => {
           </Box>
         </Box>
       </RenderOnAuthenticated>
-      <RenderOnAnonymous>
-        <Unauthorized />
-      </RenderOnAnonymous>
+      <Unauthorized />
     </>
   );
 };
