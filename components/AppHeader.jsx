@@ -1,20 +1,12 @@
-import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import ForumIcon from "@mui/icons-material/Forum";
-import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
 import MenuIcon from "@mui/icons-material/Menu";
 import SchoolIcon from "@mui/icons-material/School";
 import {
   AppBar,
-  Avatar,
   Box,
   Container,
   IconButton,
-  Menu,
-  MenuItem,
   Toolbar,
-  Typography,
   useTheme,
 } from "@mui/material";
 import Image from "next/image";
@@ -24,9 +16,8 @@ import { useCallback, useState } from "react";
 import { useWeb3Context } from "../context/Web3Context";
 import desktopLogo from "../public/master_logo.svg";
 import mobileLogo from "../public/mobile_logo.png";
+import LoginModule from "./LoginModule";
 import MobileDrawer from "./MobileDrawer";
-import RenderOnAnonymous from "./RenderOnAnonymous";
-import RenderOnAuthenticated from "./RenderOnAuthenticated";
 import SmartLink from "./SmartLink";
 
 const pages = [
@@ -84,45 +75,6 @@ const AppHeader = () => {
   const openDrawer = useCallback(() => {
     setOpen(true);
   }, [setOpen]);
-
-  const [anchorEl, setAnchorEl] = useState(null);
-  const menuOpen = Boolean(anchorEl);
-  const handleOpenMenu = useCallback(
-    (event) => {
-      setAnchorEl(event.currentTarget);
-    },
-    [setAnchorEl]
-  );
-  const handleCloseMenu = useCallback(() => {
-    setAnchorEl(null);
-  }, [setAnchorEl]);
-
-  const handleProfileNavigation = useCallback(
-    (e) => {
-      e.preventDefault();
-      handleCloseMenu();
-      router.push("/raised-disputes");
-    },
-    [handleCloseMenu, router]
-  );
-
-  const handleArbiterNavigation = useCallback(
-    (e) => {
-      e.preventDefault();
-      handleCloseMenu();
-      router.push("/upcoming-disputes");
-    },
-    [handleCloseMenu, router]
-  );
-
-  const handleDisconnect = useCallback(
-    (e) => {
-      e.preventDefault();
-      handleCloseMenu();
-      disconnect();
-    },
-    [handleCloseMenu, disconnect]
-  );
 
   return (
     <AppBar position="sticky" sx={{ backgroundColor: "white" }}>
@@ -187,64 +139,12 @@ const AppHeader = () => {
               </Link>
             </Box>
             <Box>
-              <RenderOnAnonymous>
-                <Box>
-                  <IconButton aria-label="Wallet Login" onClick={connect}>
-                    <AccountBalanceWalletIcon
-                      color="primary"
-                      sx={{ fontSize: "1.75rem" }}
-                    />
-                  </IconButton>
-                </Box>
-              </RenderOnAnonymous>
-              <RenderOnAuthenticated>
-                <Box>
-                  <IconButton
-                    aria-label="Wallet Login"
-                    onClick={handleOpenMenu}
-                    aria-controls={menuOpen ? "account-menu" : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={menuOpen ? "true" : undefined}
-                  >
-                    <Avatar
-                      alt="metamask"
-                      src="/metamask.svg"
-                      sx={{
-                        border: `1px solid ${palette.primary.dark}`,
-                        p: ".4rem",
-                        width: 34,
-                        height: 34,
-                      }}
-                    />
-                  </IconButton>
-                  <Menu
-                    id="basic-menu"
-                    anchorEl={anchorEl}
-                    open={menuOpen}
-                    onClose={handleCloseMenu}
-                    MenuListProps={{
-                      "aria-labelledby": "basic-button",
-                    }}
-                    transformOrigin={{
-                      vertical: "top",
-                      horizontal: "center",
-                    }}
-                  >
-                    <MenuItem onClick={handleProfileNavigation}>
-                      <AccountBoxIcon color="primary" sx={{ mr: 1 }} />
-                      <Typography variant="button" color="primary">
-                        Profile
-                      </Typography>
-                    </MenuItem>
-                    <MenuItem onClick={handleDisconnect}>
-                      <ExitToAppIcon color="primary" sx={{ mr: 1 }} />
-                      <Typography variant="button" color="primary">
-                        Disconnect
-                      </Typography>
-                    </MenuItem>
-                  </Menu>
-                </Box>
-              </RenderOnAuthenticated>
+              <LoginModule
+                connect={connect}
+                disconnect={disconnect}
+                router={router}
+                size={34}
+              />
             </Box>
           </Box>
           {/* Mobile View End */}
@@ -279,67 +179,11 @@ const AppHeader = () => {
                 </SmartLink>
               </Box>
             ))}
-            <RenderOnAnonymous>
-              <Box>
-                <IconButton aria-label="Wallet Login" onClick={connect}>
-                  <AccountBalanceWalletIcon color="primary" />
-                </IconButton>
-              </Box>
-            </RenderOnAnonymous>
-            <RenderOnAuthenticated>
-              <Box>
-                <IconButton
-                  aria-label="Wallet Login"
-                  onClick={handleOpenMenu}
-                  aria-controls={menuOpen ? "account-menu" : undefined}
-                  aria-haspopup="true"
-                  aria-expanded={menuOpen ? "true" : undefined}
-                >
-                  <Avatar
-                    alt="metamask"
-                    src="/metamask.svg"
-                    sx={{
-                      border: `1px solid ${palette.primary.dark}`,
-                      p: ".4rem",
-                      width: 36,
-                      height: 36,
-                    }}
-                  />
-                </IconButton>
-                <Menu
-                  id="basic-menu"
-                  anchorEl={anchorEl}
-                  open={menuOpen}
-                  onClose={handleCloseMenu}
-                  MenuListProps={{
-                    "aria-labelledby": "basic-button",
-                  }}
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "center",
-                  }}
-                >
-                  <MenuItem onClick={handleArbiterNavigation}>
-                    <HistoryEduIcon color="primary" sx={{ mr: 1 }} />
-                    <Typography variant="button" color="primary">
-                      Arbiter disputes
-                    </Typography>
-                  </MenuItem>
-                  <MenuItem onClick={handleProfileNavigation}>
-                    <AccountBoxIcon color="primary" sx={{ mr: 1 }} />
-                    <Typography variant="button" color="primary">
-                      Profile
-                    </Typography>
-                  </MenuItem>
-                  <MenuItem onClick={handleDisconnect}>
-                    <ExitToAppIcon color="primary" sx={{ mr: 1 }} />
-                    <Typography variant="button" color="primary">
-                      Disconnect
-                    </Typography>
-                  </MenuItem>
-                </Menu>
-              </Box>
-            </RenderOnAuthenticated>
+            <LoginModule
+              connect={connect}
+              disconnect={disconnect}
+              router={router}
+            />
           </Box>
           {/* Desktop Menu */}
         </Toolbar>
