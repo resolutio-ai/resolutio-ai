@@ -1,39 +1,29 @@
 export const web3InitialState = {
-  //web3Provider: null,
   provider: null,
+  web3Provider: null,
   address: null,
-  networkId: null,
-  chainId: null,
-  user: null,
+  network: null,
 };
 
 export const web3Reducer = (state, action) => {
   switch (action.type) {
-    case "SET_PROVIDER":
+    case "SET_WEB3_PROVIDER":
       return {
         ...state,
         provider: action.provider,
-        //web3Provider: action.web3Provider,
+        web3Provider: action.web3Provider,
+        address: action.address,
+        network: action.network,
       };
     case "SET_ADDRESS":
       return {
         ...state,
         address: action.address,
       };
-    case "SET_NETWORK_ID":
+    case "SET_NETWORK":
       return {
         ...state,
-        networkId: action.networkId,
-      };
-    case "SET_CHAIN_ID":
-      return {
-        ...state,
-        chainId: action.chainId,
-      };
-    case "SET_USER":
-      return {
-        ...state,
-        user: action.user,
+        network: action.network,
       };
     case "RESET_WEB3_PROVIDER":
       return web3InitialState;
