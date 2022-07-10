@@ -9,11 +9,12 @@ import {
   Toolbar,
   useTheme,
 } from "@mui/material";
+import UAuth from "@uauth/js";
 import Image from "next/image";
 import { default as Link } from "next/link";
 import { useRouter } from "next/router";
-import { useCallback, useState } from "react";
-import { useWeb3Context } from "../context/Web3Context";
+import { useCallback, useEffect, useState } from "react";
+// import { useWeb3Context } from "../context/Web3Context";
 import desktopLogo from "../public/master_logo.svg";
 import mobileLogo from "../public/mobile_logo.png";
 import LoginModule from "./LoginModule";
@@ -45,6 +46,12 @@ const pages = [
   // { id: 3, text: IMAGE_VERIFICATION_HEADING, url: "/image-verification" },
 ];
 
+const uauth = new UAuth({
+  clientID: "88302836-bf75-4bf1-aca1-3ed4d506204b",
+  scope: "openid email wallet",
+  redirectUri: "https://resolutio.ai/",
+});
+
 const useStyles = (theme) => ({
   logostyles: {
     marginTop: ".5rem",
@@ -61,11 +68,53 @@ const useStyles = (theme) => ({
   },
 });
 const AppHeader = () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState();
+  const [user, setUser] = useState();
+
+  // Check to see if the user is inside the cache
+  useEffect(() => {
+    setLoading(true);
+    uauth
+      .user()
+      .then(setUser)
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, []);
+
+  // Login with a popup and save the user
+  const handleLogin = () => {
+    setLoading(true);
+    if (!uauth) {
+      return;
+    }
+
+    uauth
+      .loginWithPopup()
+      .then(() => uauth.user().then(setUser))
+      .catch(setError)
+      .finally(() => setLoading(false));
+  };
+
+  // Logout and delete user
+  const handleLogout = () => {
+    setLoading(true);
+    if (!uauth) {
+      return;
+    }
+
+    uauth
+      .logout()
+      .then(() => setUser(undefined))
+      .catch(setError)
+      .finally(() => setLoading(false));
+  };
+
   const [open, setOpen] = useState(false);
   const theme = useTheme();
   const { palette } = theme;
   const styles = useStyles(theme);
-  const { connect, disconnect } = useWeb3Context();
+  //const { connect, disconnect } = useWeb3Context();
   const router = useRouter();
 
   const closeDrawer = useCallback(() => {
@@ -140,8 +189,9 @@ const AppHeader = () => {
             </Box>
             <Box>
               <LoginModule
-                connect={connect}
-                disconnect={disconnect}
+                user={user}
+                connect={handleLogin}
+                disconnect={handleLogout}
                 router={router}
                 size={34}
               />
@@ -180,8 +230,9 @@ const AppHeader = () => {
               </Box>
             ))}
             <LoginModule
-              connect={connect}
-              disconnect={disconnect}
+              user={user}
+              connect={handleLogin}
+              disconnect={handleLogout}
               router={router}
             />
           </Box>
