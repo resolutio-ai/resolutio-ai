@@ -71,6 +71,7 @@ const AppHeader = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
   const [user, setUser] = useState();
+  console.log(loading, error);
 
   // Check to see if the user is inside the cache
   useEffect(() => {
