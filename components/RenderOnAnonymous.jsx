@@ -1,9 +1,9 @@
 import { useWeb3Context } from "../context/Web3Context";
 
 const RenderOnAnonymous = ({ children }) => {
-  const { isConnected } = useWeb3Context();
+  const { web3Provider } = useWeb3Context();
 
-  return !isConnected ? children : null;
+  return !web3Provider ? children : null;
 };
 
 export default RenderOnAnonymous;
