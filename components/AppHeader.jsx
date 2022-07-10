@@ -47,7 +47,7 @@ const pages = [
 ];
 
 const uauth = new UAuth({
-  clientID: "88302836-bf75-4bf1-aca1-3ed4d506204b",
+  clientID: "fce8da3e-5cd4-4cf7-ace4-84fa2d146afb",
   scope: "openid email wallet",
   redirectUri: "https://resolutio.ai/",
 });
