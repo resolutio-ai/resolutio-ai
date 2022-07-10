@@ -17,6 +17,8 @@
     "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.1",
     "@react-pdf/renderer": "^2.2.0",
+    "@uauth/js": "^2.0.0",
+    "@uauth/web3modal": "^2.0.0",
     "@walletconnect/web3-provider": "^1.7.8",
     "authereum": "^0.1.14",
     "axios": "^0.27.2",
@@ -32,6 +34,7 @@
     "react-router-dom": "^6.3.0",
     "react-timer-hook": "^3.0.5",
     "sitemap": "^7.1.1",
+    "web3": "^1.7.4",
     "web3modal": "^1.9.8"
   },
   "devDependencies": {
