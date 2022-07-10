@@ -12,10 +12,10 @@ import {
   useTheme,
 } from "@mui/material";
 import { useCallback, useState } from "react";
-import RenderOnAnonymous from "./RenderOnAnonymous";
-import RenderOnAuthenticated from "./RenderOnAuthenticated";
+//import RenderOnAnonymous from "./RenderOnAnonymous";
+///import RenderOnAuthenticated from "./RenderOnAuthenticated";
 
-const LoginModule = ({ connect, disconnect, router, size = 36 }) => {
+const LoginModule = ({ user, connect, disconnect, router, size = 36 }) => {
   const theme = useTheme();
   const { palette } = theme;
   const [anchorEl, setAnchorEl] = useState(null);
@@ -60,14 +60,18 @@ const LoginModule = ({ connect, disconnect, router, size = 36 }) => {
   );
   return (
     <>
-      <RenderOnAnonymous>
+      {/* <RenderOnAnonymous> */}
+
+      {!user && (
         <Box>
           <IconButton aria-label="Wallet Login" onClick={connect}>
             <AccountBalanceWalletIcon color="primary" />
           </IconButton>
         </Box>
-      </RenderOnAnonymous>
-      <RenderOnAuthenticated>
+      )}
+      {/* </RenderOnAnonymous> */}
+      {/* <RenderOnAuthenticated> */}
+      {user && (
         <Box>
           <IconButton
             aria-label="Wallet Login"
@@ -120,7 +124,8 @@ const LoginModule = ({ connect, disconnect, router, size = 36 }) => {
             </MenuItem>
           </Menu>
         </Box>
-      </RenderOnAuthenticated>
+      )}
+      {/* </RenderOnAuthenticated> */}
     </>
   );
 };
