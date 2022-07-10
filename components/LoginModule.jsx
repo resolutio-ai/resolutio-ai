@@ -81,8 +81,8 @@ const LoginModule = ({ user, connect, disconnect, router, size = 36 }) => {
             aria-expanded={menuOpen ? "true" : undefined}
           >
             <Avatar
-              alt="metamask"
-              src="/metamask.svg"
+              alt="unstoppabledomains"
+              src="/unstoppabledomains.svg"
               sx={{
                 border: `1px solid ${palette.primary.dark}`,
                 p: ".4rem",
