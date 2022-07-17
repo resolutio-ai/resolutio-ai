@@ -2,6 +2,7 @@ import { CacheProvider } from "@emotion/react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import PropTypes from "prop-types";
 import Layout from "../components/Layout";
+import { WalletContextProvider } from "../context/WalletContext";
 import { Web3ContextProvider } from "../context/Web3Context";
 import "../styles/globals.css";
 import resolutioTheme from "../styles/theme/resolutioTheme";
@@ -13,16 +14,18 @@ const MyApp = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
   return (
-    <Web3ContextProvider>
-      <CacheProvider value={emotionCache}>
-        <ThemeProvider theme={resolutioTheme}>
-          <CssBaseline />
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </ThemeProvider>
-      </CacheProvider>
-    </Web3ContextProvider>
+    <WalletContextProvider>
+      <Web3ContextProvider>
+        <CacheProvider value={emotionCache}>
+          <ThemeProvider theme={resolutioTheme}>
+            <CssBaseline />
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </ThemeProvider>
+        </CacheProvider>
+      </Web3ContextProvider>
+    </WalletContextProvider>
   );
 };
 

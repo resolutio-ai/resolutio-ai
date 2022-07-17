@@ -14,6 +14,7 @@ import {
 import Image from "next/image";
 import * as React from "react";
 import { useCallback } from "react";
+import { useWalletContext } from "../context/WalletContext";
 import metamask from "../public/metamask.svg";
 import mobileLogo from "../public/mobile_logo.png";
 import ud from "../public/unstoppabledomains.svg";
@@ -35,15 +36,18 @@ const udIcon = (
 );
 
 const AlertDialogSlide = ({ open, onClose }) => {
+  const { connect, address, disconnect } = useWalletContext();
   const handleLoginwithMetaMask = useCallback(() => {
     console.log("Metamask Login Cliked");
     onClose();
-  }, [onClose]);
+    connect();
+  }, [onClose, connect]);
 
   const handleLoginwithUD = useCallback(() => {
     console.log("UD Login Cliked");
     onClose();
-  }, [onClose]);
+    disconnect();
+  }, [onClose, disconnect]);
 
   return (
     <div>
@@ -55,7 +59,9 @@ const AlertDialogSlide = ({ open, onClose }) => {
         aria-describedby="alert-dialog-slide-description"
         sx={{ "& .MuiDialog-paper": { minWidth: "20rem" } }}
       >
-        <DialogTitle align="center" disableT>{"Connect Wallet"}</DialogTitle>
+        <DialogTitle align="center" disableT>
+          {"Connect Wallet" + address}
+        </DialogTitle>
         <DialogContent align="center">
           <Stack
             direction="row"
