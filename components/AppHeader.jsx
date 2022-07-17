@@ -17,6 +17,7 @@ import { useCallback, useEffect, useState } from "react";
 // import { useWeb3Context } from "../context/Web3Context";
 import desktopLogo from "../public/master_logo.svg";
 import mobileLogo from "../public/mobile_logo.png";
+import LoginDialog from "./LoginDialog";
 import LoginModule from "./LoginModule";
 import MobileDrawer from "./MobileDrawer";
 import SmartLink from "./SmartLink";
@@ -71,7 +72,15 @@ const AppHeader = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
   const [user, setUser] = useState();
-  console.log(loading, error);
+  const [isLoginDialogOpen, setLoginDialogOpen] = useState(false);
+
+  const handleLoginDialogOpen = useCallback(() => {
+    setLoginDialogOpen(true);
+  }, [setLoginDialogOpen]);
+
+  const handleLoginDialogClose = useCallback(() => {
+    setLoginDialogOpen(false);
+  }, [setLoginDialogOpen]);
 
   // Check to see if the user is inside the cache
   useEffect(() => {
@@ -127,120 +136,123 @@ const AppHeader = () => {
   }, [setOpen]);
 
   return (
-    <AppBar position="sticky" sx={{ backgroundColor: "white" }}>
-      <Container className="AppBar" maxWidth="xl">
-        <Toolbar disableGutters>
-          <Link href="/" passHref>
-            <Box sx={styles.logostyles} component="a">
-              <Image
-                src={desktopLogo}
-                alt="Resolutio logo"
-                height={65}
-                width={65}
-                placeholder="blur"
-                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOMd66vBwADzAGiDaTe+gAAAABJRU5ErkJggg=="
-              />
-            </Box>
-          </Link>
-          {/* Mobile View Start */}
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: { xs: "flex", md: "none" },
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <Box>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={openDrawer}
-                color="primary"
-              >
-                <MenuIcon />
-              </IconButton>
-              <MobileDrawer
-                openDrawer={open}
-                closeDrawer={closeDrawer}
-                DrawerList={pages}
-              />
-            </Box>
-            <Box>
-              <Link href="/" passHref>
-                <Box
-                  component="a"
-                  sx={{
-                    flexGrow: 1,
-                    display: { xs: "flex", md: "none" },
-                    textDecoration: "none",
-                    color: palette.primary.main,
-                  }}
+    <>
+      <AppBar position="sticky" sx={{ backgroundColor: "white" }}>
+        <Container className="AppBar" maxWidth="xl">
+          <Toolbar disableGutters>
+            <Link href="/" passHref>
+              <Box sx={styles.logostyles} component="a">
+                <Image
+                  src={desktopLogo}
+                  alt="Resolutio logo"
+                  height={65}
+                  width={65}
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOMd66vBwADzAGiDaTe+gAAAABJRU5ErkJggg=="
+                />
+              </Box>
+            </Link>
+            {/* Mobile View Start */}
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: { xs: "flex", md: "none" },
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <Box>
+                <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={openDrawer}
+                  color="primary"
                 >
-                  <Image
-                    src={mobileLogo}
-                    alt="resolutio"
-                    height={36}
-                    width={36}
-                  />
-                </Box>
-              </Link>
+                  <MenuIcon />
+                </IconButton>
+                <MobileDrawer
+                  openDrawer={open}
+                  closeDrawer={closeDrawer}
+                  DrawerList={pages}
+                />
+              </Box>
+              <Box>
+                <Link href="/" passHref>
+                  <Box
+                    component="a"
+                    sx={{
+                      flexGrow: 1,
+                      display: { xs: "flex", md: "none" },
+                      textDecoration: "none",
+                      color: palette.primary.main,
+                    }}
+                  >
+                    <Image
+                      src={mobileLogo}
+                      alt="resolutio"
+                      height={36}
+                      width={36}
+                    />
+                  </Box>
+                </Link>
+              </Box>
+              <Box>
+                <LoginModule
+                  user={user}
+                  connect={handleLoginDialogOpen}
+                  disconnect={handleLogout}
+                  router={router}
+                  size={34}
+                />
+              </Box>
             </Box>
-            <Box>
+            {/* Mobile View End */}
+
+            {/* Desktop Menu */}
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: {
+                  xs: "none",
+                  md: "flex",
+                  alignItems: "baseline",
+                  justifyContent: "flex-end",
+                },
+              }}
+            >
+              {pages.map((page) => (
+                <Box
+                  key={page.id}
+                  sx={{ borderRight: 1, color: theme.palette.primary.light }}
+                >
+                  <SmartLink
+                    href={page.url}
+                    isExternal={page.isExternal}
+                    style={{
+                      display: "block",
+                      borderRadius: 0,
+                      padding: "0 0.5rem",
+                    }}
+                  >
+                    {page.text}
+                  </SmartLink>
+                </Box>
+              ))}
               <LoginModule
                 user={user}
-                connect={handleLogin}
+                connect={handleLoginDialogOpen}
                 disconnect={handleLogout}
                 router={router}
-                size={34}
               />
             </Box>
-          </Box>
-          {/* Mobile View End */}
-
-          {/* Desktop Menu */}
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: {
-                xs: "none",
-                md: "flex",
-                alignItems: "baseline",
-                justifyContent: "flex-end",
-              },
-            }}
-          >
-            {pages.map((page) => (
-              <Box
-                key={page.id}
-                sx={{ borderRight: 1, color: theme.palette.primary.light }}
-              >
-                <SmartLink
-                  href={page.url}
-                  isExternal={page.isExternal}
-                  style={{
-                    display: "block",
-                    borderRadius: 0,
-                    padding: "0 0.5rem",
-                  }}
-                >
-                  {page.text}
-                </SmartLink>
-              </Box>
-            ))}
-            <LoginModule
-              user={user}
-              connect={handleLogin}
-              disconnect={handleLogout}
-              router={router}
-            />
-          </Box>
-          {/* Desktop Menu */}
-        </Toolbar>
-      </Container>
-    </AppBar>
+            {/* Desktop Menu */}
+          </Toolbar>
+        </Container>
+      </AppBar>
+      <LoginDialog open={isLoginDialogOpen} onClose={handleLoginDialogClose} />
+    </>
   );
 };
 export default AppHeader;
