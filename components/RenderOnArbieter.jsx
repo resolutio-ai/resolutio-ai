@@ -1,19 +1,23 @@
-import { useCallback, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { useWeb3Context } from "../context/Web3Context";
-import { isArbiter } from "../integrations/ArbiterNFT";
+import { verifyArbiter } from "../integrations/VerifyArbiter";
 
-const RenderOnArbieter = () => {
+const RenderOnArbieter = ({ children }) => {
   const { web3Provider, address } = useWeb3Context();
+  const [isArbieter, setArbieter] = useState(false);
 
-  const checkArtbeiter = useCallback(async () => {
-    if (address) return false;
-    // logic to check for arbeiter
-    return isArbiter(address);
-  }, [address]);
+  useEffect(() => {
+    const checkArtbeiter = async () => {
+      console.log(address);
+      if (!(web3Provider && address)) return false;
+      // logic to check for arbeiter
+      const arbiterStatus = await verifyArbiter(address);
+      console.log(arbiterStatus);
+      setArbieter(arbiterStatus);
+    };
 
-  const isArbieter = useMemo(() => {
-    return web3Provider && checkArtbeiter();
-  }, [web3Provider, checkArtbeiter]);
+    checkArtbeiter();
+  }, [web3Provider, address]);
 
   return isArbieter ? children : null;
 };
