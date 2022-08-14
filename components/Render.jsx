@@ -1,13 +1,14 @@
 import { useCallback, useMemo } from "react";
 import { useWeb3Context } from "../context/Web3Context";
+import { isArbiter } from "../integrations/ArbiterNFT";
 
-const RenderonArbieter = () => {
+const RenderOnArbieter = () => {
   const { web3Provider, address } = useWeb3Context();
 
-  const checkArtbeiter = useCallback(() => {
+  const checkArtbeiter = useCallback(async () => {
     if (address) return false;
     // logic to check for arbeiter
-    return true;
+    return isArbiter(address);
   }, [address]);
 
   const isArbieter = useMemo(() => {
@@ -17,4 +18,4 @@ const RenderonArbieter = () => {
   return isArbieter ? children : null;
 };
 
-export default RenderonArbieter;
+export default RenderOnArbieter;

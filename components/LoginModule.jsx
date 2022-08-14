@@ -12,6 +12,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { useCallback, useState } from "react";
+import RenderOnArbieter from "./Render";
 import RenderOnAnonymous from "./RenderOnAnonymous";
 import RenderOnAuthenticated from "./RenderOnAuthenticated";
 
@@ -100,12 +101,14 @@ const LoginModule = ({ connect, disconnect, router, size = 36 }) => {
               horizontal: "center",
             }}
           >
-            <MenuItem onClick={handleArbiterNavigation}>
-              <HistoryEduIcon color="primary" sx={{ mr: 1 }} />
-              <Typography variant="button" color="primary">
-                Arbiter disputes
-              </Typography>
-            </MenuItem>
+            <RenderOnArbieter>
+              <MenuItem onClick={handleArbiterNavigation}>
+                <HistoryEduIcon color="primary" sx={{ mr: 1 }} />
+                <Typography variant="button" color="primary">
+                  Arbiter disputes
+                </Typography>
+              </MenuItem>
+            </RenderOnArbieter>
             <MenuItem onClick={handleProfileNavigation}>
               <AccountBoxIcon color="primary" sx={{ mr: 1 }} />
               <Typography variant="button" color="primary">
