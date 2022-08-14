@@ -12,8 +12,8 @@ import {
   useTheme,
 } from "@mui/material";
 import { useCallback, useState } from "react";
-import RenderOnArbieter from "./Render";
 import RenderOnAnonymous from "./RenderOnAnonymous";
+import RenderOnArbieter from "./RenderOnArbieter";
 import RenderOnAuthenticated from "./RenderOnAuthenticated";
 
 const LoginModule = ({ connect, disconnect, router, size = 36 }) => {
