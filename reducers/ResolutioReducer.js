@@ -17,6 +17,7 @@ export const resolutioReducer = (state, action) => {
         address: action.address,
         network: action.network,
         isLoggedIn: action.isLoggedIn,
+        isArbiter: action.isArbiter,
       };
     case "SET_ADDRESS":
       return {

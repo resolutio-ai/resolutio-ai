@@ -2,6 +2,7 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 import { ethers } from "ethers";
 import { useCallback, useEffect, useReducer } from "react";
 import Web3Modal from "web3modal";
+import { verifyArbiter } from "../integrations/VerifyArbiter";
 
 import {
   resolutioInitialState,
@@ -40,7 +41,9 @@ export const useResolutio = () => {
         const signer = web3Provider.getSigner();
         const address = await signer.getAddress();
         const network = await web3Provider.getNetwork();
+        const isArbiter = await verifyArbiter(address);
         //toast.success('Connected to Web3')
+        console.log(isArbiter);
 
         dispatch({
           type: "SET_WEB3_PROVIDER",
@@ -49,6 +52,7 @@ export const useResolutio = () => {
           address,
           network,
           isLoggedIn: true,
+          isArbiter,
         });
       } catch (e) {
         console.log("connect error", e);
@@ -83,11 +87,16 @@ export const useResolutio = () => {
   // EIP-1193 events
   useEffect(() => {
     if (provider?.on) {
-      const handleAccountsChanged = (accounts) => {
+      const handleAccountsChanged = async (accounts) => {
         // toast.info("Changed Web3 Account");
+        const isArbiter = await verifyArbiter(accounts[0]);
         dispatch({
           type: "SET_ADDRESS",
           address: accounts[0],
+        });
+        dispatch({
+          type: "SET_ISARBITER",
+          isArbiter,
         });
       };
 
