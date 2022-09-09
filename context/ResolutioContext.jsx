@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { useResolutio } from "../hooks/useWeb3";
+import { useResolutio } from "../hooks/useResolutio";
 import { web3InitialState } from "../reducers/Web3Reducer";
 
 const Web3Context = createContext(web3InitialState);
