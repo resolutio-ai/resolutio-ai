@@ -24,7 +24,7 @@ if (typeof window !== "undefined") {
   });
 }
 
-export const useWeb3 = () => {
+export const useResolutio = () => {
   const [state, dispatch] = useReducer(web3Reducer, web3InitialState);
   const { provider, web3Provider, address, network } = state;
 
