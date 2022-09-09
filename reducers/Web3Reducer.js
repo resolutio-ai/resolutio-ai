@@ -5,7 +5,7 @@ export const web3InitialState = {
   network: null,
 };
 
-export const web3Reducer = (state, action) => {
+export const resolutioReducer = (state, action) => {
   switch (action.type) {
     case "SET_WEB3_PROVIDER":
       return {
