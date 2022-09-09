@@ -1,4 +1,4 @@
-import { useWeb3Context } from "../context/Web3Context";
+import { useWeb3Context } from "../context/ResolutioContext";
 
 const RenderOnAuthenticated = ({ children }) => {
   const { web3Provider } = useWeb3Context();

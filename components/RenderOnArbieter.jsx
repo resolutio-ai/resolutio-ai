@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useWeb3Context } from "../context/Web3Context";
+import { useWeb3Context } from "../context/ResolutioContext";
 import { verifyArbiter } from "../integrations/VerifyArbiter";
 
 const RenderOnArbieter = ({ children }) => {

@@ -13,7 +13,7 @@ import Image from "next/image";
 import { default as Link } from "next/link";
 import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
-import { useWeb3Context } from "../context/Web3Context";
+import { useWeb3Context } from "../context/ResolutioContext";
 import desktopLogo from "../public/master_logo.svg";
 import mobileLogo from "../public/mobile_logo.png";
 import LoginModule from "./LoginModule";
