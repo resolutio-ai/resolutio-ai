@@ -3,7 +3,10 @@ import { ethers } from "ethers";
 import { useCallback, useEffect, useReducer } from "react";
 import Web3Modal from "web3modal";
 
-import { resolutioReducer, web3InitialState } from "../reducers/Web3Reducer";
+import {
+  resolutioInitialState,
+  resolutioReducer,
+} from "../reducers/ResolutioReducer";
 
 const providerOptions = {
   walletconnect: {
@@ -25,7 +28,7 @@ if (typeof window !== "undefined") {
 }
 
 export const useResolutio = () => {
-  const [state, dispatch] = useReducer(resolutioReducer, web3InitialState);
+  const [state, dispatch] = useReducer(resolutioReducer, resolutioInitialState);
   const { provider, web3Provider, address, network } = state;
 
   const connect = useCallback(async () => {

@@ -1,8 +1,8 @@
 import { createContext, useContext } from "react";
 import { useResolutio } from "../hooks/useResolutio";
-import { web3InitialState } from "../reducers/Web3Reducer";
+import { resolutioInitialState } from "../reducers/ResolutioReducer";
 
-const Web3Context = createContext(web3InitialState);
+const Web3Context = createContext(resolutioInitialState);
 
 export const ResolutioContextProvider = ({ children }) => {
   const web3ProviderState = useResolutio();

@@ -1,4 +1,4 @@
-export const web3InitialState = {
+export const resolutioInitialState = {
   provider: null,
   web3Provider: null,
   address: null,
@@ -26,7 +26,7 @@ export const resolutioReducer = (state, action) => {
         network: action.network,
       };
     case "RESET_WEB3_PROVIDER":
-      return web3InitialState;
+      return resolutioInitialState;
     default:
       throw new Error();
   }
