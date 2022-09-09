@@ -43,7 +43,6 @@ export const useResolutio = () => {
         const network = await web3Provider.getNetwork();
         const isArbiter = await verifyArbiter(address);
         //toast.success('Connected to Web3')
-        console.log(isArbiter);
 
         dispatch({
           type: "SET_WEB3_PROVIDER",
