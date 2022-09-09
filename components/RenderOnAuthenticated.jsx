@@ -1,8 +1,8 @@
-import { useWeb3Context } from "../context/ResolutioContext";
+import { useResolutioContext } from "../context/ResolutioContext";
 
 const RenderOnAuthenticated = ({ children }) => {
-  const { web3Provider } = useWeb3Context();
-  return web3Provider ? children : null;
+  const { isLoggedIn } = useResolutioContext();
+  return isLoggedIn ? children : null;
 };
 
 export default RenderOnAuthenticated;

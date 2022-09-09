@@ -29,7 +29,8 @@ if (typeof window !== "undefined") {
 
 export const useResolutio = () => {
   const [state, dispatch] = useReducer(resolutioReducer, resolutioInitialState);
-  const { provider, web3Provider, address, network } = state;
+  const { provider, web3Provider, address, network, isLoggedIn, isArbiter } =
+    state;
 
   const connect = useCallback(async () => {
     if (web3Modal) {
@@ -47,6 +48,7 @@ export const useResolutio = () => {
           web3Provider,
           address,
           network,
+          isLoggedIn: true,
         });
       } catch (e) {
         console.log("connect error", e);
@@ -127,5 +129,7 @@ export const useResolutio = () => {
     network,
     connect,
     disconnect,
+    isLoggedIn,
+    isArbiter,
   };
 };
