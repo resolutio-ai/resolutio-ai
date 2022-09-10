@@ -6,9 +6,10 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 import DisputesList from "../components/disputeResolution/DisputesList";
-import RenderOnAuthenticated from "../components/RenderOnAuthenticated";
+import RenderOnArbiter from "../components/RenderOnAuthenticated";
 import Meta from "../components/seo/Meta";
 import Unauthorized from "../components/Unauthorized";
+import ARBITER from "../constants/constants";
 
 const RaisedDisputes = () => {
   const [open, setOpen] = useState(false);
@@ -44,7 +45,7 @@ const RaisedDisputes = () => {
   return (
     <>
       <Meta title="Raised Disputes" />
-      <RenderOnAuthenticated>
+      <RenderOnArbiter>
         <>
           <Box>
             <Typography variant="h1">Ongoing Disputes</Typography>
@@ -94,8 +95,8 @@ const RaisedDisputes = () => {
             </DialogActions>
           </Dialog>
         </>
-      </RenderOnAuthenticated>
-      <Unauthorized />
+      </RenderOnArbiter>
+      <Unauthorized type={ARBITER} />
     </>
   );
 };

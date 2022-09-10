@@ -1,6 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import Image from "next/image";
 import RenderOnAnonymous from "../components/RenderOnAnonymous";
+import USER from "../constants/constants";
 import {
   BACK_HOME_BTN_TXT,
   UNAUTH_BODY_TEXT_1,
@@ -10,7 +11,7 @@ import {
 import image401 from "../public/401.svg";
 import SmartLink from "./SmartLink";
 
-const Unauthorized = () => {
+const Unauthorized = ({ type = USER }) => {
   return (
     <RenderOnAnonymous>
       <Box

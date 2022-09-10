@@ -37,7 +37,7 @@ const LoginModule = ({ connect, disconnect, router, size = 36 }) => {
     (e) => {
       e.preventDefault();
       handleCloseMenu();
-      router.push("/raised-disputes");
+      router.push("/profile");
     },
     [handleCloseMenu, router]
   );
