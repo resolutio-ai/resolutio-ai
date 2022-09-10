@@ -6,10 +6,10 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 import DisputesList from "../components/disputeResolution/DisputesList";
+import NotArbiter from "../components/NotArbiter";
 import RenderOnArbiter from "../components/RenderOnArbiter";
 import Meta from "../components/seo/Meta";
 import Unauthorized from "../components/Unauthorized";
-
 const UpcomingDisputes = () => {
   const [open, setOpen] = useState(false);
 
@@ -22,7 +22,6 @@ const UpcomingDisputes = () => {
   };
 
   const handleStaking = () => {
-    console.log("Staked");
     closeStakeDialog();
   };
   const upComingDisputes = [
@@ -101,6 +100,7 @@ const UpcomingDisputes = () => {
           </Dialog>
         </>
       </RenderOnArbiter>
+      <NotArbiter />
       <Unauthorized />
     </>
   );

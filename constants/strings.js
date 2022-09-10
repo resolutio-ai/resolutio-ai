@@ -37,8 +37,12 @@ export const INVALID_URL_ERROR_MESSAGE =
   "Please check the input URL. Only valid( *.jpeg, *.png, *.tif, *.tiff, and *.webp) image URLs are accepted.";
 
 // Unautorized Component
-export const UNAUTH_HEADING = "No authorization found.";
+export const UNAUTH_HEADING = "No Authorization Found.";
 export const UNAUTH_BODY_TEXT_1 = "This page is not publicly available.";
 export const UNAUTH_BODY_TEXT_2 =
   "To access it please connect your wallet first.";
 export const BACK_HOME_BTN_TXT = "Return home";
+
+export const NOT_ARBITER_HEADING = "No Arbiter Token Found.";
+export const NOT_ARBITER_BODY_TEXT_1 =
+  "This page is only accessible by Arbiters";
