@@ -6,7 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 import DisputesList from "../components/disputeResolution/DisputesList";
-import RenderOnAuthenticated from "../components/RenderOnAuthenticated";
+import RenderOnArbiter from "../components/RenderOnArbiter";
 import Meta from "../components/seo/Meta";
 import Unauthorized from "../components/Unauthorized";
 
@@ -51,7 +51,7 @@ const UpcomingDisputes = () => {
   return (
     <>
       <Meta title="Upcoming Disputes" />
-      <RenderOnAuthenticated>
+      <RenderOnArbiter>
         <>
           <Box>
             <Typography variant="h1">Upcoming Disputes</Typography>
@@ -100,7 +100,7 @@ const UpcomingDisputes = () => {
             </DialogActions>
           </Dialog>
         </>
-      </RenderOnAuthenticated>
+      </RenderOnArbiter>
       <Unauthorized />
     </>
   );

@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { useCallback, useState } from "react";
 import RenderOnAnonymous from "./RenderOnAnonymous";
-import RenderOnArbieter from "./RenderOnArbieter";
+import RenderOnArbiter from "./RenderOnArbiter";
 import RenderOnAuthenticated from "./RenderOnAuthenticated";
 
 const LoginModule = ({ connect, disconnect, router, size = 36 }) => {
@@ -101,14 +101,14 @@ const LoginModule = ({ connect, disconnect, router, size = 36 }) => {
               horizontal: "center",
             }}
           >
-            <RenderOnArbieter>
+            <RenderOnArbiter>
               <MenuItem onClick={handleArbiterNavigation}>
                 <HistoryEduIcon color="primary" sx={{ mr: 1 }} />
                 <Typography variant="button" color="primary">
                   Arbiter disputes
                 </Typography>
               </MenuItem>
-            </RenderOnArbieter>
+            </RenderOnArbiter>
             <MenuItem onClick={handleProfileNavigation}>
               <AccountBoxIcon color="primary" sx={{ mr: 1 }} />
               <Typography variant="button" color="primary">

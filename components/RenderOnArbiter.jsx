@@ -1,8 +1,8 @@
 import { useResolutioContext } from "../context/ResolutioContext";
 
-const RenderOnArbieter = ({ children }) => {
+const RenderOnArbiter = ({ children }) => {
   const { isArbiter } = useResolutioContext();
   return isArbiter ? children : null;
 };
 
-export default RenderOnArbieter;
+export default RenderOnArbiter;
