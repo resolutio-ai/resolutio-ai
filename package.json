@@ -14,13 +14,13 @@
     "@emotion/server": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "@fontsource/roboto": "^4.5.8",
-    "@mui/icons-material": "^5.5.1",
+    "@mui/icons-material": "^5.10.3",
     "@mui/material": "^5.10.0",
     "@openzeppelin/contracts": "^4.6.0",
     "@react-pdf/renderer": "^2.3.0",
     "@walletconnect/web3-provider": "^1.8.0",
     "axios": "^0.27.2",
-    "ethers": "^5.6.9",
+    "ethers": "^5.7.0",
     "ipfs-http-client": "^57.0.3",
     "next": "^12.2.5",
     "nft.storage": "^6.4.1",
@@ -31,7 +31,7 @@
     "react-router-dom": "^6.3.0",
     "react-timer-hook": "^3.0.5",
     "sitemap": "^7.1.1",
-    "web3modal": "^1.9.8"
+    "web3modal": "^1.9.9"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.6",
