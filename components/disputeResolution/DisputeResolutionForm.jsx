@@ -1,25 +1,27 @@
-import { Alert, Box, Button, Grid, IconButton, Snackbar, Stack, TextField } from "@mui/material";
-import CloseIcon from '@mui/icons-material/Close';
-import { jsPDF } from "jspdf";
-import { useCallback, useState } from "react";
+import CloseIcon from "@mui/icons-material/Close";
+import {
+  Alert,
+  Box,
+  Button,
+  Grid,
+  IconButton,
+  Snackbar,
+  Stack,
+  TextField,
+} from "@mui/material";
+import { useCallback, useEffect, useState } from "react";
 import AttachEvidence from "./AttachEvidence";
 
-import ReactPDF from '@react-pdf/renderer';
-import { PDFViewer, PDFDownloadLink } from '@react-pdf/renderer';
-import { Page, Text, View, Document, StyleSheet, Image } from '@react-pdf/renderer';
-import { useEffect } from 'react';
-import { create } from "ipfs-http-client";
-
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
 // const client = create('https://ipfs.infura.io:5001/api/v0');
 
-import { NFTStorage, File } from 'nft.storage'
+import { File, NFTStorage } from "nft.storage";
 const client = new NFTStorage({
-  endpoint: 'https://api.nft.storage',
-  token: process.env.NEXT_PUBLIC_NFT_STORAGE_IPFS_KEY
-})
+  endpoint: "https://api.nft.storage",
+  token: process.env.NEXT_PUBLIC_NFT_STORAGE_IPFS_KEY,
+});
 
 const defaultValues = {
   nft_id: "",
@@ -33,9 +35,10 @@ const defaultValues = {
 
 const DisputeResolutionForm = () => {
   const [formValues, setFormValues] = useState(defaultValues);
-  const [isClient, setIsClient] = useState(false)
+  const [isClient, setIsClient] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
   const [openLoader, setOpenLoader] = useState(false);
+  console.log(isClient);
 
   const handleOpenAlert = () => {
     setOpenAlert(true);
@@ -45,7 +48,6 @@ const DisputeResolutionForm = () => {
     setOpenAlert(false);
   };
 
-
   const handleCloseLoader = () => {
     setOpenLoader(false);
   };
@@ -54,12 +56,11 @@ const DisputeResolutionForm = () => {
   };
 
   useEffect(() => {
-    setIsClient(true)
-  }, [])
+    setIsClient(true);
+  }, []);
 
-  async function uploadToIpfs(formValues) {
+  const uploadToIpfs = useCallback(async () => {
     handleOpenLoader();
-    // e.preventDefault();
     let pdfContent;
     try {
       pdfContent = [
@@ -78,26 +79,26 @@ const DisputeResolutionForm = () => {
       ];
       console.log(pdfContent);
     } catch (error) {
-      console.log('error in data');
+      console.log("error in data");
       handleCloseLoader();
       handleOpenAlert();
     }
     try {
       let fileArray = [
-        new File([`Resolutio case created on ${new Date().toTimeString()}`], 'description.txt'),
-        new File([JSON.stringify(pdfContent, null, 2)], 'formData.json')
+        new File(
+          [`Resolutio case created on ${new Date().toTimeString()}`],
+          "description.txt"
+        ),
+        new File([JSON.stringify(pdfContent, null, 2)], "formData.json"),
       ];
       if (formValues.files.length > 0) {
-        formValues.files.forEach(item => {
-          fileArray.push(new File([item], item?.name))
+        formValues.files.forEach((item) => {
+          fileArray.push(new File([item], item?.name));
         });
       }
-      const cid = await client.storeDirectory(
-
-        fileArray
-      )
-      console.log(cid)
-      console.log(`https://ipfs.io/ipfs/${cid}`)
+      const cid = await client.storeDirectory(fileArray);
+      console.log(cid);
+      console.log(`https://ipfs.io/ipfs/${cid}`);
       if (cid) {
         clearForm();
       }
@@ -107,38 +108,35 @@ const DisputeResolutionForm = () => {
       handleOpenAlert();
       handleCloseLoader();
     }
-   
-    handleCloseLoader();
 
-  }
+    handleCloseLoader();
+  }, [clearForm, formValues]);
 
   const createPDF = useCallback(() => {
     uploadToIpfs(formValues);
 
-    return;
-
+    //return;
 
     // ReactPDF.render(<MyDocument />, `${__dirname}/example.pdf`);
+  }, [formValues, uploadToIpfs]);
 
-  }, [formValues]);
-
-  const styles = StyleSheet.create({
+  /*   const styles = StyleSheet.create({
     page: {
-      flexDirection: 'row',
-      backgroundColor: '#E4E4E4'
+      flexDirection: "row",
+      backgroundColor: "#E4E4E4",
     },
     section: {
       margin: 10,
       padding: 10,
-      flexGrow: 1
+      flexGrow: 1,
     },
     image: {
       width: 500,
       height: 500,
     },
-  });
+  }); */
   // Creating PDF : Future use
-  const MyDocument = () => (
+  /*   const MyDocument = () => (
     <Document>
       <Page size="A4" style={styles.page}>
         <Image
@@ -155,7 +153,7 @@ const DisputeResolutionForm = () => {
         </View>
       </Page>
     </Document>
-  );
+  ); */
 
   const handleInputChange = useCallback(
     (e) => {
@@ -179,7 +177,7 @@ const DisputeResolutionForm = () => {
       createPDF();
       // clearForm();
     },
-    [formValues, createPDF, clearForm]
+    [formValues, createPDF]
   );
 
   const handleAttachEvidence = useCallback(
@@ -201,7 +199,11 @@ const DisputeResolutionForm = () => {
       }}
     >
       {openAlert && (
-        <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert}>
+        <Snackbar
+          open={openAlert}
+          autoHideDuration={6000}
+          onClose={handleCloseAlert}
+        >
           <Alert variant="filled" severity="error">
             Error creating dispute. Please try again.
             <IconButton
@@ -216,16 +218,13 @@ const DisputeResolutionForm = () => {
         </Snackbar>
       )}
       <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={openLoader}
       >
         <Stack spacing={2} alignItems="center">
-          < >Please wait while dispute is being created</>
+          <>Please wait while dispute is being created</>
           <CircularProgress color="primary" />
         </Stack>
-
-
-
       </Backdrop>
       {/* {isClient && <PDFViewer>
         <MyDocument />
