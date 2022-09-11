@@ -13,6 +13,12 @@ export const getServerSideProps = async ({ req, res }) => {
     { id: 2, url: "/initiate-dispute", changefreq: "weekly", priority: 0.8 },
     { id: 3, url: "/res-ed", changefreq: "weekly", priority: 0.8 },
     { id: 4, url: "/image-verification", changefreq: "weekly", priority: 0.8 },
+    {
+      id: 5,
+      url: "/logo-brand-guidelines",
+      changefreq: "weekly",
+      priority: 0.8,
+    },
   ];
 
   // Create a stream to write to
