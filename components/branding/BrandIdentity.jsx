@@ -21,7 +21,7 @@ const BrandIdentity = () => {
       <Typography variant="h3" sx={{ textTransform: "uppercase" }}>
         What we do
       </Typography>
-      <ul>
+      <ul className="resolutio">
         <li>Provide tools to identify theft</li>
         <li>Notify people on identifying theft</li>
         <li>Community based dispute resolution to directly tackle theft</li>
