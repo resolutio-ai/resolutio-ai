@@ -37,6 +37,7 @@ ul li::before {
   /* Styles for Indentation*/
   color: #7e639e;
   display: inline-block;
+  font-weight: bolder;
   width: 1em;
   font-size: 1.5em;
   margin-left: 0.5em;
