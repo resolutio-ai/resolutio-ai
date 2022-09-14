@@ -41,7 +41,14 @@ export const useResolutio = () => {
         const signer = web3Provider.getSigner();
         const address = await signer.getAddress();
         const network = await web3Provider.getNetwork();
-        const isArbiter = await verifyArbiter(address);
+        let isArbiter;
+        try {
+          isArbiter = await verifyArbiter(address);
+        } catch (error) {
+          console.log(error);
+          isArbiter = false;
+        }
+
         //toast.success('Connected to Web3')
 
         dispatch({
@@ -88,7 +95,14 @@ export const useResolutio = () => {
     if (provider?.on) {
       const handleAccountsChanged = async (accounts) => {
         // toast.info("Changed Web3 Account");
-        const isArbiter = await verifyArbiter(accounts[0]);
+        let isArbiter;
+        try {
+          isArbiter = await verifyArbiter(accounts[0]);
+        } catch (error) {
+          console.log(error);
+          isArbiter = false;
+        }
+
         dispatch({
           type: "SET_ADDRESS",
           address: accounts[0],
