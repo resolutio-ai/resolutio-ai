@@ -1,5 +1,6 @@
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { ethers } from "ethers";
+import { useSnackbar } from "notistack";
 import { useCallback, useEffect, useReducer } from "react";
 import Web3Modal from "web3modal";
 import { verifyArbiter } from "../integrations/VerifyArbiter";
@@ -29,6 +30,7 @@ if (typeof window !== "undefined") {
 }
 
 export const useResolutio = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const [state, dispatch] = useReducer(resolutioReducer, resolutioInitialState);
   const { provider, web3Provider, address, network, isLoggedIn, isArbiter } =
     state;
@@ -46,10 +48,15 @@ export const useResolutio = () => {
           isArbiter = await verifyArbiter(address);
         } catch (error) {
           console.log(error);
+          // Toast for incorrect network
+          enqueueSnackbar("Please set network to Polygon Mumbai Testnet", {
+            variant: "warning",
+          });
           isArbiter = false;
         }
 
-        //toast.success('Connected to Web3')
+        // Toast for wallet connected
+        enqueueSnackbar("Connected to Web3 Wallet", { variant: "success" });
 
         dispatch({
           type: "SET_WEB3_PROVIDER",
@@ -66,7 +73,7 @@ export const useResolutio = () => {
     } else {
       console.error("No Web3Modal");
     }
-  }, []);
+  }, [enqueueSnackbar]);
 
   const disconnect = useCallback(async () => {
     if (web3Modal) {
@@ -74,14 +81,17 @@ export const useResolutio = () => {
       if (provider?.disconnect && typeof provider.disconnect === "function") {
         await provider.disconnect();
       }
-      //toast.error('Disconnected from Web3')
+
+      // Toast for wallet disconnected
+      enqueueSnackbar("Disconnected from Web3 Wallet", { variant: "error" });
+
       dispatch({
         type: "RESET_WEB3_PROVIDER",
       });
     } else {
       console.error("No Web3Modal");
     }
-  }, [provider]);
+  }, [enqueueSnackbar, provider]);
 
   // Auto connect to the cached provider
   useEffect(() => {
@@ -94,7 +104,9 @@ export const useResolutio = () => {
   useEffect(() => {
     if (provider?.on) {
       const handleAccountsChanged = async (accounts) => {
-        // toast.info("Changed Web3 Account");
+        // Toast for wallet Changed
+        enqueueSnackbar("Changed Web3 Wallet Account", { variant: "info" });
+
         let isArbiter;
         try {
           isArbiter = await verifyArbiter(accounts[0]);
@@ -117,7 +129,9 @@ export const useResolutio = () => {
       const handleChainChanged = (_hexChainId) => {
         if (typeof window !== "undefined") {
           console.log("switched to chain...", _hexChainId);
-          // toast.info("Web3 Network Changed");
+          // Toast for network Changed
+          enqueueSnackbar("Web3 Network Changed", { variant: "info" });
+
           window.location.reload();
         } else {
           console.log("window is undefined");
@@ -142,7 +156,7 @@ export const useResolutio = () => {
         }
       };
     }
-  }, [provider, disconnect]);
+  }, [provider, disconnect, enqueueSnackbar]);
 
   return {
     provider,
