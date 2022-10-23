@@ -4,12 +4,13 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DisputesList from "../components/disputeResolution/DisputesList";
 import NotArbiter from "../components/NotArbiter";
 import RenderOnArbiter from "../components/RenderOnArbiter";
 import Meta from "../components/seo/Meta";
 import Unauthorized from "../components/Unauthorized";
+import { DisputePool } from "../integrations/DisputePool";
 const UpcomingDisputes = () => {
   const [open, setOpen] = useState(false);
 
@@ -47,6 +48,16 @@ const UpcomingDisputes = () => {
       isStakeTimeExpired: false,
     },
   ];
+
+  useEffect(() => {
+    const getDisputes = async () => {
+      const disputePool = new DisputePool();
+      const disputes = await disputePool.getAllDisputes();
+      console.log(disputes);
+    };
+    getDisputes();
+  }, []);
+
   return (
     <>
       <Meta title="Upcoming Disputes" />
