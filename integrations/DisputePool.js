@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
-import DisputeSystem from "../Integrations/ABIs/DisputePool.json";
-import Randomizer from "../Integrations/ABIs/Randomizer.json";
+import DisputeSystem from "../contracts/DisputePool/DisputePool.json";
+import Randomizer from "../contracts/Randomizer/Randomizer.json";
 
 export class DisputePool {
   _disputeSystemAddress = "0x11673f267c39aa4D8F958E3C77fD54f0A60646a7";
