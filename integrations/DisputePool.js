@@ -30,7 +30,7 @@ export class DisputePool {
     //contract initialization: create and return an instance of the contract
     return new ethers.Contract(
       this._disputeSystemAddress,
-      DisputeSystem.abi,
+      DisputeSystem,
       signer
     );
   }
