@@ -148,7 +148,7 @@ export class DisputePool {
     let disputeArray = [];
 
     for (let dispute of allDisputes) {
-      if (dispute.state == IsCreated) {
+      if (dispute.state == this._IsCreated) {
         disputeArray.push(dispute);
       }
     }

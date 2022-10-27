@@ -15,7 +15,7 @@ const verifyArbiter = async (account_addr) => {
 
   //contract initialization: create an instance of the contract
   const arbiterNFTContract = new ethers.Contract(
-    "0x6d9763d7CB4B642c898dd7B23fAa09609E953C56",
+    "0xEE1A1940B63C95af84E6CCeC764B341f75331ED0",
     arbiter.abi,
     signer
   );

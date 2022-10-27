@@ -52,8 +52,16 @@ const UpcomingDisputes = () => {
   useEffect(() => {
     const getDisputes = async () => {
       const disputePool = new DisputePool();
-      const disputes = await disputePool.getAllDisputes();
+      const disputes = await disputePool.getNewDisputes();
       console.log(disputes);
+      /* console.time("getDisputes");
+      const data = await (
+        await fetch(
+          "https://ipfs.io/ipfs/bafybeifpsxhxgghrsfnkeesg7bv62rc3ok676fgnzvwfcpx5oup5tdsixu/formData.json"
+        )
+      ).json();
+      console.timeEnd("getDisputes");
+      console.log(data); */
     };
     getDisputes();
   }, []);
