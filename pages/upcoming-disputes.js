@@ -10,9 +10,12 @@ import NotArbiter from "../components/NotArbiter";
 import RenderOnArbiter from "../components/RenderOnArbiter";
 import Meta from "../components/seo/Meta";
 import Unauthorized from "../components/Unauthorized";
+import { useResolutioContext } from "../context/ResolutioContext";
 import { DisputePool } from "../integrations/DisputePool";
 const UpcomingDisputes = () => {
+  const { address } = useResolutioContext();
   const [open, setOpen] = useState(false);
+  const [upComingDisputes, setUpComingDisputes] = useState([]);
 
   const openStakeDialog = () => {
     setOpen(true);
@@ -25,35 +28,40 @@ const UpcomingDisputes = () => {
   const handleStaking = () => {
     closeStakeDialog();
   };
-  const upComingDisputes = [
-    {
-      id: "1",
-      title: "Digital Art",
-      description: "Comic created by artist tokenized ...",
-      stakeTime: 1655636071,
-      isStakeTimeExpired: false,
-    },
-    {
-      id: "2",
-      title: "Music",
-      description: "Part of the victim's song used ...",
-      stakeTime: 1655722471,
-      isStakeTimeExpired: false,
-    },
-    {
-      id: "3",
-      title: "Movie",
-      description: "Copy of the victims short film NFT ...",
-      stakeTime: 1655808871,
-      isStakeTimeExpired: false,
-    },
-  ];
 
   useEffect(() => {
-    const getDisputes = async () => {
+    const asyncGetDisputes = async () => {
       const disputePool = new DisputePool();
       const disputes = await disputePool.getNewDisputes();
-      console.log(disputes);
+
+      const mappedDisputes = disputes.map((dispute) => {
+        const {
+          arbiterCount,
+          createdAt,
+          creator,
+          disputeId,
+          disputePool,
+          selectedArbiters,
+          state,
+          uri,
+          winningProposal,
+        } = dispute;
+        return {
+          title: "",
+          description: "",
+          hasStaked: disputePool.includes(address),
+          arbiterCount,
+          createdAt,
+          creator,
+          disputeId,
+          disputePool,
+          selectedArbiters,
+          state,
+          uri,
+          winningProposal,
+        };
+      });
+      setUpComingDisputes(mappedDisputes);
       /* console.time("getDisputes");
       const data = await (
         await fetch(
@@ -63,8 +71,8 @@ const UpcomingDisputes = () => {
       console.timeEnd("getDisputes");
       console.log(data); */
     };
-    getDisputes();
-  }, []);
+    asyncGetDisputes();
+  }, [address]);
 
   return (
     <>

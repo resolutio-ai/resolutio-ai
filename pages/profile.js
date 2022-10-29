@@ -1,5 +1,4 @@
 import { Box, Typography } from "@mui/material";
-import DisputesList from "../components/disputeResolution/DisputesList";
 import RenderOnArbiter from "../components/RenderOnArbiter";
 import RenderOnAuthenticated from "../components/RenderOnAuthenticated";
 import Meta from "../components/seo/Meta";
@@ -39,7 +38,7 @@ const Profile = () => {
       <RenderOnArbiter>
         <Box>
           <Typography variant="h1">Ongoing Disputes</Typography>
-          <DisputesList disputes={onGoingDisputes} />
+          {/* <DisputesList disputes={onGoingDisputes} /> */}
         </Box>
       </RenderOnArbiter>
       <Unauthorized />
