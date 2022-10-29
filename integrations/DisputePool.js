@@ -1,12 +1,14 @@
 import { ethers } from "ethers";
+import {
+  CHAINLINK_RANDOM_GENERATOR_CONTRACT_ADDR,
+  DISPUTE_INITIATION_CONTRACT_ADDR,
+} from "../config";
 import DisputeSystem from "../contracts/DisputePool/DisputePool.json";
 import Randomizer from "../contracts/Randomizer/Randomizer.json";
 
 export class DisputePool {
-  _disputeSystemAddress =
-    process.env.NEXT_PUBLIC_DISPUTE_INITIATION_CONTRACT_ADDR;
-  _randomizerAddress =
-    process.env.NEXT_PUBLIC_CHAINLINK_RANDOM_GENERATOR_CONTRACT_ADDR;
+  _disputeSystemAddress = DISPUTE_INITIATION_CONTRACT_ADDR;
+  _randomizerAddress = CHAINLINK_RANDOM_GENERATOR_CONTRACT_ADDR;
   stake = "0.02";
   _UnInitialized = 0;
   _IsCreated = 1;
