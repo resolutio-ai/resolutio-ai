@@ -3,8 +3,10 @@ import DisputeSystem from "../contracts/DisputePool/DisputePool.json";
 import Randomizer from "../contracts/Randomizer/Randomizer.json";
 
 export class DisputePool {
-  _disputeSystemAddress = "0x11673f267c39aa4D8F958E3C77fD54f0A60646a7";
-  _randomizerAddress = "0x15C89FAa1b28BA3D667F05aA871484254e01C9EE";
+  _disputeSystemAddress =
+    process.env.NEXT_PUBLIC_DISPUTE_INITIATION_CONTRACT_ADDR;
+  _randomizerAddress =
+    process.env.NEXT_PUBLIC_CHAINLINK_RANDOM_GENERATOR_CONTRACT_ADDR;
   stake = "0.02";
   _UnInitialized = 0;
   _IsCreated = 1;
