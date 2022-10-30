@@ -12,6 +12,8 @@ import {
 import { useCallback, useEffect, useState } from "react";
 import AttachEvidence from "./AttachEvidence";
 
+import { DisputePool } from "../../integrations/DisputePool";
+
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 
@@ -30,6 +32,7 @@ const defaultValues = {
   info: "",
   subject: "",
   case_details: "",
+  attached_files:0,
   files: [],
 };
 
@@ -63,20 +66,16 @@ const DisputeResolutionForm = () => {
     handleOpenLoader();
     let pdfContent;
     try {
-      pdfContent = [
-        { text: "NFT ID", value: formValues["nft_id"] },
-        { text: "NFT URL", value: formValues["nft_url"] },
-        { text: "Marketplace", value: formValues["marketplace"] },
-        {
-          text: "Information Pertaining to the Concerned Parties",
-          value: formValues["info"],
-        },
-        {
-          text: "Subject Matter(i.e. Art, Music, Document, etc.)",
-          value: formValues["subject"],
-        },
-        { text: "Case Details", value: formValues["case_details"] },
-      ];
+      pdfContent = {
+        nftID: formValues["nft_id"],
+        nftURL: formValues["nft_url"],
+        marketplace: formValues["marketplace"],
+        info: formValues["info"],
+        subject: formValues["subject"],
+        details: formValues["case_details"],
+        additionalInfo: formValues["additional_details"],
+        attachedFiles: formValues["attached_files"]
+      }
       console.log(pdfContent);
     } catch (error) {
       console.log("error in data");
@@ -89,7 +88,7 @@ const DisputeResolutionForm = () => {
           [`Resolutio case created on ${new Date().toTimeString()}`],
           "description.txt"
         ),
-        new File([JSON.stringify(pdfContent, null, 2)], "formData.json"),
+        new File([JSON.stringify(pdfContent, null, 2)], "dispute.json"),
       ];
       if (formValues.files.length > 0) {
         formValues.files.forEach((item) => {
@@ -98,7 +97,14 @@ const DisputeResolutionForm = () => {
       }
       const cid = await client.storeDirectory(fileArray);
       console.log(cid);
-      console.log(`https://ipfs.io/ipfs/${cid}`);
+
+      let ipfsURL = `https://ipfs.io/ipfs/${cid}`;
+
+      console.log('ipfsURL', ipfsURL);
+      //The Dispute Pool file is now a class that exposes necessary code
+      const disputePoolInstance = new DisputePool();
+      await disputePoolInstance.createDispute(ipfsURL);
+
       if (cid) {
         clearForm();
       }
@@ -182,6 +188,7 @@ const DisputeResolutionForm = () => {
 
   const handleAttachEvidence = useCallback(
     (files) => {
+      formValues["attached_files"]+=1;
       setFormValues({
         ...formValues,
         files,
@@ -304,6 +311,18 @@ const DisputeResolutionForm = () => {
               type="text"
               fullWidth
               value={formValues.case_details}
+              onChange={handleInputChange}
+            />
+          </Grid>
+          <Grid item>
+            <TextField
+              id="additional_details-input"
+              name="additional_details"
+              label="Additional Details"
+              multiline
+              rows={4}
+              fullWidth
+              value={formValues.additional_details}
               onChange={handleInputChange}
             />
           </Grid>

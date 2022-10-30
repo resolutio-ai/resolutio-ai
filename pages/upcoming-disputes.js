@@ -31,9 +31,12 @@ const UpcomingDisputes = () => {
 
   useEffect(() => {
     const asyncGetDisputes = async () => {
+      if (!address) {
+        return
+      }
       const disputeSystem = new DisputePool();
       const disputes = await disputeSystem.getNewDisputes();
-      const mappedDisputes = disputes.map((dispute) => {
+      let mappedDisputes = disputes.map((dispute) => {
         const {
           arbiterCount,
           createdAt,
@@ -61,14 +64,34 @@ const UpcomingDisputes = () => {
         };
       });
       setUpComingDisputes(mappedDisputes);
-      /* console.time("getDisputes");
-      const data = await (
-        await fetch(
-          "https://ipfs.io/ipfs/bafybeifpsxhxgghrsfnkeesg7bv62rc3ok676fgnzvwfcpx5oup5tdsixu/formData.json"
-        )
-      ).json();
+      console.log("getDisputes", disputes);
+
+      Promise.all(
+        disputes.map(dispute => fetch(`${dispute.uri}/dispute.json`))
+      )
+        .then(function (responses) {
+          // Get a JSON object from each of the responses
+          return Promise.all(responses.map(function (response) {
+            if (response.status === 200)
+              return response.json();
+            return null;
+          }));
+        }).catch(function (error) {
+          console.log('api error', error);
+          return error;
+        })
+        .then(function (data) {
+          // Log the data to the console
+          console.log('multi data', data);
+          mappedDisputes.forEach((element, index) => {
+            element.additionalDetails = data[index];
+          });
+          console.log(mappedDisputes);
+        }).catch(function (error) {
+          console.log(error);
+        });
+
       console.timeEnd("getDisputes");
-      console.log(data); */
     };
     asyncGetDisputes();
   }, [address]);
