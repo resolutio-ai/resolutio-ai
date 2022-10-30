@@ -107,7 +107,7 @@ export class DisputePool {
   }
 
   //get a dispute
-  async getADispute(disputeId) {
+  async getDisputeById(disputeId) {
     const contract = await this._createDisputeSystemContractInstance();
 
     let response = await contract.getDispute(disputeId);

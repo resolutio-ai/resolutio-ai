@@ -31,9 +31,8 @@ const UpcomingDisputes = () => {
 
   useEffect(() => {
     const asyncGetDisputes = async () => {
-      const disputePool = new DisputePool();
-      const disputes = await disputePool.getNewDisputes();
-
+      const disputeSystem = new DisputePool();
+      const disputes = await disputeSystem.getNewDisputes();
       const mappedDisputes = disputes.map((dispute) => {
         const {
           arbiterCount,
