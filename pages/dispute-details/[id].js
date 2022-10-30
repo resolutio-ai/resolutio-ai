@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
+import StakingDialog from "../../components/dialogs/StakingDialog";
 import NotArbiter from "../../components/NotArbiter";
 import RenderOnArbiter from "../../components/RenderOnArbiter";
 import Meta from "../../components/seo/Meta";
@@ -34,49 +35,69 @@ const DisputeDetails = () => {
     winningProposal: 0,
     additionalDetails: [],
   });
+  const [isStakingDialogOpen, setStakingDialogOpen] = useState(false);
 
-  const handleStaking = useCallback(() => {
+  const handleStakingDialogOpen = useCallback(() => {
+    setStakingDialogOpen(true);
+  }, []);
+
+  const handleStakingDialogClose = useCallback(() => {
+    setStakingDialogOpen(false);
+  }, []);
+
+  const handleJoinDisputePool = useCallback(() => {
     const asyncJoinDisputePool = async () => {
       if (!id) return;
-      const disputeSystem = new DisputePool();
-      const response = await disputeSystem.joinDisputePool(id);
-      console.log(response);
+      try {
+        const disputeSystem = new DisputePool();
+        const response = await disputeSystem.joinDisputePool(id);
+        console.log(response);
+        handleStakingDialogClose();
+      } catch (error) {
+        console.log(error);
+        handleStakingDialogClose();
+      }
     };
     asyncJoinDisputePool();
-  }, [id]);
+  }, [handleStakingDialogClose, id]);
 
   useEffect(() => {
     const asyncGetDisputeById = async () => {
       if (!id) return;
-      const disputeSystem = new DisputePool();
-      const dispute = await disputeSystem.getDisputeById(id);
-      const {
-        arbiterCount,
-        createdAt,
-        creator,
-        disputeId,
-        disputePool,
-        selectedArbiters,
-        state,
-        uri,
-        winningProposal,
-      } = dispute;
-      const data = await (await fetch(`${dispute.uri}/formData.json`)).json();
-      setDispute({
-        title: "",
-        description: "",
-        hasStaked: disputePool.includes(address),
-        arbiterCount,
-        createdAt,
-        creator,
-        disputeId,
-        disputePool,
-        selectedArbiters,
-        state,
-        uri,
-        winningProposal,
-        additionalDetails: data,
-      });
+
+      try {
+        const disputeSystem = new DisputePool();
+        const dispute = await disputeSystem.getDisputeById(id);
+        const {
+          arbiterCount,
+          createdAt,
+          creator,
+          disputeId,
+          disputePool,
+          selectedArbiters,
+          state,
+          uri,
+          winningProposal,
+        } = dispute;
+        const data = await (await fetch(`${dispute.uri}/formData.json`)).json();
+        setDispute({
+          title: "",
+          description: "",
+          hasStaked: disputePool.includes(address),
+          arbiterCount,
+          createdAt,
+          creator,
+          disputeId,
+          disputePool,
+          selectedArbiters,
+          state,
+          uri,
+          winningProposal,
+          additionalDetails: data,
+        });
+      } catch (error) {
+        console.log(error);
+      }
     };
     asyncGetDisputeById();
   }, [address, id]);
@@ -137,7 +158,7 @@ const DisputeDetails = () => {
                   variant="contained"
                   color="primary"
                   sx={{ mt: 2 }}
-                  onClick={handleStaking}
+                  onClick={handleStakingDialogOpen}
                 >
                   Stake
                 </Button>
@@ -159,6 +180,11 @@ const DisputeDetails = () => {
             </Box>
           </CardActions>
         </Card>
+        <StakingDialog
+          open={isStakingDialogOpen}
+          onClose={handleStakingDialogClose}
+          onAction={handleJoinDisputePool}
+        />
       </RenderOnArbiter>
       <NotArbiter />
       <Unauthorized />
