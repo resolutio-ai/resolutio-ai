@@ -32,7 +32,7 @@ const DisputeDetails = () => {
     state: 0,
     uri: "",
     winningProposal: 0,
-    additionalDetails: [],
+    additionalDetails: null
   });
 
   const handleStaking = useCallback(() => {
@@ -61,7 +61,7 @@ const DisputeDetails = () => {
         uri,
         winningProposal,
       } = dispute;
-      const data = await (await fetch(`${dispute.uri}/formData.json`)).json();
+      const data = await (await fetch(`${dispute.uri}/dispute.json`)).json();
       setDispute({
         title: "",
         description: "",
@@ -101,14 +101,16 @@ const DisputeDetails = () => {
                 <Typography variant="body1" sx={{ mt: 2 }}>
                   <strong>Victim:</strong> {dispute.creator}
                 </Typography>
-                {dispute.additionalDetails.map((data, indx) => {
-                  return (
-                    <Typography variant="body1" sx={{ mt: 2 }} key={indx}>
-                      <strong>{`${data.text}: `}</strong>
-                      {data.value}
-                    </Typography>
-                  );
-                })}
+                {(dispute.additionalDetails) &&
+                  (Object.keys(dispute.additionalDetails).map((key) => {
+                    return (
+                      <Typography variant="body1" sx={{ mt: 2 }} key={key}>
+                        <strong>{`${key}: `}</strong>
+                        {dispute.additionalDetails[key]}
+                      </Typography>
+                    );
+                  }))
+                }
               </Box>
               <Box sx={{ mt: 2 }}>
                 <SmartLink href={dispute.uri} isExternal={true}>
