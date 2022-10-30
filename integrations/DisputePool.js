@@ -55,7 +55,7 @@ export class DisputePool {
     return new ethers.Contract(_randomizerAddress, Randomizer.abi, signer);
   }
 
-  _getStake = async () => ethers.utils.parseUnits(price, "ether");
+  _getStake = async () => ethers.utils.parseUnits(this.stake, "ether");
 
   //Create a dispute
   async createDispute(uri) {
@@ -78,8 +78,16 @@ export class DisputePool {
 
   //Join a dispute pool
   async joinDisputePool(disputeId) {
-    let price = this._getStake();
+    let price = await this._getStake();
+    console.log(
+      "🚀 ~ file: DisputePool.js ~ line 82 ~ DisputePool ~ joinDisputePool ~ price",
+      price
+    );
     const contract = await this._createDisputeSystemContractInstance();
+    console.log(
+      "🚀 ~ file: DisputePool.js ~ line 87 ~ DisputePool ~ joinDisputePool ~ contract",
+      contract
+    );
 
     let txn = await contract.joinDisputePool(disputeId, { value: price });
     let response = await txn.wait();

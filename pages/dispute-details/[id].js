@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import NotArbiter from "../../components/NotArbiter";
 import RenderOnArbiter from "../../components/RenderOnArbiter";
 import Meta from "../../components/seo/Meta";
@@ -34,6 +34,16 @@ const DisputeDetails = () => {
     winningProposal: 0,
     additionalDetails: [],
   });
+
+  const handleStaking = useCallback(() => {
+    const asyncJoinDisputePool = async () => {
+      if (!id) return;
+      const disputeSystem = new DisputePool();
+      const response = await disputeSystem.joinDisputePool(id);
+      console.log(response);
+    };
+    asyncJoinDisputePool();
+  }, [id]);
 
   useEffect(() => {
     const asyncGetDisputeById = async () => {
@@ -118,15 +128,21 @@ const DisputeDetails = () => {
             </Box>
           </CardContent>
           <CardActions sx={{ justifyContent: "center" }}>
-            <Box sx={{ textAlign: "center" }}>
-              <Typography variant="h5">
-                Would you like to be an arbiter for this case ?
-              </Typography>
-              <Button variant="contained" color="primary" sx={{ mt: 2 }}>
-                Stake
-              </Button>
-            </Box>
-
+            {!dispute.hasStaked && (
+              <Box sx={{ textAlign: "center" }}>
+                <Typography variant="h5">
+                  Would you like to be an arbiter for this case ?
+                </Typography>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  sx={{ mt: 2 }}
+                  onClick={handleStaking}
+                >
+                  Stake
+                </Button>
+              </Box>
+            )}
             <Box>
               {/*         <Box sx={{ textAlign: "center", mb: 4 }}>
           <Typography variant="h1">VOTE</Typography>
