@@ -17,6 +17,7 @@ import ImageURLInput from "../components/imageVerification/ImageURLInput";
 import ImageVerificationHeader from "../components/imageVerification/ImageVerificationHeader";
 import SimilarImageList from "../components/imageVerification/SimilarImageList";
 import Meta from "../components/seo/Meta";
+import { IMG_VERIFICATION_API_KEY, IMG_VERIFICATION_BASE_URL } from "../config";
 import {
   INPUT_URL_TAB_LABEL,
   UPLOAD_IMAGE_TAB_LABEL,
@@ -56,7 +57,7 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
+const ImageVerification = () => {
   const [imageURL, setImageURL] = useState("");
   const [imageFile, setImageFile] = useState([]);
   const [images, setImages] = useState([]);
@@ -65,6 +66,7 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
   const [tabValue, setTabValue] = useState(0);
   const [alert, setAlert] = useState(false);
   const [isValidURL, setValidURL] = useState(true);
+  const Authorization = IMG_VERIFICATION_API_KEY;
 
   const resetValues = useCallback(() => {
     setImageURL("");
@@ -118,11 +120,11 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
     setOpen(true);
     const headers = {
       "Content-Type": "application/json",
-      Authorization: IMG_VERIFY_API_KEY,
+      Authorization,
     };
     try {
       const res = await axios.post(
-        `${IMG_VERIFY_BASE_URL}duplicates/urls`,
+        `${IMG_VERIFICATION_BASE_URL}duplicates/urls`,
         { url: imageURL, ...params },
         { headers }
       );
@@ -151,11 +153,11 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
 
     const headers = {
       "Content-Type": "multipart/form-data",
-      Authorization: IMG_VERIFY_API_KEY,
+      Authorization,
     };
 
     const res = await axios.post(
-      `${IMG_VERIFY_BASE_URL}duplicates/files`,
+      `${IMG_VERIFICATION_BASE_URL}duplicates/files`,
       formData,
       { params, headers }
     );
@@ -244,16 +246,6 @@ const ImageVerification = ({ IMG_VERIFY_BASE_URL, IMG_VERIFY_API_KEY }) => {
       </Snackbar>
     </>
   );
-};
-
-export const getStaticProps = async () => {
-  // Pass env variables to the page via props
-  return {
-    props: {
-      IMG_VERIFY_BASE_URL: process.env.IMG_VERIFICATION_BASE_URL,
-      IMG_VERIFY_API_KEY: process.env.IMG_VERIFICATION_API_KEY,
-    },
-  };
 };
 
 export default ImageVerification;
