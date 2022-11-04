@@ -69,10 +69,10 @@ export class DisputePool {
   }
 
   //Get all arbiters selected for a dispute
-  async getAddressesForDispute() {
+  async getAddressesForDispute(disputeId) {
     const contract = await this._createDisputeSystemContractInstance();
 
-    let response = await contract.getAddressesForDispute();
+    let response = await contract.getAddressesForDispute(disputeId);
     return response;
   }
 
@@ -97,7 +97,7 @@ export class DisputePool {
 
   //Vote
   async vote(proposal, disputeId) {
-    //Where 1 = validate and 2 = invalidate
+    //Where proposal = 1 => validate and 2 => invalidate
     const contract = await this._createDisputeSystemContractInstance();
 
     let txn = await contract.vote(proposal, disputeId);
@@ -206,7 +206,7 @@ export class DisputePool {
 
   //ADMIN PRIVILEDGES
 
-  //Assign Random Arbiters
+  //Assign Random Arbiters [4, 8, 2]
   async assignRandomArbiters(disputeId, randomValues) {
     const contract = await this._createDisputeSystemContractInstance();
 
