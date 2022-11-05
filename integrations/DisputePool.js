@@ -9,6 +9,7 @@ import {
   COMPUTE_RESULT,
   CREATED,
   END,
+  STAKE,
 } from "../constants/constants";
 import DisputeSystem from "../contracts/DisputePool/DisputePool.json";
 import Randomizer from "../contracts/Randomizer/Randomizer.json";
@@ -16,7 +17,6 @@ import Randomizer from "../contracts/Randomizer/Randomizer.json";
 class DisputePool {
   _disputeSystemAddress = DISPUTE_INITIATION_CONTRACT_ADDR;
   _randomizerAddress = CHAINLINK_RANDOM_GENERATOR_CONTRACT_ADDR;
-  stake = "0.02";
   _forward = 1;
   _backward = 2;
 
@@ -56,7 +56,7 @@ class DisputePool {
     return new ethers.Contract(_randomizerAddress, Randomizer.abi, signer);
   }
 
-  _getStake = async () => ethers.utils.parseUnits(this.stake, "ether");
+  _getStake = async () => ethers.utils.parseUnits(STAKE, "ether");
 
   //Create a dispute
   async createDispute(uri) {

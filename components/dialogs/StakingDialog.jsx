@@ -7,8 +7,9 @@ import {
   DialogTitle,
   Typography,
 } from "@mui/material";
+import { STAKE } from "../../constants/constants";
 
-const StakingDialog = ({ open, onClose, onAction }) => {
+const StakingDialog = ({ open, onClose, onAction, description }) => {
   return (
     <Dialog
       open={open}
@@ -22,15 +23,12 @@ const StakingDialog = ({ open, onClose, onAction }) => {
       <DialogContent sx={{ textAlign: "center" }}>
         <Box sx={{ mb: 2 }}>
           <Typography variant="h6">Dispute Summary</Typography>
-          <Typography variant="body1">
-            Victim’s comic, which was first published on their social media page
-            in 2020, was allegedly minted as an NFT by another on 13 Feb 2022.{" "}
-          </Typography>
+          <Typography variant="body1">{description}</Typography>
         </Box>
         <Box>
           <Typography variant="h6">Stake</Typography>
           <Typography variant="body1">
-            Stake <b>60 MATIC</b> to participate in the arbiter selection
+            Stake <b>{STAKE} MATIC</b> to participate in the arbiter selection
             process?
           </Typography>
         </Box>

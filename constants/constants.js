@@ -12,3 +12,6 @@ export const ARBITER_SELECTION = 2;
 export const CAN_VOTE = 3;
 export const COMPUTE_RESULT = 4;
 export const END = 5;
+
+// Dispute STAKES
+export const STAKE = "0.02";

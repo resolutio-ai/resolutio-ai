@@ -65,35 +65,38 @@ const DisputeDetails = () => {
   useEffect(() => {
     const asyncGetDisputeById = async () => {
       if (!id) return;
-      const disputeSystem = new DisputePool();
-      const dispute = await disputeSystem.getDisputeById(id);
-      const {
-        arbiterCount,
-        createdAt,
-        creator,
-        disputeId,
-        disputePool,
-        selectedArbiters,
-        state,
-        uri,
-        winningProposal,
-      } = dispute;
-      const data = await (await fetch(`${dispute.uri}/dispute.json`)).json();
-      setDispute({
-        title: "",
-        description: "",
-        hasStaked: disputePool.includes(address),
-        arbiterCount,
-        createdAt,
-        creator,
-        disputeId,
-        disputePool,
-        selectedArbiters,
-        state,
-        uri,
-        winningProposal,
-        additionalDetails: data,
-      });
+      try {
+        const disputeSystem = new DisputePool();
+        const dispute = await disputeSystem.getDisputeById(id);
+        const {
+          arbiterCount,
+          createdAt,
+          creator,
+          disputeId,
+          disputePool,
+          selectedArbiters,
+          state,
+          uri,
+          winningProposal,
+        } = dispute;
+        const details = await (
+          await fetch(`${dispute.uri}/dispute.json`)
+        ).json();
+        setDispute({
+          description: details.info,
+          hasStaked: disputePool.includes(address),
+          arbiterCount,
+          createdAt,
+          creator,
+          disputeId,
+          disputePool,
+          selectedArbiters,
+          state,
+          uri,
+          winningProposal,
+          additionalDetails: details,
+        });
+      } catch (error) {}
     };
     asyncGetDisputeById();
   }, [address, id]);
@@ -109,40 +112,44 @@ const DisputeDetails = () => {
                 variant="h1"
                 sx={{ textAlign: "center" }}
               >{`Case Id: ${id}`}</Typography>
-              <Box>
-                <Typography variant="h5" sx={{ textAlign: "center" }}>
-                  Victim’s comic, which was first published on their social
-                  media page in 2020, was allegedly minted as an NFT by another
-                  on 13 Feb 2022.
-                </Typography>
-                <Typography variant="body1" sx={{ mt: 2 }}>
-                  <strong>Victim:</strong> {dispute.creator}
-                </Typography>
-                {dispute.additionalDetails &&
-                  Object.keys(dispute.additionalDetails).map((key) => {
-                    return (
-                      <Typography variant="body1" sx={{ mt: 2 }} key={key}>
-                        <strong>{`${key}: `}</strong>
-                        {dispute.additionalDetails[key]}
-                      </Typography>
-                    );
-                  })}
-              </Box>
-              <Box sx={{ mt: 2 }}>
-                <SmartLink href={dispute.uri} isExternal={true}>
-                  <Button variant="contained" color="secondary" sx={{ mr: 2 }}>
-                    Evidence
-                  </Button>
-                </SmartLink>
-                <SmartLink
-                  href="https://znreza-blockchain-transaction-search-app-4pp5e7.streamlitapp.com/"
-                  isExternal={true}
-                >
-                  <Button variant="contained" color="secondary">
-                    Arbiter Tools
-                  </Button>
-                </SmartLink>
-              </Box>
+              <>
+                <Box>
+                  <Typography variant="h5" sx={{ textAlign: "center" }}>
+                    {dispute.description}
+                  </Typography>
+                  <Typography variant="body1" sx={{ mt: 2 }}>
+                    <strong>Victim:</strong> {dispute.creator}
+                  </Typography>
+                  {dispute.additionalDetails &&
+                    Object.keys(dispute.additionalDetails).map((key) => {
+                      return (
+                        <Typography variant="body1" sx={{ mt: 2 }} key={key}>
+                          <strong>{`${key}: `}</strong>
+                          {dispute.additionalDetails[key]}
+                        </Typography>
+                      );
+                    })}
+                </Box>
+                <Box sx={{ mt: 2 }}>
+                  <SmartLink href={dispute.uri} isExternal={true}>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      sx={{ mr: 2 }}
+                    >
+                      Evidence
+                    </Button>
+                  </SmartLink>
+                  <SmartLink
+                    href="https://znreza-blockchain-transaction-search-app-4pp5e7.streamlitapp.com/"
+                    isExternal={true}
+                  >
+                    <Button variant="contained" color="secondary">
+                      Arbiter Tools
+                    </Button>
+                  </SmartLink>
+                </Box>
+              </>
             </Box>
           </CardContent>
           <CardActions sx={{ justifyContent: "center" }}>
@@ -181,6 +188,7 @@ const DisputeDetails = () => {
           open={isStakingDialogOpen}
           onClose={handleStakingDialogClose}
           onAction={handleJoinDisputePool}
+          description={dispute.description}
         />
       </RenderOnArbiter>
       <NotArbiter />
