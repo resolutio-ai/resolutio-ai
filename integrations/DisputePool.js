@@ -3,6 +3,13 @@ import {
   CHAINLINK_RANDOM_GENERATOR_CONTRACT_ADDR,
   DISPUTE_INITIATION_CONTRACT_ADDR,
 } from "../config";
+import {
+  ARBITER_SELECTION,
+  CAN_VOTE,
+  COMPUTE_RESULT,
+  CREATED,
+  END,
+} from "../constants/constants";
 import DisputeSystem from "../contracts/DisputePool/DisputePool.json";
 import Randomizer from "../contracts/Randomizer/Randomizer.json";
 
@@ -10,12 +17,6 @@ class DisputePool {
   _disputeSystemAddress = DISPUTE_INITIATION_CONTRACT_ADDR;
   _randomizerAddress = CHAINLINK_RANDOM_GENERATOR_CONTRACT_ADDR;
   stake = "0.02";
-  _UnInitialized = 0;
-  _IsCreated = 1;
-  _ArbiterSelection = 2;
-  _CanVote = 3;
-  _ComputeResult = 4;
-  _End = 5;
   _forward = 1;
   _backward = 2;
 
@@ -146,7 +147,7 @@ class DisputePool {
     const allDisputes = await contract.getAllDisputes();
 
     const newDisputes = allDisputes.filter(
-      (dispute) => dispute.state == this._IsCreated
+      (dispute) => dispute.state == CREATED
     );
 
     return newDisputes;
@@ -160,9 +161,9 @@ class DisputePool {
 
     const ongoingDisputes = allDisputes.filter(
       (dispute) =>
-        dispute.state == this._ArbiterSelection ||
-        dispute.state == this._CanVote ||
-        dispute.state == this._ComputeResult
+        dispute.state == ARBITER_SELECTION ||
+        dispute.state == CAN_VOTE ||
+        dispute.state == COMPUTE_RESULT
     );
 
     return ongoingDisputes;
@@ -174,7 +175,7 @@ class DisputePool {
 
     const allDisputes = await contract.getAllDisputes();
     const resolvedDisputes = allDisputes.filter(
-      (dispute) => dispute.state == this._End
+      (dispute) => dispute.state == END
     );
 
     return resolvedDisputes;
