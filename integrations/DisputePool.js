@@ -215,7 +215,7 @@ class DisputePool {
   }
 
   //get Random Values
-  async getRandomValues() {}
+  //async getRandomValues() {}
 }
 
 export default DisputePool;

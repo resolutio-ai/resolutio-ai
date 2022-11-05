@@ -7,11 +7,15 @@ const CountDownTimer = ({ expiryTimestamp }) => {
     onExpire: () => console.warn("onExpire called"),
   });
   return (
-    <Box sx={{ textAlign: "center", mb: 1 }}>
-      <Box sx={{ fontSize: "1rem" }}>
-        <span>{`${days} days : ${hours} hours: ${minutes} minutes: ${seconds} seconds`}</span>
-      </Box>
-    </Box>
+    <>
+      {isRunning && (
+        <Box sx={{ textAlign: "center", mb: 1 }}>
+          <Box sx={{ fontSize: "1rem" }}>
+            <span>{`${days} days : ${hours} hours: ${minutes} minutes: ${seconds} seconds`}</span>
+          </Box>
+        </Box>
+      )}
+    </>
   );
 };
 
