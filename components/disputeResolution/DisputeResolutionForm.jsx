@@ -14,6 +14,7 @@ import { useCallback, useState } from "react";
 import { NFT_STORAGE_IPFS_KEY } from "../../config";
 import DisputePool from "../../integrations/DisputePool";
 import AttachEvidence from "./AttachEvidence";
+import DisputeCreationSuccess from "./DisputeCreationSuccess";
 
 const defaultValues = {
   nft_id: "",
@@ -50,6 +51,7 @@ const DisputeResolutionForm = () => {
   const createDispute = useCallback(() => {
     const createDisputeAsync = async () => {
       handleOpenLoader();
+      // Object for creating Dispute JSON
       const disputeObject = {
         nftID: formValues["nft_id"],
         nftURL: formValues["nft_url"],
@@ -60,6 +62,7 @@ const DisputeResolutionForm = () => {
         additionalInfo: formValues["additional_details"],
         attachedFiles: formValues["attached_files"],
       };
+      // File list for uploading to IPFS
       const fileList = [
         new File(
           [`Resolutio case created on ${new Date().toTimeString()}`],
@@ -75,13 +78,14 @@ const DisputeResolutionForm = () => {
           token: NFT_STORAGE_IPFS_KEY,
         });
         const disputePoolInstance = new DisputePool();
-
+        // Store Evidence on IPFS
         const cid = await client.storeDirectory(fileList);
         const ipfsURL = `https://ipfs.io/ipfs/${cid}`;
+        // Create dispute on Blockchain
         await disputePoolInstance.createDispute(ipfsURL);
 
-        clearForm();
         setDisputeCreated(true);
+        clearForm();
       } catch (error) {
         console.log(error);
         handleOpenAlert();
@@ -268,7 +272,7 @@ const DisputeResolutionForm = () => {
           </form>
         </>
       )}
-      {isDisputeCreated && <></>}
+      {isDisputeCreated && <DisputeCreationSuccess />}
     </Box>
   );
 };
