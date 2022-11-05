@@ -126,16 +126,13 @@ class DisputePool {
   async getMyCreatedDisputes(userAddress) {
     const contract = await this._createDisputeSystemContractInstance();
 
-    let allDisputes = await contract.getAllDisputes();
-    let disputeArray = [];
+    const allDisputes = await contract.getAllDisputes();
 
-    for (let dispute of allDisputes) {
-      if (dispute.creator.toString() === userAddress.toString()) {
-        disputeArray.push(dispute);
-      }
-    }
+    const userDisputes = allDisputes.filter(
+      (dispute) => dispute.creator === userAddress
+    );
 
-    return disputeArray;
+    return userDisputes;
   }
 
   //Get all disputes for an arbiter with userAddress
