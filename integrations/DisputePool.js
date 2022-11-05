@@ -6,7 +6,7 @@ import {
 import DisputeSystem from "../contracts/DisputePool/DisputePool.json";
 import Randomizer from "../contracts/Randomizer/Randomizer.json";
 
-export class DisputePool {
+class DisputePool {
   _disputeSystemAddress = DISPUTE_INITIATION_CONTRACT_ADDR;
   _randomizerAddress = CHAINLINK_RANDOM_GENERATOR_CONTRACT_ADDR;
   stake = "0.02";
@@ -240,3 +240,5 @@ export class DisputePool {
   //get Random Values
   async getRandomValues() {}
 }
+
+export default DisputePool;

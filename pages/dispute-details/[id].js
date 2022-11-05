@@ -15,7 +15,8 @@ import Meta from "../../components/seo/Meta";
 import SmartLink from "../../components/SmartLink";
 import Unauthorized from "../../components/Unauthorized";
 import { useResolutioContext } from "../../context/ResolutioContext";
-import { DisputePool } from "../../integrations/DisputePool";
+import DisputePool from "../../integrations/DisputePool";
+
 const DisputeDetails = () => {
   const router = useRouter();
   const { address } = useResolutioContext();
@@ -33,7 +34,7 @@ const DisputeDetails = () => {
     state: 0,
     uri: "",
     winningProposal: 0,
-    additionalDetails: null
+    additionalDetails: null,
   });
   const [isStakingDialogOpen, setStakingDialogOpen] = useState(false);
 
@@ -117,16 +118,15 @@ const DisputeDetails = () => {
                 <Typography variant="body1" sx={{ mt: 2 }}>
                   <strong>Victim:</strong> {dispute.creator}
                 </Typography>
-                {(dispute.additionalDetails) &&
-                  (Object.keys(dispute.additionalDetails).map((key) => {
+                {dispute.additionalDetails &&
+                  Object.keys(dispute.additionalDetails).map((key) => {
                     return (
                       <Typography variant="body1" sx={{ mt: 2 }} key={key}>
                         <strong>{`${key}: `}</strong>
                         {dispute.additionalDetails[key]}
                       </Typography>
                     );
-                  }))
-                }
+                  })}
               </Box>
               <Box sx={{ mt: 2 }}>
                 <SmartLink href={dispute.uri} isExternal={true}>
