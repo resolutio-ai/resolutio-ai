@@ -1,15 +1,17 @@
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import DisputesList from "../components/disputeResolution/DisputesList";
 import NotArbiter from "../components/NotArbiter";
 import RenderOnArbiter from "../components/RenderOnArbiter";
 import Meta from "../components/seo/Meta";
 import Unauthorized from "../components/Unauthorized";
+import { CREATED } from "../constants/constants";
 import { useResolutioContext } from "../context/ResolutioContext";
 import DisputePool from "../integrations/DisputePool";
 const UpcomingDisputes = () => {
   const { address } = useResolutioContext();
   const [upComingDisputes, setUpComingDisputes] = useState([]);
+  const [arbiterDisputes, setArbiterDisputes] = useState(true);
 
   useEffect(() => {
     const asyncGetDisputes = async () => {
@@ -18,8 +20,8 @@ const UpcomingDisputes = () => {
       }
       try {
         const disputeSystem = new DisputePool();
-        const disputes = await disputeSystem.getNewDisputes();
-        let mappedDisputes = disputes.map((dispute) => {
+        const allDisputes = await disputeSystem.getAllDisputes();
+        let mappedDisputes = allDisputes.map((dispute) => {
           const {
             arbiterCount,
             createdAt,
@@ -56,13 +58,20 @@ const UpcomingDisputes = () => {
               })
             );
           })
-          .then(function (allDisputeDetails) {
+          .then(function (disputes) {
             mappedDisputes.forEach((dispute, index) => {
-              dispute.additionalDetails = allDisputeDetails[index];
-              dispute.description = allDisputeDetails[index]?.info;
+              dispute.additionalDetails = disputes[index];
+              dispute.description = disputes[index]?.info;
             });
             console.log(mappedDisputes);
-            setUpComingDisputes(mappedDisputes);
+            const upcomingDisputesMapped = mappedDisputes.filter(
+              () => (dispute) => dispute.state == CREATED
+            );
+            const arbiterDisputesMapped = mappedDisputes.filter((dispute) =>
+              dispute.selectedArbiters.includes(address)
+            );
+            setUpComingDisputes(upcomingDisputesMapped);
+            setArbiterDisputes(arbiterDisputesMapped);
           });
       } catch (error) {
         console.log(error);
@@ -75,10 +84,18 @@ const UpcomingDisputes = () => {
     <>
       <Meta title="Upcoming Disputes" />
       <RenderOnArbiter>
-        <>
-          <Typography variant="h1">Upcoming Disputes</Typography>
-          <DisputesList disputes={upComingDisputes} />
-        </>
+        {upComingDisputes.length > 0 && (
+          <Box>
+            <Typography variant="h1">Upcoming Disputes</Typography>
+            <DisputesList disputes={upComingDisputes} />
+          </Box>
+        )}
+        {arbiterDisputes.length > 0 && (
+          <Box>
+            <Typography variant="h1">Arbiter Disputes</Typography>
+            <DisputesList disputes={arbiterDisputes} />
+          </Box>
+        )}
       </RenderOnArbiter>
       <NotArbiter />
       <Unauthorized />
