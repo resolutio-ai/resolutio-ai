@@ -8,13 +8,12 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import React from "react";
 import {
   READ_MORE_BUTTON_LABEL,
   RESED_SECTION_DESC,
   RESED_SECTION_HEADING,
-} from "../constants/strings";
-import articles from "../data/mediumArticles.json";
+} from "../../constants/strings";
+import articles from "../../data/mediumArticles.json";
 
 const ResEd = () => {
   return (

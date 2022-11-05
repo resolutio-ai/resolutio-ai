@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
-import { PLACEHOLDER_BLUR } from "../constants/constants";
-import members from "../data/ourMembers.json";
+import { PLACEHOLDER_BLUR } from "../../constants/constants";
+import members from "../../data/ourMembers.json";
 
 const OurTeam = () => {
   return (
