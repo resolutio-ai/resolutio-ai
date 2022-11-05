@@ -16,67 +16,57 @@ const UpcomingDisputes = () => {
       if (!address) {
         return;
       }
-      const disputeSystem = new DisputePool();
-      const disputes = await disputeSystem.getNewDisputes();
-      let mappedDisputes = disputes.map((dispute) => {
-        const {
-          arbiterCount,
-          createdAt,
-          creator,
-          disputeId,
-          disputePool,
-          selectedArbiters,
-          state,
-          uri,
-          winningProposal,
-        } = dispute;
-        return {
-          title: "",
-          description: "",
-          hasStaked: disputePool.includes(address),
-          arbiterCount,
-          createdAt,
-          creator,
-          disputeId,
-          disputePool,
-          selectedArbiters,
-          state,
-          uri,
-          winningProposal,
-        };
-      });
-      setUpComingDisputes(mappedDisputes);
-      console.log("getDisputes", disputes);
-
-      Promise.all(
-        disputes.map((dispute) => fetch(`${dispute.uri}/dispute.json`))
-      )
-        .then(function (responses) {
-          // Get a JSON object from each of the responses
-          return Promise.all(
-            responses.map(function (response) {
-              if (response.status === 200) return response.json();
-              return null;
-            })
-          );
-        })
-        .catch(function (error) {
-          console.log("api error", error);
-          return error;
-        })
-        .then(function (data) {
-          // Log the data to the console
-          console.log("multi data", data);
-          mappedDisputes.forEach((element, index) => {
-            element.additionalDetails = data[index];
-          });
-          console.log(mappedDisputes);
-        })
-        .catch(function (error) {
-          console.log(error);
+      try {
+        const disputeSystem = new DisputePool();
+        const disputes = await disputeSystem.getNewDisputes();
+        let mappedDisputes = disputes.map((dispute) => {
+          const {
+            arbiterCount,
+            createdAt,
+            creator,
+            disputeId,
+            disputePool,
+            selectedArbiters,
+            state,
+            uri,
+            winningProposal,
+          } = dispute;
+          return {
+            hasStaked: disputePool.includes(address),
+            arbiterCount,
+            createdAt,
+            creator,
+            disputeId,
+            disputePool,
+            selectedArbiters,
+            state,
+            uri,
+            winningProposal,
+          };
         });
-
-      console.timeEnd("getDisputes");
+        Promise.all(
+          mappedDisputes.map((dispute) => fetch(`${dispute.uri}/dispute.json`))
+        )
+          .then(function (responses) {
+            // Get a JSON object from each of the responses
+            return Promise.all(
+              responses.map(function (response) {
+                if (response.status === 200) return response.json();
+                return null;
+              })
+            );
+          })
+          .then(function (allDisputeDetails) {
+            mappedDisputes.forEach((dispute, index) => {
+              dispute.additionalDetails = allDisputeDetails[index];
+              dispute.description = allDisputeDetails[index]?.info;
+            });
+            console.log(mappedDisputes);
+            setUpComingDisputes(mappedDisputes);
+          });
+      } catch (error) {
+        console.log(error);
+      }
     };
     asyncGetDisputes();
   }, [address]);

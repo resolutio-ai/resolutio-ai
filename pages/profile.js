@@ -1,7 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import DisputesList from "../components/disputeResolution/DisputesList";
-import RenderOnArbiter from "../components/RenderOnArbiter";
 import RenderOnAuthenticated from "../components/RenderOnAuthenticated";
 import Meta from "../components/seo/Meta";
 import Unauthorized from "../components/Unauthorized";
@@ -13,7 +12,7 @@ const Profile = () => {
   const [createdDisputes, setCreatedDisputes] = useState([]);
 
   useEffect(() => {
-    const asyncGetDisputes = async () => {
+    const asyncGetMyDisputes = async () => {
       if (!address) {
         return;
       }
@@ -63,13 +62,13 @@ const Profile = () => {
               dispute.description = allDisputeDetails[index]?.info;
             });
             console.log(mappedDisputes);
+            setCreatedDisputes(mappedDisputes);
           });
-        setCreatedDisputes(mappedDisputes);
       } catch (error) {
         console.log(error);
       }
     };
-    asyncGetDisputes();
+    asyncGetMyDisputes();
   }, [address]);
 
   return (
@@ -84,11 +83,6 @@ const Profile = () => {
           <code>{address}</code>
         </Box>
       </RenderOnAuthenticated>
-      <RenderOnArbiter>
-        <Box>
-          {/* <Typography variant="h1">Ongoing Disputes</Typography> */}
-        </Box>
-      </RenderOnArbiter>
       {createdDisputes.length > 0 && (
         <Box>
           <Typography variant="h1">Created Disputes</Typography>
