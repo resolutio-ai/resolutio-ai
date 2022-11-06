@@ -1,18 +1,9 @@
-import {
-  Alert,
-  Box,
-  Button,
-  Grid,
-  Snackbar,
-  Stack,
-  TextField,
-} from "@mui/material";
-import Backdrop from "@mui/material/Backdrop";
-import CircularProgress from "@mui/material/CircularProgress";
+import { Alert, Box, Button, Grid, Snackbar, TextField } from "@mui/material";
 import { File, NFTStorage } from "nft.storage";
 import { useCallback, useState } from "react";
 import { NFT_STORAGE_IPFS_KEY } from "../../config";
 import DisputePool from "../../integrations/DisputePool";
+import BackdropLoader from "../loaders/BackdropLoader";
 import AttachEvidence from "./AttachEvidence";
 import DisputeCreationSuccess from "./DisputeCreationSuccess";
 
@@ -159,15 +150,10 @@ const DisputeResolutionForm = () => {
               An error occurred while creating dispute. Please try again.
             </Alert>
           </Snackbar>
-          <Backdrop
-            sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          <BackdropLoader
             open={openLoader}
-          >
-            <Stack spacing={2} alignItems="center">
-              <>Please wait while dispute is being created</>
-              <CircularProgress color="primary" />
-            </Stack>
-          </Backdrop>
+            msg={"Please wait while dispute is being created."}
+          />
           <form onSubmit={handleFormSubmit}>
             <Grid container spacing={2} direction="column">
               <Grid item>

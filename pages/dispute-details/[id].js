@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import CountDownTimer from "../../components/CountDownTimer";
 import StakingDialog from "../../components/dialogs/StakingDialog";
+import BackdropLoader from "../../components/loaders/BackdropLoader";
 import NotArbiter from "../../components/NotArbiter";
 import RenderOnArbiter from "../../components/RenderOnArbiter";
 import Meta from "../../components/seo/Meta";
@@ -40,6 +41,8 @@ const DisputeDetails = () => {
   });
   const [isStakingDialogOpen, setStakingDialogOpen] = useState(false);
   const [isVoted, setVoted] = useState(false);
+  const [isFullScreenLoaderOpen, setFullScreenLoaderOpen] = useState(false);
+  const [loaderMsg, setLoaderMsg] = useState("");
 
   const isPageViewable = useMemo(
     () => isArbiter || dispute.creator === address,
@@ -55,15 +58,19 @@ const DisputeDetails = () => {
 
   const handleJoinDisputePool = useCallback(() => {
     const asyncJoinDisputePool = async () => {
+      handleStakingDialogClose();
       if (!id) return;
       try {
+        setLoaderMsg("Hold on tight!, Staking in progress...");
+        setFullScreenLoaderOpen(true);
         const disputeSystem = new DisputePool();
         await disputeSystem.joinDisputePool(id);
         setDispute((prev) => ({ ...prev, hasStaked: true }));
-        handleStakingDialogClose();
       } catch (error) {
         console.log(error);
         handleStakingDialogClose();
+      } finally {
+        setFullScreenLoaderOpen(false);
       }
     };
     asyncJoinDisputePool();
@@ -74,11 +81,15 @@ const DisputeDetails = () => {
       const votingAsync = async () => {
         if (!id) return;
         try {
+          setLoaderMsg("Hold on tight!, Voting in progress...");
+          setFullScreenLoaderOpen(true);
           const disputeSystem = new DisputePool();
           await disputeSystem.vote(vote, id);
           setVoted(true);
         } catch (error) {
           console.log(error);
+        } finally {
+          setFullScreenLoaderOpen(false);
         }
       };
       votingAsync();
@@ -240,6 +251,7 @@ const DisputeDetails = () => {
       </RenderOnArbiter>
       {!isPageViewable && <NotArbiter />}
       <Unauthorized />
+      <BackdropLoader open={isFullScreenLoaderOpen} msg={loaderMsg} />
     </>
   );
 };
