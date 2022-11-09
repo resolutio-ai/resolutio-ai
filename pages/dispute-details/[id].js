@@ -202,46 +202,48 @@ const DisputeDetails = () => {
             </Box>
           </CardContent>
           <CardActions sx={{ justifyContent: "center" }}>
-            {!dispute.hasStaked && dispute.state === CREATED && (
-              <Box sx={{ textAlign: "center" }}>
-                <Typography variant="h5">
-                  Would you like to be an arbiter for this case ?
-                </Typography>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  sx={{ mt: 2 }}
-                  onClick={handleStakingDialogOpen}
-                >
-                  Stake
-                </Button>
-              </Box>
-            )}
-            {dispute.state === CAN_VOTE && !isVoted && (
-              <Box>
-                <Box sx={{ textAlign: "center", mb: 4 }}>
-                  <Typography variant="h1">VOTE</Typography>
-                  <CountDownTimer expiryTimestamp={1656530040208} />
-                  <Box>
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      sx={{ mr: 4 }}
-                      onClick={handleInvalidateDispute}
-                    >
-                      Invalidate NFT
-                    </Button>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={handleValidateDispute}
-                    >
-                      Validate NFT
-                    </Button>
+            <RenderOnArbiter>
+              {!dispute.hasStaked && dispute.state === CREATED && (
+                <Box sx={{ textAlign: "center" }}>
+                  <Typography variant="h5">
+                    Would you like to be an arbiter for this case ?
+                  </Typography>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    sx={{ mt: 2 }}
+                    onClick={handleStakingDialogOpen}
+                  >
+                    Stake
+                  </Button>
+                </Box>
+              )}
+              {dispute.state === CAN_VOTE && !isVoted && (
+                <Box>
+                  <Box sx={{ textAlign: "center", mb: 4 }}>
+                    <Typography variant="h1">VOTE</Typography>
+                    <CountDownTimer expiryTimestamp={1656530040208} />
+                    <Box>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        sx={{ mr: 4 }}
+                        onClick={handleInvalidateDispute}
+                      >
+                        Invalidate NFT
+                      </Button>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleValidateDispute}
+                      >
+                        Validate NFT
+                      </Button>
+                    </Box>
                   </Box>
                 </Box>
-              </Box>
-            )}
+              )}
+            </RenderOnArbiter>
           </CardActions>
         </Card>
       )}
