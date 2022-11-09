@@ -61,7 +61,6 @@ const DisputeDetails = () => {
       if (!id) return;
       openBackdrop("Hold on, Joining Dispute Pool...");
       try {
-        setFullScreenLoaderOpen(true);
         const disputeSystem = new DisputePool();
         await disputeSystem.joinDisputePool(id);
         setDispute((prev) => ({ ...prev, hasStaked: true }));
@@ -81,7 +80,6 @@ const DisputeDetails = () => {
         if (!id) return;
         openBackdrop("Hold on, Voting...");
         try {
-          setFullScreenLoaderOpen(true);
           const disputeSystem = new DisputePool();
           await disputeSystem.vote(vote, id);
           setVoted(true);
