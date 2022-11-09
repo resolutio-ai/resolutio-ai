@@ -23,12 +23,11 @@ const DisputeResolutionForm = () => {
   const { enqueueSnackbar } = useSnackbar();
   const { openBackdrop, closeBackdrop } = useResolutioBackdropContext();
   const [formValues, setFormValues] = useState(defaultValues);
-  const [openLoader, setOpenLoader] = useState(false);
   const [isDisputeCreated, setDisputeCreated] = useState(false);
 
   const createDispute = useCallback(() => {
     const createDisputeAsync = async () => {
-      openBackdrop("Hold on, we are creating your dispute...");
+      openBackdrop("Hold on, while we create your dispute...");
       // Object for creating Dispute JSON
       const disputeObject = {
         nftID: formValues["nft_id"],

@@ -6,10 +6,12 @@ import RenderOnArbiter from "../components/RenderOnArbiter";
 import Meta from "../components/seo/Meta";
 import Unauthorized from "../components/Unauthorized";
 import { CREATED } from "../constants/constants";
+import { useResolutioBackdropContext } from "../context/ResolutioBackdropContext";
 import { useResolutioContext } from "../context/ResolutioContext";
 import DisputePool from "../integrations/DisputePool";
 const UpcomingDisputes = () => {
   const { address } = useResolutioContext();
+  const { openBackdrop, closeBackdrop } = useResolutioBackdropContext();
   const [upComingDisputes, setUpComingDisputes] = useState([]);
   const [arbiterDisputes, setArbiterDisputes] = useState(true);
 
@@ -18,6 +20,7 @@ const UpcomingDisputes = () => {
       if (!address) {
         return;
       }
+      openBackdrop("Hold on, Fetching Arbiter information...");
       try {
         const disputeSystem = new DisputePool();
         const allDisputes = await disputeSystem.getAllDisputes();
@@ -72,13 +75,16 @@ const UpcomingDisputes = () => {
             );
             setUpComingDisputes(upcomingDisputesMapped);
             setArbiterDisputes(arbiterDisputesMapped);
+            closeBackdrop();
           });
       } catch (error) {
         console.log(error);
+      } finally {
+        //closeBackdrop();
       }
     };
     asyncGetDisputes();
-  }, [address]);
+  }, [address, closeBackdrop, openBackdrop]);
 
   return (
     <>

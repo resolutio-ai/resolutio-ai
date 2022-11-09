@@ -4,11 +4,13 @@ import DisputesList from "../components/disputeResolution/DisputesList";
 import RenderOnAuthenticated from "../components/RenderOnAuthenticated";
 import Meta from "../components/seo/Meta";
 import Unauthorized from "../components/Unauthorized";
+import { useResolutioBackdropContext } from "../context/ResolutioBackdropContext";
 import { useResolutioContext } from "../context/ResolutioContext";
 import DisputePool from "../integrations/DisputePool";
 
 const Profile = () => {
   const { address } = useResolutioContext();
+  const { openBackdrop, closeBackdrop } = useResolutioBackdropContext();
   const [createdDisputes, setCreatedDisputes] = useState([]);
 
   useEffect(() => {
@@ -16,6 +18,7 @@ const Profile = () => {
       if (!address) {
         return;
       }
+      openBackdrop("Hold on, Fetching your profile data...");
       try {
         const disputeSystem = new DisputePool();
         const disputes = await disputeSystem.getMyCreatedDisputes(address);
@@ -63,13 +66,16 @@ const Profile = () => {
             });
             console.log(mappedDisputes);
             setCreatedDisputes(mappedDisputes);
+            closeBackdrop();
           });
       } catch (error) {
         console.log(error);
+      } finally {
+        //closeBackdrop();
       }
     };
     asyncGetMyDisputes();
-  }, [address]);
+  }, [address, closeBackdrop, openBackdrop]);
 
   return (
     <>

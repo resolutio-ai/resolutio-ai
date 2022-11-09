@@ -10,19 +10,20 @@ import { useRouter } from "next/router";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import CountDownTimer from "../../components/CountDownTimer";
 import StakingDialog from "../../components/dialogs/StakingDialog";
-import BackdropLoader from "../../components/loaders/BackdropLoader";
 import NotArbiter from "../../components/NotArbiter";
 import RenderOnArbiter from "../../components/RenderOnArbiter";
 import Meta from "../../components/seo/Meta";
 import SmartLink from "../../components/SmartLink";
 import Unauthorized from "../../components/Unauthorized";
 import { CAN_VOTE, CREATED } from "../../constants/constants";
+import { useResolutioBackdropContext } from "../../context/ResolutioBackdropContext";
 import { useResolutioContext } from "../../context/ResolutioContext";
 import DisputePool from "../../integrations/DisputePool";
 
 const DisputeDetails = () => {
   const router = useRouter();
   const { address, isArbiter } = useResolutioContext();
+  const { openBackdrop, closeBackdrop } = useResolutioBackdropContext();
   const { id } = router.query;
   const [dispute, setDispute] = useState({
     title: "",
@@ -41,8 +42,6 @@ const DisputeDetails = () => {
   });
   const [isStakingDialogOpen, setStakingDialogOpen] = useState(false);
   const [isVoted, setVoted] = useState(false);
-  const [isFullScreenLoaderOpen, setFullScreenLoaderOpen] = useState(false);
-  const [loaderMsg, setLoaderMsg] = useState("");
 
   const isPageViewable = useMemo(
     () => isArbiter || dispute.creator === address,
@@ -60,8 +59,8 @@ const DisputeDetails = () => {
     const asyncJoinDisputePool = async () => {
       handleStakingDialogClose();
       if (!id) return;
+      openBackdrop("Hold on, Joining Dispute Pool...");
       try {
-        setLoaderMsg("Hold on tight!, Staking in progress...");
         setFullScreenLoaderOpen(true);
         const disputeSystem = new DisputePool();
         await disputeSystem.joinDisputePool(id);
@@ -70,18 +69,18 @@ const DisputeDetails = () => {
         console.log(error);
         handleStakingDialogClose();
       } finally {
-        setFullScreenLoaderOpen(false);
+        closeBackdrop();
       }
     };
     asyncJoinDisputePool();
-  }, [handleStakingDialogClose, id]);
+  }, [closeBackdrop, handleStakingDialogClose, id, openBackdrop]);
 
   const handleVoting = useCallback(
     (vote) => {
       const votingAsync = async () => {
         if (!id) return;
+        openBackdrop("Hold on, Voting...");
         try {
-          setLoaderMsg("Hold on tight!, Voting in progress...");
           setFullScreenLoaderOpen(true);
           const disputeSystem = new DisputePool();
           await disputeSystem.vote(vote, id);
@@ -89,12 +88,12 @@ const DisputeDetails = () => {
         } catch (error) {
           console.log(error);
         } finally {
-          setFullScreenLoaderOpen(false);
+          closeBackdrop();
         }
       };
       votingAsync();
     },
-    [id]
+    [closeBackdrop, id, openBackdrop]
   );
 
   const handleValidateDispute = useCallback(() => {
@@ -108,6 +107,7 @@ const DisputeDetails = () => {
   useEffect(() => {
     const asyncGetDisputeById = async () => {
       if (!id) return;
+      openBackdrop("Hold on, we are fetching the dispute details...");
       try {
         const disputeSystem = new DisputePool();
         const dispute = await disputeSystem.getDisputeById(id);
@@ -139,10 +139,14 @@ const DisputeDetails = () => {
           winningProposal,
           additionalDetails: details,
         });
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      } finally {
+        closeBackdrop();
+      }
     };
     asyncGetDisputeById();
-  }, [address, id]);
+  }, [address, closeBackdrop, id, openBackdrop]);
 
   return (
     <>
@@ -251,7 +255,6 @@ const DisputeDetails = () => {
       </RenderOnArbiter>
       {!isPageViewable && <NotArbiter />}
       <Unauthorized />
-      <BackdropLoader open={isFullScreenLoaderOpen} msg={loaderMsg} />
     </>
   );
 };
