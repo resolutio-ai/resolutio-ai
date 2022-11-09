@@ -9,8 +9,11 @@ const DisputeItem = ({ dispute }) => {
   return (
     <Card
       sx={{
-        minWidth: 275,
         p: 2,
+        display: "flex",
+        width: "100%",
+        justifyContent: "space-between",
+        flexDirection: "column",
       }}
     >
       <CardContent>

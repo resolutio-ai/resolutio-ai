@@ -6,7 +6,14 @@ const DisputesList = ({ disputes }) => {
     <Box sx={{ mb: 4 }}>
       <Grid container spacing={2}>
         {disputes.map((dispute) => (
-          <Grid item md={4} sm={6} xs={12} key={dispute.disputeId._hex}>
+          <Grid
+            item
+            md={4}
+            sm={6}
+            xs={12}
+            key={dispute.disputeId._hex}
+            sx={{ display: "flex" }}
+          >
             <DisputeItem dispute={dispute} />
           </Grid>
         ))}
