@@ -88,14 +88,14 @@ const Profile = () => {
           </Typography>
           <code>{address}</code>
         </Box>
-      </RenderOnAuthenticated>
-      {createdDisputes.length > 0 && (
-        <Box>
-          <Typography variant="h1">Created Disputes</Typography>
-          <DisputesList disputes={createdDisputes} />
-        </Box>
-      )}
 
+        {createdDisputes.length > 0 && (
+          <Box>
+            <Typography variant="h1">Created Disputes</Typography>
+            <DisputesList disputes={createdDisputes} />
+          </Box>
+        )}
+      </RenderOnAuthenticated>
       <Unauthorized />
     </>
   );
