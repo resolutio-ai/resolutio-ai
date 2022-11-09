@@ -6,7 +6,9 @@ import NProgress from "nprogress";
 import PropTypes from "prop-types";
 import { useEffect } from "react";
 import Layout from "../components/Layout";
+import LoadingBackdrop from "../components/loaders/LoadingBackdrop";
 import NotistackWrapper from "../components/NotistackWrapper";
+import { ResolutioBackdropContextProvider } from "../context/ResolutioBackdropContext";
 import { ResolutioContextProvider } from "../context/ResolutioContext";
 import { primaryMain } from "../styles/colors";
 import "../styles/globals.css";
@@ -33,15 +35,18 @@ const MyApp = (props) => {
   return (
     <NotistackWrapper>
       <ResolutioContextProvider>
-        <CacheProvider value={emotionCache}>
-          <ThemeProvider theme={resolutioTheme}>
-            <CssBaseline />
-            <Layout>
-              <NextNProgress color={primaryMain} />
-              <Component {...pageProps} />
-            </Layout>
-          </ThemeProvider>
-        </CacheProvider>
+        <ResolutioBackdropContextProvider>
+          <CacheProvider value={emotionCache}>
+            <ThemeProvider theme={resolutioTheme}>
+              <CssBaseline />
+              <LoadingBackdrop />
+              <Layout>
+                <NextNProgress color={primaryMain} />
+                <Component {...pageProps} />
+              </Layout>
+            </ThemeProvider>
+          </CacheProvider>
+        </ResolutioBackdropContextProvider>
       </ResolutioContextProvider>
     </NotistackWrapper>
   );
