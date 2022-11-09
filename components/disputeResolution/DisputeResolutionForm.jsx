@@ -1,5 +1,6 @@
-import { Alert, Box, Button, Grid, Snackbar, TextField } from "@mui/material";
+import { Box, Button, Grid, TextField } from "@mui/material";
 import { File, NFTStorage } from "nft.storage";
+import { useSnackbar } from "notistack";
 import { useCallback, useState } from "react";
 import { NFT_STORAGE_IPFS_KEY } from "../../config";
 import DisputePool from "../../integrations/DisputePool";
@@ -19,18 +20,10 @@ const defaultValues = {
 };
 
 const DisputeResolutionForm = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const [formValues, setFormValues] = useState(defaultValues);
-  const [openErrorAlert, setOpenErrorAlert] = useState(false);
   const [openLoader, setOpenLoader] = useState(false);
   const [isDisputeCreated, setDisputeCreated] = useState(false);
-
-  const handleOpenAlert = useCallback(() => {
-    setOpenErrorAlert(true);
-  }, []);
-
-  const handleCloseAlert = useCallback(() => {
-    setOpenErrorAlert(false);
-  }, []);
 
   const handleCloseLoader = useCallback(() => {
     setOpenLoader(false);
@@ -79,7 +72,10 @@ const DisputeResolutionForm = () => {
         clearForm();
       } catch (error) {
         console.log(error);
-        handleOpenAlert();
+        enqueueSnackbar(
+          "An error occurred while creating dispute. Please try again.",
+          { variant: "error" }
+        );
       } finally {
         handleCloseLoader();
       }
@@ -87,9 +83,9 @@ const DisputeResolutionForm = () => {
     createDisputeAsync();
   }, [
     clearForm,
+    enqueueSnackbar,
     formValues,
     handleCloseLoader,
-    handleOpenAlert,
     handleOpenLoader,
   ]);
 
@@ -136,20 +132,6 @@ const DisputeResolutionForm = () => {
     >
       {!isDisputeCreated && (
         <>
-          <Snackbar
-            open={openErrorAlert}
-            autoHideDuration={6000}
-            onClose={handleCloseAlert}
-            sx={{ alignItems: "center" }}
-          >
-            <Alert
-              onClose={handleCloseAlert}
-              severity="error"
-              sx={{ width: "100%" }}
-            >
-              An error occurred while creating dispute. Please try again.
-            </Alert>
-          </Snackbar>
           <BackdropLoader
             open={openLoader}
             msg={"Please wait while dispute is being created."}
