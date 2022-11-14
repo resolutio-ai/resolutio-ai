@@ -1,20 +1,14 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  Typography,
-} from "@mui/material";
+import { Card, CardActions, CardContent } from "@mui/material";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import DisputeInfomation from "../../components/disputeDetails/DisputeInfomation";
+import DisputeTools from "../../components/disputeDetails/DisputeTools";
 
 import Staking from "../../components/disputeDetails/Staking";
 import Voting from "../../components/disputeDetails/Voting";
 import NotArbiter from "../../components/NotArbiter";
 import RenderOnArbiter from "../../components/RenderOnArbiter";
 import Meta from "../../components/seo/Meta";
-import SmartLink from "../../components/SmartLink";
 import Unauthorized from "../../components/Unauthorized";
 import { CAN_VOTE, CREATED } from "../../constants/constants";
 import { useResolutioBackdropContext } from "../../context/ResolutioBackdropContext";
@@ -183,52 +177,8 @@ const DisputeDetails = () => {
       {isPageViewable && (
         <Card sx={{ my: 4 }}>
           <CardContent>
-            <Box>
-              <Typography
-                variant="h1"
-                sx={{ textAlign: "center" }}
-              >{`Case Id: ${id}`}</Typography>
-              <>
-                <Box>
-                  <Typography variant="h5" sx={{ textAlign: "center" }}>
-                    {dispute.description}
-                  </Typography>
-                  <Typography variant="body1" sx={{ mt: 2 }}>
-                    <strong>Victim:</strong> {dispute.creator}
-                  </Typography>
-                  {dispute.additionalDetails &&
-                    Object.keys(dispute.additionalDetails).map((key) => {
-                      return (
-                        <Typography variant="body1" sx={{ mt: 2 }} key={key}>
-                          <strong>{`${key}: `}</strong>
-                          {dispute.additionalDetails[key]}
-                        </Typography>
-                      );
-                    })}
-                </Box>
-                <Box sx={{ mt: 2 }}>
-                  <SmartLink href={dispute.uri} isExternal={true}>
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      sx={{ mr: 2 }}
-                    >
-                      Evidence
-                    </Button>
-                  </SmartLink>
-                  <RenderOnArbiter>
-                    <SmartLink
-                      href="https://znreza-blockchain-transaction-search-app-4pp5e7.streamlitapp.com/"
-                      isExternal={true}
-                    >
-                      <Button variant="contained" color="secondary">
-                        Arbiter Tools
-                      </Button>
-                    </SmartLink>
-                  </RenderOnArbiter>
-                </Box>
-              </>
-            </Box>
+            <DisputeInfomation dispute={dispute} />
+            <DisputeTools uri={dispute.uri} />
           </CardContent>
           <CardActions sx={{ justifyContent: "center" }}>
             <RenderOnArbiter>
