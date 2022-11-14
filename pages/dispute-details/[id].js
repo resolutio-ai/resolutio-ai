@@ -35,7 +35,7 @@ const DisputeDetails = () => {
     creator: "",
     disputeId: "",
     disputePool: [],
-    selectedArbiters: [],
+    selectedArbiters: {},
     state: 0,
     uri: "",
     winningProposal: 0,
@@ -44,9 +44,28 @@ const DisputeDetails = () => {
 
   const [isVoted, setVoted] = useState(false);
 
+  const isOwnDispute = useMemo(
+    () => dispute.creator === address,
+    [dispute, address]
+  );
+
   const isPageViewable = useMemo(
-    () => isArbiter || dispute.creator === address,
-    [address, dispute, isArbiter]
+    () => isArbiter || isOwnDispute,
+    [isArbiter, isOwnDispute]
+  );
+
+  const canVote = useMemo(
+    () =>
+      dispute.state === CAN_VOTE &&
+      !isOwnDispute &&
+      dispute.selectedArbiters.hasOwnProperty(address) &&
+      dispute.selectedArbiters[address].hasVoted === false,
+    [address, dispute, isOwnDispute]
+  );
+
+  const canStake = useMemo(
+    () => dispute.state === CREATED && !isOwnDispute && !dispute.hasStaked,
+    [dispute, isOwnDispute]
   );
 
   const handleJoinDisputePool = useCallback(() => {
@@ -134,7 +153,7 @@ const DisputeDetails = () => {
           creator,
           disputeId,
           disputePool,
-          selectedArbiters,
+          selectedArbiters: selectedArbitersObject,
           state,
           uri,
           winningProposal,
@@ -204,13 +223,13 @@ const DisputeDetails = () => {
           </CardContent>
           <CardActions sx={{ justifyContent: "center" }}>
             <RenderOnArbiter>
-              {!dispute.hasStaked && dispute.state === CREATED && (
+              {canStake && (
                 <Staking
                   description={dispute.description}
                   handleJoinDisputePool={handleJoinDisputePool}
                 />
               )}
-              {dispute.state === CAN_VOTE && !isVoted && (
+              {canVote && (
                 <Voting
                   handleInvalidate={handleInvalidateDispute}
                   handleValidate={handleValidateDispute}
@@ -220,7 +239,6 @@ const DisputeDetails = () => {
           </CardActions>
         </Card>
       )}
-
       {!isPageViewable && <NotArbiter />}
       <Unauthorized />
     </>
