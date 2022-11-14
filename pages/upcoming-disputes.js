@@ -49,38 +49,32 @@ const UpcomingDisputes = () => {
             winningProposal,
           };
         });
-        Promise.all(
-          mappedDisputes.map((dispute) => fetch(`${dispute.uri}/dispute.json`))
-        )
-          .then(function (responses) {
-            // Get a JSON object from each of the responses
-            return Promise.all(
-              responses.map(function (response) {
-                if (response.status === 200) return response.json();
-                return null;
-              })
-            );
-          })
-          .then(function (disputes) {
-            mappedDisputes.forEach((dispute, index) => {
-              dispute.additionalDetails = disputes[index];
-              dispute.description = disputes[index]?.info;
-            });
-            console.log(mappedDisputes);
-            const upcomingDisputesMapped = mappedDisputes.filter(
-              () => (dispute) => dispute.state == CREATED
-            );
-            const arbiterDisputesMapped = mappedDisputes.filter((dispute) =>
-              dispute.selectedArbiters.includes(address)
-            );
-            setUpComingDisputes(upcomingDisputesMapped);
-            setArbiterDisputes(arbiterDisputesMapped);
-            closeBackdrop();
-          });
+        const upcomingDisputesMapped = mappedDisputes.filter(
+          () => (dispute) => dispute.state == CREATED
+        );
+
+        const allDisputeDetails = await Promise.all(
+          upcomingDisputesMapped.map(
+            async (dispute) =>
+              await (await fetch(`${dispute.uri}/dispute.json`)).json()
+          )
+        );
+        upcomingDisputesMapped.forEach((dispute, index) => {
+          dispute.additionalDetails = allDisputeDetails[index];
+          dispute.description = allDisputeDetails[index]?.info;
+        });
+        console.log(upcomingDisputesMapped);
+        const arbiterDisputesMapped = upcomingDisputesMapped.filter((dispute) =>
+          dispute.selectedArbiters.includes(address)
+        );
+        setUpComingDisputes(upcomingDisputesMapped);
+        setArbiterDisputes(arbiterDisputesMapped);
+        console.log(upcomingDisputesMapped);
+        console.log(arbiterDisputesMapped);
       } catch (error) {
         console.log(error);
       } finally {
-        //closeBackdrop();
+        closeBackdrop();
       }
     };
     asyncGetDisputes();
