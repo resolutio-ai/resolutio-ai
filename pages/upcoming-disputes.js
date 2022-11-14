@@ -23,6 +23,8 @@ const UpcomingDisputes = () => {
       openBackdrop("Hold on, Fetching Arbiter information...");
       try {
         const disputeSystem = new DisputePool();
+
+        // Get all Disputes
         const allDisputes = await disputeSystem.getAllDisputes();
         let mappedDisputes = allDisputes.map((dispute) => {
           const {
@@ -43,33 +45,40 @@ const UpcomingDisputes = () => {
             creator,
             disputeId,
             disputePool,
-            selectedArbiters,
+            selectedArbiters: selectedArbiters.map(
+              (arbiter) => arbiter.arbiter
+            ),
             state,
             uri,
             winningProposal,
           };
         });
-        const upcomingDisputesMapped = mappedDisputes.filter(
-          () => (dispute) => dispute.state == CREATED
-        );
 
+        // Get Aditional Details for the dispute
         const allDisputeDetails = await Promise.all(
-          upcomingDisputesMapped.map(
+          mappedDisputes.map(
             async (dispute) =>
               await (await fetch(`${dispute.uri}/dispute.json`)).json()
           )
         );
-        upcomingDisputesMapped.forEach((dispute, index) => {
+
+        // Mapping the additional details to the dispute
+        mappedDisputes.forEach((dispute, index) => {
           dispute.additionalDetails = allDisputeDetails[index];
           dispute.description = allDisputeDetails[index]?.info;
         });
-        const arbiterDisputesMapped = upcomingDisputesMapped.filter((dispute) =>
+        console.log(
+          "🚀 ~ file: upcoming-disputes.js ~ line 70 ~ mappedDisputes.forEach ~ mappedDisputes",
+          mappedDisputes
+        );
+        const upcomingDisputesMapped = mappedDisputes.filter(
+          (dispute) => dispute.state === CREATED
+        );
+        const arbiterDisputesMapped = mappedDisputes.filter((dispute) =>
           dispute.selectedArbiters.includes(address)
         );
         setUpComingDisputes(upcomingDisputesMapped);
         setArbiterDisputes(arbiterDisputesMapped);
-        console.log(upcomingDisputesMapped);
-        console.log(arbiterDisputesMapped);
       } catch (error) {
         console.log(error);
       } finally {
