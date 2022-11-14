@@ -8,8 +8,9 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import CountDownTimer from "../../components/CountDownTimer";
-import StakingDialog from "../../components/dialogs/StakingDialog";
+
+import Staking from "../../components/disputeDetails/Staking";
+import Voting from "../../components/disputeDetails/Voting";
 import NotArbiter from "../../components/NotArbiter";
 import RenderOnArbiter from "../../components/RenderOnArbiter";
 import Meta from "../../components/seo/Meta";
@@ -40,24 +41,16 @@ const DisputeDetails = () => {
     winningProposal: 0,
     additionalDetails: null,
   });
-  const [isStakingDialogOpen, setStakingDialogOpen] = useState(false);
+
   const [isVoted, setVoted] = useState(false);
 
   const isPageViewable = useMemo(
     () => isArbiter || dispute.creator === address,
     [address, dispute, isArbiter]
   );
-  const handleStakingDialogOpen = useCallback(() => {
-    setStakingDialogOpen(true);
-  }, []);
-
-  const handleStakingDialogClose = useCallback(() => {
-    setStakingDialogOpen(false);
-  }, []);
 
   const handleJoinDisputePool = useCallback(() => {
     const asyncJoinDisputePool = async () => {
-      handleStakingDialogClose();
       if (!id) return;
       openBackdrop("Hold on, Joining Dispute Pool...");
       try {
@@ -66,13 +59,12 @@ const DisputeDetails = () => {
         setDispute((prev) => ({ ...prev, hasStaked: true }));
       } catch (error) {
         console.log(error);
-        handleStakingDialogClose();
       } finally {
         closeBackdrop();
       }
     };
     asyncJoinDisputePool();
-  }, [closeBackdrop, handleStakingDialogClose, id, openBackdrop]);
+  }, [closeBackdrop, id, openBackdrop]);
 
   const handleVoting = useCallback(
     (vote) => {
@@ -123,6 +115,17 @@ const DisputeDetails = () => {
         const details = await (
           await fetch(`${dispute.uri}/dispute.json`)
         ).json();
+        const selectedArbitersObject = selectedArbiters.reduce((prev, curr) => {
+          const { arbiter, hasVoted, decision } = curr;
+          return {
+            ...prev,
+            [arbiter]: {
+              hasVoted,
+              decision,
+            },
+          };
+        }, {});
+        console.log(selectedArbitersObject);
         setDispute({
           description: details.info,
           hasStaked: disputePool.includes(address),
@@ -202,57 +205,22 @@ const DisputeDetails = () => {
           <CardActions sx={{ justifyContent: "center" }}>
             <RenderOnArbiter>
               {!dispute.hasStaked && dispute.state === CREATED && (
-                <Box sx={{ textAlign: "center" }}>
-                  <Typography variant="h5">
-                    Would you like to be an arbiter for this case ?
-                  </Typography>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    sx={{ mt: 2 }}
-                    onClick={handleStakingDialogOpen}
-                  >
-                    Stake
-                  </Button>
-                </Box>
+                <Staking
+                  description={dispute.description}
+                  handleJoinDisputePool={handleJoinDisputePool}
+                />
               )}
               {dispute.state === CAN_VOTE && !isVoted && (
-                <Box>
-                  <Box sx={{ textAlign: "center", mb: 4 }}>
-                    <Typography variant="h1">VOTE</Typography>
-                    <CountDownTimer expiryTimestamp={1656530040208} />
-                    <Box>
-                      <Button
-                        variant="contained"
-                        color="secondary"
-                        sx={{ mr: 4 }}
-                        onClick={handleInvalidateDispute}
-                      >
-                        Invalidate NFT
-                      </Button>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleValidateDispute}
-                      >
-                        Validate NFT
-                      </Button>
-                    </Box>
-                  </Box>
-                </Box>
+                <Voting
+                  handleInvalidate={handleInvalidateDispute}
+                  handleValidate={handleValidateDispute}
+                />
               )}
             </RenderOnArbiter>
           </CardActions>
         </Card>
       )}
-      <RenderOnArbiter>
-        <StakingDialog
-          open={isStakingDialogOpen}
-          onClose={handleStakingDialogClose}
-          onAction={handleJoinDisputePool}
-          description={dispute.description}
-        />
-      </RenderOnArbiter>
+
       {!isPageViewable && <NotArbiter />}
       <Unauthorized />
     </>
