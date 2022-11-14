@@ -18,7 +18,7 @@ const DisputeItem = ({ dispute }) => {
     >
       <CardContent>
         <Typography variant="h5" gutterBottom>
-          {`Dispute ${dispute.disputeId._hex}`}
+          {`Dispute ${dispute.disputeId}`}
         </Typography>
         <Typography component="div">{dispute.description}</Typography>
       </CardContent>
