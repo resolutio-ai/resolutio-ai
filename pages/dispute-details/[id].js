@@ -42,8 +42,6 @@ const DisputeDetails = () => {
     additionalDetails: null,
   });
 
-  const [isVoted, setVoted] = useState(false);
-
   const isOwnDispute = useMemo(
     () => dispute.creator === address,
     [dispute, address]

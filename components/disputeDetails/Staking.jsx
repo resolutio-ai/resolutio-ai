@@ -1,6 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import { useCallback, useState } from "react";
-import StakingDialog from "../dialogs/StakingDialog";
+import StakingDialog from "./StakingDialog";
 
 const Staking = ({ description, handleJoinDisputePool }) => {
   const [isStakingDialogOpen, setStakingDialogOpen] = useState(false);
