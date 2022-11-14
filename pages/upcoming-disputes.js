@@ -63,7 +63,6 @@ const UpcomingDisputes = () => {
           dispute.additionalDetails = allDisputeDetails[index];
           dispute.description = allDisputeDetails[index]?.info;
         });
-        console.log(upcomingDisputesMapped);
         const arbiterDisputesMapped = upcomingDisputesMapped.filter((dispute) =>
           dispute.selectedArbiters.includes(address)
         );
