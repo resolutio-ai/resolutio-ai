@@ -93,7 +93,18 @@ const DisputeDetails = () => {
         try {
           const disputeSystem = new DisputePool();
           await disputeSystem.vote(vote, id);
-          setVoted(true);
+          setDispute((prev) => {
+            return {
+              ...prev,
+              selectedArbiters: {
+                ...prev.selectedArbiters,
+                [address]: {
+                  decision: vote,
+                  hasVoted: true,
+                },
+              },
+            };
+          });
         } catch (error) {
           console.log(error);
         } finally {
@@ -102,7 +113,7 @@ const DisputeDetails = () => {
       };
       votingAsync();
     },
-    [closeBackdrop, id, openBackdrop]
+    [address, closeBackdrop, id, openBackdrop]
   );
 
   const handleValidateDispute = useCallback(() => {
