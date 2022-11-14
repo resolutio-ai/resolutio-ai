@@ -47,31 +47,23 @@ const Profile = () => {
             winningProposal,
           };
         });
-        Promise.all(
-          mappedDisputes.map((dispute) => fetch(`${dispute.uri}/dispute.json`))
-        )
-          .then(function (responses) {
-            // Get a JSON object from each of the responses
-            return Promise.all(
-              responses.map(function (response) {
-                if (response.status === 200) return response.json();
-                return null;
-              })
-            );
-          })
-          .then(function (allDisputeDetails) {
-            mappedDisputes.forEach((dispute, index) => {
-              dispute.additionalDetails = allDisputeDetails[index];
-              dispute.description = allDisputeDetails[index]?.info;
-            });
-            console.log(mappedDisputes);
-            setCreatedDisputes(mappedDisputes);
-            closeBackdrop();
-          });
+
+        const allDisputeDetails = await Promise.all(
+          mappedDisputes.map(
+            async (dispute) =>
+              await (await fetch(`${dispute.uri}/dispute.json`)).json()
+          )
+        );
+        mappedDisputes.forEach((dispute, index) => {
+          dispute.additionalDetails = allDisputeDetails[index];
+          dispute.description = allDisputeDetails[index]?.info;
+        });
+        setCreatedDisputes(mappedDisputes);
+        console.log(mappedDisputes);
       } catch (error) {
         console.log(error);
       } finally {
-        //closeBackdrop();
+        closeBackdrop();
       }
     };
     asyncGetMyDisputes();
