@@ -1,7 +1,16 @@
 import { Box, Button, Typography } from "@mui/material";
 /* import CountDownTimer from "../../components/CountDownTimer"; */
+import { useCallback } from "react";
 
-const Voting = ({ handleInvalidate, handleValidate }) => {
+const Voting = ({ handleVoting }) => {
+  const handleValidate = useCallback(() => {
+    handleVoting(1);
+  }, [handleVoting]);
+
+  const handleInvalidate = useCallback(() => {
+    handleVoting(2);
+  }, [handleVoting]);
+
   return (
     <Box>
       <Box sx={{ textAlign: "center", mb: 4 }}>

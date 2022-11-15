@@ -113,14 +113,6 @@ const DisputeDetails = () => {
     [address, closeBackdrop, id, openBackdrop]
   );
 
-  const handleValidateDispute = useCallback(() => {
-    handleVoting(1);
-  }, [handleVoting]);
-
-  const handleInvalidateDispute = useCallback(() => {
-    handleVoting(2);
-  }, [handleVoting]);
-
   useEffect(() => {
     const asyncGetDisputeById = async () => {
       if (!id) return;
@@ -199,12 +191,7 @@ const DisputeDetails = () => {
                   handleJoinDisputePool={handleJoinDisputePool}
                 />
               )}
-              {canVote && (
-                <Voting
-                  handleInvalidate={handleInvalidateDispute}
-                  handleValidate={handleValidateDispute}
-                />
-              )}
+              {canVote && <Voting handleVoting={handleVoting} />}
             </RenderOnArbiter>
           </CardActions>
         </Card>
