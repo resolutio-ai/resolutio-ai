@@ -9,6 +9,7 @@ import { CREATED } from "../constants/constants";
 import { useResolutioBackdropContext } from "../context/ResolutioBackdropContext";
 import { useResolutioContext } from "../context/ResolutioContext";
 import DisputePool from "../integrations/DisputePool";
+
 const UpcomingDisputes = () => {
   const { address } = useResolutioContext();
   const { openBackdrop, closeBackdrop } = useResolutioBackdropContext();
@@ -24,7 +25,7 @@ const UpcomingDisputes = () => {
       try {
         const disputeSystem = new DisputePool();
 
-        // Get all Disputes
+        // Get all Disputes from the Blockchain
         const allDisputes = await disputeSystem.getAllDisputes();
         let mappedDisputes = allDisputes.map((dispute) => {
           const {
@@ -54,7 +55,7 @@ const UpcomingDisputes = () => {
           };
         });
 
-        // Get Aditional Details for the dispute
+        // Get Aditional Details for the dispute from IPFS
         const allDisputeDetails = await Promise.all(
           mappedDisputes.map(
             async (dispute) =>
@@ -67,13 +68,19 @@ const UpcomingDisputes = () => {
           dispute.additionalDetails = allDisputeDetails[index];
           dispute.description = allDisputeDetails[index]?.info;
         });
+
+        // TODO: Remove this after testing
         console.log(
           "🚀 ~ file: upcoming-disputes.js ~ line 70 ~ mappedDisputes.forEach ~ mappedDisputes",
           mappedDisputes
         );
+
+        // Filter the disputes based on state(CREATED === Upcoming)
         const upcomingDisputesMapped = mappedDisputes.filter(
           (dispute) => dispute.state === CREATED
         );
+
+        // Filter the disputes based on arbiter is selected for decision making
         const arbiterDisputesMapped = mappedDisputes.filter((dispute) =>
           dispute.selectedArbiters.includes(address)
         );
@@ -81,6 +88,7 @@ const UpcomingDisputes = () => {
         setArbiterDisputes(arbiterDisputesMapped);
       } catch (error) {
         console.log(error);
+        // TODO: Hndle error for neagtive cases
       } finally {
         closeBackdrop();
       }

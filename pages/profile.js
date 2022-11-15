@@ -21,6 +21,8 @@ const Profile = () => {
       openBackdrop("Hold on, Fetching your profile data...");
       try {
         const disputeSystem = new DisputePool();
+
+        // Get the user disputes from the Blockchain
         const disputes = await disputeSystem.getMyCreatedDisputes(address);
         let mappedDisputes = disputes.map((dispute) => {
           const {
@@ -48,24 +50,31 @@ const Profile = () => {
           };
         });
 
+        // Get other details of the dispute from IPFS
         const allDisputeDetails = await Promise.all(
           mappedDisputes.map(
             async (dispute) =>
               await (await fetch(`${dispute.uri}/dispute.json`)).json()
           )
         );
+
+        // Merge the dispute details with the dispute object
         mappedDisputes.forEach((dispute, index) => {
           dispute.additionalDetails = allDisputeDetails[index];
           dispute.description = allDisputeDetails[index]?.info;
         });
         setCreatedDisputes(mappedDisputes);
+
+        // TODO: Remove console.log after testing
         console.log(mappedDisputes);
       } catch (error) {
         console.log(error);
+        // TODO: Handle neagtive cases in the future
       } finally {
         closeBackdrop();
       }
     };
+    // Loading the user's disputes
     asyncGetMyDisputes();
   }, [address, closeBackdrop, openBackdrop]);
 
