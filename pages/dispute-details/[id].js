@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import DisputeInfomation from "../../components/disputeDetails/DisputeInfomation";
 import DisputeTools from "../../components/disputeDetails/DisputeTools";
-
 import Staking from "../../components/disputeDetails/Staking";
 import Voting from "../../components/disputeDetails/Voting";
 import NotArbiter from "../../components/NotArbiter";
@@ -20,6 +19,7 @@ const DisputeDetails = () => {
   const { address, isArbiter } = useResolutioContext();
   const { openBackdrop, closeBackdrop } = useResolutioBackdropContext();
   const { id } = router.query;
+  // Initail State
   const [dispute, setDispute] = useState({
     title: "",
     description: "",
@@ -36,6 +36,7 @@ const DisputeDetails = () => {
     additionalDetails: null,
   });
 
+  // Is the dispute created by the current user?
   const isOwnDispute = useMemo(
     () => dispute.creator === address,
     [dispute, address]
@@ -46,6 +47,7 @@ const DisputeDetails = () => {
     [isArbiter, isOwnDispute]
   );
 
+  // Check if an arbiter can vote
   const canVote = useMemo(
     () =>
       dispute.state === CAN_VOTE &&
@@ -55,11 +57,13 @@ const DisputeDetails = () => {
     [address, dispute, isOwnDispute]
   );
 
+  // Check if an arbiter can stake
   const canStake = useMemo(
     () => dispute.state === CREATED && !isOwnDispute && !dispute.hasStaked,
     [dispute, isOwnDispute]
   );
 
+  // Handle joining a dispute Pool
   const handleJoinDisputePool = useCallback(() => {
     const asyncJoinDisputePool = async () => {
       if (!id) return;
@@ -77,6 +81,7 @@ const DisputeDetails = () => {
     asyncJoinDisputePool();
   }, [closeBackdrop, id, openBackdrop]);
 
+  // Handle Voting
   const handleVoting = useCallback(
     (vote) => {
       const votingAsync = async () => {
@@ -122,6 +127,7 @@ const DisputeDetails = () => {
       openBackdrop("Hold on, we are fetching the dispute details...");
       try {
         const disputeSystem = new DisputePool();
+        // Get Dispute information from blockchain
         const dispute = await disputeSystem.getDisputeById(id);
         const {
           arbiterCount,
@@ -134,9 +140,13 @@ const DisputeDetails = () => {
           uri,
           winningProposal,
         } = dispute;
-        const details = await (
+
+        // Get dispute information from IPFS
+        const additionalDetails = await (
           await fetch(`${dispute.uri}/dispute.json`)
         ).json();
+
+        // Reduce the selected arbiter object to an efficient DS
         const selectedArbitersObject = selectedArbiters.reduce((prev, curr) => {
           const { arbiter, hasVoted, decision } = curr;
           return {
@@ -147,9 +157,9 @@ const DisputeDetails = () => {
             },
           };
         }, {});
-        console.log(selectedArbitersObject);
+
         setDispute({
-          description: details.info,
+          description: additionalDetails.info,
           hasStaked: disputePool.includes(address),
           arbiterCount,
           createdAt,
@@ -160,10 +170,11 @@ const DisputeDetails = () => {
           state,
           uri,
           winningProposal,
-          additionalDetails: details,
+          additionalDetails,
         });
       } catch (error) {
         console.log(error);
+        // TODO: Handle error for edge cases in future
       } finally {
         closeBackdrop();
       }
