@@ -3,7 +3,7 @@ import { ethers } from "ethers";
 import { useSnackbar } from "notistack";
 import { useCallback, useEffect, useReducer } from "react";
 import Web3Modal from "web3modal";
-import ArbiterNFT from "../integrations/VerifyArbiter";
+import ArbiterNFT from "../integrations/ArbiterNFT";
 
 import {
   resolutioInitialState,
