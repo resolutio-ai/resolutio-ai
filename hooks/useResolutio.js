@@ -3,7 +3,7 @@ import { ethers } from "ethers";
 import { useSnackbar } from "notistack";
 import { useCallback, useEffect, useReducer } from "react";
 import Web3Modal from "web3modal";
-import { verifyArbiter } from "../integrations/VerifyArbiter";
+import ArbiterNFT from "../integrations/VerifyArbiter";
 
 import {
   resolutioInitialState,
@@ -45,7 +45,8 @@ export const useResolutio = () => {
         const network = await web3Provider.getNetwork();
         let isArbiter;
         try {
-          isArbiter = await verifyArbiter(address);
+          const arbiterNFT = new ArbiterNFT();
+          isArbiter = await arbiterNFT.verifyUser(address);
         } catch (error) {
           console.log(error);
           // Toast for incorrect network
@@ -109,7 +110,8 @@ export const useResolutio = () => {
 
         let isArbiter;
         try {
-          isArbiter = await verifyArbiter(accounts[0]);
+          const arbiterNFT = new ArbiterNFT();
+          isArbiter = await arbiterNFT.verifyUser(accounts[0]);
         } catch (error) {
           console.log(error);
           isArbiter = false;
