@@ -1,6 +1,8 @@
 import { Card, CardActions, CardContent } from "@mui/material";
 import { useRouter } from "next/router";
+import { useSnackbar } from "notistack";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import AdminDecision from "../../components/disputeDetails/AdminDecision";
 import DisputeInfomation from "../../components/disputeDetails/DisputeInfomation";
 import DisputeTools from "../../components/disputeDetails/DisputeTools";
 import Staking from "../../components/disputeDetails/Staking";
@@ -12,11 +14,14 @@ import Unauthorized from "../../components/Unauthorized";
 import { CAN_VOTE, CREATED } from "../../constants/constants";
 import { useResolutioBackdropContext } from "../../context/ResolutioBackdropContext";
 import { useResolutioContext } from "../../context/ResolutioContext";
+import DisputeNFT from "../../integrations/DisputeNFT";
 import DisputePool from "../../integrations/DisputePool";
 
 const DisputeDetails = () => {
+
+  const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
-  const { address, isArbiter } = useResolutioContext();
+  const { address, isArbiter, isAdmin } = useResolutioContext();
   const { openBackdrop, closeBackdrop } = useResolutioBackdropContext();
   const { id } = router.query;
   // Initail State
@@ -46,6 +51,17 @@ const DisputeDetails = () => {
     () => isArbiter || isOwnDispute,
     [isArbiter, isOwnDispute]
   );
+
+  // Check if an admin can decide
+  // ToDo: Add condition
+  const canDecide = useMemo(
+    () => isAdmin
+  );
+  //   isAdmin &&
+  //   !isOwnDispute &&
+  //   dispute.selectedArbiters.hasOwnProperty(address) &&
+  //   dispute.selectedArbiters[address].hasVoted === false,
+  // [address, dispute, isOwnDispute, isAdmin]
 
   // Check if an arbiter can vote
   const canVote = useMemo(
@@ -113,6 +129,30 @@ const DisputeDetails = () => {
     [address, closeBackdrop, id, openBackdrop]
   );
 
+  // Handle Admin Voting
+  const handleDecision = useCallback(
+    (mintAmount) => {
+      const votingAsync = async () => {
+        if (!id) return;
+        openBackdrop("Hold on, Decision is being minted...");
+        console.log(mintAmount);
+        console.log('params', id, mintAmount, dispute.uri);
+        try {
+          const disputeDecision = new DisputeNFT();
+          const data = await disputeDecision.mintToken(id, mintAmount, dispute.uri);
+          console.log(data);
+        } catch (error) {
+          enqueueSnackbar("Could not mint", { variant: "error" });
+          console.log(error);
+        } finally {
+          closeBackdrop();
+        }
+      };
+      votingAsync();
+    },
+    [address, closeBackdrop, id, openBackdrop]
+  );
+
   useEffect(() => {
     const asyncGetDisputeById = async () => {
       if (!id) return;
@@ -121,6 +161,7 @@ const DisputeDetails = () => {
         const disputeSystem = new DisputePool();
         // Get Dispute information from blockchain
         const dispute = await disputeSystem.getDisputeById(id);
+        console.log(dispute, dispute.disputeId);
         const {
           arbiterCount,
           createdAt,
@@ -192,6 +233,7 @@ const DisputeDetails = () => {
                 />
               )}
               {canVote && <Voting handleVoting={handleVoting} />}
+              {canDecide && <AdminDecision handleDecision={handleDecision} />}
             </RenderOnArbiter>
           </CardActions>
         </Card>

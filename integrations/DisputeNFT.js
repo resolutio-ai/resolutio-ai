@@ -6,7 +6,7 @@ import {
 
 import DecisionNFT from "../contracts/DecisionNFT/DecisionNft.json";
 
-class DisputePool {
+class DisputeNFT {
   _decisionNFTAddress = DECISION_NFT_CONTRACT_ADDR;
 
   async _createDecisionNFTContractInstance() {
@@ -50,3 +50,5 @@ class DisputePool {
     return response;
   }
 }
+
+export default DisputeNFT;
