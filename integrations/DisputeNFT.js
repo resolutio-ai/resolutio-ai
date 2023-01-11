@@ -22,7 +22,7 @@ class DisputeNFT {
     const signer = provider.getSigner();
 
     //contract initialization: create and return an instance of the contract
-    return new ethers.Contract(this._disputeSystemAddress, DecisionNFT, signer);
+    return new ethers.Contract(this._decisionNFTAddress, DecisionNFT, signer);
   }
 
   //Create a dispute
@@ -30,7 +30,7 @@ class DisputeNFT {
    
     //Initialize
     const contract = await this._createDecisionNFTContractInstance();
-
+    console.log('contract',contract);
     const mintTokenTx = await contract.mintToken(disputeId, amountToBeMinted, uri);
     const response = await mintTokenTx.wait();
     return response;

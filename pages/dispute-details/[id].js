@@ -136,10 +136,14 @@ const DisputeDetails = () => {
         if (!id) return;
         openBackdrop("Hold on, Decision is being minted...");
         console.log(mintAmount);
-        console.log('params', id, mintAmount, dispute.uri);
+        const disputeID = Number(id);
+        console.log('params', disputeID, mintAmount, dispute.uri);
         try {
+
+          const disputeSystem = new DisputePool();
+          disputeSystem.endVoting();
           const disputeDecision = new DisputeNFT();
-          const data = await disputeDecision.mintToken(id, mintAmount, dispute.uri);
+          const data = await disputeDecision.mintToken(disputeID, mintAmount, dispute.uri);
           console.log(data);
         } catch (error) {
           enqueueSnackbar("Could not mint", { variant: "error" });
