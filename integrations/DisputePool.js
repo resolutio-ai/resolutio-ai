@@ -58,6 +58,12 @@ class DisputePool {
 
   _getStake = async () => ethers.utils.parseUnits(STAKE, "ether");
 
+  //Get Current Admin
+  async getAdmin(){
+     const contract = await this._createDisputeSystemContractInstance();
+     return await contract.owner();
+  }
+
   //Create a dispute
   async createDispute(uri) {
     const price = this._getStake();
