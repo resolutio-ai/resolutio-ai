@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import AdminDecision from "../../components/disputeDetails/AdminDecision";
+import AdminTools from "../../components/disputeDetails/AdminTools";
 import DisputeInfomation from "../../components/disputeDetails/DisputeInfomation";
 import DisputeTools from "../../components/disputeDetails/DisputeTools";
 import Staking from "../../components/disputeDetails/Staking";
@@ -237,8 +238,12 @@ const DisputeDetails = () => {
                 />
               )}
               {canVote && <Voting handleVoting={handleVoting} />}
-              {canDecide && <AdminDecision handleDecision={handleDecision} />}
             </RenderOnArbiter>
+          </CardActions>
+          <CardActions sx={{ justifyContent: "left" }}>
+            {true && <h4>Admin Tools</h4>}
+            <AdminTools id={id}/>
+            {canDecide && <AdminDecision handleDecision={handleDecision} />}
           </CardActions>
         </Card>
       )}
