@@ -4,6 +4,7 @@ import { useSnackbar } from "notistack";
 import { useCallback, useEffect, useReducer } from "react";
 import Web3Modal from "web3modal";
 import ArbiterNFT from "../integrations/ArbiterNFT";
+import DisputePool from "../integrations/DisputePool";
 
 import {
   resolutioInitialState,
@@ -59,6 +60,13 @@ export const useResolutio = () => {
         let isAdmin;
         // ToDo: Set admin from NFT or account
         try {
+          const disputeSystem = new DisputePool();
+
+          const adminAddr = await disputeSystem.getAdmin();
+          console.log('admin', adminAddr, address);
+          if(adminAddr === address){
+            console.log('Current user is admin');
+          }
           isAdmin = true;
         } catch (error) {
           console.log(error);
