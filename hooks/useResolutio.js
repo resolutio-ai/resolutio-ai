@@ -64,10 +64,12 @@ export const useResolutio = () => {
 
           const adminAddr = await disputeSystem.getAdmin();
           console.log('admin', adminAddr, address);
-          if(adminAddr === address){
+          if (adminAddr === address) {
             console.log('Current user is admin');
+            isAdmin = true;
+          } else {
+            isAdmin = false;
           }
-          isAdmin = true;
         } catch (error) {
           console.log(error);
           isAdmin = false;
