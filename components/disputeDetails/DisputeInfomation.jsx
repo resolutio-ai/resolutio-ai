@@ -43,7 +43,7 @@ const DisputeInfomation = ({ dispute }) => {
   );
 
   return (
-    <Box>
+    <Box sx={{ marginRight: '5rem' }}>
       <Typography
         variant="h1"
         sx={{ textAlign: "center" }}

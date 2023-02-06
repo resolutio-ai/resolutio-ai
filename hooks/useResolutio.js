@@ -4,6 +4,7 @@ import { useSnackbar } from "notistack";
 import { useCallback, useEffect, useReducer } from "react";
 import Web3Modal from "web3modal";
 import ArbiterNFT from "../integrations/ArbiterNFT";
+import DisputePool from "../integrations/DisputePool";
 
 import {
   resolutioInitialState,
@@ -32,7 +33,7 @@ if (typeof window !== "undefined") {
 export const useResolutio = () => {
   const { enqueueSnackbar } = useSnackbar();
   const [state, dispatch] = useReducer(resolutioReducer, resolutioInitialState);
-  const { provider, web3Provider, address, network, isLoggedIn, isArbiter } =
+  const { provider, web3Provider, address, network, isLoggedIn, isArbiter, isAdmin } =
     state;
 
   const connect = useCallback(async () => {
@@ -56,6 +57,24 @@ export const useResolutio = () => {
           isArbiter = false;
         }
 
+        let isAdmin;
+        // ToDo: Set admin from NFT or account
+        try {
+          const disputeSystem = new DisputePool();
+
+          const adminAddr = await disputeSystem.getAdmin();
+          console.log('admin', adminAddr, address);
+          if (adminAddr === address) {
+            console.log('Current user is admin');
+            isAdmin = true;
+          } else {
+            isAdmin = false;
+          }
+        } catch (error) {
+          console.log(error);
+          isAdmin = false;
+        }
+
         // Toast for wallet connected
         enqueueSnackbar("Connected to Web3 Wallet", { variant: "success" });
 
@@ -67,6 +86,7 @@ export const useResolutio = () => {
           network,
           isLoggedIn: true,
           isArbiter,
+          isAdmin
         });
       } catch (e) {
         console.log("connect error", e);
@@ -117,6 +137,15 @@ export const useResolutio = () => {
           isArbiter = false;
         }
 
+        let isAdmin;
+        // ToDo: Set admin from NFT or account
+        try {
+          isAdmin = true;
+        } catch (error) {
+          console.log(error);
+          isAdmin = false;
+        }
+
         dispatch({
           type: "SET_ADDRESS",
           address: accounts[0],
@@ -124,6 +153,11 @@ export const useResolutio = () => {
         dispatch({
           type: "SET_ISARBITER",
           isArbiter,
+        });
+        console.log('disp admin');
+        dispatch({
+          type: "SET_ISADMIN",
+          isAdmin,
         });
       };
 
@@ -169,5 +203,6 @@ export const useResolutio = () => {
     disconnect,
     isLoggedIn,
     isArbiter,
+    isAdmin
   };
 };

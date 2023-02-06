@@ -1,6 +1,10 @@
-import { Card, CardActions, CardContent } from "@mui/material";
+import { HuddleIframe } from "@huddle01/huddle01-iframe";
+import { Box, Card, CardActions, CardContent } from "@mui/material";
 import { useRouter } from "next/router";
+import { useSnackbar } from "notistack";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import AdminDecision from "../../components/disputeDetails/AdminDecision";
+import AdminTools from "../../components/disputeDetails/adminTools/AdminTools";
 import DisputeInfomation from "../../components/disputeDetails/DisputeInfomation";
 import DisputeTools from "../../components/disputeDetails/DisputeTools";
 import Staking from "../../components/disputeDetails/Staking";
@@ -12,11 +16,14 @@ import Unauthorized from "../../components/Unauthorized";
 import { CAN_VOTE, CREATED } from "../../constants/constants";
 import { useResolutioBackdropContext } from "../../context/ResolutioBackdropContext";
 import { useResolutioContext } from "../../context/ResolutioContext";
+import DisputeNFT from "../../integrations/DisputeNFT";
 import DisputePool from "../../integrations/DisputePool";
 
 const DisputeDetails = () => {
+
+  const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
-  const { address, isArbiter } = useResolutioContext();
+  const { address, isArbiter, isAdmin } = useResolutioContext();
   const { openBackdrop, closeBackdrop } = useResolutioBackdropContext();
   const { id } = router.query;
   // Initail State
@@ -46,6 +53,17 @@ const DisputeDetails = () => {
     () => isArbiter || isOwnDispute,
     [isArbiter, isOwnDispute]
   );
+
+  // Check if an admin can decide
+  // ToDo: Add condition
+  const canDecide = useMemo(
+    () => isAdmin
+  );
+  //   isAdmin &&
+  //   !isOwnDispute &&
+  //   dispute.selectedArbiters.hasOwnProperty(address) &&
+  //   dispute.selectedArbiters[address].hasVoted === false,
+  // [address, dispute, isOwnDispute, isAdmin]
 
   // Check if an arbiter can vote
   const canVote = useMemo(
@@ -113,6 +131,34 @@ const DisputeDetails = () => {
     [address, closeBackdrop, id, openBackdrop]
   );
 
+  // Handle Admin Voting
+  const handleDecision = useCallback(
+    (mintAmount) => {
+      const votingAsync = async () => {
+        if (!id) return;
+        openBackdrop("Hold on, Decision is being minted...");
+        console.log(mintAmount);
+        const disputeID = Number(id);
+        console.log('params', disputeID, mintAmount, dispute.uri);
+        try {
+
+          const disputeSystem = new DisputePool();
+          disputeSystem.endVoting();
+          const disputeDecision = new DisputeNFT();
+          const data = await disputeDecision.mintToken(disputeID, mintAmount, dispute.uri);
+          console.log(data);
+        } catch (error) {
+          enqueueSnackbar("Could not mint", { variant: "error" });
+          console.log(error);
+        } finally {
+          closeBackdrop();
+        }
+      };
+      votingAsync();
+    },
+    [address, closeBackdrop, id, openBackdrop]
+  );
+
   useEffect(() => {
     const asyncGetDisputeById = async () => {
       if (!id) return;
@@ -121,6 +167,7 @@ const DisputeDetails = () => {
         const disputeSystem = new DisputePool();
         // Get Dispute information from blockchain
         const dispute = await disputeSystem.getDisputeById(id);
+        console.log(dispute, dispute.disputeId);
         const {
           arbiterCount,
           createdAt,
@@ -174,13 +221,28 @@ const DisputeDetails = () => {
     asyncGetDisputeById();
   }, [address, closeBackdrop, id, openBackdrop]);
 
+  const iframeConfig = {
+    roomUrl: "https://iframe.huddle01.com/123",
+    height: "800px",
+    width: "80%",
+    noBorder: true, // false by default
+  };
+
   return (
     <>
       <Meta title="Dispute Details" />
       {isPageViewable && (
         <Card sx={{ my: 4 }}>
           <CardContent>
-            <DisputeInfomation dispute={dispute} />
+            <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+              <DisputeInfomation dispute={dispute} />
+              {isAdmin && (
+                <Box>
+                  <h4>Admin Tools</h4>
+                  <AdminTools id={id} />
+                </Box>
+              )}
+            </Box>
             <DisputeTools uri={dispute.uri} />
           </CardContent>
           <CardActions sx={{ justifyContent: "center" }}>
@@ -193,6 +255,13 @@ const DisputeDetails = () => {
               )}
               {canVote && <Voting handleVoting={handleVoting} />}
             </RenderOnArbiter>
+          </CardActions>
+          <CardActions sx={{ display: "flex", flexDirection: 'column', justifyContent: "left" }}>
+
+            {/* {canDecide && <AdminDecision handleDecision={handleDecision} />} */}
+          </CardActions>
+          <CardActions>
+            <HuddleIframe config={iframeConfig} />
           </CardActions>
         </Card>
       )}

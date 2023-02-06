@@ -5,6 +5,7 @@ export const resolutioInitialState = {
   network: null,
   isLoggedIn: false,
   isArbiter: false,
+  isAdmin: false,
 };
 
 export const resolutioReducer = (state, action) => {
@@ -18,6 +19,7 @@ export const resolutioReducer = (state, action) => {
         network: action.network,
         isLoggedIn: action.isLoggedIn,
         isArbiter: action.isArbiter,
+        isAdmin: action.isAdmin,
       };
     case "SET_ADDRESS":
       return {
@@ -38,6 +40,11 @@ export const resolutioReducer = (state, action) => {
       return {
         ...state,
         isArbiter: action.isArbiter,
+      };
+    case "SET_ISADMIN":
+      return {
+        ...state,
+        isAdmin: action.isAdmin,
       };
     case "RESET_WEB3_PROVIDER":
       return resolutioInitialState;
