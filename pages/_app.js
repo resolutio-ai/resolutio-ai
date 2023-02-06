@@ -15,12 +15,18 @@ import "../styles/globals.css";
 import resolutioTheme from "../styles/theme/resolutioTheme";
 import createEmotionCache from "../utility/createEmotionCache";
 
+// Huddle
+import { HuddleClientProvider, getHuddleClient } from '@huddle01/huddle01-client';
+import { HUDDLE_KEY } from "../config";
+
 const clientSideEmotionCache = createEmotionCache();
 NProgress.configure({ showSpinner: false });
 
 const MyApp = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
+  const huddleClient = getHuddleClient(HUDDLE_KEY)
+  
   useEffect(() => {
     Router.events.on("routeChangeStart", () => NProgress.start());
     Router.events.on("routeChangeComplete", () => NProgress.done());
@@ -33,22 +39,24 @@ const MyApp = (props) => {
   }, []);
 
   return (
-    <NotistackWrapper>
-      <ResolutioContextProvider>
-        <ResolutioBackdropContextProvider>
-          <CacheProvider value={emotionCache}>
-            <ThemeProvider theme={resolutioTheme}>
-              <CssBaseline />
-              <LoadingBackdrop />
-              <Layout>
-                <NextNProgress color={primaryMain} />
-                <Component {...pageProps} />
-              </Layout>
-            </ThemeProvider>
-          </CacheProvider>
-        </ResolutioBackdropContextProvider>
-      </ResolutioContextProvider>
-    </NotistackWrapper>
+    <HuddleClientProvider client={huddleClient} >
+      <NotistackWrapper>
+        <ResolutioContextProvider>
+          <ResolutioBackdropContextProvider>
+            <CacheProvider value={emotionCache}>
+              <ThemeProvider theme={resolutioTheme}>
+                <CssBaseline />
+                <LoadingBackdrop />
+                <Layout>
+                  <NextNProgress color={primaryMain} />
+                  <Component {...pageProps} />
+                </Layout>
+              </ThemeProvider>
+            </CacheProvider>
+          </ResolutioBackdropContextProvider>
+        </ResolutioContextProvider>
+      </NotistackWrapper>
+    </HuddleClientProvider>
   );
 };
 

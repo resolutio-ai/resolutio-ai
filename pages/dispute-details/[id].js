@@ -1,9 +1,10 @@
-import { Card, CardActions, CardContent } from "@mui/material";
+import { HuddleIframe } from "@huddle01/huddle01-iframe";
+import { Box, Card, CardActions, CardContent } from "@mui/material";
 import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import AdminDecision from "../../components/disputeDetails/AdminDecision";
-import AdminTools from "../../components/disputeDetails/AdminTools";
+import AdminTools from "../../components/disputeDetails/adminTools/AdminTools";
 import DisputeInfomation from "../../components/disputeDetails/DisputeInfomation";
 import DisputeTools from "../../components/disputeDetails/DisputeTools";
 import Staking from "../../components/disputeDetails/Staking";
@@ -220,13 +221,28 @@ const DisputeDetails = () => {
     asyncGetDisputeById();
   }, [address, closeBackdrop, id, openBackdrop]);
 
+  const iframeConfig = {
+    roomUrl: "https://iframe.huddle01.com/123",
+    height: "800px",
+    width: "80%",
+    noBorder: true, // false by default
+  };
+
   return (
     <>
       <Meta title="Dispute Details" />
       {isPageViewable && (
         <Card sx={{ my: 4 }}>
           <CardContent>
-            <DisputeInfomation dispute={dispute} />
+            <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+              <DisputeInfomation dispute={dispute} />
+              {isAdmin && (
+                <Box>
+                  <h4>Admin Tools</h4>
+                  <AdminTools id={id} />
+                </Box>
+              )}
+            </Box>
             <DisputeTools uri={dispute.uri} />
           </CardContent>
           <CardActions sx={{ justifyContent: "center" }}>
@@ -240,10 +256,12 @@ const DisputeDetails = () => {
               {canVote && <Voting handleVoting={handleVoting} />}
             </RenderOnArbiter>
           </CardActions>
-          <CardActions sx={{ justifyContent: "left" }}>
-            {true && <h4>Admin Tools</h4>}
-            <AdminTools id={id}/>
-            {canDecide && <AdminDecision handleDecision={handleDecision} />}
+          <CardActions sx={{ display: "flex", flexDirection: 'column', justifyContent: "left" }}>
+
+            {/* {canDecide && <AdminDecision handleDecision={handleDecision} />} */}
+          </CardActions>
+          <CardActions>
+            <HuddleIframe config={iframeConfig} />
           </CardActions>
         </Card>
       )}

@@ -17,6 +17,17 @@ const InitiateDispute = () => {
             Initiate Dispute
           </Button>
         </Link>
+        <br></br>
+        <br></br>
+        <Typography variant="h5">Apply to become an arbiter</Typography>
+        <Typography variant="body1">
+          Adjudicate disputes, Restore justice, and Earn rewards!
+        </Typography>
+        <Link href="/arbiter-details" passHref>
+          <Button variant="outlined" sx={{ mt: "1rem" }}>
+            Become Arbitar
+          </Button>
+        </Link>
       </Box>
     </RenderOnAuthenticated>
   );

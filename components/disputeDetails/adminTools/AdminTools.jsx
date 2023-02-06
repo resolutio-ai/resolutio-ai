@@ -1,10 +1,11 @@
 import { Box, Button, Typography } from "@mui/material";
 import { useSnackbar } from "notistack";
 import { useCallback } from "react";
-import { useResolutioBackdropContext } from "../../context/ResolutioBackdropContext";
-import DisputeNFT from "../../integrations/DisputeNFT";
+import { useResolutioBackdropContext } from "../../../context/ResolutioBackdropContext";
+import DisputeNFT from "../../../integrations/DisputeNFT";
 
-import DisputePool from "../../integrations/DisputePool";
+import DisputePool from "../../../integrations/DisputePool";
+import DisputeStatusStepper from "./DisputeStatusStepper";
 
 const AdminTools = (data) => {
 
@@ -27,7 +28,7 @@ const AdminTools = (data) => {
         openBackdrop("Hold on, Dispute state is being changed...");
         try {
           const disputeSystem = new DisputePool();
-          const dispute = await disputeSystem.getDisputeById(id, '1');
+          const dispute = await disputeSystem.changeDisputeState(disputeID, '1');
           // ToDo club all function to 1
           // switch (action) {
           //   case value:
@@ -60,7 +61,7 @@ const AdminTools = (data) => {
         openBackdrop("Hold on, Voting stage is being closed...");
         try {
           const disputeSystem = new DisputePool();
-          const dispute = await disputeSystem.endVoting(id);
+          const dispute = await disputeSystem.endVoting(disputeID);
           console.log('response', dispute);
         } catch (error) {
           enqueueSnackbar("Could not end voting for dispute", { variant: "error" });
@@ -86,7 +87,7 @@ const AdminTools = (data) => {
           const rndInt = randomIntFromInterval(1, 100)
           console.log(rndInt)
           const disputeSystem = new DisputePool();
-          const dispute = await disputeSystem.assignRandomArbiters(id, rndInt);
+          const dispute = await disputeSystem.assignRandomArbiters(disputeID, [4, 18, 2]);
           console.log('response', dispute);
         } catch (error) {
           enqueueSnackbar("Could not add Arbiter for dispute", { variant: "error" });
@@ -111,7 +112,8 @@ const AdminTools = (data) => {
       <Box
         sx={{ mx: "2rem", textAlign: "center", display: "flex", flexDirection: "column", gap: "1rem" }}
       >
-        <Button variant="contained" color="primary" sx={{ my: 0 }} onClick={handleEndVote}>
+        <DisputeStatusStepper id={data.id}/>
+        {/* <Button variant="contained" color="primary" sx={{ my: 0 }} onClick={handleEndVote}>
           <Typography variant="h7" color="white" >
             End Vote
           </Typography>
@@ -125,7 +127,7 @@ const AdminTools = (data) => {
           <Typography variant="h7" color="white" >
             Assign Arbiters
           </Typography>
-        </Button>
+        </Button> */}
       </Box>
     </>
   );
