@@ -16,6 +16,7 @@ const AdminTools = (data) => {
     2: 'END_VOTING',
     3: 'ASSIGN_ARBITER'
   }
+  console.log('id', data.id, data.dispute);
 
   const changeDisputeState = useCallback(
     (e) => {
@@ -112,7 +113,7 @@ const AdminTools = (data) => {
       <Box
         sx={{ mx: "2rem", textAlign: "center", display: "flex", flexDirection: "column", gap: "1rem" }}
       >
-        <DisputeStatusStepper id={data.id}/>
+        <DisputeStatusStepper disputeID={data.id} dispute={data.dispute} />
         {/* <Button variant="contained" color="primary" sx={{ my: 0 }} onClick={handleEndVote}>
           <Typography variant="h7" color="white" >
             End Vote

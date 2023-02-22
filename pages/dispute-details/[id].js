@@ -1,5 +1,5 @@
 import { HuddleIframe } from "@huddle01/huddle01-iframe";
-import { Box, Card, CardActions, CardContent } from "@mui/material";
+import { Box, Card, CardActions, CardContent, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -167,7 +167,7 @@ const DisputeDetails = () => {
         const disputeSystem = new DisputePool();
         // Get Dispute information from blockchain
         const dispute = await disputeSystem.getDisputeById(id);
-        console.log(dispute, dispute.disputeId);
+        console.log('Dispute details', dispute, dispute.disputeId);
         const {
           arbiterCount,
           createdAt,
@@ -234,14 +234,21 @@ const DisputeDetails = () => {
       {isPageViewable && (
         <Card sx={{ my: 4 }}>
           <CardContent>
-            <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-              <DisputeInfomation dispute={dispute} />
+            <Typography
+              variant="h1"
+              sx={{ textAlign: "center" }}
+            >{`Case Id: ${dispute.disputeId}`}</Typography>
+            <Typography variant="h5" sx={{ textAlign: "center" }}>
+              {dispute.description}
+            </Typography>
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               {isAdmin && (
-                <Box>
+                <Box sx={{ borderStyle: 'solid', borderWidth: '0.5px', borderColor: 'yellowgreen', padding: '10px 15px' }}>
                   <h4>Admin Tools</h4>
-                  <AdminTools id={id} />
+                  <AdminTools id={id} dispute={dispute} />
                 </Box>
               )}
+              <DisputeInfomation dispute={dispute} />
             </Box>
             <DisputeTools uri={dispute.uri} />
           </CardContent>
@@ -261,10 +268,11 @@ const DisputeDetails = () => {
             {/* {canDecide && <AdminDecision handleDecision={handleDecision} />} */}
           </CardActions>
           <CardActions>
-            <HuddleIframe config={iframeConfig} />
+            {/* <HuddleIframe config={iframeConfig} /> */}
           </CardActions>
         </Card>
-      )}
+      )
+      }
       {!isPageViewable && <NotArbiter />}
       <Unauthorized />
     </>
