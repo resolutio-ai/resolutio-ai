@@ -5,15 +5,101 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { DISPUTE_STATE } from '../../../constants/constants';
+import { DISPUTE_STATE, MIN_NO_ARBITER } from '../../../constants/constants';
 import AdminDecision from '../AdminDecision';
+
+import DisputePool from "../../../integrations/DisputePool";
+import { useResolutioBackdropContext } from '../../../context/ResolutioBackdropContext';
+import { useSnackbar } from 'notistack';
 
 // const steps = ['Dispute Initiated', 'Arbiter Selection', 'Can Vote', 'Compute Result', 'End'];
 const steps = DISPUTE_STATE;
 
-export default function DisputeStatusStepper() {
-  const [activeStep, setActiveStep] = React.useState(0);
+export default function DisputeStatusStepper({ dispute, disputeID }) {
+
+  const { enqueueSnackbar } = useSnackbar();
+  const { openBackdrop, closeBackdrop } = useResolutioBackdropContext();
+
+  console.log('dispute', disputeID);
+  const [activeStep, setActiveStep] = React.useState(dispute.state);
   const [skipped, setSkipped] = React.useState(new Set());
+
+  console.log('inside stepper data and id', dispute, disputeID,);
+  console.log('inside stepper state', dispute.state);
+
+  const assignRandomArbiters = async () => {
+    try {
+      const disputeSystem = new DisputePool();
+      const dispute = await disputeSystem.assignRandomArbiters(disputeID, [4, 18, 2]);
+      console.log('response', dispute);
+      return dispute;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const satisfyNextCondition = async () => {
+    try {
+
+      let moveNextStep = false;
+      let negativeMsg = '';
+      switch (activeStep) {
+        case 0:
+          moveNextStep = true;
+          break;
+        case 1:
+          moveNextStep = true;
+          break;
+        case 2:
+          // Arbiter Selection
+          moveNextStep = dispute.arbiterCount >= MIN_NO_ARBITER ? true : false;
+          negativeMsg = `Minimum ${MIN_NO_ARBITER} arbiters required in pool`;
+          if (moveNextStep) {
+            const res = await assignRandomArbiters();
+            console.log(res);
+          }
+          break;
+        case 3:
+          // Can Vote
+          moveNextStep = true;
+          if (Object.keys(dispute.selectedArbiters).length !== MIN_NO_ARBITER) {
+            negativeMsg = `Minimum ${MIN_NO_ARBITER} arbiters need to be selected. 
+            Arbiter selection not completed. 
+            Arbiters selected: ${Object.keys(dispute.selectedArbiters).length}`;
+            moveNextStep = false;
+          }
+          break;
+        case 4:
+          // Compute Result
+          moveNextStep = true;
+          if (Object.keys(dispute.selectedArbiters).length === MIN_NO_ARBITER) {
+            for (const [key, value] of Object.entries(dispute.selectedArbiters)) {
+              console.log(`${key}: ${value}`);
+              if (value.hasVoted === false) {
+                moveNextStep = false;
+                negativeMsg = 'One of the arbiters has not voted yet';
+                break;
+              }
+            }
+          } else {
+            moveNextStep = false;
+            negativeMsg = `Minimum ${MIN_NO_ARBITER} arbiters required in selected pool`;
+          }
+          break;
+        case 5:
+          moveNextStep = true;
+          break;
+        default:
+          moveNextStep = false;
+          break;
+      }
+      return { moveNextStep, negativeMsg };
+
+    } catch (error) {
+      console.error(error);
+      return { moveNextStep: false, negativeMsg: error.message };
+    }
+  };
 
   const isStepOptional = (step) => {
     return step === 9;
@@ -23,19 +109,63 @@ export default function DisputeStatusStepper() {
     return skipped.has(step);
   };
 
-  const handleNext = () => {
-    let newSkipped = skipped;
-    if (isStepSkipped(activeStep)) {
-      newSkipped = new Set(newSkipped.values());
-      newSkipped.delete(activeStep);
+  const handleNext = async () => {
+    const { moveNextStep, negativeMsg } = await satisfyNextCondition();
+    if (!moveNextStep) {
+      enqueueSnackbar(negativeMsg, { variant: 'error' });
+      return;
     }
 
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped(newSkipped);
+    try {
+      let newSkipped = skipped;
+      if (isStepSkipped(activeStep)) {
+        newSkipped = new Set(newSkipped.values());
+        newSkipped.delete(activeStep);
+      }
+      enqueueSnackbar(
+        "Inprogress",
+        { variant: "warning" }
+      );
+      openBackdrop("Hold on, while we change state of dispute...");
+      const disputeSystem = new DisputePool();
+      const dispute = await disputeSystem.changeDisputeState(disputeID, '1');
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      setSkipped(newSkipped);
+      console.log(dispute);
+      console.log('Next completed');
+    } catch (error) {
+      console.log(error);
+      enqueueSnackbar(
+        "An error occurred while moving back. Please try again.",
+        { variant: "error" }
+      );
+    } finally {
+      closeBackdrop();
+    }
   };
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  const handleBack = async () => {
+    try {
+      console.log('Back in progress');
+      enqueueSnackbar(
+        "Inprogress",
+        { variant: "warning" }
+      );
+      openBackdrop("Hold on, while we change state of dispute...");
+      const disputeSystem = new DisputePool();
+      const dispute = await disputeSystem.changeDisputeState(disputeID, '2');
+      setActiveStep((prevActiveStep) => prevActiveStep - 1);
+      console.log(dispute);
+      console.log('Back completed');
+    } catch (error) {
+      console.log(error);
+      enqueueSnackbar(
+        "An error occurred while moving back. Please try again.",
+        { variant: "error" }
+      );
+    } finally {
+      closeBackdrop();
+    }
   };
 
   const handleSkip = () => {
@@ -84,10 +214,10 @@ export default function DisputeStatusStepper() {
           <Typography sx={{ mt: 2, mb: 1 }}>
             All steps completed - you&apos;re admin role is completed. Minted token has been send.
           </Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+          {/* <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Box sx={{ flex: '1 1 auto' }} />
             <Button onClick={handleReset}>Reset</Button>
-          </Box>
+          </Box> */}
         </React.Fragment>
       ) : (
         <React.Fragment>
@@ -104,31 +234,31 @@ export default function DisputeStatusStepper() {
             {
               {
                 0: <React.Fragment>
-                  <Typography sx={{ mt: 2, mb: 1 }}>
+                  <Typography sx={{ mt: 2, mb: 1, width: '100%' }}>
                     Dispute has been raised
                   </Typography>
                 </React.Fragment>,
                 1: <React.Fragment>
-                  <Typography sx={{ mt: 2, mb: 1 }}>
-                    Select arbitors
+                  <Typography sx={{ mt: 2, mb: 1, width: '100%' }}>
+                    Open arbitor pool
                   </Typography>
                 </React.Fragment>,
                 2: <React.Fragment>
-                  <Typography sx={{ mt: 2, mb: 1 }}>
-                    Allow arbitor to vote next
+                  <Typography sx={{ mt: 2, mb: 1, width: '100%' }}>
+                    Select arbitor for dispute
                   </Typography>
                 </React.Fragment>,
                 3: <React.Fragment>
-                  <Typography sx={{ mt: 2, mb: 1 }}>
-                    Compute the results
+                  <Typography sx={{ mt: 2, mb: 1, width: '100%' }}>
+                    Let the selected arbiter vote
                   </Typography>
                 </React.Fragment>,
                 4: <React.Fragment>
-                  <Box sx={{ display: 'flex', flexDirection: 'column' , justifyContent: 'center', width: '100%' }}>
+                  <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100%' }}>
                     <Typography sx={{ mt: 2, mb: 1 }}>
                       End the dispute and mint tokens
                     </Typography>
-                    <AdminDecision />
+                    <AdminDecision disputeID={disputeID} />
                   </Box>
                 </React.Fragment>
               }[activeStep]

@@ -32,3 +32,4 @@ export const DISPUTE_STATE = [
 
 // Dispute STAKES
 export const STAKE = "0.02";
+export const MIN_NO_ARBITER = 3;

@@ -6,7 +6,9 @@ import { useCallback, useState } from "react";
 import { useResolutioBackdropContext } from "../../context/ResolutioBackdropContext";
 import AdminDecisionSuccess from "./AdminDecisionSuccess";
 
-const AdminDecision = ({ handleDecision }) => {
+const AdminDecision = ({ disputeID }) => {
+
+  console.log('inside AdminDecision', disputeID);
 
   const defaultValues = {
     additional_details: "",
@@ -19,7 +21,7 @@ const AdminDecision = ({ handleDecision }) => {
   const { enqueueSnackbar } = useSnackbar();
   const { openBackdrop, closeBackdrop } = useResolutioBackdropContext();
   const [formValues, setFormValues] = useState(defaultValues);
-  const [isDisputeCreated, setDisputeCreated] = useState(false);
+  const [isDecisionCreated, setDecisionCreated] = useState(false);
 
   const createDispute = useCallback(() => {
     const createDisputeAsync = async () => {
@@ -28,13 +30,10 @@ const AdminDecision = ({ handleDecision }) => {
       const disputeObject = {
         additionalInfo: formValues["additional_details"],
         mintAmount: formValues["mintAmount"],
+        disputeID: id
       };
       // File list for uploading to IPFS
       const fileList = [
-        new File(
-          [`Resolutio case decision created on ${new Date().toTimeString()}`],
-          "description.txt"
-        ),
         new File([JSON.stringify(disputeObject, null, 2)], "decision.json"),
         ...formValues.files.map((file) => new File([file], file?.name)),
       ];
@@ -49,9 +48,9 @@ const AdminDecision = ({ handleDecision }) => {
         const cid = await client.storeDirectory(fileList);
         const ipfsURL = `https://ipfs.io/ipfs/${cid}`;
         // Create dispute on Blockchain
-        await disputePoolInstance.createDispute(ipfsURL);
+        await disputePoolInstance.mintToken(disputeID, formValues["mintAmount"], ipfsURL);
 
-        setDisputeCreated(true);
+        setDecisionCreated(true);
         clearForm();
       } catch (error) {
         console.log(error);
@@ -105,13 +104,13 @@ const AdminDecision = ({ handleDecision }) => {
     console.log(e.target.value);
     const { value } = e.target;
     console.log(mintAmount);
-    handleDecision(mintAmount);
-  }, [handleDecision, mintAmount]
+    // handleDecision(mintAmount);
+  }, [mintAmount]
   );
 
-  const handleDecline = useCallback(() => {
-    handleDecision(2);
-  }, [handleDecision]);
+  // const handleDecline = useCallback(() => {
+  //   handleDecision(2);
+  // }, [handleDecision]);
 
   return (
     <Box>
@@ -134,7 +133,7 @@ const AdminDecision = ({ handleDecision }) => {
         </Box>
       </Box>)}
 
-      {!isDisputeCreated && (
+      {!isDecisionCreated && (
         <form onSubmit={handleFormSubmit}>
           <Grid container spacing={2} direction="column">
             <Grid item>
@@ -174,7 +173,7 @@ const AdminDecision = ({ handleDecision }) => {
           </Grid>
         </form>
       )}
-      {isDisputeCreated && <AdminDecisionSuccess />}
+      {isDecisionCreated && <AdminDecisionSuccess />}
     </Box>
   );
 };

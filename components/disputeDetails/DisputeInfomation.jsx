@@ -43,22 +43,18 @@ const DisputeInfomation = ({ dispute }) => {
   );
 
   return (
-    <Box sx={{ marginRight: '5rem' }}>
-      <Typography
-        variant="h1"
-        sx={{ textAlign: "center" }}
-      >{`Case Id: ${dispute.disputeId}`}</Typography>
+    <Box sx={{ marginRight: '5rem', marginTop: '2rem' }}>
       <Box>
-        <Typography variant="h5" sx={{ textAlign: "center" }}>
-          {dispute.description}
+        <Typography variant="h5" sx={{ textAlign: "left" }}>
+          Case Details
         </Typography>
         {disputeInfo.map((info, index) => {
-          return (
+          return ((info.label).toLowerCase() === 'details' && (
             <Typography variant="body1" sx={{ mt: 2 }} key={index}>
               <strong>{`${info.label}: `}</strong>
               {info.value}
             </Typography>
-          );
+          ));
         })}
       </Box>
     </Box>
