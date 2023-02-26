@@ -1,7 +1,7 @@
 import { SnackbarProvider } from "notistack";
 
 const MAX_SNACK = 3;
-const AUTO_HIDE_DURATION = 3000;
+const AUTO_HIDE_DURATION = 5000;
 
 const POSITION = {
   vertical: "bottom",
