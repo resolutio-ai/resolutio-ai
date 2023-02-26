@@ -105,7 +105,7 @@ const LoginModule = ({ connect, disconnect, router, size = 36 }) => {
               <MenuItem onClick={handleArbiterNavigation}>
                 <HistoryEduIcon color="primary" sx={{ mr: 1 }} />
                 <Typography variant="button" color="primary">
-                  Arbiter disputes
+                  Ongoing Disputes
                 </Typography>
               </MenuItem>
             </RenderOnArbiter>
