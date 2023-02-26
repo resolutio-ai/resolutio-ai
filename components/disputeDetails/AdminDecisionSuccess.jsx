@@ -13,9 +13,9 @@ const AdminDecisionSuccess = () => {
         <Typography variant="h5" color="primary" sx={{ my: 2 }}>
           Your decision has been successfully created!
         </Typography>
-        <SmartLink href="/profile" isExternal={false}>
+        {/* <SmartLink href="/profile" isExternal={false}>
           <Button variant="contained">View all Disputes</Button>
-        </SmartLink>
+        </SmartLink> */}
       </Box>
     </>
   );

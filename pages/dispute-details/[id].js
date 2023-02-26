@@ -182,7 +182,7 @@ const DisputeDetails = () => {
 
         // Get dispute information from IPFS
         const additionalDetails = await (
-          await fetch(`${dispute.uri}/dispute.json`)
+          await fetch(`https://nftstorage.link/ipfs/${dispute.uri}/dispute.json`)
         ).json();
 
         // Reduce the selected arbiter object to an efficient DS
