@@ -3,19 +3,24 @@ import { NFTStorage } from "nft.storage";
 import { useSnackbar } from "notistack";
 /* import CountDownTimer from "../../components/CountDownTimer"; */
 import { useCallback, useState } from "react";
+import { NFT_STORAGE_IPFS_KEY } from "../../config";
 import { useResolutioBackdropContext } from "../../context/ResolutioBackdropContext";
+import DisputeNFT from "../../integrations/DisputeNFT";
+import DisputePool from "../../integrations/DisputePool";
 import AdminDecisionSuccess from "./AdminDecisionSuccess";
+
+const defaultValues = {
+  additional_details: "",
+  nft_mint_value: 1
+};
 
 const AdminDecision = ({ disputeID }) => {
 
   console.log('inside AdminDecision', disputeID);
 
-  const defaultValues = {
-    additional_details: "",
-    nft_mint_value: 0
-  };
 
-  const [mintAmount, setmintAmount] = useState(0);
+
+  // const [mintAmount, setmintAmount] = useState(0);
 
 
   const { enqueueSnackbar } = useSnackbar();
@@ -23,19 +28,22 @@ const AdminDecision = ({ disputeID }) => {
   const [formValues, setFormValues] = useState(defaultValues);
   const [isDecisionCreated, setDecisionCreated] = useState(false);
 
-  const createDispute = useCallback(() => {
+  const createDecision = useCallback(() => {
     const createDisputeAsync = async () => {
       openBackdrop("Hold on, while we upload your decision...");
       // Object for creating Dispute JSON
+      let mintValue = 10;
       const disputeObject = {
         additionalInfo: formValues["additional_details"],
-        mintAmount: formValues["mintAmount"],
-        disputeID: id
+        mintAmount: formValues["nft_mint_value"],
+        disputeID: disputeID
       };
+      console.log('disputeObject', disputeObject);
+      // return;
       // File list for uploading to IPFS
       const fileList = [
         new File([JSON.stringify(disputeObject, null, 2)], "decision.json"),
-        ...formValues.files.map((file) => new File([file], file?.name)),
+        // ...formValues.files.map((file) => new File([file], file?.name)),
       ];
 
       try {
@@ -43,12 +51,15 @@ const AdminDecision = ({ disputeID }) => {
           endpoint: "https://api.nft.storage",
           token: NFT_STORAGE_IPFS_KEY,
         });
-        const disputePoolInstance = new DisputePool();
+        const disputePoolInstance = new DisputeNFT();
         // Store Evidence on IPFS
         const cid = await client.storeDirectory(fileList);
+        // let cid = 'asd'
         const ipfsURL = `https://ipfs.io/ipfs/${cid}`;
+        console.log('ipfsURL', ipfsURL);
+
         // Create dispute on Blockchain
-        await disputePoolInstance.mintToken(disputeID, formValues["mintAmount"], ipfsURL);
+        await disputePoolInstance.mintToken(disputeID, mintValue, ipfsURL);
 
         setDecisionCreated(true);
         clearForm();
@@ -63,10 +74,11 @@ const AdminDecision = ({ disputeID }) => {
       }
     };
     createDisputeAsync();
-  }, [clearForm, closeBackdrop, enqueueSnackbar, formValues, openBackdrop]);
+  }, [clearForm, closeBackdrop, disputeID, enqueueSnackbar, formValues, openBackdrop]);
 
   const handleInputChange = useCallback(
     (e) => {
+      console.log('checking input', e.target.value);
       const { name, value } = e.target;
       setFormValues({
         ...formValues,
@@ -83,30 +95,31 @@ const AdminDecision = ({ disputeID }) => {
   const handleFormSubmit = useCallback(
     (event) => {
       event.preventDefault();
-      createDispute();
+      console.log('submit')
+      createDecision();
     },
-    [createDispute]
+    [createDecision]
   );
 
 
 
-  const handleMintChange = useCallback(
-    (e) => {
-      console.log(e.target.value);
-      const { value } = e.target;
-      setmintAmount(value);
-    },
-    [setmintAmount]
-  );
+  // const handleMintChange = useCallback(
+  //   (e) => {
+  //     console.log(e.target.value);
+  //     const { value } = e.target;
+  //     setmintAmount(value);
+  //   },
+  //   [setmintAmount]
+  // );
 
 
-  const handleAccept = useCallback((e) => {
-    console.log(e.target.value);
-    const { value } = e.target;
-    console.log(mintAmount);
-    // handleDecision(mintAmount);
-  }, [mintAmount]
-  );
+  // const handleAccept = useCallback((e) => {
+  //   console.log(e.target.value);
+  //   const { value } = e.target;
+  //   console.log(mintAmount);
+  //   // handleDecision(mintAmount);
+  // }, [mintAmount]
+  // );
 
   // const handleDecline = useCallback(() => {
   //   handleDecision(2);
@@ -117,20 +130,20 @@ const AdminDecision = ({ disputeID }) => {
       {false && (<Box sx={{ textAlign: "center", mb: 4 }}>
         <Typography variant="h4" sx={{ mb: 2 }}>Admin Decision</Typography>
         {/* <CountDownTimer expiryTimestamp={1656530040208} /> */}
-        <TextField
+        {/* <TextField
           id="mint_amount-input"
           name="mint_amount"
           label="Amount to be minted"
           type="number"
           fullWidth
           value={mintAmount}
-          onChange={handleMintChange}
-        />
-        <Box sx={{ textAlign: "center", mt: 1 }}>
+          // onChange={handleInputChange}
+        /> */}
+        {/* <Box sx={{ textAlign: "center", mt: 1 }}>
           <Button variant="contained" color="primary" onClick={handleAccept}>
             Mint NFT
           </Button>
-        </Box>
+        </Box> */}
       </Box>)}
 
       {!isDecisionCreated && (
@@ -139,7 +152,7 @@ const AdminDecision = ({ disputeID }) => {
             <Grid item>
               <TextField
                 id="mint_value-input"
-                name="mint_value"
+                name="nft_mint_value"
                 label="Mint NFT value"
                 type="number"
                 required
@@ -167,7 +180,7 @@ const AdminDecision = ({ disputeID }) => {
                 type="submit"
                 fullWidth
               >
-                Mint NFT
+                Mint NFT as
               </Button>
             </Grid>
           </Grid>
