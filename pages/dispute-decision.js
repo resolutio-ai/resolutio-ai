@@ -58,7 +58,7 @@ const DisputeDecision = () => {
         const allDisputeDetails = await Promise.all(
           mappedDisputes.map(
             async (dispute) =>
-              await (await fetch(`${dispute.uri}/dispute.json`)).json()
+              await (await fetch(`https://nftstorage.link/ipfs/${dispute.uri}/dispute.json`)).json()
           )
         );
 

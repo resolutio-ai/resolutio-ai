@@ -59,7 +59,7 @@ const DisputeResolutionForm = () => {
         const cid = await client.storeDirectory(fileList);
         const ipfsURL = `https://ipfs.io/ipfs/${cid}`;
         // Create dispute on Blockchain
-        await disputePoolInstance.createDispute(ipfsURL);
+        await disputePoolInstance.createDispute(cid);
 
         setDisputeCreated(true);
         clearForm();
