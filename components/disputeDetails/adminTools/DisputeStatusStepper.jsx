@@ -12,6 +12,7 @@ import { useSnackbar } from 'notistack';
 import { useState } from "react";
 import { useResolutioBackdropContext } from '../../../context/ResolutioBackdropContext';
 import DisputePool from "../../../integrations/DisputePool";
+import { useEffect } from 'react';
 
 // const steps = ['Dispute Initiated', 'Arbiter Selection', 'Can Vote', 'Compute Result', 'End'];
 const steps = DISPUTE_STATE;
@@ -24,6 +25,12 @@ export default function DisputeStatusStepper({ dispute, disputeID }) {
   console.log('dispute', disputeID);
   console.log('inside stepper state', dispute.state);
   const [activeStep, setActiveStep] = useState(dispute.state);
+
+  useEffect(() => {
+    setActiveStep(dispute.state);
+  }, [dispute]);
+
+
   const [skipped, setSkipped] = useState(new Set());
 
   console.log('inside stepper data and id', dispute, disputeID,);
