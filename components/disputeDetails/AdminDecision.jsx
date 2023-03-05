@@ -55,11 +55,12 @@ const AdminDecision = ({ disputeID }) => {
         // Store Evidence on IPFS
         const cid = await client.storeDirectory(fileList);
         // let cid = 'asd'
-        const ipfsURL = `https://ipfs.io/ipfs/${cid}`;
+        const ipfsURL = `${cid}`;
         console.log('ipfsURL', ipfsURL);
 
         // Create dispute on Blockchain
-        await disputePoolInstance.mintToken(disputeID, mintValue, ipfsURL);
+        console.log(disputeID, formValues["nft_mint_value"], ipfsURL);
+        await disputePoolInstance.mintToken(disputeID, formValues["nft_mint_value"], ipfsURL);
 
         setDecisionCreated(true);
         clearForm();
