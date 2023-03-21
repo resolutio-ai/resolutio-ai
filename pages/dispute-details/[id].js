@@ -250,7 +250,7 @@ const DisputeDetails = () => {
               )}
               <DisputeInfomation dispute={dispute} />
             </Box>
-            <DisputeTools uri={dispute.uri} />
+            <DisputeTools uri={`https://nftstorage.link/ipfs/${dispute.uri}`} />
           </CardContent>
           <CardActions sx={{ justifyContent: "center" }}>
             <RenderOnArbiter>

@@ -25,6 +25,7 @@ export default function DisputeStatusStepper({ dispute, disputeID }) {
   console.log('dispute', disputeID);
   console.log('inside stepper state', dispute.state);
   const [activeStep, setActiveStep] = useState(dispute.state);
+  const [showMint, setShowMint] = useState(false);
 
   useEffect(() => {
     setActiveStep(dispute.state);
@@ -64,6 +65,7 @@ export default function DisputeStatusStepper({ dispute, disputeID }) {
       moveNextStep = false;
       negativeMsg = `Minimum ${MIN_NO_ARBITER} arbiters required in selected pool`;
     }
+    setShowMint(moveNextStep);
     return { moveNextStep, negativeMsg };
   }
 
@@ -273,19 +275,34 @@ export default function DisputeStatusStepper({ dispute, disputeID }) {
                   </Typography>
                 </React.Fragment>,
                 4: <React.Fragment>
-                  {hasAllVoted().moveNextStep && (
+                  {true && (
                     <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100%' }}>
                       <Typography sx={{ mt: 2, mb: 1 }}>
-                        End the dispute and mint tokens
+                        Move to next state and end the dispute and mint tokens
                       </Typography>
                       <AdminDecision disputeID={disputeID} />
                     </Box>)}
-                  {!hasAllVoted().moveNextStep && (
+                  {/* {!hasAllVoted().moveNextStep && (
                     <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100%' }}>
                       <Typography sx={{ mt: 2, mb: 1 }}>
                         All arbiters have not voted
                       </Typography>
+                    </Box>)} */}
+                </React.Fragment>,
+                5: <React.Fragment>
+                  {showMint && (
+                    <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100%' }}>
+                      <Typography sx={{ mt: 2, mb: 1 }}>
+                        Dispute ended and mint tokens
+                      </Typography>
+                      <AdminDecision disputeID={disputeID} />
                     </Box>)}
+                  {/* {!hasAllVoted().moveNextStep && (
+                    <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100%' }}>
+                      <Typography sx={{ mt: 2, mb: 1 }}>
+                        All arbiters have not voted
+                      </Typography>
+                    </Box>)} */}
                 </React.Fragment>
               }[activeStep]
             }
