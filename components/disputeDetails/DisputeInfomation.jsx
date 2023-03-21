@@ -1,7 +1,21 @@
 import { Box, Typography } from "@mui/material";
 import { useMemo } from "react";
+import { useResolutioContext } from "../../context/ResolutioContext";
 
 const DisputeInfomation = ({ dispute }) => {
+
+  const { address, isArbiter, isAdmin } = useResolutioContext();
+  // Is the dispute created by the current user?
+  const isOwnDispute = useMemo(
+    () => dispute.creator === address,
+    [dispute, address]
+  );
+  const isSelectedArtbitor = useMemo(
+    () => dispute.selectedArbiters.hasOwnProperty(address),
+    [dispute, address]
+  );
+  console.log('dispute inside infomation', isSelectedArtbitor)
+  console.log(dispute)
   const disputeInfo = useMemo(
     () => [
       { label: "Victim", value: dispute.creator },
@@ -48,14 +62,27 @@ const DisputeInfomation = ({ dispute }) => {
         <Typography variant="h5" sx={{ textAlign: "left" }}>
           Case Details
         </Typography>
-        {disputeInfo.map((info, index) => {
-          return ((info.label).toLowerCase() === 'details' && (
-            <Typography variant="body1" sx={{ mt: 2 }} key={index}>
-              <strong>{`${info.label}: `}</strong>
-              {info.value}
-            </Typography>
-          ));
-        })}
+        {!isOwnDispute && (<Box>
+          {disputeInfo.map((info, index) => {
+            return ((info.label).toLowerCase() === 'details' && (
+              <Typography variant="body1" sx={{ mt: 2 }} key={index}>
+                <strong>{`${info.label}: `}</strong>
+                {info.value}
+              </Typography>
+            ));
+          })}
+        </Box>)}
+        {(isOwnDispute || isAdmin || isSelectedArtbitor) && (
+          <Box>
+            {disputeInfo.map((info, index) => {
+              return (
+                <Typography variant="body1" sx={{ mt: 2 }} key={index}>
+                  <strong>{`${info.label}: `}</strong>
+                  {info.value}
+                </Typography>
+              );
+            })}
+          </Box>)}
       </Box>
     </Box>
   );
