@@ -1,24 +1,32 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  Typography,
-} from "@mui/material";
+import { HuddleIframe } from "@huddle01/huddle01-iframe";
+import { Box, Card, CardActions, CardContent, Typography } from "@mui/material";
 import { useRouter } from "next/router";
-import { useCallback, useEffect, useState } from "react";
+import { useSnackbar } from "notistack";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import AdminDecision from "../../components/disputeDetails/AdminDecision";
+import AdminTools from "../../components/disputeDetails/adminTools/AdminTools";
+import DisputeInfomation from "../../components/disputeDetails/DisputeInfomation";
+import DisputeTools from "../../components/disputeDetails/DisputeTools";
+import Staking from "../../components/disputeDetails/Staking";
+import Voting from "../../components/disputeDetails/Voting";
 import NotArbiter from "../../components/NotArbiter";
 import RenderOnArbiter from "../../components/RenderOnArbiter";
 import Meta from "../../components/seo/Meta";
-import SmartLink from "../../components/SmartLink";
 import Unauthorized from "../../components/Unauthorized";
+import { CAN_VOTE, CREATED } from "../../constants/constants";
+import { useResolutioBackdropContext } from "../../context/ResolutioBackdropContext";
 import { useResolutioContext } from "../../context/ResolutioContext";
-import { DisputePool } from "../../integrations/DisputePool";
+import DisputeNFT from "../../integrations/DisputeNFT";
+import DisputePool from "../../integrations/DisputePool";
+
 const DisputeDetails = () => {
+
+  const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
-  const { address } = useResolutioContext();
+  const { address, isArbiter, isAdmin } = useResolutioContext();
+  const { openBackdrop, closeBackdrop } = useResolutioBackdropContext();
   const { id } = router.query;
+  // Initail State
   const [dispute, setDispute] = useState({
     title: "",
     description: "",
@@ -28,141 +36,244 @@ const DisputeDetails = () => {
     creator: "",
     disputeId: "",
     disputePool: [],
-    selectedArbiters: [],
+    selectedArbiters: {},
     state: 0,
     uri: "",
     winningProposal: 0,
-    additionalDetails: null
+    additionalDetails: null,
   });
 
-  const handleStaking = useCallback(() => {
+  // Is the dispute created by the current user?
+  const isOwnDispute = useMemo(
+    () => dispute.creator === address,
+    [dispute, address]
+  );
+
+  const isPageViewable = useMemo(
+    () => isArbiter || isOwnDispute,
+    [isArbiter, isOwnDispute]
+  );
+
+  // Check if an admin can decide
+  // ToDo: Add condition
+  const canDecide = useMemo(
+    () => isAdmin
+  );
+  //   isAdmin &&
+  //   !isOwnDispute &&
+  //   dispute.selectedArbiters.hasOwnProperty(address) &&
+  //   dispute.selectedArbiters[address].hasVoted === false,
+  // [address, dispute, isOwnDispute, isAdmin]
+
+  // Check if an arbiter can vote
+  const canVote = useMemo(
+    () =>
+      dispute.state === CAN_VOTE &&
+      !isOwnDispute &&
+      dispute.selectedArbiters.hasOwnProperty(address) &&
+      dispute.selectedArbiters[address].hasVoted === false,
+    [address, dispute, isOwnDispute]
+  );
+
+  // Check if an arbiter can stake
+  const canStake = useMemo(
+    () => dispute.state === CREATED && !isOwnDispute && !dispute.hasStaked,
+    [dispute, isOwnDispute]
+  );
+
+  // Handle joining a dispute Pool
+  const handleJoinDisputePool = useCallback(() => {
     const asyncJoinDisputePool = async () => {
       if (!id) return;
-      const disputeSystem = new DisputePool();
-      const response = await disputeSystem.joinDisputePool(id);
-      console.log(response);
+      openBackdrop("Hold on, Joining Dispute Pool...");
+      try {
+        const disputeSystem = new DisputePool();
+        await disputeSystem.joinDisputePool(id);
+        setDispute((prev) => ({ ...prev, hasStaked: true }));
+      } catch (error) {
+        console.log(error);
+      } finally {
+        closeBackdrop();
+      }
     };
     asyncJoinDisputePool();
-  }, [id]);
+  }, [closeBackdrop, id, openBackdrop]);
+
+  // Handle Voting
+  const handleVoting = useCallback(
+    (vote) => {
+      const votingAsync = async () => {
+        if (!id) return;
+        openBackdrop("Hold on, Voting...");
+        try {
+          const disputeSystem = new DisputePool();
+          await disputeSystem.vote(vote, id);
+          setDispute((prev) => {
+            return {
+              ...prev,
+              selectedArbiters: {
+                ...prev.selectedArbiters,
+                [address]: {
+                  decision: vote,
+                  hasVoted: true,
+                },
+              },
+            };
+          });
+        } catch (error) {
+          console.log(error);
+        } finally {
+          closeBackdrop();
+        }
+      };
+      votingAsync();
+    },
+    [address, closeBackdrop, id, openBackdrop]
+  );
+
+  // Handle Admin Voting
+  const handleDecision = useCallback(
+    (mintAmount) => {
+      const votingAsync = async () => {
+        if (!id) return;
+        openBackdrop("Hold on, Decision is being minted...");
+        console.log(mintAmount);
+        const disputeID = Number(id);
+        console.log('params', disputeID, mintAmount, dispute.uri);
+        try {
+
+          const disputeSystem = new DisputePool();
+          disputeSystem.endVoting();
+          const disputeDecision = new DisputeNFT();
+          const data = await disputeDecision.mintToken(disputeID, mintAmount, dispute.uri);
+          console.log(data);
+        } catch (error) {
+          enqueueSnackbar("Could not mint", { variant: "error" });
+          console.log(error);
+        } finally {
+          closeBackdrop();
+        }
+      };
+      votingAsync();
+    },
+    [address, closeBackdrop, id, openBackdrop]
+  );
 
   useEffect(() => {
     const asyncGetDisputeById = async () => {
       if (!id) return;
-      const disputeSystem = new DisputePool();
-      const dispute = await disputeSystem.getDisputeById(id);
-      const {
-        arbiterCount,
-        createdAt,
-        creator,
-        disputeId,
-        disputePool,
-        selectedArbiters,
-        state,
-        uri,
-        winningProposal,
-      } = dispute;
-      const data = await (await fetch(`${dispute.uri}/dispute.json`)).json();
-      setDispute({
-        title: "",
-        description: "",
-        hasStaked: disputePool.includes(address),
-        arbiterCount,
-        createdAt,
-        creator,
-        disputeId,
-        disputePool,
-        selectedArbiters,
-        state,
-        uri,
-        winningProposal,
-        additionalDetails: data,
-      });
+      openBackdrop("Hold on, we are fetching the dispute details...");
+      try {
+        const disputeSystem = new DisputePool();
+        // Get Dispute information from blockchain
+        const dispute = await disputeSystem.getDisputeById(id);
+        console.log('Dispute details', dispute, dispute.disputeId);
+        const {
+          arbiterCount,
+          createdAt,
+          creator,
+          disputeId,
+          disputePool,
+          selectedArbiters,
+          state,
+          uri,
+          winningProposal,
+        } = dispute;
+
+        // Get dispute information from IPFS
+        const additionalDetails = await (
+          await fetch(`https://nftstorage.link/ipfs/${dispute.uri}/dispute.json`)
+        ).json();
+
+        // Reduce the selected arbiter object to an efficient DS
+        const selectedArbitersObject = selectedArbiters.reduce((prev, curr) => {
+          const { arbiter, hasVoted, decision } = curr;
+          return {
+            ...prev,
+            [arbiter]: {
+              hasVoted,
+              decision,
+            },
+          };
+        }, {});
+
+        setDispute({
+          description: additionalDetails.info,
+          hasStaked: disputePool.includes(address),
+          arbiterCount,
+          createdAt,
+          creator,
+          disputeId,
+          disputePool,
+          selectedArbiters: selectedArbitersObject,
+          state,
+          uri,
+          winningProposal,
+          additionalDetails,
+        });
+      } catch (error) {
+        console.log(error);
+        // TODO: Handle error for edge cases in future
+      } finally {
+        closeBackdrop();
+      }
     };
     asyncGetDisputeById();
-  }, [address, id]);
+  }, [address, closeBackdrop, id, openBackdrop]);
+
+  const iframeConfig = {
+    roomUrl: "https://iframe.huddle01.com/123",
+    height: "800px",
+    width: "80%",
+    noBorder: true, // false by default
+  };
 
   return (
     <>
       <Meta title="Dispute Details" />
-      <RenderOnArbiter>
+      {isPageViewable && (
         <Card sx={{ my: 4 }}>
           <CardContent>
-            <Box>
-              <Typography
-                variant="h1"
-                sx={{ textAlign: "center" }}
-              >{`Case Id: ${id}`}</Typography>
-              <Box>
-                <Typography variant="h5" sx={{ textAlign: "center" }}>
-                  Victim’s comic, which was first published on their social
-                  media page in 2020, was allegedly minted as an NFT by another
-                  on 13 Feb 2022.
-                </Typography>
-                <Typography variant="body1" sx={{ mt: 2 }}>
-                  <strong>Victim:</strong> {dispute.creator}
-                </Typography>
-                {(dispute.additionalDetails) &&
-                  (Object.keys(dispute.additionalDetails).map((key) => {
-                    return (
-                      <Typography variant="body1" sx={{ mt: 2 }} key={key}>
-                        <strong>{`${key}: `}</strong>
-                        {dispute.additionalDetails[key]}
-                      </Typography>
-                    );
-                  }))
-                }
-              </Box>
-              <Box sx={{ mt: 2 }}>
-                <SmartLink href={dispute.uri} isExternal={true}>
-                  <Button variant="contained" color="secondary" sx={{ mr: 2 }}>
-                    Evidence
-                  </Button>
-                </SmartLink>
-                <SmartLink
-                  href="https://znreza-blockchain-transaction-search-app-4pp5e7.streamlitapp.com/"
-                  isExternal={true}
-                >
-                  <Button variant="contained" color="secondary">
-                    Arbiter Tools
-                  </Button>
-                </SmartLink>
-              </Box>
+            <Typography
+              variant="h1"
+              sx={{ textAlign: "center" }}
+            >{`Case Id: ${dispute.disputeId}`}</Typography>
+            <Typography variant="h5" sx={{ textAlign: "center" }}>
+              {dispute.description}
+            </Typography>
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+              {isAdmin && (
+                <Box sx={{ borderStyle: 'solid', borderWidth: '0.5px', borderColor: 'yellowgreen', padding: '10px 15px' }}>
+                  <h4>Admin Tools</h4>
+                  <AdminTools id={id} dispute={dispute} />
+                </Box>
+              )}
+              <DisputeInfomation dispute={dispute} />
             </Box>
+            <DisputeTools uri={`https://nftstorage.link/ipfs/${dispute.uri}`} />
           </CardContent>
           <CardActions sx={{ justifyContent: "center" }}>
-            {!dispute.hasStaked && (
-              <Box sx={{ textAlign: "center" }}>
-                <Typography variant="h5">
-                  Would you like to be an arbiter for this case ?
-                </Typography>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  sx={{ mt: 2 }}
-                  onClick={handleStaking}
-                >
-                  Stake
-                </Button>
-              </Box>
-            )}
-            <Box>
-              {/*         <Box sx={{ textAlign: "center", mb: 4 }}>
-          <Typography variant="h1">VOTE</Typography>
-          <CountDownTimer expiryTimestamp={1656530040208} />
-          <Box>
-            <Button variant="contained" color="secondary" sx={{ mr: 4 }}>
-              Invalidate NFT
-            </Button>
-            <Button variant="contained" color="primary">
-              Validate NFT
-            </Button>
-          </Box>
-        </Box> */}
-            </Box>
+            <RenderOnArbiter>
+              {canStake && (
+                <Staking
+                  description={dispute.description}
+                  handleJoinDisputePool={handleJoinDisputePool}
+                />
+              )}
+              {canVote && <Voting handleVoting={handleVoting} />}
+            </RenderOnArbiter>
+          </CardActions>
+          <CardActions sx={{ display: "flex", flexDirection: 'column', justifyContent: "left" }}>
+
+            {/* {canDecide && <AdminDecision handleDecision={handleDecision} />} */}
+          </CardActions>
+          <CardActions>
+            {/* <HuddleIframe config={iframeConfig} /> */}
           </CardActions>
         </Card>
-      </RenderOnArbiter>
-      <NotArbiter />
+      )
+      }
+      {!isPageViewable && <NotArbiter />}
       <Unauthorized />
     </>
   );

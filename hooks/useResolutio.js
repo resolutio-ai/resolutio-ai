@@ -3,7 +3,8 @@ import { ethers } from "ethers";
 import { useSnackbar } from "notistack";
 import { useCallback, useEffect, useReducer } from "react";
 import Web3Modal from "web3modal";
-import { verifyArbiter } from "../integrations/VerifyArbiter";
+import ArbiterNFT from "../integrations/ArbiterNFT";
+import DisputePool from "../integrations/DisputePool";
 
 import {
   resolutioInitialState,
@@ -32,7 +33,7 @@ if (typeof window !== "undefined") {
 export const useResolutio = () => {
   const { enqueueSnackbar } = useSnackbar();
   const [state, dispatch] = useReducer(resolutioReducer, resolutioInitialState);
-  const { provider, web3Provider, address, network, isLoggedIn, isArbiter } =
+  const { provider, web3Provider, address, network, isLoggedIn, isArbiter, isAdmin } =
     state;
 
   const connect = useCallback(async () => {
@@ -45,7 +46,8 @@ export const useResolutio = () => {
         const network = await web3Provider.getNetwork();
         let isArbiter;
         try {
-          isArbiter = await verifyArbiter(address);
+          const arbiterNFT = new ArbiterNFT();
+          isArbiter = await arbiterNFT.verifyUser(address);
         } catch (error) {
           console.log(error);
           // Toast for incorrect network
@@ -53,6 +55,24 @@ export const useResolutio = () => {
             variant: "warning",
           });
           isArbiter = false;
+        }
+
+        let isAdmin;
+        // ToDo: Set admin from NFT or account
+        try {
+          const disputeSystem = new DisputePool();
+
+          const adminAddr = await disputeSystem.getAdmin();
+          console.log('admin', adminAddr, address);
+          if (adminAddr === address) {
+            console.log('Current user is admin');
+            isAdmin = true;
+          } else {
+            isAdmin = false;
+          }
+        } catch (error) {
+          console.log(error);
+          isAdmin = false;
         }
 
         // Toast for wallet connected
@@ -66,6 +86,7 @@ export const useResolutio = () => {
           network,
           isLoggedIn: true,
           isArbiter,
+          isAdmin
         });
       } catch (e) {
         console.log("connect error", e);
@@ -109,10 +130,20 @@ export const useResolutio = () => {
 
         let isArbiter;
         try {
-          isArbiter = await verifyArbiter(accounts[0]);
+          const arbiterNFT = new ArbiterNFT();
+          isArbiter = await arbiterNFT.verifyUser(accounts[0]);
         } catch (error) {
           console.log(error);
           isArbiter = false;
+        }
+
+        let isAdmin;
+        // ToDo: Set admin from NFT or account
+        try {
+          isAdmin = true;
+        } catch (error) {
+          console.log(error);
+          isAdmin = false;
         }
 
         dispatch({
@@ -122,6 +153,11 @@ export const useResolutio = () => {
         dispatch({
           type: "SET_ISARBITER",
           isArbiter,
+        });
+        console.log('disp admin');
+        dispatch({
+          type: "SET_ISADMIN",
+          isAdmin,
         });
       };
 
@@ -167,5 +203,6 @@ export const useResolutio = () => {
     disconnect,
     isLoggedIn,
     isArbiter,
+    isAdmin
   };
 };

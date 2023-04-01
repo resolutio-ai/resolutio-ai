@@ -1,15 +1,24 @@
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import DisputeItem from "./DisputeItem";
 
-const DisputesList = ({ disputes, openStakeDialog }) => {
+const DisputesList = ({ disputes }) => {
   return (
-    <Grid container spacing={2}>
-      {disputes.map((dispute) => (
-        <Grid item md={4} sm={6} xs={12} key={dispute.disputeId._hex}>
-          <DisputeItem dispute={dispute} openStakeDialog={openStakeDialog} />
-        </Grid>
-      ))}
-    </Grid>
+    <Box sx={{ mb: 4 }}>
+      <Grid container spacing={2}>
+        {disputes.map((dispute) => (
+          <Grid
+            item
+            md={4}
+            sm={6}
+            xs={12}
+            key={dispute.disputeId._hex}
+            sx={{ display: "flex" }}
+          >
+            <DisputeItem dispute={dispute} />
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
   );
 };
 

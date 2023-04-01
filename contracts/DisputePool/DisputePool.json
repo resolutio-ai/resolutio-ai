@@ -20,10 +20,32 @@
         "type": "uint256"
       },
       {
+        "components": [
+          {
+            "internalType": "enum Disputepool.Decision",
+            "name": "decision",
+            "type": "uint8"
+          },
+          {
+            "internalType": "bool",
+            "name": "hasVoted",
+            "type": "bool"
+          },
+          {
+            "internalType": "address",
+            "name": "arbiter",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "disputeId",
+            "type": "uint256"
+          }
+        ],
         "indexed": false,
-        "internalType": "address[]",
+        "internalType": "struct Disputepool.DisputeToDecision[]",
         "name": "selectedArbiters",
-        "type": "address[]"
+        "type": "tuple[]"
       },
       {
         "indexed": false,
@@ -164,13 +186,13 @@
       },
       {
         "internalType": "bool",
-        "name": "isSelected",
+        "name": "hasVoted",
         "type": "bool"
       },
       {
-        "internalType": "bool",
-        "name": "hasStaked",
-        "type": "bool"
+        "internalType": "address",
+        "name": "arbiter",
+        "type": "address"
       },
       {
         "internalType": "uint256",
@@ -254,9 +276,31 @@
     "name": "getAddressesForDispute",
     "outputs": [
       {
-        "internalType": "address[]",
+        "components": [
+          {
+            "internalType": "enum Disputepool.Decision",
+            "name": "decision",
+            "type": "uint8"
+          },
+          {
+            "internalType": "bool",
+            "name": "hasVoted",
+            "type": "bool"
+          },
+          {
+            "internalType": "address",
+            "name": "arbiter",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "disputeId",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct Disputepool.DisputeToDecision[]",
         "name": "",
-        "type": "address[]"
+        "type": "tuple[]"
       }
     ],
     "stateMutability": "view",
@@ -274,7 +318,7 @@
             "type": "uint8"
           },
           {
-            "internalType": "uint8",
+            "internalType": "enum Disputepool.Proposal",
             "name": "winningProposal",
             "type": "uint8"
           },
@@ -304,9 +348,31 @@
             "type": "string"
           },
           {
-            "internalType": "address[]",
+            "components": [
+              {
+                "internalType": "enum Disputepool.Decision",
+                "name": "decision",
+                "type": "uint8"
+              },
+              {
+                "internalType": "bool",
+                "name": "hasVoted",
+                "type": "bool"
+              },
+              {
+                "internalType": "address",
+                "name": "arbiter",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "disputeId",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct Disputepool.DisputeToDecision[]",
             "name": "selectedArbiters",
-            "type": "address[]"
+            "type": "tuple[]"
           },
           {
             "internalType": "address[]",
@@ -317,6 +383,19 @@
         "internalType": "struct Disputepool.Dispute[]",
         "name": "",
         "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getBalance",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -340,7 +419,7 @@
             "type": "uint8"
           },
           {
-            "internalType": "uint8",
+            "internalType": "enum Disputepool.Proposal",
             "name": "winningProposal",
             "type": "uint8"
           },
@@ -370,9 +449,31 @@
             "type": "string"
           },
           {
-            "internalType": "address[]",
+            "components": [
+              {
+                "internalType": "enum Disputepool.Decision",
+                "name": "decision",
+                "type": "uint8"
+              },
+              {
+                "internalType": "bool",
+                "name": "hasVoted",
+                "type": "bool"
+              },
+              {
+                "internalType": "address",
+                "name": "arbiter",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "disputeId",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct Disputepool.DisputeToDecision[]",
             "name": "selectedArbiters",
-            "type": "address[]"
+            "type": "tuple[]"
           },
           {
             "internalType": "address[]",
@@ -383,6 +484,25 @@
         "internalType": "struct Disputepool.Dispute",
         "name": "",
         "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "disputeId",
+        "type": "uint256"
+      }
+    ],
+    "name": "isValidDispute",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
       }
     ],
     "stateMutability": "view",
@@ -404,7 +524,7 @@
         "type": "uint8"
       },
       {
-        "internalType": "uint8",
+        "internalType": "enum Disputepool.Proposal",
         "name": "winningProposal",
         "type": "uint8"
       },

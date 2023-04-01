@@ -5,12 +5,11 @@ import NotArbiter from "../components/NotArbiter";
 import RenderOnArbiter from "../components/RenderOnArbiter";
 import Meta from "../components/seo/Meta";
 import Unauthorized from "../components/Unauthorized";
-import { CREATED } from "../constants/constants";
 import { useResolutioBackdropContext } from "../context/ResolutioBackdropContext";
 import { useResolutioContext } from "../context/ResolutioContext";
 import DisputePool from "../integrations/DisputePool";
 
-const UpcomingDisputes = () => {
+const DisputeDecision = () => {
   const { address } = useResolutioContext();
   const { openBackdrop, closeBackdrop } = useResolutioBackdropContext();
   const [upComingDisputes, setUpComingDisputes] = useState([]);
@@ -21,7 +20,7 @@ const UpcomingDisputes = () => {
       if (!address) {
         return;
       }
-      openBackdrop("Hold on, Fetching Arbiter information...");
+      openBackdrop("Hold on, Fetching Admin Arbiter information...");
       try {
         const disputeSystem = new DisputePool();
 
@@ -71,14 +70,11 @@ const UpcomingDisputes = () => {
 
         // TODO: Remove this after testing
         console.log(
-          "🚀 ~ file: upcoming-disputes.js ~ line 70 ~ mappedDisputes.forEach ~ mappedDisputes",
           mappedDisputes
         );
 
         // Filter the disputes based on state(CREATED === Upcoming)
-        const upcomingDisputesMapped = mappedDisputes.filter(
-          (dispute) => dispute.state === CREATED
-        );
+        const upcomingDisputesMapped = mappedDisputes
 
         // Filter the disputes based on arbiter is selected for decision making
         const arbiterDisputesMapped = mappedDisputes.filter((dispute) =>
@@ -98,17 +94,17 @@ const UpcomingDisputes = () => {
 
   return (
     <>
-      <Meta title="Upcoming Disputes" />
+      <Meta title="Admin: Dispute Decisions" />
       <RenderOnArbiter>
         {upComingDisputes.length > 0 && (
           <Box>
-            <Typography variant="h1">Upcoming Disputes</Typography>
+            <Typography variant="h1">Admin: Dispute Decisions</Typography>
             <DisputesList disputes={upComingDisputes} />
           </Box>
         )}
         {arbiterDisputes.length > 0 && (
           <Box>
-            <Typography variant="h1">Arbiter Disputes</Typography>
+            <Typography variant="h1">Admin: Dispute Decisions</Typography>
             <DisputesList disputes={arbiterDisputes} />
           </Box>
         )}
@@ -119,4 +115,4 @@ const UpcomingDisputes = () => {
   );
 };
 
-export default UpcomingDisputes;
+export default DisputeDecision;

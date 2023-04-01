@@ -9,15 +9,18 @@ const DisputeItem = ({ dispute }) => {
   return (
     <Card
       sx={{
-        minWidth: 275,
         p: 2,
+        display: "flex",
+        width: "100%",
+        justifyContent: "space-between",
+        flexDirection: "column",
       }}
     >
       <CardContent>
         <Typography variant="h5" gutterBottom>
-          {`Dispute ${dispute.disputeId._hex} ${dispute.title}`}
+          {`Dispute ${dispute.disputeId}`}
         </Typography>
-        <Typography component="div">{`Test Description ${dispute.description}`}</Typography>
+        <Typography component="div">{dispute.description}</Typography>
       </CardContent>
       <CardActions>
         <>

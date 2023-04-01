@@ -1,29 +1,12 @@
-import CloseIcon from "@mui/icons-material/Close";
-import {
-  Alert,
-  Box,
-  Button,
-  Grid,
-  IconButton,
-  Snackbar,
-  Stack,
-  TextField,
-} from "@mui/material";
-import { useCallback, useEffect, useState } from "react";
-import AttachEvidence from "./AttachEvidence";
-
-import { DisputePool } from "../../integrations/DisputePool";
-
-import Backdrop from "@mui/material/Backdrop";
-import CircularProgress from "@mui/material/CircularProgress";
-
-// const client = create('https://ipfs.infura.io:5001/api/v0');
-
+import { Box, Button, Grid, TextField } from "@mui/material";
 import { File, NFTStorage } from "nft.storage";
-const client = new NFTStorage({
-  endpoint: "https://api.nft.storage",
-  token: process.env.NEXT_PUBLIC_NFT_STORAGE_IPFS_KEY,
-});
+import { useSnackbar } from "notistack";
+import { useCallback, useState } from "react";
+import { NFT_STORAGE_IPFS_KEY } from "../../config";
+import { useResolutioBackdropContext } from "../../context/ResolutioBackdropContext";
+import DisputePool from "../../integrations/DisputePool";
+import AttachEvidence from "./AttachEvidence";
+import DisputeCreationSuccess from "./DisputeCreationSuccess";
 
 const defaultValues = {
   nft_id: "",
@@ -32,41 +15,21 @@ const defaultValues = {
   info: "",
   subject: "",
   case_details: "",
-  attached_files:0,
+  attached_files: 0,
   files: [],
 };
 
 const DisputeResolutionForm = () => {
+  const { enqueueSnackbar } = useSnackbar();
+  const { openBackdrop, closeBackdrop } = useResolutioBackdropContext();
   const [formValues, setFormValues] = useState(defaultValues);
-  const [isClient, setIsClient] = useState(false);
-  const [openAlert, setOpenAlert] = useState(false);
-  const [openLoader, setOpenLoader] = useState(false);
-  console.log(isClient);
+  const [isDisputeCreated, setDisputeCreated] = useState(false);
 
-  const handleOpenAlert = () => {
-    setOpenAlert(true);
-  };
-
-  const handleCloseAlert = () => {
-    setOpenAlert(false);
-  };
-
-  const handleCloseLoader = () => {
-    setOpenLoader(false);
-  };
-  const handleOpenLoader = () => {
-    setOpenLoader(true);
-  };
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  const uploadToIpfs = useCallback(async () => {
-    handleOpenLoader();
-    let pdfContent;
-    try {
-      pdfContent = {
+  const createDispute = useCallback(() => {
+    const createDisputeAsync = async () => {
+      openBackdrop("Hold on, while we create your dispute...");
+      // Object for creating Dispute JSON
+      const disputeObject = {
         nftID: formValues["nft_id"],
         nftURL: formValues["nft_url"],
         marketplace: formValues["marketplace"],
@@ -74,92 +37,44 @@ const DisputeResolutionForm = () => {
         subject: formValues["subject"],
         details: formValues["case_details"],
         additionalInfo: formValues["additional_details"],
-        attachedFiles: formValues["attached_files"]
-      }
-      console.log(pdfContent);
-    } catch (error) {
-      console.log("error in data");
-      handleCloseLoader();
-      handleOpenAlert();
-    }
-    try {
-      let fileArray = [
+        attachedFiles: formValues["attached_files"],
+      };
+      // File list for uploading to IPFS
+      const fileList = [
         new File(
           [`Resolutio case created on ${new Date().toTimeString()}`],
           "description.txt"
         ),
-        new File([JSON.stringify(pdfContent, null, 2)], "dispute.json"),
+        new File([JSON.stringify(disputeObject, null, 2)], "dispute.json"),
+        ...formValues.files.map((file) => new File([file], file?.name)),
       ];
-      if (formValues.files.length > 0) {
-        formValues.files.forEach((item) => {
-          fileArray.push(new File([item], item?.name));
+
+      try {
+        const client = new NFTStorage({
+          endpoint: "https://api.nft.storage",
+          token: NFT_STORAGE_IPFS_KEY,
         });
-      }
-      const cid = await client.storeDirectory(fileArray);
-      console.log(cid);
+        const disputePoolInstance = new DisputePool();
+        // Store Evidence on IPFS
+        const cid = await client.storeDirectory(fileList);
+        const ipfsURL = `https://ipfs.io/ipfs/${cid}`;
+        // Create dispute on Blockchain
+        await disputePoolInstance.createDispute(cid);
 
-      let ipfsURL = `https://ipfs.io/ipfs/${cid}`;
-
-      console.log('ipfsURL', ipfsURL);
-      //The Dispute Pool file is now a class that exposes necessary code
-      const disputePoolInstance = new DisputePool();
-      await disputePoolInstance.createDispute(ipfsURL);
-
-      if (cid) {
+        setDisputeCreated(true);
         clearForm();
+      } catch (error) {
+        console.log(error);
+        enqueueSnackbar(
+          "An error occurred while creating dispute. Please try again.",
+          { variant: "error" }
+        );
+      } finally {
+        closeBackdrop();
       }
-    } catch (error) {
-      console.log(error);
-      console.log(error.message);
-      handleOpenAlert();
-      handleCloseLoader();
-    }
-
-    handleCloseLoader();
-  }, [clearForm, formValues]);
-
-  const createPDF = useCallback(() => {
-    uploadToIpfs(formValues);
-
-    //return;
-
-    // ReactPDF.render(<MyDocument />, `${__dirname}/example.pdf`);
-  }, [formValues, uploadToIpfs]);
-
-  /*   const styles = StyleSheet.create({
-    page: {
-      flexDirection: "row",
-      backgroundColor: "#E4E4E4",
-    },
-    section: {
-      margin: 10,
-      padding: 10,
-      flexGrow: 1,
-    },
-    image: {
-      width: 500,
-      height: 500,
-    },
-  }); */
-  // Creating PDF : Future use
-  /*   const MyDocument = () => (
-    <Document>
-      <Page size="A4" style={styles.page}>
-        <Image
-          style={styles.image}
-          src="https://image.shutterstock.com/image-photo/tiny-floating-house-on-lake-600w-1980476267.jpg"
-        />
-        <View style={styles.section}>
-          <Text>NFT ID</Text>
-          <Text>NFT URL</Text>
-          <Text>Marketplace</Text>
-        </View>
-        <View style={styles.section}>
-          <Text>Section #2</Text>
-        </View>
-      </Page>
-    </Document>
-  ); */
+    };
+    createDisputeAsync();
+  }, [clearForm, closeBackdrop, enqueueSnackbar, formValues, openBackdrop]);
 
   const handleInputChange = useCallback(
     (e) => {
@@ -179,16 +94,14 @@ const DisputeResolutionForm = () => {
   const handleFormSubmit = useCallback(
     (event) => {
       event.preventDefault();
-      console.log(formValues);
-      createPDF();
-      // clearForm();
+      createDispute();
     },
-    [formValues, createPDF]
+    [createDispute]
   );
 
   const handleAttachEvidence = useCallback(
     (files) => {
-      formValues["attached_files"]+=1;
+      formValues["attached_files"] += 1;
       setFormValues({
         ...formValues,
         files,
@@ -200,147 +113,115 @@ const DisputeResolutionForm = () => {
   return (
     <Box
       sx={{
-        my: 2,
         maxWidth: "45rem",
         margin: "2rem auto",
       }}
     >
-      {openAlert && (
-        <Snackbar
-          open={openAlert}
-          autoHideDuration={6000}
-          onClose={handleCloseAlert}
-        >
-          <Alert variant="filled" severity="error">
-            Error creating dispute. Please try again.
-            <IconButton
-              aria-label="close"
-              color="inherit"
-              sx={{ p: 0.5 }}
-              onClick={handleCloseAlert}
-            >
-              <CloseIcon />
-            </IconButton>
-          </Alert>
-        </Snackbar>
+      {!isDisputeCreated && (
+        <form onSubmit={handleFormSubmit}>
+          <Grid container spacing={2} direction="column">
+            <Grid item>
+              <TextField
+                id="nft_id-input"
+                name="nft_id"
+                label="NFT (ASSET) ID"
+                type="text"
+                required
+                fullWidth
+                value={formValues.nft_id}
+                onChange={handleInputChange}
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                id="nft_url-input"
+                name="nft_url"
+                label="NFT URL"
+                required
+                fullWidth
+                type="url"
+                value={formValues.nft_url}
+                onChange={handleInputChange}
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                id="marketplace-input"
+                name="marketplace"
+                label="Marketplace"
+                type="text"
+                fullWidth
+                value={formValues.marketplace}
+                onChange={handleInputChange}
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                id="info-input"
+                name="info"
+                label="Information Pertaining to the Concerned Parties"
+                type="text"
+                fullWidth
+                value={formValues.info}
+                onChange={handleInputChange}
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                id="subject-input"
+                name="subject"
+                label="Subject Matter(i.e. Art, Music, Document, etc.)"
+                type="text"
+                fullWidth
+                value={formValues.subject}
+                onChange={handleInputChange}
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                id="case_details-input"
+                name="case_details"
+                label="Case Details"
+                type="text"
+                fullWidth
+                value={formValues.case_details}
+                onChange={handleInputChange}
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                id="additional_details-input"
+                name="additional_details"
+                label="Additional Details"
+                multiline
+                rows={4}
+                fullWidth
+                value={formValues.additional_details}
+                onChange={handleInputChange}
+              />
+            </Grid>
+            <Grid item>
+              <AttachEvidence setFiles={handleAttachEvidence} />
+              <ul>
+                {formValues.files.map((file) => (
+                  <li key={file.size}>{file.name}</li>
+                ))}
+              </ul>
+            </Grid>
+            <Grid item>
+              <Button
+                variant="contained"
+                color="primary"
+                type="submit"
+                fullWidth
+              >
+                Submit
+              </Button>
+            </Grid>
+          </Grid>
+        </form>
       )}
-      <Backdrop
-        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={openLoader}
-      >
-        <Stack spacing={2} alignItems="center">
-          <>Please wait while dispute is being created</>
-          <CircularProgress color="primary" />
-        </Stack>
-      </Backdrop>
-      {/* {isClient && <PDFViewer>
-        <MyDocument />
-      </PDFViewer>}
-
-      {isClient && (
-        <PDFDownloadLink document={<MyDocument />} fileName="fee_acceptance.pdf">
-          {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
-        </PDFDownloadLink>
-      )} */}
-
-      {/* https://react-pdf.org/ */}
-      <form onSubmit={handleFormSubmit}>
-        <Grid container spacing={2} direction="column">
-          <Grid item>
-            <TextField
-              id="nft_id-input"
-              name="nft_id"
-              label="NFT (ASSET) ID"
-              type="text"
-              required
-              fullWidth
-              value={formValues.nft_id}
-              onChange={handleInputChange}
-            />
-          </Grid>
-          <Grid item>
-            <TextField
-              id="nft_url-input"
-              name="nft_url"
-              label="NFT URL"
-              required
-              fullWidth
-              type="url"
-              value={formValues.nft_url}
-              onChange={handleInputChange}
-            />
-          </Grid>
-          <Grid item>
-            <TextField
-              id="marketplace-input"
-              name="marketplace"
-              label="Marketplace"
-              type="text"
-              fullWidth
-              value={formValues.marketplace}
-              onChange={handleInputChange}
-            />
-          </Grid>
-          <Grid item>
-            <TextField
-              id="info-input"
-              name="info"
-              label="Information Pertaining to the Concerned Parties"
-              type="text"
-              fullWidth
-              value={formValues.info}
-              onChange={handleInputChange}
-            />
-          </Grid>
-          <Grid item>
-            <TextField
-              id="subject-input"
-              name="subject"
-              label="Subject Matter(i.e. Art, Music, Document, etc.)"
-              type="text"
-              fullWidth
-              value={formValues.subject}
-              onChange={handleInputChange}
-            />
-          </Grid>
-          <Grid item>
-            <TextField
-              id="case_details-input"
-              name="case_details"
-              label="Case Details"
-              type="text"
-              fullWidth
-              value={formValues.case_details}
-              onChange={handleInputChange}
-            />
-          </Grid>
-          <Grid item>
-            <TextField
-              id="additional_details-input"
-              name="additional_details"
-              label="Additional Details"
-              multiline
-              rows={4}
-              fullWidth
-              value={formValues.additional_details}
-              onChange={handleInputChange}
-            />
-          </Grid>
-          <Grid item>
-            <AttachEvidence setFiles={handleAttachEvidence} />
-            <ul>
-              {formValues.files.map((file) => (
-                <li key={file.size}>{file.name}</li>
-              ))}
-            </ul>
-          </Grid>
-          <Grid item>
-            <Button variant="contained" color="primary" type="submit" fullWidth>
-              Submit
-            </Button>
-          </Grid>
-        </Grid>
-      </form>
+      {isDisputeCreated && <DisputeCreationSuccess />}
     </Box>
   );
 };

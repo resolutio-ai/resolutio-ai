@@ -3,15 +3,14 @@ import ForumIcon from "@mui/icons-material/Forum";
 import SchoolIcon from "@mui/icons-material/School";
 import { Box, Grid, IconButton, Typography } from "@mui/material";
 import Link from "next/link";
-import React from "react";
-import { DISCORD_LINK } from "../constants/constants";
+import { DISCORD_LINK } from "../../constants/constants";
 import {
   DISCORD_TEXT,
   DISPUTE_TEXT,
   RESED_TEXT,
   WELCOME_DESC,
   WELCOME_HEADING,
-} from "../constants/strings";
+} from "../../constants/strings";
 
 const useStyles = () => ({
   iconStyles: {

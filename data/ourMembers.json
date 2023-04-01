@@ -28,5 +28,11 @@
     "imageSrc": "/team/anish.png",
     "name": "Anish Praveen",
     "profileURL": "https://www.linkedin.com/in/anishprvn/"
+  },
+  {
+    "id": 6,
+    "imageSrc": "/team/rashmi.jpg",
+    "name": "Rashmi Abbigeri",
+    "profileURL": "https://www.linkedin.com/in/rashmi-v-abbigeri/"
   }
 ]
