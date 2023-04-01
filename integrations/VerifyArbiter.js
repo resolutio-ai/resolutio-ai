@@ -2,7 +2,7 @@ import { ethers } from "ethers";
 import { ARBITER_WHITELISTER_CONTRACT_ADDR } from "../config";
 import arbiter from "../contracts/ArbiterNFT/ArbiterNFT.json";
 
-const verifyArbiter = async (account_addr) => {
+const _createArbiterVerificationContractInstance = async () => {
   const { ethereum } = window;
 
   //if none is found, it means that a user does not
@@ -15,13 +15,36 @@ const verifyArbiter = async (account_addr) => {
   const signer = provider.getSigner();
 
   //contract initialization: create an instance of the contract
-  const arbiterNFTContract = new ethers.Contract(
+  return new ethers.Contract(
     ARBITER_WHITELISTER_CONTRACT_ADDR,
     arbiter.abi,
     signer
   );
+}
 
-  return arbiterNFTContract.verifyUser(account_addr);
+const verifyArbiter = async (account_addr) => {
+  const contract = await _createArbiterVerificationContractInstance();
+  return contract.verifyUser(account_addr);
 };
 
-export { verifyArbiter };
+const transferOwnership = async (newOwnersAddress)  => {
+  const contract = await _createArbiterVerificationContractInstance();
+  return await contract.transferOwnership(newOwnersAddress);
+}
+
+const getContractOwner = async () => {
+  const contract = await _createArbiterVerificationContractInstance();
+  return await contract.owner();
+}
+
+const addAUserToWhiteList = async (userAddress) => {
+  const contract = await _createArbiterVerificationContractInstance();
+  return await contract.addUser(userAddress);
+}
+
+export { 
+  verifyArbiter, 
+  transferOwnership, 
+  getContractOwner, 
+  addAUserToWhiteList,
+};
