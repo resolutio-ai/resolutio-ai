@@ -2,6 +2,8 @@ import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import HistoryEduIcon from "@mui/icons-material/HistoryEdu";
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+
 import {
   Avatar,
   Box,
@@ -15,12 +17,14 @@ import { useCallback, useState } from "react";
 import RenderOnAnonymous from "./RenderOnAnonymous";
 import RenderOnArbiter from "./RenderOnArbiter";
 import RenderOnAuthenticated from "./RenderOnAuthenticated";
+import { useResolutioContext } from "../context/ResolutioContext";
 
 const LoginModule = ({ connect, disconnect, router, size = 36 }) => {
   const theme = useTheme();
   const { palette } = theme;
   const [anchorEl, setAnchorEl] = useState(null);
   const menuOpen = Boolean(anchorEl);
+  const { isAdmin } = useResolutioContext();
 
   const handleOpenMenu = useCallback(
     (event) => {
@@ -38,6 +42,14 @@ const LoginModule = ({ connect, disconnect, router, size = 36 }) => {
       e.preventDefault();
       handleCloseMenu();
       router.push("/profile");
+    },
+    [handleCloseMenu, router]
+  );
+  const handleAdmin = useCallback(
+    (e) => {
+      e.preventDefault();
+      handleCloseMenu();
+      router.push("/admin");
     },
     [handleCloseMenu, router]
   );
@@ -115,6 +127,14 @@ const LoginModule = ({ connect, disconnect, router, size = 36 }) => {
                 Profile
               </Typography>
             </MenuItem>
+            {isAdmin && (
+              <MenuItem onClick={handleAdmin}>
+                <AdminPanelSettingsIcon color="primary" sx={{ mr: 1 }} />
+                <Typography variant="button" color="primary">
+                  Admin
+                </Typography>
+              </MenuItem>
+            )}
             <MenuItem onClick={handleDisconnect}>
               <ExitToAppIcon color="primary" sx={{ mr: 1 }} />
               <Typography variant="button" color="primary">
