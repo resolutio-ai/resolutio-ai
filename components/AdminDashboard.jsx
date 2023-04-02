@@ -6,6 +6,7 @@ import { useState } from "react";
 import styled from "@emotion/styled";
 import AddIcon from '@mui/icons-material/Add';
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
+import { transferOwnership } from "../integrations/VerifyArbiter";
 
 const useStyles = (theme) => ({
   textLine: {
@@ -48,6 +49,12 @@ const AdminDashboard = () => {
   async function handleAdminChange(event) {
     event.preventDefault();
     console.log('newAdmin:', newAdmin);
+    try {
+      const res = await transferOwnership(newAdmin);
+      console.log('response', res);
+    } catch (error) {
+
+    }
     setnewAdminAddr('')
   };
 
