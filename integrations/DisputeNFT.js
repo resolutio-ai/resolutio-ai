@@ -49,6 +49,12 @@ class DisputeNFT {
     const response = await airDropTokenTx.wait();
     return response;
   }
+
+  async transferOwnership(newOwnersAddress) {
+    console.log('inside transferOwnership dispute nft');
+    const contract = await this._createDecisionNFTContractInstance();
+    return await contract.transferOwnership(newOwnersAddress);
+  }
 }
 
 export default DisputeNFT;
