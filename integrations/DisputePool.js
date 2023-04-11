@@ -59,9 +59,9 @@ class DisputePool {
   _getStake = async () => ethers.utils.parseUnits(STAKE, "ether");
 
   //Get Current Admin
-  async getAdmin(){
-     const contract = await this._createDisputeSystemContractInstance();
-     return await contract.owner();
+  async getAdmin() {
+    const contract = await this._createDisputeSystemContractInstance();
+    return await contract.owner();
   }
 
   //Create a dispute
@@ -218,6 +218,12 @@ class DisputePool {
     let txn = await contract.changeDisputeState(disputeId, move);
     let response = await txn.wait();
     return response;
+  }
+
+  async transferOwnership(newOwnersAddress) {
+    console.log('inside transferOwnership dispute system');
+    const contract = await this._createDisputeSystemContractInstance();
+    return await contract.transferOwnership(newOwnersAddress);
   }
 
   //get Random Values
