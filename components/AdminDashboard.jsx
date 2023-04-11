@@ -6,7 +6,9 @@ import { useState } from "react";
 import styled from "@emotion/styled";
 import AddIcon from '@mui/icons-material/Add';
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
-import { transferOwnership } from "../integrations/VerifyArbiter";
+import { getContractOwner, transferOwnership } from "../integrations/VerifyArbiter";
+import DisputePool from "../integrations/DisputePool";
+import DisputeNFT from "../integrations/DisputeNFT";
 
 const useStyles = (theme) => ({
   textLine: {
@@ -50,8 +52,19 @@ const AdminDashboard = () => {
     event.preventDefault();
     console.log('newAdmin:', newAdmin);
     try {
+      const arbOwner= await getContractOwner();
+      console.log('arbOwner:', arbOwner);
       const res = await transferOwnership(newAdmin);
-      console.log('response', res);
+      console.log('response first', res);
+      
+      const disputeSystem = new DisputePool();
+      const resDispute = await disputeSystem.transferOwnership(newAdmin);
+      console.log('resDispute', resDispute);
+      
+      const disputeNFT = new DisputeNFT();
+      const resNFT = await disputeNFT.transferOwnership(newAdmin);
+      console.log('response', resNFT);
+
     } catch (error) {
 
     }
