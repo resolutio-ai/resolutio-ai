@@ -52,6 +52,7 @@ const AdminDashboard = () => {
     event.preventDefault();
     console.log('newAdmin:', newAdmin);
     try {
+      console.log('test admin change');
       const arbOwner= await getContractOwner();
       console.log('arbOwner:', arbOwner);
       const res = await transferOwnership(newAdmin);
