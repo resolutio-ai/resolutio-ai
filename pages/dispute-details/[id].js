@@ -18,6 +18,7 @@ import { useResolutioBackdropContext } from "../../context/ResolutioBackdropCont
 import { useResolutioContext } from "../../context/ResolutioContext";
 import DisputeNFT from "../../integrations/DisputeNFT";
 import DisputePool from "../../integrations/DisputePool";
+import CountDownTimer from "../../components/CountDownTimer";
 
 const DisputeDetails = () => {
 
@@ -196,6 +197,11 @@ const DisputeDetails = () => {
             },
           };
         }, {});
+        const endTimestamp = parseInt(createdAt, 10);
+        const time = new Date(endTimestamp * 1000);
+        time.setSeconds(time.getSeconds() + 3 * 86400); // 3 days timer
+        let arbiterSelectionexpiryTimestamp = time;
+        console.log('expiryTimestamp', arbiterSelectionexpiryTimestamp);
 
         setDispute({
           description: additionalDetails.info,
@@ -210,6 +216,7 @@ const DisputeDetails = () => {
           uri,
           winningProposal,
           additionalDetails,
+          arbiterSelectionexpiryTimestamp
         });
       } catch (error) {
         console.log(error);
@@ -241,6 +248,8 @@ const DisputeDetails = () => {
             <Typography variant="h5" sx={{ textAlign: "center" }}>
               {dispute.description}
             </Typography>
+
+            <CountDownTimer expiryTimestamp={dispute.arbiterSelectionexpiryTimestamp} text='arbiter selection' />
             <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               {isAdmin && (
                 <Box sx={{ borderStyle: 'solid', borderWidth: '0.5px', borderColor: 'yellowgreen', padding: '10px 15px' }}>

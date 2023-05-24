@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { useTimer } from "react-timer-hook";
 
-const CountDownTimer = ({ expiryTimestamp }) => {
+const CountDownTimer = ({ expiryTimestamp, text }) => {
   const { seconds, minutes, hours, days, isRunning } = useTimer({
     expiryTimestamp,
     onExpire: () => console.warn("onExpire called"),
@@ -12,6 +12,7 @@ const CountDownTimer = ({ expiryTimestamp }) => {
         <Box sx={{ textAlign: "center", mb: 1 }}>
           <Box sx={{ fontSize: "1rem" }}>
             <span>{`${days} days : ${hours} hours: ${minutes} minutes: ${seconds} seconds`}</span>
+            <span>{` left for ${text}`}</span>
           </Box>
         </Box>
       )}
