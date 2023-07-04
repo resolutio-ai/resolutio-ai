@@ -40,7 +40,7 @@ const DetailsResolutionForm = () => {
           "description.txt"
         ),
         new File([JSON.stringify(arbiterObject, null, 2)], "arbiter.json"),
-        ...formValues.files.map((file) => new File([file], file?.name)),
+        //...formValues.files.map((file) => new File([file], file?.name)),
       ];
 
       try {

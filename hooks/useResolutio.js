@@ -51,7 +51,7 @@ export const useResolutio = () => {
         } catch (error) {
           console.log(error);
           // Toast for incorrect network
-          enqueueSnackbar("Please set network to Polygon Mumbai Testnet", {
+          enqueueSnackbar("Please set network to Filecoin Calibration Testnet", {
             variant: "warning",
           });
           isArbiter = false;

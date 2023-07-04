@@ -14,7 +14,7 @@ const DetailsCreationSuccess = () => {
           Your Details has been successfully created!
         </Typography>
         <SmartLink href="/profile" isExternal={false}>
-          <Button variant="contained">View all Detailss</Button>
+          <Button variant="contained">View all Details</Button>
         </SmartLink>
       </Box>
     </>
