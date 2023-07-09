@@ -1,6 +1,7 @@
 import ForumIcon from "@mui/icons-material/Forum";
 import MenuIcon from "@mui/icons-material/Menu";
 import SchoolIcon from "@mui/icons-material/School";
+import DescriptionIcon from "@mui/icons-material/Description";
 import {
   AppBar,
   Box,
@@ -28,6 +29,13 @@ const pages = [
     url: "/raised-disputes",
     isExternal: false,
   }, */
+  {
+    id: 1,
+    text: "Resources",
+    url: "https://resolutio.notion.site/Res-Ed-Resources-17e8661544f04373a89e18330d885643?pvs=4",
+    isExternal: true,
+    icon: <DescriptionIcon color="primary" />,
+  },
   {
     id: 2,
     text: "Res Ed",
