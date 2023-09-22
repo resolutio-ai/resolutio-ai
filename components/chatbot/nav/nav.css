@@ -1,0 +1,23 @@
+.nav {
+  max-width: 100px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 0 25px;
+  padding-top: 30px;
+}
+.nav img {
+  display: block;
+  max-width: 100%;
+  cursor: pointer;
+}
+
+.nav__blocks1 {
+  margin: auto;
+  cursor: pointer;
+  color: grey;
+}
+
+.nav__blocks1:hover {
+  color: blue;
+}

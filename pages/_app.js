@@ -14,10 +14,13 @@ import { primaryMain } from "../styles/colors";
 import "../styles/globals.css";
 import resolutioTheme from "../styles/theme/resolutioTheme";
 import createEmotionCache from "../utility/createEmotionCache";
+import '../components/chatbot/Chatbot.css'
+
 
 // Huddle
 import { HuddleClientProvider, getHuddleClient } from '@huddle01/huddle01-client';
 import { HUDDLE_KEY } from "../config";
+import ChatFab from "../components/chatbot/chatFab";
 
 const clientSideEmotionCache = createEmotionCache();
 NProgress.configure({ showSpinner: false });
@@ -26,7 +29,7 @@ const MyApp = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
   const huddleClient = getHuddleClient(HUDDLE_KEY)
-  
+
   useEffect(() => {
     Router.events.on("routeChangeStart", () => NProgress.start());
     Router.events.on("routeChangeComplete", () => NProgress.done());
@@ -49,6 +52,9 @@ const MyApp = (props) => {
                 <LoadingBackdrop />
                 <Layout>
                   <NextNProgress color={primaryMain} />
+                  <div className="">
+                    <ChatFab />
+                  </div>
                   <Component {...pageProps} />
                 </Layout>
               </ThemeProvider>
