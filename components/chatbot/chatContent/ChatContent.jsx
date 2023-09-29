@@ -19,6 +19,7 @@ export default class ChatContent extends Component {
       image: mobileLogo,
       type: "other",
       msg: "Hello, I am Res. How may I help you today?",
+      time: new Date().getTime(),
     },
   ];
 
@@ -83,6 +84,7 @@ export default class ChatContent extends Component {
         type: "",
         msg: userText,
         image: metamask,
+        time: new Date().getTime(),
       });
       this.setState({ chat: [...this.chatItms] });
       this.scrollToBottom();
@@ -102,6 +104,7 @@ export default class ChatContent extends Component {
         type: "other",
         msg: data.conversationIds[0].messages[0].content.parts[1],
         image: mobileLogo,
+        time: data.conversationIds[0].messages[0].timeStamp,
       });
       this.setState({ chat: [...this.chatItms] });
       this.scrollToBottom();
