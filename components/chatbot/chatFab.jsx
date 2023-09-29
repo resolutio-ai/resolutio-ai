@@ -2,7 +2,7 @@ import Fab from '@mui/material/Fab';
 import { Component } from "react";
 import ChatBody from "./chatbody/ChatBody";
 
-import AddIcon from '@mui/icons-material/Add';
+import ChatIcon from '@mui/icons-material/Chat';
 import { Dialog, IconButton, Toolbar } from "@mui/material";
 
 import CloseIcon from '@mui/icons-material/Close';
@@ -68,7 +68,7 @@ export default class ChatFab extends Component {
           </Dialog>
 
           <Fab color="primary" size="medium" aria-label="add" onClick={this.handleClickOpen} className="chat-fab">
-            <AddIcon />
+            <ChatIcon />
           </Fab>
         </div>
       </>
