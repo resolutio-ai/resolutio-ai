@@ -54,7 +54,6 @@ export default class ChatContent extends Component {
   }
 
   sendMsgToModel = async (msg) => {
-    // const axios = require('axios');
     let data = JSON.stringify({
       userId: "123456",
       messageContent: msg,
@@ -66,41 +65,32 @@ export default class ChatContent extends Component {
 
     let config = {
       method: "post",
-      // maxBodyLength: Infinity,
       url: "https://resolutio-chatbot.onrender.com/api/v1.0/conversation",
       headers: {
         "Content-Type": "application/json",
       },
       data: data,
     };
-
-    // await new Promise(resolve => setTimeout(resolve, 1000)); // wait for 1 second before calling
     const response = await axios.request(config);
-    // .then((response) => {
-    //   console.log(JSON.stringify(response.data));
-    //   return
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    // });
     return response.data;
   };
 
   sendMessage = async () => {
-    // ToDo: call service for sending message
-    console.log("Sending message", this.state.msg);
-    if (this.state.msg != "") {
+    const userText = this.state.msg;
+    if (userText != "") {
       this.chatItms.push({
         key: this.chatItms.length + 1,
         type: "",
-        msg: this.state.msg,
+        msg: userText,
         image: metamask,
       });
       this.setState({ chat: [...this.chatItms] });
       this.scrollToBottom();
       this.setState({ msg: "" });
     }
-    let data = await this.sendMsgToModel(this.state.msg);
+    if (!userText) return;
+    console.log("Sending message", this.state.msg);
+    let data = await this.sendMsgToModel(userText);
     console.log(
       "data from alex",
       data.conversationIds[0].messages[0].content.parts
