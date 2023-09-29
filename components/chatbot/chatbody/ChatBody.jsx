@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 // import "./chatBody.module.css";
-import ChatList from "../chatList/ChatList";
+// import ChatList from "../chatList/ChatList";
 import ChatContent from "../chatContent/ChatContent";
-import UserProfile from "../userProfile/UserProfile";
+//import UserProfile from "../userProfile/UserProfile";
 
 export default class ChatBody extends Component {
   render() {
     return (
       <div className="main__chatbody">
-        <ChatList />
+        {/* <ChatList /> */}
         <ChatContent />
         {/* <UserProfile /> */}
       </div>
