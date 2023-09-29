@@ -78,21 +78,34 @@ export default class ChatContent extends Component {
 
   sendMessage = async () => {
     const userText = this.state.msg;
-    if (userText != "") {
-      this.chatItms.push({
-        key: this.chatItms.length + 1,
-        type: "",
-        msg: userText,
-        image: metamask,
-        time: new Date().getTime(),
-      });
-      this.setState({ chat: [...this.chatItms] });
-      this.scrollToBottom();
-      this.setState({ msg: "" });
-    }
+
     if (!userText) return;
+
+    this.chatItms.push(
+      ...[
+        {
+          key: this.chatItms.length + 1,
+          type: "",
+          msg: userText,
+          image: metamask,
+          time: new Date().getTime(),
+        },
+        {
+          key: this.chatItms.length + 1,
+          type: "other",
+          msg: "typing...",
+          image: mobileLogo,
+          time: null,
+        },
+      ]
+    );
+    this.setState({ chat: [...this.chatItms] });
+    this.scrollToBottom();
+    this.setState({ msg: "" });
+
     console.log("Sending message", this.state.msg);
     let data = await this.sendMsgToModel(userText);
+    this.chatItms.pop();
     console.log(
       "data from alex",
       data.conversationIds[0].messages[0].content.parts

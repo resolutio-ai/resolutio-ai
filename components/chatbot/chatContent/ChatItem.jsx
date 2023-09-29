@@ -7,7 +7,7 @@ export default class ChatItem extends Component {
     super(props);
   }
   render() {
-    const msgTime = moment(this.props.time).fromNow();
+    const msgTime = this.props.time ? moment(this.props.time).fromNow() : null;
     return (
       <div
         style={{ animationDelay: `0.8s` }}
@@ -15,9 +15,11 @@ export default class ChatItem extends Component {
       >
         <div className="chat__item__content">
           <div className="chat__msg">{this.props.msg}</div>
-          <div className="chat__meta">
-            <span>{msgTime}</span>
-          </div>
+          {msgTime && (
+            <div className="chat__meta">
+              <span>{msgTime}</span>
+            </div>
+          )}
         </div>
         <Avatar isOnline="active" image={this.props.image} />
       </div>
