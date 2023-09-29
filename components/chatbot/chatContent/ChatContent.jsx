@@ -9,27 +9,24 @@ import ChatList from "../chatList/ChatList";
 // import mobileLogo from "../public/mobile_logo.png";
 import mobileLogo from "../../../public/mobile_logo.png";
 import metamask from "../../../public/metamask.svg";
-import SendIcon from '@mui/icons-material/Send';
+import SendIcon from "@mui/icons-material/Send";
 
 export default class ChatContent extends Component {
-
-
   messagesEndRef = createRef(null);
   chatItms = [
     {
       key: 1,
       image: mobileLogo,
       type: "other",
-      msg: "Hello, I am Res. How may I help you today?"
+      msg: "Hello, I am Res. How may I help you today?",
     },
-    
   ];
 
   constructor(props) {
     super(props);
     this.state = {
       chat: this.chatItms,
-      msg: ""
+      msg: "",
     };
     this.myRef = React.createRef();
   }
@@ -43,7 +40,7 @@ export default class ChatContent extends Component {
     setTimeout(() => {
       // this.messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
       this.myRef.current.scrollIntoView({ behavior: "smooth" });
-    }, 100)
+    }, 100);
     // this.myRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -56,39 +53,38 @@ export default class ChatContent extends Component {
     this.scrollToBottom();
   }
 
-
   sendMsgToModel = async (msg) => {
     // const axios = require('axios');
     let data = JSON.stringify({
-      "userId": "123456",
-      "messageContent": msg,
-      "conversationId": "string",
-      "timestamp": "Date",
-      "isLoggedIn": false,
-      "authorRole": "User"
+      userId: "123456",
+      messageContent: msg,
+      conversationId: "string",
+      timeStamp: new Date().getTime(),
+      isLoggedIn: false,
+      authorRole: "User",
     });
 
     let config = {
-      method: 'post',
+      method: "post",
       // maxBodyLength: Infinity,
-      url: 'https://resolutio-chatbot.onrender.com/api/v1.0/conversation',
+      url: "https://resolutio-chatbot.onrender.com/api/v1.0/conversation",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      data: data
+      data: data,
     };
 
     // await new Promise(resolve => setTimeout(resolve, 1000)); // wait for 1 second before calling
-    const response = await axios.request(config)
+    const response = await axios.request(config);
     // .then((response) => {
     //   console.log(JSON.stringify(response.data));
-    //   return 
+    //   return
     // })
     // .catch((error) => {
     //   console.log(error);
     // });
     return response.data;
-  }
+  };
 
   sendMessage = async () => {
     // ToDo: call service for sending message
@@ -98,27 +94,29 @@ export default class ChatContent extends Component {
         key: this.chatItms.length + 1,
         type: "",
         msg: this.state.msg,
-        image: metamask
+        image: metamask,
       });
       this.setState({ chat: [...this.chatItms] });
       this.scrollToBottom();
       this.setState({ msg: "" });
     }
     let data = await this.sendMsgToModel(this.state.msg);
-    console.log('data from alex', data.conversationIds[0].messages[0].content.parts);
-    
+    console.log(
+      "data from alex",
+      data.conversationIds[0].messages[0].content.parts
+    );
+
     if (data.conversationIds[0].messages[0].content.parts[1]) {
       this.chatItms.push({
         key: this.chatItms.length + 1,
         type: "other",
         msg: data.conversationIds[0].messages[0].content.parts[1],
-        image: mobileLogo
+        image: mobileLogo,
       });
       this.setState({ chat: [...this.chatItms] });
       this.scrollToBottom();
     }
-  }
-
+  };
 
   onStateChange = (e) => {
     this.setState({ msg: e.target.value });
@@ -130,10 +128,7 @@ export default class ChatContent extends Component {
         <div className="content__header">
           <div className="blocks">
             <div className="current-chatting-user">
-              <Avatar
-                isOnline="active"
-                image={mobileLogo}
-              />
+              <Avatar isOnline="active" image={mobileLogo} />
               <p>Ask our Chatbot</p>
             </div>
           </div>
@@ -174,7 +169,11 @@ export default class ChatContent extends Component {
               onChange={this.onStateChange}
               value={this.state.msg}
             />
-            <button className="btnSendMsg" id="sendMsgBtn" onClick={this.sendMessage}>
+            <button
+              className="btnSendMsg"
+              id="sendMsgBtn"
+              onClick={this.sendMessage}
+            >
               <SendIcon />
             </button>
           </div>
