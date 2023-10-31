@@ -146,14 +146,14 @@ const AppHeader = () => {
                 </Box>
               </Link>
             </Box>
-            <Box>
+            {/* <Box>
               <LoginModule
                 connect={connect}
                 disconnect={disconnect}
                 router={router}
                 size={34}
               />
-            </Box>
+            </Box> */}
           </Box>
           {/* Mobile View End */}
 
@@ -187,11 +187,11 @@ const AppHeader = () => {
                 </SmartLink>
               </Box>
             ))}
-            <LoginModule
+            {/* <LoginModule
               connect={connect}
               disconnect={disconnect}
               router={router}
-            />
+            /> */}
           </Box>
           {/* Desktop Menu */}
         </Toolbar>
