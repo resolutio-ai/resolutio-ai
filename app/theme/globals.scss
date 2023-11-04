@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import 'variables';
+@import 'functions';
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -17,4 +19,30 @@ body {
 
 .content {
   flex: 1 0 auto;
+}
+
+.heading-style {
+  font-size: toRem(60);
+  font-weight: 700;
+  line-height: toRem(76);
+  letter-spacing: 0.5px;
+}
+
+.font-montserra-heading {
+  font-family: var(--font-montserrat);
+  @extend .heading-style;
+}
+
+.font-dm-sans-heading {
+  font-family: var(--font-dm-sans);
+  color: $primary;
+  @extend .heading-style;
+}
+
+.font-dm-sans-text {
+  color: rgba(58, 58, 58, 0.75);
+  font-size: toRem(20);
+  font-weight: 400;
+  line-height: toRem(32);
+  letter-spacing: 0.5px;
 }

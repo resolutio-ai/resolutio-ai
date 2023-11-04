@@ -1,10 +1,18 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import Footer from './components/Footer/Footer';
-import Header from './components/Header/Header';
+import { DM_Sans, Montserrat } from 'next/font/google';
+import { Footer, Header } from './components';
 import './theme/globals.scss';
 
-const inter = Inter({ subsets: ['latin'] });
+const montserrat = Montserrat({
+  weight: '700',
+  subsets: ['latin'],
+  variable: '--font-montserrat',
+});
+
+const dm_sans = DM_Sans({
+  subsets: ['latin'],
+  variable: '--font-dm-sans',
+});
 
 export const metadata: Metadata = {
   title: 'resolutio',
@@ -20,8 +28,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en'>
-      <body className={inter.className}>
+    <html
+      lang='en'
+      className={`${montserrat.variable} ${dm_sans.variable}`}
+      data-theme='winter'
+    >
+      <body>
         <Header />
         <main className='content'>{children}</main>
         <Footer />

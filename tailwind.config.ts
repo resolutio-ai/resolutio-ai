@@ -15,16 +15,9 @@ const config: Config = {
       },
     },
   },
-  plugins: [require('daisyui')],
+  plugins: [require('@tailwindcss/typography'), require('daisyui')],
   daisyui: {
-    themes: [
-      {
-        resolutioTheme: {
-          primary: '#5f437f',
-          secondary: '#974164',
-        },
-      },
-    ],
+    themes: ['winter'],
   },
 };
 export default config;
