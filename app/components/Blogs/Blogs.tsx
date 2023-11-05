@@ -23,7 +23,7 @@ const BlogItem: FC<BlogItemProps> = ({ blog }) => {
       <div className='blog-content order-2 basis-full md:order-1 md:basis-6/12'>
         <h4 className='blog-title mb-4 text-xl font-bold'>{title}</h4>
         <p className='blog-description font-dm-sans-text mb-6'>{description}</p>
-        <button className='btn btn-outline px-8'>See More</button>
+        <button className='btn btn-outline'>See More</button>
       </div>
     </div>
   );
