@@ -31,9 +31,7 @@ body {
 }
 
 .heading-style {
-  font-size: toRem(52);
-  font-weight: 700;
-  line-height: toRem(76);
+  @apply text-4xl;
 }
 
 .font-secondary-heading {
@@ -43,6 +41,7 @@ body {
 
 .font-primary-heading {
   color: $primary;
+  @apply font-bold;
   @extend .ff-primary;
   @extend .heading-style;
 }
