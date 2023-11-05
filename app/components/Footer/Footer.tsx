@@ -13,7 +13,7 @@ const Footer: FC = () => {
             {/* <p>Resolutio</p> */}
           </aside>
           <div className="flex-1 text-center bg-primary font-se">
-            Want to learn more ? Let's talk.
+            {"Want to learn more ? Let's talk."}
           </div>
           <nav className='flex-0 justify-end'>
             {/* <header className="footer-title">Social</header> */}
