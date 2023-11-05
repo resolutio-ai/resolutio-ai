@@ -15,7 +15,7 @@ interface BlogItemProps {
 }
 
 const BlogItem: FC<BlogItemProps> = ({ blog }) => {
-  const { title, description, imageURL } = blog;
+  const { title, description, link, imageURL } = blog;
   return (
     <div className='blog-item mb-10 grid gap-6 md:grid-cols-2'>
       <div className='blog-image-container justify-self-end md:order-2 md:mb-0'>
@@ -24,7 +24,9 @@ const BlogItem: FC<BlogItemProps> = ({ blog }) => {
       <div className='blog-content order-2 basis-full md:order-1 md:basis-6/12'>
         <h4 className='blog-title mb-4 text-xl font-bold'>{title}</h4>
         <p className='blog-description font-dm-sans-text mb-6'>{description}</p>
-        <button className='btn btn-outline'>See More</button>
+        <a className='btn btn-outline' href={link} target='_blank'>
+          See More
+        </a>
       </div>
     </div>
   );
