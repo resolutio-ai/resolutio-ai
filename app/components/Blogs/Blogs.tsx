@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import './Blogs.scss';
+
 interface Blog {
   id: number;
   title: string;
@@ -14,13 +16,14 @@ interface BlogItemProps {
 const BlogItem: FC<BlogItemProps> = ({ blog }) => {
   const { title, description, image } = blog;
   return (
-    <div className='blog-item mb-10 flex'>
-      <div className='blog-content mr-4 basis-full md:basis-6/12'>
-        <h4 className='blog-title font-bold'> {title}</h4>
-        <p className='blog-description'>{description}</p>
+    <div className='blog-item mb-10 grid gap-6 md:grid-cols-2'>
+      <div className='blog-image-container justify-self-end md:order-2 md:mb-0'>
+        <img src={image} alt={title} className='blog-img rounded-md' />
       </div>
-      <div className='blog-image'>
-        <img src={image} alt='blog' width={450} height={250} />
+      <div className='blog-content order-2 basis-full md:order-1 md:basis-6/12'>
+        <h4 className='blog-title mb-4 text-xl font-bold'>{title}</h4>
+        <p className='blog-description font-dm-sans-text mb-6'>{description}</p>
+        <button className='btn btn-outline px-8'>See More</button>
       </div>
     </div>
   );
@@ -53,7 +56,7 @@ const Blogs: FC = () => {
   ];
   return (
     <div className='blogs container mx-auto px-4'>
-      <h1 className='font-montserra-heading'>Blogs</h1>
+      <h1 className='font-montserra-heading mb-10'>Blogs</h1>
       <div className=''>
         {blogs.map((blog) => (
           <BlogItem key={blog.id} blog={blog} />
