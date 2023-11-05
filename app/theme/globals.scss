@@ -10,11 +10,11 @@
   --background-end-rgb: 255, 255, 255;
 }
 
-.ff-sans {
+.ff-primary {
   font-family: var(--font-dm-sans);
 }
 
-.ff-montserrat {
+.ff-secondary {
   font-family: var(--font-montserrat);
 }
 
@@ -23,7 +23,7 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  @extend .ff-sans;
+  @extend .ff-primary;
 }
 
 .content {
@@ -36,26 +36,20 @@ body {
   line-height: toRem(76);
 }
 
-.font-montserra-heading {
-  @extend .ff-montserrat;
+.font-secondary-heading {
+  @extend .ff-secondary;
   @extend .heading-style;
 }
 
-.font-dm-sans-heading {
+.font-primary-heading {
   color: $primary;
-  @extend .ff-sans;
+  @extend .ff-primary;
   @extend .heading-style;
-}
-
-.font-dm-sans-text {
-  color: rgba(58, 58, 58, 0.75);
-  @extend .ff-sans;
-  font-size: toRem(18);
-  font-weight: 400;
 }
 
 .btn {
   @apply rounded;
   @apply h-10;
+  @apply px-8;
   min-height: 2.5rem;
 }
