@@ -30,21 +30,15 @@ body {
   flex: 1 0 auto;
 }
 
-.heading-style {
-  font-size: toRem(52);
-  font-weight: 700;
-  line-height: toRem(76);
-}
-
 .font-secondary-heading {
   @extend .ff-secondary;
-  @extend .heading-style;
+  @apply text-4xl;
 }
 
 .font-primary-heading {
   color: $primary;
   @extend .ff-primary;
-  @extend .heading-style;
+  @apply text-4xl;
 }
 
 .btn {
