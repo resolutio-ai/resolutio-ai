@@ -30,15 +30,20 @@ body {
   flex: 1 0 auto;
 }
 
+.heading-style {
+  @apply text-4xl;
+}
+
 .font-secondary-heading {
   @extend .ff-secondary;
-  @apply text-4xl;
+  @extend .heading-style;
 }
 
 .font-primary-heading {
   color: $primary;
+  @apply font-bold;
   @extend .ff-primary;
-  @apply text-4xl;
+  @extend .heading-style;
 }
 
 .btn {
