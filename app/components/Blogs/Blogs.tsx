@@ -40,7 +40,7 @@ const Blogs: FC = async () => {
   return (
     <div className='blogs container mx-auto px-4'>
       <h1 className='font-secondary-heading my-10'>Blogs</h1>
-      <div className=''>
+      <div className='pb-4'>
         {blogs.map((blog) => (
           <BlogItem key={blog.id} blog={blog} />
         ))}
