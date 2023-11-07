@@ -7,6 +7,7 @@ interface Member {
   name: string;
   linkedinURL: string;
   imageURL: string;
+  mask: string;
 }
 
 interface MemberItemProps {
@@ -14,10 +15,10 @@ interface MemberItemProps {
 }
 
 const MemberItem: FC<MemberItemProps> = ({ member }) => {
-  const { name, imageURL } = member;
+  const { name, imageURL, mask } = member;
   return (
     <div className='our-team-member text-center'>
-      <div className='mask'>
+      <div className='mask' style={{ backgroundColor: mask }}>
         <img src={imageURL} alt={name} className='mx-auto mb-4 h-64' />
       </div>
       <h3 className='mb-2 text-xl font-bold'>{name}</h3>

@@ -3,7 +3,6 @@ $prefix: our-team-container;
 .#{$prefix} {
   background-color: #f4f4f4;
   .mask {
-    background-color: lightblue;
     -webkit-mask-image: url('../../assets/mask.svg');
     mask-image: url('../../assets/mask.svg');
   }
