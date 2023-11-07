@@ -38,7 +38,7 @@ const Blogs: FC = async () => {
   );
   const blogs: Blog[] = await response.json();
   return (
-    <div className='blogs container mx-auto px-4'>
+    <div className='blogs res-container'>
       <h1 className='font-secondary-heading my-10'>Blogs</h1>
       <div className='pb-4'>
         {blogs.map((blog) => (

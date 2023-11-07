@@ -46,6 +46,17 @@ body {
   @extend .heading-style;
 }
 
+.res-container {
+  @apply mx-auto;
+  @apply px-4;
+  @apply w-full;
+  @apply sm:max-w-screen-sm;
+  @apply md:max-w-screen-md;
+  @apply lg:max-w-screen-lg;
+  @apply xl:max-w-6xl;
+  @apply 2xl:max-w-7xl;
+}
+
 .btn {
   @apply rounded;
   @apply h-10;

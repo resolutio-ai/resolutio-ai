@@ -44,7 +44,7 @@ const OurTeam: FC = async () => {
 
   return (
     <div className='our-team-container'>
-      <div className='container mx-auto px-4 py-16'>
+      <div className='res-container py-16'>
         <h1 className='font-primary-heading mb-4'>Meet our Team</h1>
         <div className='our-team grid gap-4 py-4 md:grid-cols-3'>
           {ourMembers.map((member) => (
