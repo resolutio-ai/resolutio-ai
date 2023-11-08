@@ -1,5 +1,6 @@
 import { FC } from 'react';
 
+import Image from 'next/image';
 import './OurTeam.scss';
 
 interface Member {
@@ -19,7 +20,7 @@ const MemberItem: FC<MemberItemProps> = ({ member }) => {
   return (
     <div className='our-team-member text-center'>
       <div className='mask' style={{ backgroundColor: mask }}>
-        <img src={imageURL} alt={name} className='mx-auto mb-4 h-64' />
+        <Image src={imageURL} alt={name} className='mx-auto mb-4 h-64' width={256} height={256} />
       </div>
       <h3 className='mb-2 text-xl font-bold'>{name}</h3>
     </div>

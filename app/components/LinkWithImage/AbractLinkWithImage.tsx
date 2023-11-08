@@ -1,5 +1,6 @@
 import { FC } from 'react';
 
+import Image from 'next/image';
 import './AbractLinkWithImage.scss';
 
 interface AbractLinkWithImageProps {
@@ -28,14 +29,14 @@ const AbractLinkWithImage: FC<AbractLinkWithImageProps> = ({
       <div
         className={`content-container flex items-center justify-center ${contentOrder}`}
       >
-        <div className='content px-4'>
+        <div className='content-cta'>
           <h1 className='font-secondary-heading mb-4'>{heading}</h1>
           {description && <p className='description mb-6'>{description}</p>}
           <button className='btn btn-outline'>{btnText}</button>
         </div>
       </div>
       <div className={`img-container ${imgOrder}`}>
-        <img src={imageURL} alt='Img' className='cover-img' />
+        <Image src={imageURL} alt='Img' className='cover-img' width={500} height={500} />
       </div>
     </div>
   );
