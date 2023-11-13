@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import 'variables';
+@import 'functions';
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+.ff-primary {
+  font-family: var(--font-dm-sans);
+}
+
+.ff-secondary {
+  font-family: var(--font-montserrat);
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  @extend .ff-primary;
+}
+
+.content {
+  flex: 1 0 auto;
+}
+
+.heading-style {
+  @apply text-4xl;
+}
+
+.font-secondary-heading {
+  @extend .ff-secondary;
+  @extend .heading-style;
+}
+
+.font-primary-heading {
+  color: $primary;
+  @apply font-bold;
+  @extend .ff-primary;
+  @extend .heading-style;
+}
+
+.res-container {
+  @apply mx-auto;
+  @apply px-4;
+  @apply w-full;
+  @apply sm:max-w-screen-sm;
+  @apply md:max-w-screen-md;
+  @apply lg:max-w-screen-lg;
+  @apply xl:max-w-6xl;
+  @apply 2xl:max-w-7xl;
+}
+
+.btn {
+  @apply rounded;
+  @apply h-10;
+  @apply px-8;
+  @apply normal-case;
+  min-height: 2.5rem;
+}
