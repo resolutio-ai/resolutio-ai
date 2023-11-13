@@ -95,70 +95,70 @@ export const useResolutio = () => {
   }, [enqueueSnackbar, provider]);
 
   // // Auto connect to the cached provider
-  // useEffect(() => {
-  //   if (web3Modal && web3Modal.cachedProvider) {
-  //     connect();
-  //   }
-  // }, [connect]);
+  useEffect(() => {
+    if (web3Modal && web3Modal.cachedProvider) {
+      connect();
+    }
+  }, [connect]);
 
-  // // EIP-1193 events
-  // useEffect(() => {
-  //   if (provider?.on) {
-  //     const handleAccountsChanged = async (accounts) => {
-  //       // Toast for wallet Changed
-  //       enqueueSnackbar("Changed Web3 Wallet Account", { variant: "info" });
+  // EIP-1193 events
+  useEffect(() => {
+    if (provider?.on) {
+      const handleAccountsChanged = async (accounts) => {
+        // Toast for wallet Changed
+        enqueueSnackbar("Changed Web3 Wallet Account", { variant: "info" });
 
-  //       let isArbiter;
-  //       try {
-  //         const arbiterNFT = new ArbiterNFT();
-  //         isArbiter = await arbiterNFT.verifyUser(accounts[0]);
-  //       } catch (error) {
-  //         console.log(error);
-  //         isArbiter = false;
-  //       }
+        let isArbiter;
+        try {
+          const arbiterNFT = new ArbiterNFT();
+          isArbiter = await arbiterNFT.verifyUser(accounts[0]);
+        } catch (error) {
+          console.log(error);
+          isArbiter = false;
+        }
 
-  //       dispatch({
-  //         type: "SET_ADDRESS",
-  //         address: accounts[0],
-  //       });
-  //       dispatch({
-  //         type: "SET_ISARBITER",
-  //         isArbiter,
-  //       });
-  //     };
+        dispatch({
+          type: "SET_ADDRESS",
+          address: accounts[0],
+        });
+        dispatch({
+          type: "SET_ISARBITER",
+          isArbiter,
+        });
+      };
 
-  //     // https://docs.ethers.io/v5/concepts/best-practices/#best-practices--network-changes
-  //     const handleChainChanged = (_hexChainId) => {
-  //       if (typeof window !== "undefined") {
-  //         console.log("switched to chain...", _hexChainId);
-  //         // Toast for network Changed
-  //         enqueueSnackbar("Web3 Network Changed", { variant: "info" });
+      // https://docs.ethers.io/v5/concepts/best-practices/#best-practices--network-changes
+      const handleChainChanged = (_hexChainId) => {
+        if (typeof window !== "undefined") {
+          console.log("switched to chain...", _hexChainId);
+          // Toast for network Changed
+          enqueueSnackbar("Web3 Network Changed", { variant: "info" });
 
-  //         window.location.reload();
-  //       } else {
-  //         console.log("window is undefined");
-  //       }
-  //     };
+          window.location.reload();
+        } else {
+          console.log("window is undefined");
+        }
+      };
 
-  //     const handleDisconnect = (error) => {
-  //       console.log("disconnect", error);
-  //       disconnect();
-  //     };
+      const handleDisconnect = (error) => {
+        console.log("disconnect", error);
+        disconnect();
+      };
 
-  //     provider.on("accountsChanged", handleAccountsChanged);
-  //     provider.on("chainChanged", handleChainChanged);
-  //     provider.on("disconnect", handleDisconnect);
+      provider.on("accountsChanged", handleAccountsChanged);
+      provider.on("chainChanged", handleChainChanged);
+      provider.on("disconnect", handleDisconnect);
 
-  //     // Subscription Cleanup
-  //     return () => {
-  //       if (provider.removeListener) {
-  //         provider.removeListener("accountsChanged", handleAccountsChanged);
-  //         provider.removeListener("chainChanged", handleChainChanged);
-  //         provider.removeListener("disconnect", handleDisconnect);
-  //       }
-  //     };
-  //   }
-  // }, [provider, disconnect, enqueueSnackbar]);
+      // Subscription Cleanup
+      return () => {
+        if (provider.removeListener) {
+          provider.removeListener("accountsChanged", handleAccountsChanged);
+          provider.removeListener("chainChanged", handleChainChanged);
+          provider.removeListener("disconnect", handleDisconnect);
+        }
+      };
+    }
+  }, [provider, disconnect, enqueueSnackbar]);
 
   return {
     provider,
