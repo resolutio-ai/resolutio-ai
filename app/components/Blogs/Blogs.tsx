@@ -39,7 +39,12 @@ const BlogItem: FC<BlogItemProps> = ({ blog }) => {
       <div className='blog-content order-2 basis-full md:order-1 md:basis-6/12'>
         <h4 className='blog-title mb-4 text-xl font-bold'>{title}</h4>
         <p className='blog-description font-dm-sans-text mb-6'>{description}</p>
-        <a className='btn btn-primary btn-outline' href={link} target='_blank'>
+        <a
+          className='btn-primary btn btn-outline'
+          href={link}
+          target='_blank'
+          rel='noreferrer'
+        >
           See More
         </a>
       </div>
@@ -69,7 +74,12 @@ const Blogs: FC = async () => {
         ))}
       </div>
       <div className='my-10 flex justify-center'>
-        <a className='btn btn-primary btn-outline' href={link} target='_blank'>
+        <a
+          className='btn-primary btn btn-outline'
+          href={link}
+          target='_blank'
+          rel='noreferrer'
+        >
           {btnText}
         </a>
       </div>

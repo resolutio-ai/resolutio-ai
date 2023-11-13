@@ -19,7 +19,7 @@ const MemberItem: FC<MemberItemProps> = ({ member }) => {
   const { name, imageURL, mask, profileLink } = member;
   return (
     <div className='our-team-member text-center'>
-      <a href={profileLink} target='_blank'>
+      <a href={profileLink} target='_blank' rel='noreferrer'>
         <div className='mask' style={{ backgroundColor: mask }}>
           <Image
             src={imageURL}
