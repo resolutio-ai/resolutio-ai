@@ -75,7 +75,7 @@ const AbractLinkWithImage: FC<AbractLinkWithImageProps> = async ({
         </div>
       </div>
       <div className={`img-container relative ${imgOrder}`}>
-        <a href={imgNavigation} target='_blank'>
+        <a href={imgNavigation} target='_blank' rel='noreferrer'>
           <Image
             src={imageURL}
             alt='Art'
