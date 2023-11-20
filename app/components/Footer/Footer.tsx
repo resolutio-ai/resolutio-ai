@@ -65,7 +65,12 @@ const Footer: FC = () => {
               href='https://www.linkedin.com/company/dec-resolutio/'
               title='Resolutio Linkedin'
             >
-              <Image src='/linkedin.svg' alt='' width={24} height={28} />
+              <Image
+                src='/linkedin.svg'
+                alt='linkedin Logo'
+                width={24}
+                height={28}
+              />
             </a>
             <a
               target='_blank'

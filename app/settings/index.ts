@@ -12,6 +12,7 @@ import {
   TEAM_FILE,
   UNDERSTAND_YOUR_RIGHTS_FILE,
 } from './dataConfig';
+import { GA_TRACKING_ID } from './siteConfig';
 
 export {
   BLOGS_FILE,
@@ -19,6 +20,7 @@ export {
   COMMUNITY_LINK_FILE,
   EVENTS_WORKSHOPS_FILE,
   EVIDENCE_LINK_FILE,
+  GA_TRACKING_ID,
   LAVENDER_LINK_FILE,
   LINK_FOLDER,
   LINK_WITH_IMAGE_FOLDER,
