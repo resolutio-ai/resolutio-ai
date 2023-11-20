@@ -23,7 +23,7 @@ const MemberItem: FC<MemberItemProps> = ({ member }) => {
         <div className='mask' style={{ backgroundColor: mask }}>
           <Image
             src={imageURL}
-            alt={name}
+            alt={`${name}'s picture`}
             className='mx-auto mb-4 max-h-64'
             width={256}
             height={256}
