@@ -11,6 +11,7 @@ import UnderstandYourRights from './LinkWithImage/UnderstandYourRights';
 import OurTeam from './OurTeam/OurTeam';
 import RestrictedAccess from './RestrictedAccess/RestrictedAccess';
 import SmartLink from './SmartLink/SmartLink';
+import Feed from './Feed/page';
 
 export {
   Blogs,
@@ -26,4 +27,5 @@ export {
   RestrictedAccess,
   SmartLink,
   UnderstandYourRights,
+  Feed
 };

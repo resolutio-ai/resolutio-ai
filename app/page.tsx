@@ -4,6 +4,7 @@ import {
   CommunityLink,
   EventsAndWorkShop,
   EvidenceLink,
+  Feed,
   LavenderCollectiveLink,
   OurStory,
   OurTeam,
@@ -26,7 +27,7 @@ const Home = () => {
  
           gtag('config', '${GA_TRACKING_ID}');
         `}
-      </Script>
+      </Script>     
       <OurStory />
       <EvidenceLink />
       <ResolveDispute />
