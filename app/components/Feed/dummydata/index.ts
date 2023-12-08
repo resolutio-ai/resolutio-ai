@@ -1,4 +1,4 @@
-import {  brush, music, pencil, star } from "@/app/assets/icons";
+import { brush, music, pencil, star } from "@/app/assets/icons";
 import { image1, image2 } from "@/app/assets/images";
 import { StaticImageData } from "next/image";
 
@@ -6,7 +6,7 @@ interface Post {
     creator: string;
     creatorImage: StaticImageData;
     art: StaticImageData;
-    artdescription: StaticImageData;
+    artdescription: string;
     description: string;
     code: string;
     licence: string;

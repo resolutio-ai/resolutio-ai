@@ -1,6 +1,6 @@
 "use client";
 
-import { evidencForm, messages, notification, profile, saved, support } from "@/app/assets/icons";
+import { evidencForm, home, messages, notification, profile, saved, support } from "@/app/assets/icons";
 import { Montserrat } from 'next/font/google';
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
@@ -19,7 +19,7 @@ const montserrat = Montserrat ({ weight: "600", subsets:["latin"]})
 const routes:Routes[] = [
   {
     label: 'Home',
-    icon: messages,
+    icon: home,
     href: '/components/Feed',
   },
   {
@@ -80,11 +80,11 @@ function Sidebar() {
             <Link
               key={route.href} 
               href={route.href}
-              className= "text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-white hover:bg-primary rounded-lg transition text-black bg-white/10"
+              className= "text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-white hover:bg-primary  rounded-lg transition text-black bg-white/10"
               
             >
               <div className="flex items-center flex-1">
-                <Image src={route.icon} className="h-5 w-5 mr-3 hover:bg-primary " alt={route.label}/>
+                <Image src={route.icon} className="h-5 w-5 mr-3 fill-transparent stroke-purple-700 transition duration-300 ease-in-out hover:fill-purple-700 " alt={route.label}/>
                 {route.label}
               </div>
             </Link>

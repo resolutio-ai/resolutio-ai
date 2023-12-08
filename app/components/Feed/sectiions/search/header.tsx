@@ -11,7 +11,7 @@ interface InputProps {
 
 const Search: React.FC<InputProps> = () => {
   return (
-    <div className="relative flex items-center rounded-md px-10 py-2 bg-gray-200 mb-5 flex  ">
+    <div className="relative flex items-center rounded-md px-10 py-2 bg-gray-200 mb-5 flex border border-primary ">
       <Image src={search} alt="search" width={20} height={20} className='absolute z-20  top-1/2 left-3 transform -translate-y-1/2' />
 
       <input
