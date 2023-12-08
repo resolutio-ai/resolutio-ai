@@ -60,13 +60,13 @@ function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <div className='space-y-4 py-4 flex flex-col  bg-gray text-black' >
+<div className="space-y-4 py-4 flex flex-col  bg-gray text-black ">
         <div className="px-3 py-2 flex-1">
             <div  className='flex item-center pl-3 mb-14'>
               <div className="relative w-8 h-8 mr-4">
-              <div className="dropdown dropdown-bottom dropdown-end">
-        <div tabIndex={0} role="button" className="btn m-1 bg-primary text-white">Categories</div>
-        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+              <div className="dropdown dropdown-bottom  hover:text-white ">
+        <div tabIndex={0} role="button" className="btn m-1 bg-primary text-white border-none hover:bg-primary">Categories</div>
+        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52  text-white bg-primary">
             <li><a>Item 1</a></li>
             <li><a>Item 2</a></li>
         </ul>
@@ -80,12 +80,15 @@ function Sidebar() {
             <Link
               key={route.href} 
               href={route.href}
-              className= "text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-white hover:bg-primary  rounded-lg transition text-black bg-white/10"
+              className="text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-white hover:bg-primary  rounded-lg transition text-black bg-white/10 md:p-4"
               
             >
               <div className="flex items-center flex-1">
-                <Image src={route.icon} className="h-5 w-5 mr-3 fill-transparent stroke-purple-700 transition duration-300 ease-in-out hover:fill-purple-700 " alt={route.label}/>
-                {route.label}
+                <Image src={route.icon}
+                  className="h-5 w-5 mr-3 fill-transparent stroke-purple-700 transition duration-300 ease-in-out hover:fill-purple-700 md:h-6 md:w-6"
+
+                alt={route.label}/>
+                <span className="hidden md:inline sm:hidden">{route.label}</span>
               </div>
             </Link>
           ))}
