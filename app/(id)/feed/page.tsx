@@ -1,4 +1,4 @@
-import Home from './(routes)/Home/page'
+import Home from '../../components/Feed/(routes)/Home/page'
 
 export default function Feed() {
   return (

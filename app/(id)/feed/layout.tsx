@@ -1,4 +1,4 @@
-import Sidebar from "./sectiions/sidebar/sidebar"
+import Sidebar from "../../components/Feed/sectiions/sidebar/sidebar"
 
 
 

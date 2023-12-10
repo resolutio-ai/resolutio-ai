@@ -1,3 +1,4 @@
+import Feed from '../(id)/feed/page';
 import Blogs from './Blogs/Blogs';
 import Footer from './Footer/Footer';
 import Header from './Header/Header';
@@ -11,14 +12,12 @@ import UnderstandYourRights from './LinkWithImage/UnderstandYourRights';
 import OurTeam from './OurTeam/OurTeam';
 import RestrictedAccess from './RestrictedAccess/RestrictedAccess';
 import SmartLink from './SmartLink/SmartLink';
-import Feed from './Feed/page';
 
 export {
   Blogs,
   CommunityLink,
   EventsAndWorkShop,
-  EvidenceLink,
-  Footer,
+  EvidenceLink, Feed, Footer,
   Header,
   LavenderCollectiveLink,
   OurStory,
@@ -26,6 +25,6 @@ export {
   ResolveDispute,
   RestrictedAccess,
   SmartLink,
-  UnderstandYourRights,
-  Feed
+  UnderstandYourRights
 };
+
