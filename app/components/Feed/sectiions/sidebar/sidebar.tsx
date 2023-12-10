@@ -60,22 +60,35 @@ function Sidebar() {
   const pathname = usePathname();
 
   return (
-<div className="space-y-4 py-4 flex flex-col  bg-gray text-black ">
-        <div className="px-3 py-2 flex-1">
-            <div  className='flex item-center pl-3 mb-14'>
-              <div className="relative w-8 h-8 mr-4">
-              <div className="dropdown dropdown-bottom  hover:text-white ">
-        <div tabIndex={0} role="button" className="btn m-1 bg-primary text-white border-none hover:bg-primary">Categories</div>
-        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52  text-white bg-primary">
-            <li><a>Item 1</a></li>
-            <li><a>Item 2</a></li>
-        </ul>
-        </div>
+<div className="space-y-4 md:pt-5 flex flex-col   text-black ">
+        <div className="px-3  flex-1">
+            <div  className='flex item-center  mb-5'>
+              <div className="relative ">
+              <div className="dropdown dropdown-bottom  hover:text-white   ">
+                <div tabIndex={0} role="button" 
+                  className=" gap-10  text-white bg-primary text-white border-none hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-md text-sm px-5 py-4 text-center inline-flex items-center w-[100%]  "
+            >
+              <p className="hidden md:inline sm:hidden">Categories</p> 
+              <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                  </svg>
+                  
+                </div>
+                <ul tabIndex={0}
+                 className="dropdown-content  z-[1] menu text-primary bg-white divide-y divide-gray-100 rounded-md shadow w-44"
+                 >
+                    <li><a>Item 1</a></li>
+                    <li><a>Item 2</a></li>
+                </ul>
+              </div>
               </div>
              
             </div>
 
-            <div className="space-y-1">
+        
+
+
+            <div className="space-y-2 ">
             {routes.map((route) => (
             <Link
               key={route.href} 

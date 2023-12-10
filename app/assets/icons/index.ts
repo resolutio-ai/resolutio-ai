@@ -14,6 +14,7 @@ import pencil from "./pencil-line.svg"
 import star from "./star-06.svg"
 import plus from "./plus.png"
 import home from "./home.svg"
+import drop from "./chevron-down.png"
 
 
 export{
@@ -32,5 +33,6 @@ export{
     pencil,
     star,
     plus,
-    dot
+    dot,
+    drop
 }

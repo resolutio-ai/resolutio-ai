@@ -1,5 +1,5 @@
-import Feed from '../(id)/feed/page';
 import Blogs from './Blogs/Blogs';
+import Feed from './Feed/page';
 import Footer from './Footer/Footer';
 import Header from './Header/Header';
 import CommunityLink from './LinkSection/CommunityLink';

@@ -12,7 +12,7 @@ export default function Home() {
   const router = useRouter();
 
   return (
-    <div className="md:px-10 w-5/6  md:pt-5   ">
+    <div className=" w-5/6  md:pt-5 pr-2   ">
       <Search placeholder={""} />
       <div className=" my-8 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10 align-center md:justify-center md:align-center 
 ">
