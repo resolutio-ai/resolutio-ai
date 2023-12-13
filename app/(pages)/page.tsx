@@ -9,8 +9,8 @@ import {
   OurTeam,
   ResolveDispute,
   UnderstandYourRights,
-} from './components';
-import { GA_TRACKING_ID } from './settings';
+} from '../components';
+import { GA_TRACKING_ID } from '../settings';
 
 const Home = () => {
   return (
