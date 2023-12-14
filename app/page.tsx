@@ -15,6 +15,8 @@ import { GA_TRACKING_ID } from './settings';
 const Home = () => {
   return (
     <>
+    <Script src="../path/to/flowbite/dist/datepicker.js"></Script>
+
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
       />
@@ -27,6 +29,7 @@ const Home = () => {
           gtag('config', '${GA_TRACKING_ID}');
         `}
       </Script>
+      
       <OurStory />
       <EvidenceLink />
       <ResolveDispute />

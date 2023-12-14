@@ -1,0 +1,29 @@
+
+  input[type="date"]:in-range::-webkit-datetime-edit {
+    color: transparent;
+}
+input[type="date"]:not(.has)::before{
+  color: #9a9da1;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.5px;  content: attr(placeholder);
+}
+// option:checked,
+    option:hover {
+      background-color: #5F437F;
+      box-shadow: 0 0 10px 100px #5F437F inset;
+      color: floralwhite;
+      padding: 10px 0;
+
+
+    }
+//     option{
+//       padding: 1rem;
+//       border-bottom: 1px solid #5F437F;
+//       transition: background-color 0.3s, color 0.3s;
+//     }
+
+//     select:focus option:hover {
+//       background-color: yellow;
+//   }
