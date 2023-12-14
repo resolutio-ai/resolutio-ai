@@ -1,38 +1,40 @@
-import messages from "./message-square-02.png"
-import notification from "./bell-01.png"
-import evidencForm from "./Frame.png"
-import saved from "./bookmark.png"
-import support from "./annotation-question.png"
-import profile from "./user-01.png"
-import search from "./search-md.png"
-import eye from "./eye.png"
-import brush from "./brush-01.svg"
-import dot from "./dot.png"
-import users from "./users-01.png"
-import music from "./music-note-01.svg"
-import pencil from "./pencil-line.svg"
-import star from "./star-06.svg"
-import plus from "./plus.png"
-import home from "./home.svg"
-import drop from "./chevron-down.png"
+import evidencForm from './Frame.png';
+import supportIcon from './annotation-question.png';
+import notificationIcon from './bell-01.png';
+import booknnarkIcon from './bookmark.svg';
+import PaintbrushSvg from './brush-01.svg';
+import dropIcon from './chevron-down.png';
+import MoreIcon from './dot.png';
+import eyeIcon from './eye.png';
+import homeBtnSvg from './home.svg';
+import messageIcon from './message-square-02.png';
+import musicNoteIconSvg from './music-note-01.svg';
+import pencilIconSvg from './pencil-line.svg';
+import plusIcon from './plus.png';
+import searchIcon from './search-md.png';
+import starIconSvg from './star-06.svg';
+import profileIcon from './user-01.png';
+import usersIcon from './users-01.png';
+import dropdownIcon from "./dropdown.svg"
 
-
-export{
-    messages,
-    users,
-    home,
-    notification,
+export {
+    MoreIcon,
+    dropdownIcon,
+    PaintbrushSvg,
+    booknnarkIcon,
+    dropIcon,
     evidencForm,
-    saved,
-    support,
-    profile,
-    search,
-    eye,
-    brush,
-    music,
-    pencil,
-    star,
-    plus,
-    dot,
-    drop
-}
+    eyeIcon,
+    homeBtnSvg,
+    messageIcon,
+    musicNoteIconSvg,
+    notificationIcon,
+    pencilIconSvg,
+    plusIcon,
+    profileIcon,
+    searchIcon,
+    starIconSvg,
+    supportIcon,
+    usersIcon
+};
+

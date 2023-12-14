@@ -1,11 +1,19 @@
-"use client";
+'use client';
 
-import { evidencForm, home, messages, notification, profile, saved, support } from "@/app/assets/icons";
-import { Montserrat } from 'next/font/google';
-import Image, { StaticImageData } from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-
+import {
+  booknnarkIcon,
+  dropdownIcon,
+  evidencForm,
+  homeBtnSvg,
+  messageIcon,
+  notificationIcon,
+  profileIcon,
+  supportIcon,
+} from '@/app/assets/icons';
+import Image, { StaticImageData } from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { FC } from 'react';
 
 interface Routes {
   label: string;
@@ -13,23 +21,20 @@ interface Routes {
   href: string;
 }
 
-
-const montserrat = Montserrat ({ weight: "600", subsets:["latin"]})
-
-const routes:Routes[] = [
+const routes: Routes[] = [
   {
     label: 'Home',
-    icon: home,
-    href: '/components/Feed',
+    icon: homeBtnSvg,
+    href: '/feed',
   },
   {
     label: 'Message',
-    icon: messages,
-    href: '/components/Feed/Message',
+    icon: messageIcon,
+    href: 'feed/Message',
   },
   {
     label: 'Notification',
-    icon: notification,
+    icon: notificationIcon,
     href: '/Notification',
   },
   {
@@ -39,76 +44,82 @@ const routes:Routes[] = [
   },
   {
     label: 'Saved',
-    icon: saved,
+    icon: booknnarkIcon,
     href: '/Saves',
   },
   {
     label: 'Support',
-    icon: support,
+    icon: supportIcon,
     href: '/Support',
   },
   {
     label: 'Profile',
-    icon: profile,
+    icon: profileIcon,
     href: '/Profile',
   },
 ];
 
-
-function Sidebar() {
+  const Sidebar:FC = () => {
 
   const pathname = usePathname();
 
   return (
-<div className="space-y-4 md:pt-5 flex flex-col   text-black ">
-        <div className="px-3  flex-1">
-            <div  className='flex item-center  mb-5'>
-              <div className="relative ">
-              <div className="dropdown dropdown-bottom  hover:text-white   ">
-                <div tabIndex={0} role="button" 
-                  className=" gap-10  text-white bg-primary text-white border-none hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-md text-sm px-5 py-4 text-center inline-flex items-center w-[100%]  "
-            >
-              <p className="hidden md:inline sm:hidden">Categories</p> 
-              <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                  </svg>
-                  
-                </div>
-                <ul tabIndex={0}
-                 className="dropdown-content  z-[1] menu text-primary bg-white divide-y divide-gray-100 rounded-md shadow w-44"
-                 >
-                    <li><a>Item 1</a></li>
-                    <li><a>Item 2</a></li>
-                </ul>
+    <div className='flex flex-col space-y-4 text-black   md:pt-5 '>
+      <div className='flex-1  px-3'>
+        <div className='item-center mb-5  flex'>
+          <div className='relative '>
+            <div className='dropdown dropdown-bottom  hover:text-white   '>
+              <div
+                tabIndex={0}
+                role='button'
+                className=' inline-flex  w-[100%]  lg:gap-5 items-center gap-10 rounded-md border-none bg-primary px-5 py-4 text-center text-sm font-medium text-white text-white hover:bg-primary focus:outline-none focus:ring-4 focus:ring-primary  '
+              >
+                <p className='hidden sm:hidden md:inline'>Categories</p>
+
+                <Image
+                  src={dropdownIcon}
+                  className='ms-3 h-2.5 w-2.5'
+                  alt='dropdown'
+                />
               </div>
-              </div>
-             
+              <ul
+                tabIndex={0}
+                className='menu  dropdown-content z-[1] w-44 divide-y divide-gray-100 rounded-md bg-white text-primary shadow'
+              >
+                <li>
+                  <a>Item 1</a>
+                </li>
+                <li>
+                  <a>Item 2</a>
+                </li>
+              </ul>
             </div>
+          </div>
+        </div>
 
-        
-
-
-            <div className="space-y-2 ">
-            {routes.map((route) => (
+        <div className='space-y-2 '>
+          {routes.map((route) => (
             <Link
-              key={route.href} 
+              key={route.href}
               href={route.href}
-              className="text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-white hover:bg-primary  rounded-lg transition text-black bg-white/10 md:p-4"
-              
+              className='group flex w-full cursor-pointer justify-start rounded-lg bg-white/10 p-3 text-sm font-medium  text-black transition hover:bg-primary hover:text-white md:p-4'
             >
-              <div className="flex items-center flex-1">
-                <Image src={route.icon}
-                  className="h-5 w-5 mr-3 fill-transparent stroke-purple-700 transition duration-300 ease-in-out hover:fill-purple-700 md:h-6 md:w-6"
-
-                alt={route.label}/>
-                <span className="hidden md:inline sm:hidden">{route.label}</span>
+              <div className='flex flex-1 items-center'>
+                <Image
+                  src={route.icon}
+                  className='mr-3 h-5 w-5 fill-transparent stroke-purple-700 transition duration-300 ease-in-out hover:fill-purple-700 md:h-6 md:w-6'
+                  alt={route.label}
+                />
+                <span className='hidden sm:hidden md:inline'>
+                  {route.label}
+                </span>
               </div>
             </Link>
           ))}
         </div>
-        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default Sidebar
+export default Sidebar;
