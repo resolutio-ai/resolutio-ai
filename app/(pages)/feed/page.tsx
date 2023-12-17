@@ -2,17 +2,17 @@
 
 import {
   MoreIcon,
+  booknnarkIcon,
   evidencForm,
   eyeIcon,
   messageIcon,
-  booknnarkIcon,
   usersIcon,
 } from '@/app/assets/icons';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Post } from '../components/Feed/dummydata';
-import Search from '../components/Feed/sectiions/search/header';
 import { FC, useEffect, useState } from 'react';
+import { Post } from '../../components/Feed/dummydata';
+import Search from '../../components/Feed/sectiions/search/header';
 interface Post {
   creator: string;
   creatorImage: string;
@@ -25,9 +25,9 @@ interface Post {
   id: string;
 }
 const API_URL =
-  'https://gist.github.com/tamuno777/a838d3e0484b4477bf6e2031c43cbd3b/raw/3fec981e05b059fbe9d18190076f0a906ac360bd/feedPosts';
+  'https://gist.githack.com/tamuno777/a838d3e0484b4477bf6e2031c43cbd3b/raw/3fec981e05b059fbe9d18190076f0a906ac360bd/feedPosts';
 
-const Home: FC = () => {
+const Feed: FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
 
   useEffect(() => {
@@ -173,4 +173,4 @@ const Home: FC = () => {
     </div>
   );
 };
-export default Home;
+export default Feed;
