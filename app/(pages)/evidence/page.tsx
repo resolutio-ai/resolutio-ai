@@ -2,7 +2,6 @@ import { FC } from 'react';
 import Form from '../components/Evidence/form';
 import SideImage from '../components/Evidence/sideImage';
 import "./evidence.scss"
-import React from 'react';
 
 
 
