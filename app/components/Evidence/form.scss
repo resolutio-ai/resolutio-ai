@@ -1,29 +1,66 @@
-
-  input[type="date"]:in-range::-webkit-datetime-edit {
-    color: transparent;
+input[type='date']:in-range::-webkit-datetime-edit {
+  color: transparent;
 }
-input[type="date"]:not(.has)::before{
+input[type='date']:not(.has)::before {
   color: #9a9da1;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  letter-spacing: 0.5px;  content: attr(placeholder);
+  letter-spacing: 0.5px;
+  content: attr(placeholder);
 }
-// option:checked,
-    option:hover {
-      background-color: #5F437F;
-      box-shadow: 0 0 10px 100px #5F437F inset;
-      color: floralwhite;
-      padding: 10px 0;
+option:hover {
+  background-color: #5f437f;
+  box-shadow: 0 0 10px 100px #5f437f inset;
+  color: floralwhite;
+  padding: 10px 0;
+  appearance: none;
+  -webkit-appearance: none;
+}
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  font-size: 1.15rem;
+  padding: 0.675em 6em 0.675em 1em;
+}
+.tooltip .tooltiptext {
+  width: 120px;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  margin: 0 5px;
+}
 
-
-    }
-//     option{
-//       padding: 1rem;
-//       border-bottom: 1px solid #5F437F;
-//       transition: background-color 0.3s, color 0.3s;
-//     }
-
-//     select:focus option:hover {
-//       background-color: yellow;
-//   }
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: white;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  color: #010101;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+}
+.tooltip__link {
+  color: #010101;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px;
+  text-decoration-line: underline;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
