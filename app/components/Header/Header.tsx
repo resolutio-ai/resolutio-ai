@@ -28,7 +28,7 @@ const Header: FC = () => {
             </label>
             <ul
               tabIndex={0}
-              className='menu dropdown-content rounded-box menu-sm z-[1] mt-3 w-52 bg-base-100 p-2 shadow'
+              className='menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow'
             >
               <li>
                 <a>Feed</a>
@@ -86,7 +86,7 @@ const Header: FC = () => {
           </a>
         </div>
       </header>
-      <div className='vertical-spacing  min-h-16'></div>
+      <div className='vertical-spacing'></div>
     </>
   );
 };

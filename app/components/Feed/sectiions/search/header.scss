@@ -1,0 +1,32 @@
+$prefix: header-item;
+
+.#{$prefix} {
+  .input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    padding: 0 16px;
+    height: 40px;
+
+    & input {
+      background-color: transparent;
+      border: none;
+      outline: none;
+      width: 100%;
+      font-size: 16px;
+      padding-right: 40px;
+    }
+
+    & img {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      color: #757575;
+    }
+  }
+}
