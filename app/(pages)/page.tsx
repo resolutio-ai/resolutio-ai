@@ -15,6 +15,7 @@ import { GA_TRACKING_ID } from '../settings';
 const Home = () => {
   return (
     <>
+
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
       />
@@ -27,6 +28,7 @@ const Home = () => {
           gtag('config', '${GA_TRACKING_ID}');
         `}
       </Script>
+      
       <OurStory />
       <EvidenceLink />
       <ResolveDispute />
