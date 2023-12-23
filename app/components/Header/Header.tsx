@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
-
+import { SmartLink } from '..';
 import './Header.scss';
 
 const Header: FC = () => {
@@ -65,9 +65,13 @@ const Header: FC = () => {
         <div className='navbar-end'>
           <ul className='menu menu-horizontal mx-2 hidden px-1 text-primary lg:flex'>
             <li>
-              <Link href='/feed' className='btn-link'>
+              <SmartLink
+                href='/feed'
+                isExternal={false}
+                className='link-hover link'
+              >
                 Feed
-              </Link>
+              </SmartLink>
             </li>
             {/*             <li>
               <a>Resources</a>
