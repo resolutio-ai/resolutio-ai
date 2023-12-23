@@ -1,13 +1,7 @@
-'use client';
+import { FC } from 'react';
 
-import { useRouter } from 'next/navigation';
+const Message: FC = () => {
+  return <div className='mt-4 space-y-4 md:pt-40'>content</div>;
+};
 
-export default function Message() {
-  const router = useRouter();
-
-  return (
-    <div>
-      <div className='mt-4 space-y-4 md:pt-40'>content</div>
-    </div>
-  );
-}
+export default Message;

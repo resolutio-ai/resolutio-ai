@@ -29,7 +29,7 @@ const routes: Routes[] = [
   {
     label: 'Message',
     icon: messageIcon,
-    href: 'feed/message',
+    href: '/feed/message',
   },
   {
     label: 'Notification',
