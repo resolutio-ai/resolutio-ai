@@ -63,11 +63,13 @@ const Header: FC = () => {
         </div>
 
         <div className='navbar-end'>
-          {/* <ul className='menu menu-horizontal hidden px-1 text-primary lg:flex'>
+          <ul className='menu menu-horizontal mx-2 hidden px-1 text-primary lg:flex'>
             <li>
-              <a>Feed</a>
+              <Link href='/feed' className='btn-link'>
+                Feed
+              </Link>
             </li>
-            <li>
+            {/*             <li>
               <a>Resources</a>
             </li>
             <li>
@@ -75,8 +77,8 @@ const Header: FC = () => {
             </li>
             <li>
               <a>Community</a>
-            </li>
-          </ul> */}
+            </li> */}
+          </ul>
           <a
             className='btn-primary btn'
             href='https://docs.google.com/forms/d/e/1FAIpQLSdFA8JiIw1Dnfmv8uRlnLnw8wSCiH3ENT7qO6I_pIMoTLaafQ/viewform'
