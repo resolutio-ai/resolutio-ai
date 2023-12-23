@@ -68,7 +68,7 @@ const Sidebar: FC = () => {
               <div
                 tabIndex={0}
                 role='button'
-                className=' inline-flex  w-[100%]  items-center gap-10 rounded-md border-none bg-primary px-5 py-4 text-center text-sm font-medium text-white text-white hover:bg-primary focus:outline-none focus:ring-4 focus:ring-primary lg:gap-5  '
+                className=' inline-flex  w-[100%]  items-center gap-10 rounded-md border-none bg-primary px-5 py-4 text-center text-sm font-medium text-white hover:bg-primary focus:outline-none focus:ring-4 focus:ring-primary lg:gap-5  '
               >
                 <p className='hidden sm:hidden md:inline'>Categories</p>
 
