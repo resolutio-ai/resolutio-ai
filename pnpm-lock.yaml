@@ -31,6 +31,9 @@ devDependencies:
   '@types/react':
     specifier: ^18.2.45
     version: 18.2.45
+  '@types/react-datepicker':
+    specifier: ^4.19.4
+    version: 4.19.4(react-dom@18.2.0)(react@18.2.0)
   '@types/react-dom':
     specifier: ^18.2.18
     version: 18.2.18
@@ -794,6 +797,21 @@ packages:
       }
     dev: true
 
+  /@types/react-datepicker@4.19.4(react-dom@18.2.0)(react@18.2.0):
+    resolution:
+      {
+        integrity: sha512-HRD0LHTxBVe61LRJgTdPscbapLQl7+jI/7bxnPGpvzdJ/iXN9q7ucYv8HKULeIAN84O5LzFhwTMOkO4QnIUJaQ==,
+      }
+    dependencies:
+      '@popperjs/core': 2.11.8
+      '@types/react': 18.2.45
+      date-fns: 2.30.0
+      react-popper: 2.3.0(@popperjs/core@2.11.8)(react-dom@18.2.0)(react@18.2.0)
+    transitivePeerDependencies:
+      - react
+      - react-dom
+    dev: true
+
   /@types/react-dom@18.2.18:
     resolution:
       {
@@ -1442,7 +1460,6 @@ packages:
     engines: { node: '>=0.11' }
     dependencies:
       '@babel/runtime': 7.23.6
-    dev: false
 
   /debug@3.2.7:
     resolution:
@@ -3616,7 +3633,6 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
-    dev: false
 
   /react-fast-compare@3.2.2:
     resolution:
@@ -3659,7 +3675,6 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       react-fast-compare: 3.2.2
       warning: 4.0.3
-    dev: false
 
   /react@18.2.0:
     resolution:
@@ -3669,7 +3684,6 @@ packages:
     engines: { node: '>=0.10.0' }
     dependencies:
       loose-envify: 1.4.0
-    dev: false
 
   /read-cache@1.0.0:
     resolution:
@@ -3831,7 +3845,6 @@ packages:
       }
     dependencies:
       loose-envify: 1.4.0
-    dev: false
 
   /semver@6.3.1:
     resolution:
@@ -4392,7 +4405,6 @@ packages:
       }
     dependencies:
       loose-envify: 1.4.0
-    dev: false
 
   /watchpack@2.4.0:
     resolution:
