@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
-import { SmartLink } from '..';
 import LoginDialog from '../Dialogs/LoginDialog/LoginDialog';
 import ProfileDropdown from '../ProfileDropdown/ProfileDropdown';
 import './Header.scss';
@@ -57,13 +56,9 @@ const Header: FC = () => {
         <div className='navbar-end'>
           <ul className='menu menu-horizontal mx-2 hidden px-1 text-primary lg:flex'>
             <li>
-              <SmartLink
-                href='/feed'
-                isExternal={false}
-                className='link-hover link'
-              >
+              <Link href='/feed' className='link-hover link'>
                 Feed
-              </SmartLink>
+              </Link>
             </li>
           </ul>
           <ProfileDropdown />
