@@ -1,6 +1,6 @@
 'use client';
 
-import { useMagicLinkContext } from '@/app/contexts';
+import { useUserContext } from '@/app/contexts';
 import { LOGIN_MODAL_ID } from '@/app/settings';
 import { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -12,7 +12,7 @@ type LoginFormInput = {
 };
 
 const LoginDialog: FC<LoginDialogProps> = () => {
-  const { login } = useMagicLinkContext();
+  const { login } = useUserContext();
   const { register, handleSubmit, reset } = useForm<LoginFormInput>();
 
   const closeModal = () => {
@@ -36,7 +36,6 @@ const LoginDialog: FC<LoginDialogProps> = () => {
     <dialog id={LOGIN_MODAL_ID} className='modal'>
       <div className='modal-box'>
         <form method='dialog'>
-          {/* if there is a button in form, it will close the modal */}
           <button className='btn-circle btn-ghost btn-sm absolute right-2 top-2'>
             ✕
           </button>

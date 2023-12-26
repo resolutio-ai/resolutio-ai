@@ -1,5 +1,5 @@
 import { Footer, Header } from '@/app/components';
-import { MagicLinkContextProvider } from '@/app/contexts';
+import { MagicProvider, UserProvider } from '@/app/contexts';
 import type { Metadata } from 'next';
 import { DM_Sans, Montserrat } from 'next/font/google';
 import { FC, PropsWithChildren } from 'react';
@@ -30,19 +30,21 @@ export const metadata: Metadata = {
 
 const RootLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
-    <MagicLinkContextProvider>
-      <html
-        lang='en'
-        className={`${montserrat.variable} ${dm_sans.variable}`}
-        data-theme='resolutioTheme'
-      >
-        <body>
-          <Header />
-          <main className='content'>{children}</main>
-          <Footer />
-        </body>
-      </html>
-    </MagicLinkContextProvider>
+    <html
+      lang='en'
+      className={`${montserrat.variable} ${dm_sans.variable}`}
+      data-theme='resolutioTheme'
+    >
+      <MagicProvider>
+        <UserProvider>
+          <body>
+            <Header />
+            <main className='content'>{children}</main>
+            <Footer />
+          </body>
+        </UserProvider>
+      </MagicProvider>
+    </html>
   );
 };
 

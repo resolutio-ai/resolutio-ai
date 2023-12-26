@@ -1,6 +1,4 @@
-import {
-  MagicLinkContextProvider,
-  useMagicLinkContext,
-} from './MagicLinkContext';
+import { MagicProvider, useMagicContext } from './MagicContext';
+import { UserProvider, useUserContext } from './UserContext';
 
-export { MagicLinkContextProvider, useMagicLinkContext };
+export { MagicProvider, UserProvider, useMagicContext, useUserContext };
