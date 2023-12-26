@@ -1,6 +1,7 @@
 import { getOurTeam } from '@/app/services/cms.service';
 import Image from 'next/image';
 import { FC } from 'react';
+
 import './OurTeam.scss';
 
 interface Member {

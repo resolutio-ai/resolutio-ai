@@ -1,6 +1,9 @@
+import { Footer, Header } from '@/app/components';
+import { MagicLinkContextProvider } from '@/app/contexts';
 import type { Metadata } from 'next';
 import { DM_Sans, Montserrat } from 'next/font/google';
-import { Footer, Header } from './components';
+import { FC, PropsWithChildren } from 'react';
+
 import './theme/globals.scss';
 
 const montserrat = Montserrat({
@@ -25,22 +28,22 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+const RootLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
-    <html
-      lang='en'
-      className={`${montserrat.variable} ${dm_sans.variable}`}
-      data-theme='resolutioTheme'
-    >
-      <body>
-        <Header />
-        <main className='content'>{children}</main>
-        <Footer />
-      </body>
-    </html>
+    <MagicLinkContextProvider>
+      <html
+        lang='en'
+        className={`${montserrat.variable} ${dm_sans.variable}`}
+        data-theme='resolutioTheme'
+      >
+        <body>
+          <Header />
+          <main className='content'>{children}</main>
+          <Footer />
+        </body>
+      </html>
+    </MagicLinkContextProvider>
   );
-}
+};
+
+export default RootLayout;
