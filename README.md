@@ -44,11 +44,7 @@ In essence, "Creator Armour" not only addresses the existing gaps in copyright p
 In the vast digital landscape, creators struggle to find relevant and accessible information on protecting their artistic creations. The sheer volume of resources, coupled with the challenge of identifying essential details, creates a barrier for creators seeking to safeguard their intellectual property (IP). Res Chat Bot emerges as a solution to address this problem, offering a user-centric platform that cuts through the noise and provides clear, actionable insights for artists navigating the complexities of art protection.
 
 
-The primary features of res bot is:
-A. Anonymous Usage
-B. User Centric Engagement
-C. Privacy First
-D. Actionable Message Handling
+The primary features of resbot is:
 
 A. Anonymous Usage: Allowing users to access services anonymously and without data storage.
 
@@ -56,7 +52,7 @@ B. User-Centric Engagement & Intuitive Conversation Management: Effortlessly cre
 
 C. Privacy First: Even users who chose to log in and share their data are protected. Their conversations are encrypted using Lighhouse and storage on web3.storage.
 
-Actionable Message Handling: Send, receive, delete, edit, and resend messages with ease, ensuring effective communication.
+D. Actionable Message Handling: Send, receive, delete, edit, and resend messages with ease, ensuring effective communication.
 Platform
 
 
@@ -84,7 +80,7 @@ F. Decision NFT and Rewards
 
 G. Marketplace notification
 
-A. **Initiate Dispute Resolution**
+**A. Initiate Dispute Resolution**
 
 The victim shall initiate dispute resolution by providing a fee and submitting the relavant case details and evidence.
 
