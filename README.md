@@ -1,5 +1,3 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## resolutio: Protection Layer for Creator Economy
 Welcome to *********resolutio*********’s GitHub repository, where innovation meets protection in the dynamic world of digital creation. *resolutio* is a platform dedicated to empowering creators by providing robust solutions in the fields of blockchain, AI, and intellectual property.
 
@@ -46,11 +44,7 @@ In essence, "Creator Armour" not only addresses the existing gaps in copyright p
 In the vast digital landscape, creators struggle to find relevant and accessible information on protecting their artistic creations. The sheer volume of resources, coupled with the challenge of identifying essential details, creates a barrier for creators seeking to safeguard their intellectual property (IP). Res Chat Bot emerges as a solution to address this problem, offering a user-centric platform that cuts through the noise and provides clear, actionable insights for artists navigating the complexities of art protection.
 
 
-The primary features of res bot is:
-A. Anonymous Usage
-B. User Centric Engagement
-C. Privacy First
-D. Actionable Message Handling
+The primary features of resbot is:
 
 A. Anonymous Usage: Allowing users to access services anonymously and without data storage.
 
@@ -58,7 +52,7 @@ B. User-Centric Engagement & Intuitive Conversation Management: Effortlessly cre
 
 C. Privacy First: Even users who chose to log in and share their data are protected. Their conversations are encrypted using Lighhouse and storage on web3.storage.
 
-Actionable Message Handling: Send, receive, delete, edit, and resend messages with ease, ensuring effective communication.
+D. Actionable Message Handling: Send, receive, delete, edit, and resend messages with ease, ensuring effective communication.
 Platform
 
 
@@ -86,7 +80,7 @@ F. Decision NFT and Rewards
 
 G. Marketplace notification
 
-A. **Initiate Dispute Resolution**
+**A. Initiate Dispute Resolution**
 
 The victim shall initiate dispute resolution by providing a fee and submitting the relavant case details and evidence.
 
@@ -130,17 +124,10 @@ First, run the development server:
 
 ```bash
 pnpm dev
-# or
-yarn dev
+
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
 ## Learn More
 
@@ -150,9 +137,3 @@ To learn more about Next.js, take a look at the following resources:
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

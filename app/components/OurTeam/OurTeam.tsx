@@ -9,6 +9,7 @@ interface Member {
   profileLink: string;
   imageURL: string;
   mask: string;
+  tags: string[];
 }
 
 interface MemberItemProps {
