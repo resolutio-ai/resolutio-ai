@@ -11,15 +11,21 @@
     "start": "next start"
   },
   "dependencies": {
+    "@magic-sdk/admin": "^2.0.1",
+    "magic-sdk": "^21.4.1",
     "next": "14.0.4",
     "react": "^18.2.0",
+    "react-datepicker": "^4.25.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.49.2",
     "sharp": "^0.33.1"
   },
   "devDependencies": {
+    "@magic-sdk/types": "^17.3.0",
     "@tailwindcss/typography": "^0.5.10",
     "@types/node": "^20.10.5",
     "@types/react": "^18.2.45",
+    "@types/react-datepicker": "^4.19.4",
     "@types/react-dom": "^18.2.18",
     "autoprefixer": "^10.4.16",
     "daisyui": "^4.4.24",

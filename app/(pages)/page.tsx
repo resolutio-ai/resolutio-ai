@@ -1,4 +1,3 @@
-import Script from 'next/script';
 import {
   Blogs,
   CommunityLink,
@@ -9,8 +8,9 @@ import {
   OurTeam,
   ResolveDispute,
   UnderstandYourRights,
-} from '../components';
-import { GA_TRACKING_ID } from '../settings';
+} from '@/app/components';
+import { GA_TRACKING_ID } from '@/app/settings';
+import Script from 'next/script';
 
 const Home = () => {
   return (

@@ -12,7 +12,6 @@ import {
 } from '@/app/assets/icons';
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { FC } from 'react';
 
 interface Routes {
@@ -30,7 +29,7 @@ const routes: Routes[] = [
   {
     label: 'Message',
     icon: messageIcon,
-    href: 'feed/Message',
+    href: '/feed/message',
   },
   {
     label: 'Notification',
@@ -59,10 +58,7 @@ const routes: Routes[] = [
   },
 ];
 
-  const Sidebar:FC = () => {
-
-  const pathname = usePathname();
-
+const Sidebar: FC = () => {
   return (
     <div className='flex flex-col space-y-4 text-black   md:pt-5 '>
       <div className='flex-1  px-3'>
@@ -72,7 +68,7 @@ const routes: Routes[] = [
               <div
                 tabIndex={0}
                 role='button'
-                className=' inline-flex  w-[100%]  lg:gap-5 items-center gap-10 rounded-md border-none bg-primary px-5 py-4 text-center text-sm font-medium text-white text-white hover:bg-primary focus:outline-none focus:ring-4 focus:ring-primary  '
+                className=' inline-flex  w-[100%]  items-center gap-10 rounded-md border-none bg-primary px-5 py-4 text-center text-sm font-medium text-white hover:bg-primary focus:outline-none focus:ring-4 focus:ring-primary lg:gap-5  '
               >
                 <p className='hidden sm:hidden md:inline'>Categories</p>
 
@@ -120,6 +116,6 @@ const routes: Routes[] = [
       </div>
     </div>
   );
-}
+};
 
 export default Sidebar;

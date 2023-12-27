@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
-
+import LoginDialog from '../Dialogs/LoginDialog/LoginDialog';
+import ProfileDropdown from '../ProfileDropdown/ProfileDropdown';
 import './Header.scss';
 
 const Header: FC = () => {
@@ -28,19 +29,10 @@ const Header: FC = () => {
             </label>
             <ul
               tabIndex={0}
-              className='menu dropdown-content rounded-box menu-sm z-[1] mt-3 w-52 bg-base-100 p-2 shadow'
+              className='menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow'
             >
               <li>
                 <a>Feed</a>
-              </li>
-              <li>
-                <a>Resources</a>
-              </li>
-              <li>
-                <a>ResEd</a>
-              </li>
-              <li>
-                <a>Community</a>
               </li>
             </ul>
           </div>
@@ -61,32 +53,19 @@ const Header: FC = () => {
             />
           </Link>
         </div>
-
         <div className='navbar-end'>
-          {/* <ul className='menu menu-horizontal hidden px-1 text-primary lg:flex'>
+          <ul className='menu menu-horizontal mx-2 hidden px-1 text-primary lg:flex'>
             <li>
-              <a>Feed</a>
+              <Link href='/feed' className='link-hover link'>
+                Feed
+              </Link>
             </li>
-            <li>
-              <a>Resources</a>
-            </li>
-            <li>
-              <a>ResEd</a>
-            </li>
-            <li>
-              <a>Community</a>
-            </li>
-          </ul> */}
-          <a
-            className='btn-primary btn'
-            href='https://docs.google.com/forms/d/e/1FAIpQLSdFA8JiIw1Dnfmv8uRlnLnw8wSCiH3ENT7qO6I_pIMoTLaafQ/viewform'
-            target='_blank'
-          >
-            Join Waitlist
-          </a>
+          </ul>
+          <ProfileDropdown />
         </div>
       </header>
-      <div className='vertical-spacing  min-h-16'></div>
+      <div className='vertical-spacing'></div>
+      <LoginDialog />
     </>
   );
 };
