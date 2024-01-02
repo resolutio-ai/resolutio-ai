@@ -14,7 +14,7 @@ interface Post {
   id: string;
 }
 
-export const Post: Post[] = [
+export const FeedPost: Post[] = [
   {
     creator: 'creator123',
     creatorImage: creatorArt2,

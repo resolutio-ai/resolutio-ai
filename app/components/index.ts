@@ -11,6 +11,7 @@ import UnderstandYourRights from './LinkWithImage/UnderstandYourRights';
 import OurTeam from './OurTeam/OurTeam';
 import RestrictedAccess from './RestrictedAccess/RestrictedAccess';
 import SmartLink from './SmartLink/SmartLink';
+import { Sidebar, Search, MessageContent,FeedPost } from './FeedComponents';
 
 export {
   Blogs,
@@ -26,4 +27,8 @@ export {
   RestrictedAccess,
   SmartLink,
   UnderstandYourRights,
+  Sidebar,
+  Search,
+  MessageContent,
+  FeedPost
 };

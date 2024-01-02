@@ -1,6 +1,6 @@
 import { searchIcon } from '@/app/assets/icons';
 import Image from 'next/image';
-import './header.scss';
+import './search.scss';
 
 import React from 'react';
 

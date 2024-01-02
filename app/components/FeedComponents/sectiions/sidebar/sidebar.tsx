@@ -1,74 +1,80 @@
 'use client';
 
 import {
-  booknnarkIcon,
+  Bookmarkicon,
   dropdownIcon,
-  evidencForm,
-  homeBtnSvg,
-  messageIcon,
-  notificationIcon,
-  profileIcon,
-  supportIcon,
+  EvidenceSvg,
+  HomeBtnSvg,
+  MessageIcon,
+  NotificationIcon,
+  SingleUser,
+  SupportIcon,
 } from '@/app/assets/icons';
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 import Link from 'next/link';
-import { FC } from 'react';
+import { FC, useState } from 'react';
+import './sidebar.scss';
 
 interface Routes {
   label: string;
-  icon: StaticImageData;
+  icon: React.ReactElement;
   href: string;
 }
 
 const routes: Routes[] = [
   {
     label: 'Home',
-    icon: homeBtnSvg,
+    icon: <HomeBtnSvg />,
     href: '/feed',
   },
   {
     label: 'Message',
-    icon: messageIcon,
+    icon: <MessageIcon />,
     href: '/feed/message',
   },
   {
     label: 'Notification',
-    icon: notificationIcon,
+    icon: <NotificationIcon />,
     href: '/Notification',
   },
   {
     label: 'Evidence form',
-    icon: evidencForm,
+    icon: <EvidenceSvg />,
     href: '/EvidenceForm',
   },
   {
     label: 'Saved',
-    icon: booknnarkIcon,
+    icon: <Bookmarkicon />,
     href: '/Saves',
   },
   {
     label: 'Support',
-    icon: supportIcon,
+    icon: <SupportIcon />,
     href: '/Support',
   },
   {
     label: 'Profile',
-    icon: profileIcon,
+    icon: <SingleUser />,
     href: '/Profile',
   },
 ];
-
 const Sidebar: FC = () => {
+  const [activeLink, setActiveLink] = useState<number>(0);
+
+  const handleActiveLink = (index: number) => {
+    setActiveLink(index);
+  };
+
   return (
-    <div className='flex flex-col space-y-4 text-black   md:pt-5 '>
+    <div className='flex flex-col space-y-4 text-black md:pt-5'>
       <div className='flex-1  px-3'>
-        <div className='item-center mb-5  flex'>
-          <div className='relative '>
-            <div className='dropdown dropdown-bottom  hover:text-white   '>
+        <div className='item-center mb-5 flex w-[100%]'>
+          <div className='relative lg:w-[100%] '>
+            <div className='dropdown dropdown-bottom  w-[100%]  hover:text-white'>
               <div
                 tabIndex={0}
                 role='button'
-                className=' inline-flex  w-[100%]  items-center gap-10 rounded-md border-none bg-primary px-5 py-4 text-center text-sm font-medium text-white hover:bg-primary focus:outline-none focus:ring-4 focus:ring-primary lg:gap-5  '
+                className=' flex w-[100%]  items-center  justify-between  rounded-md border-none bg-primary px-5 py-4 text-center text-sm font-medium text-white hover:bg-primary focus:outline-none focus:ring-4 focus:ring-primary lg:gap-5  '
               >
                 <p className='hidden sm:hidden md:inline'>Categories</p>
 
@@ -94,18 +100,19 @@ const Sidebar: FC = () => {
         </div>
 
         <div className='space-y-2 '>
-          {routes.map((route) => (
+          {routes.map((route, index) => (
             <Link
               key={route.href}
               href={route.href}
-              className='group flex w-full cursor-pointer justify-start rounded-lg bg-white/10 p-3 text-sm font-medium  text-black transition hover:bg-primary hover:text-white md:p-4'
+              onClick={() => handleActiveLink(index)}
+              className={`flex w-full cursor-pointer justify-start rounded-lg bg-white/10 p-3 text-sm font-medium text-black transition transition  md:p-4  ${
+                activeLink === index ? 'active-group' : 'group'
+              } `}
             >
               <div className='flex flex-1 items-center'>
-                <Image
-                  src={route.icon}
-                  className='mr-3 h-5 w-5 fill-transparent stroke-purple-700 transition duration-300 ease-in-out hover:fill-purple-700 md:h-6 md:w-6'
-                  alt={route.label}
-                />
+                <span className='icon  mr-3 h-5 w-5  transition duration-300 ease-in-out md:h-6 md:w-6'>
+                  {route.icon}
+                </span>
                 <span className='hidden sm:hidden md:inline'>
                   {route.label}
                 </span>

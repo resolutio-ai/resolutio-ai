@@ -1,5 +1,4 @@
-import Sidebar from '../../components/Feed/sectiions/sidebar/sidebar';
-
+import { Sidebar } from "@/app/components";
 export default function FeedLayout({
   children,
 }: {
