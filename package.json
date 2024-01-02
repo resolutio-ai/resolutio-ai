@@ -23,9 +23,9 @@
   "devDependencies": {
     "@magic-sdk/types": "^17.3.0",
     "@tailwindcss/typography": "^0.5.10",
-    "@types/node": "^20.10.5",
-    "@types/react": "^18.2.45",
-    "@types/react-datepicker": "^4.19.4",
+    "@types/node": "^20.10.6",
+    "@types/react": "^18.2.46",
+    "@types/react-datepicker": "^4.19.5",
     "@types/react-dom": "^18.2.18",
     "autoprefixer": "^10.4.16",
     "daisyui": "^4.4.24",
@@ -34,8 +34,8 @@
     "eslint-config-prettier": "^9.1.0",
     "postcss": "^8.4.32",
     "prettier": "^3.1.1",
-    "prettier-plugin-tailwindcss": "^0.5.9",
-    "sass": "^1.69.5",
+    "prettier-plugin-tailwindcss": "^0.5.10",
+    "sass": "^1.69.6",
     "tailwindcss": "^3.4.0",
     "typescript": "^5.3.3"
   }
