@@ -3,6 +3,7 @@
   "version": "2.0.5",
   "private": true,
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "build": "next build",
     "dev": "next dev",
     "format": "prettier --check --ignore-path .gitignore .",
