@@ -10,7 +10,7 @@ import {
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
-interface SingleFeedPostProps {
+interface FeedItemProps {
   feed: {
     creator: string;
     creatorImage: StaticImageData;
@@ -24,7 +24,7 @@ interface SingleFeedPostProps {
   };
 }
 
-const SingleFeedPost: FC<SingleFeedPostProps> = ({ feed }) => {
+const FeedItem: FC<FeedItemProps> = ({ feed }) => {
   return (
     <div
       key={feed.id}
@@ -93,18 +93,17 @@ const SingleFeedPost: FC<SingleFeedPostProps> = ({ feed }) => {
               className='lg:h-6 lg:w-6'
             />
             <p className='text-#262626  font-400 leading-18 align-end pt-1 text-[13px]'>
-              6  <span className='hidden sm:hidden md:inline'>licensees</span>
+              6 <span className='hidden sm:hidden md:inline'>licensees</span>
             </p>
           </div>
         </div>
-        
+
         <div className='flex justify-between gap-1'>
           <Image
             src={messageIcon}
             alt='message'
             width={20}
             height={10}
-            
             className='lg:h-6 lg:w-6 '
           />
           <Image
@@ -148,4 +147,4 @@ const SingleFeedPost: FC<SingleFeedPostProps> = ({ feed }) => {
   );
 };
 
-export default SingleFeedPost;
+export default FeedItem;

@@ -13,7 +13,8 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC, useState } from 'react';
-import './sidebar.scss';
+
+import './Sidebar.scss';
 
 interface Routes {
   label: string;
@@ -66,18 +67,17 @@ const Sidebar: FC = () => {
   };
 
   return (
-    <div className='flex flex-col space-y-4 text-black md:pt-5'>
-      <div className='flex-1  px-3'>
+    <div className='flex flex-col space-y-4 text-black'>
+      <div className='flex-1'>
         <div className='item-center mb-5 flex w-[100%]'>
           <div className='relative lg:w-[100%] '>
             <div className='dropdown dropdown-bottom  w-[100%]  hover:text-white'>
               <div
                 tabIndex={0}
                 role='button'
-                className=' flex w-[100%]  items-center  justify-between  rounded-md border-none bg-primary px-5 py-4 text-center text-sm font-medium text-white hover:bg-primary focus:outline-none focus:ring-4 focus:ring-primary lg:gap-5  '
+                className='flex w-[100%] items-center justify-between rounded-md border-none bg-primary px-5 py-4 text-center text-sm font-medium text-white hover:bg-primary focus:outline-none focus:ring-4 focus:ring-primary lg:gap-5 '
               >
                 <p className='hidden sm:hidden md:inline'>Categories</p>
-
                 <Image
                   src={dropdownIcon}
                   className='ms-3 h-2.5 w-2.5'
@@ -105,7 +105,7 @@ const Sidebar: FC = () => {
               key={route.href}
               href={route.href}
               onClick={() => handleActiveLink(index)}
-              className={`flex w-full cursor-pointer justify-start rounded-lg bg-white/10 p-3 text-sm font-medium text-black transition transition  md:p-4  ${
+              className={`flex w-full cursor-pointer justify-start rounded-lg bg-white/10 p-3 text-sm font-medium text-black transition md:p-4  ${
                 activeLink === index ? 'active-group' : 'group'
               } `}
             >

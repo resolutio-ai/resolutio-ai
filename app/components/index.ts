@@ -1,4 +1,8 @@
 import Blogs from './Blogs/Blogs';
+import FeedItem from './FeedComponents/FeedItem/FeedItem';
+import Search from './FeedComponents/Search/Search';
+import Sidebar from './FeedComponents/Sidebar/Sidebar';
+import { FeedPost } from './FeedComponents/dummydata';
 import Footer from './Footer/Footer';
 import Header from './Header/Header';
 import CommunityLink from './LinkSection/CommunityLink';
@@ -11,13 +15,14 @@ import UnderstandYourRights from './LinkWithImage/UnderstandYourRights';
 import OurTeam from './OurTeam/OurTeam';
 import RestrictedAccess from './RestrictedAccess/RestrictedAccess';
 import SmartLink from './SmartLink/SmartLink';
-import { Sidebar, Search, MessageContent,FeedPost } from './FeedComponents';
 
 export {
   Blogs,
   CommunityLink,
   EventsAndWorkShop,
   EvidenceLink,
+  FeedItem,
+  FeedPost,
   Footer,
   Header,
   LavenderCollectiveLink,
@@ -25,10 +30,8 @@ export {
   OurTeam,
   ResolveDispute,
   RestrictedAccess,
+  Search,
+  Sidebar,
   SmartLink,
   UnderstandYourRights,
-  Sidebar,
-  Search,
-  MessageContent,
-  FeedPost
 };

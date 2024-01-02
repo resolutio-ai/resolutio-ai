@@ -2,16 +2,16 @@ import { searchIcon } from '@/app/assets/icons';
 import Image from 'next/image';
 import './search.scss';
 
-import React from 'react';
+import React, { FC } from 'react';
 
-interface InputProps {
+interface SearchProps {
   placeholder: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Search: React.FC<InputProps> = () => {
+const Search: FC<SearchProps> = () => {
   return (
-    <div className='relative mb-5 flex flex  items-center rounded-md border border-primary bg-gray-200 px-10 py-2 sm:w-[100%] '>
+    <div className='relative mb-5 flex items-center rounded-md border border-primary bg-gray-200 px-10 py-2 sm:w-[100%] '>
       <Image
         src={searchIcon}
         alt='search'

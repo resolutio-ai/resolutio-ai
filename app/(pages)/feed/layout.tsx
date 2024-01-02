@@ -1,17 +1,13 @@
-import { Sidebar } from "@/app/components";
-export default function FeedLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+import { Sidebar } from '@/app/components';
+import { FC, PropsWithChildren } from 'react';
+
+const FeedLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
-    <div className='mt-8'>
-      <div className='feed-header flex gap-2'>
-        <div className='md:w-75 bg-white-900 w-1/6 md:inset-y-0 md:flex md:flex-col'>
-          <Sidebar />
-        </div>
-        {children}
-      </div>
+    <div className='feed-container flex gap-2 px-2 pt-4 md:px-4'>
+      <Sidebar />
+      {children}
     </div>
   );
-}
+};
+
+export default FeedLayout;
