@@ -1,4 +1,9 @@
-import { PaintbrushSvg, musicNoteIconSvg, pencilIconSvg, starIconSvg } from '@/app/assets/icons';
+import {
+  PaintbrushSvg,
+  musicNoteIconSvg,
+  pencilIconSvg,
+  starIconSvg,
+} from '@/app/assets/icons';
 import { creatorArt, creatorArt2 } from '@/app/assets/images';
 import { StaticImageData } from 'next/image';
 
@@ -14,7 +19,7 @@ interface Post {
   id: string;
 }
 
-export const FeedPost: Post[] = [
+export const Feeds: Post[] = [
   {
     creator: 'creator123',
     creatorImage: creatorArt2,

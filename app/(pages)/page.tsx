@@ -12,7 +12,7 @@ import {
 import { GA_TRACKING_ID } from '@/app/settings';
 import Script from 'next/script';
 
-const Home = () => {
+const HomePage = () => {
   return (
     <>
       <Script
@@ -40,4 +40,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

@@ -1,15 +1,6 @@
 'use client';
 
-import {
-  Bookmarkicon,
-  dropdownIcon,
-  EvidenceSvg,
-  HomeBtnSvg,
-  MessageIcon,
-  NotificationIcon,
-  SingleUser,
-  SupportIcon,
-} from '@/app/assets/icons';
+import { dropdownIcon, HomeBtnSvg } from '@/app/assets/icons';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC, useState } from 'react';
@@ -28,7 +19,7 @@ const routes: Routes[] = [
     icon: <HomeBtnSvg />,
     href: '/feed',
   },
-  {
+  /* {
     label: 'Message',
     icon: <MessageIcon />,
     href: '/feed/message',
@@ -57,7 +48,7 @@ const routes: Routes[] = [
     label: 'Profile',
     icon: <SingleUser />,
     href: '/Profile',
-  },
+  }, */
 ];
 const Sidebar: FC = () => {
   const [activeLink, setActiveLink] = useState<number>(0);

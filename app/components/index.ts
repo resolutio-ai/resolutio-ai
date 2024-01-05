@@ -2,7 +2,6 @@ import Blogs from './Blogs/Blogs';
 import FeedItem from './FeedComponents/FeedItem/FeedItem';
 import Search from './FeedComponents/Search/Search';
 import Sidebar from './FeedComponents/Sidebar/Sidebar';
-import { FeedPost } from './FeedComponents/dummydata';
 import Footer from './Footer/Footer';
 import Header from './Header/Header';
 import CommunityLink from './LinkSection/CommunityLink';
@@ -22,7 +21,6 @@ export {
   EventsAndWorkShop,
   EvidenceLink,
   FeedItem,
-  FeedPost,
   Footer,
   Header,
   LavenderCollectiveLink,

@@ -5,7 +5,6 @@ import './search.scss';
 import React, { FC } from 'react';
 
 interface SearchProps {
-  placeholder: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 

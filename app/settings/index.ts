@@ -1,4 +1,4 @@
-import { CMS_BASE_URL } from './apiConfig';
+import { CMS_BASE_URL, queryClient } from './apiConfig';
 import {
   BLOGS_FILE,
   COMMUNITY_LINK_FILE,
@@ -36,4 +36,5 @@ export {
   RESOLVE_DISPUTE_FILE,
   TEAM_FILE,
   UNDERSTAND_YOUR_RIGHTS_FILE,
+  queryClient,
 };

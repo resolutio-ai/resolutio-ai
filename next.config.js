@@ -25,6 +25,12 @@ const nextConfig = {
         port: '',
         pathname: '/resolutio-ai/CMS/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'daisyui.com',
+        port: '',
+        pathname: '/images/stock/**',
+      },
     ],
   },
 }

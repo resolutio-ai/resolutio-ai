@@ -7,24 +7,16 @@ import {
   messageIcon,
   usersIcon,
 } from '@/app/assets/icons';
-import Image, { StaticImageData } from 'next/image';
+import { Feed } from '@/app/services/cms.service';
+import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
 interface FeedItemProps {
-  feed: {
-    creator: string;
-    creatorImage: StaticImageData;
-    art: StaticImageData;
-    artdescription: string;
-    description: string;
-    code: string;
-    licence: string;
-    href: string;
-    id: string;
-  };
+  feed: Feed;
 }
 
 const FeedItem: FC<FeedItemProps> = ({ feed }) => {
+  const { creator, work } = feed;
   return (
     <div
       key={feed.id}
@@ -33,16 +25,15 @@ const FeedItem: FC<FeedItemProps> = ({ feed }) => {
       <div className='align-center flex w-[100%] items-center  justify-between gap-4  py-2'>
         <div className='flex items-center justify-between gap-2   '>
           <Image
-            src={feed.creatorImage}
-            alt={feed.creator}
+            src={creator.image}
+            alt={creator.name}
             width={25}
             height={25}
-            loader={({ src }) => src}
             className=' rounded-[50%]'
           />
           <p className='color-gray-700 font-dm-sans text-center text-base font-bold font-normal leading-6'>
             <strong>
-              {feed.creator}{' '}
+              {creator.name}
               <span className='font-dmSans text-sm font-normal leading-5 text-slate-500'>
                 . 5h
               </span>
@@ -56,17 +47,14 @@ const FeedItem: FC<FeedItemProps> = ({ feed }) => {
 
       <div className='relative w-[100%] '>
         <Image
-          src={feed.art}
-          alt={feed.description}
+          src={work.url}
+          alt={work.description}
+          width={500}
+          height={500}
           className='h-447 w-[100%] shrink-0 rounded-md '
         />
         <div className='absolute right-[20px] top-[10px] flex w-[35px] cursor-pointer justify-center rounded-md  bg-info bg-white/25 p-2  backdrop-blur-sm transition duration-500 ease-in-out'>
-          <Image
-            src={feed.artdescription}
-            alt={feed.description}
-            width={25}
-            height={25}
-          />
+          <Image src={''} alt={work.description} width={25} height={25} />
         </div>
       </div>
 
@@ -125,7 +113,7 @@ const FeedItem: FC<FeedItemProps> = ({ feed }) => {
 
       <div className='align-center sm:flex-wrap-nowrap flex w-[100%] flex-wrap items-center justify-between gap-3 py-2'>
         <p className=' font-weight-normal m:w-60 w-80 text-sm leading-5 text-gray-700'>
-          {feed.description}
+          {work.description}
         </p>
         <Link
           href='#'
