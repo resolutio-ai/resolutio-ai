@@ -6,6 +6,7 @@ const useFeeds = () => {
     queryKey: ['getFeeds'],
     queryFn: getFeeds,
     select: (response) => response.data,
+    staleTime: 1000 * 60 * 60 * 24,
   });
 };
 

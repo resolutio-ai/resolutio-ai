@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
-import dropdownicon from '../../../assets/dropdownicon.svg';
-import tooltip from '../../../assets/tooltip.svg';
+//import dropdownicon from '../../../assets/dropdownicon.svg';
+//import tooltip from '../../../assets/tooltip.svg';
 import Image from 'next/image';
 
 interface LicenseSelectProps {
@@ -22,7 +22,7 @@ const LicenseSelect: React.FC<LicenseSelectProps> = ({
       >
         License
         <div className=' tooltip relative ml-1 inline-block'>
-          <Image src={tooltip} alt='tooltip' className='h-4 w-4' />
+          <Image src={''} alt='tooltip' className='h-4 w-4' />
           <span className='tooltiptext font-weight-400 leading-18 invisible absolute bottom-full left-1/2 z-10 w-[120px] -translate-x-1/2 transform rounded border bg-white p-[7px] text-center text-xs font-normal text-black'>
             Learn more about Licenses{' '}
             <a href='#' className='text-xs font-bold text-black underline'>
@@ -35,7 +35,7 @@ const LicenseSelect: React.FC<LicenseSelectProps> = ({
       <select
         value={selectedLicense}
         onChange={handleLicenseChange}
-        className='form-select  align-center focus:shadow-outline	 block flex flex w-[100%] appearance-none appearance-none appearance-none flex-col flex-col items-center justify-center gap-2 rounded-md border border-solid border-[#5F437F] px-4 py-3 leading-tight text-gray-700 shadow focus:outline-none  '
+        className='form-select  align-center focus:shadow-outline	 block w-[100%] appearance-none  flex-col  items-center justify-center gap-2 rounded-md border border-solid border-[#5F437F] px-4 py-3 leading-tight text-gray-700 shadow focus:outline-none  '
       >
         <option className=' leading-tight text-gray-400' disabled selected>
           Select{' '}
@@ -64,11 +64,9 @@ const LicenseSelect: React.FC<LicenseSelectProps> = ({
         </option>
       </select>
 
-      <div className=' align-center pointer-events-none absolute inset-y-0 right-0 flex flex items-center justify-center pr-4 pt-5 text-gray-700'>
-        <Image src={dropdownicon} alt='tooltip' className='h-5 w-5' />
+      <div className=' align-center pointer-events-none absolute inset-y-0 right-0 flex items-center justify-center pr-4 pt-5 text-gray-700'>
+        <Image src={''} alt='tooltip' className='h-5 w-5' />
       </div>
-
-     
     </div>
   );
 };

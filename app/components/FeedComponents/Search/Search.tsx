@@ -1,7 +1,6 @@
-import { searchIcon } from '@/app/assets/icons';
-import Image from 'next/image';
 import './search.scss';
 
+import { SearchIcon } from '@/app/assets';
 import React, { FC } from 'react';
 
 interface SearchProps {
@@ -10,15 +9,8 @@ interface SearchProps {
 
 const Search: FC<SearchProps> = () => {
   return (
-    <div className='relative mb-5 flex items-center rounded-md border border-primary bg-gray-200 px-10 py-2 sm:w-[100%] '>
-      <Image
-        src={searchIcon}
-        alt='search'
-        width={20}
-        height={20}
-        className='absolute left-3  top-1/2 z-20 -translate-y-1/2 transform'
-      />
-
+    <div className='relative mb-5 flex items-center rounded-md border border-primary bg-gray-200 px-4 py-2 sm:w-[100%] '>
+      <SearchIcon />
       <input
         type='text'
         placeholder='Search from the world of creativity'

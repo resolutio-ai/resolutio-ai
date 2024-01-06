@@ -13,7 +13,7 @@ const FeedPage: FC = () => {
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <div className='align-center md:align-center my-8 grid grid-cols-1 gap-4 md:grid-cols-2 md:justify-center md:gap-10'>
+        <div className='my-8 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-10 lg:grid-cols-3'>
           {feeds?.map((feed) => <FeedItem key={feed.id} feed={feed} />)}
         </div>
       )}
