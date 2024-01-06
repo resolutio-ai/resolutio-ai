@@ -1,4 +1,7 @@
 import Blogs from './Blogs/Blogs';
+import FeedItem from './FeedComponents/FeedItem/FeedItem';
+import Search from './FeedComponents/Search/Search';
+import Sidebar from './FeedComponents/Sidebar/Sidebar';
 import Footer from './Footer/Footer';
 import Header from './Header/Header';
 import CommunityLink from './LinkSection/CommunityLink';
@@ -17,6 +20,7 @@ export {
   CommunityLink,
   EventsAndWorkShop,
   EvidenceLink,
+  FeedItem,
   Footer,
   Header,
   LavenderCollectiveLink,
@@ -24,6 +28,8 @@ export {
   OurTeam,
   ResolveDispute,
   RestrictedAccess,
+  Search,
+  Sidebar,
   SmartLink,
   UnderstandYourRights,
 };

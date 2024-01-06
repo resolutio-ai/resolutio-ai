@@ -1,10 +1,9 @@
 'use client';
 
 import { FC } from 'react';
-import Message from '../../../components/Feed/message';
 
-const Page: FC = () => {
-  return <Message />;
+const MessagePage: FC = () => {
+  return <div className=''>content</div>;
 };
 
-export default Page;
+export default MessagePage;

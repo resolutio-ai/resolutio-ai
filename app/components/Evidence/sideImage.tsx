@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import { FC } from 'react';
-import monalisaart from '../../assets/unsplash_Kv1hYl9LlxU.png';
-
+import monalisaart from '../../assets/evidence-sideimg.png';
 
 const SideImage: FC = () => {
   return (
