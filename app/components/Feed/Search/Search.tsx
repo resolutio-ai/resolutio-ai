@@ -1,7 +1,7 @@
-import './search.scss';
-
 import { SearchIcon } from '@/app/assets';
 import React, { FC } from 'react';
+
+import './Search.scss';
 
 interface SearchProps {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;

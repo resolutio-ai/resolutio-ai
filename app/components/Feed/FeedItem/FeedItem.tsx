@@ -67,7 +67,7 @@ const FeedItem: FC<FeedItemProps> = ({ feed }) => {
             </span>
           </div>
         </div>
-        <div className='action-container flex gap-5'>
+        <div className='action-container flex gap-4'>
           <BookmarkIcon />
           <SaveIcon />
           <AddIcon />

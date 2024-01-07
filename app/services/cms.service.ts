@@ -8,6 +8,8 @@ import {
 
 import axios from 'axios';
 
+// NOTE: Fetch is used when the request is SSR other wise axios is used.
+
 export const getBlogs = (): Promise<Response> => {
   return fetch(`${CMS_BASE_URL}/${BLOGS_FILE}`, { cache: 'no-store' });
 };

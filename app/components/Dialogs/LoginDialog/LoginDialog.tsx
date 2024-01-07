@@ -25,7 +25,7 @@ const LoginDialog: FC<LoginDialogProps> = () => {
 
   const handleLogin: SubmitHandler<LoginFormInput> = ({ email }) => {
     if (!login) {
-      console.log('login function is not defined');
+      console.error('login function is not defined');
       return;
     }
     closeModal();

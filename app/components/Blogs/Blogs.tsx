@@ -57,7 +57,7 @@ const Blogs: FC = async () => {
     const response: Response = await getBlogs();
     blog = await response.json();
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 
   if (!blog) return null;
