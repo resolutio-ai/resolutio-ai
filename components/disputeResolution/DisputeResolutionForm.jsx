@@ -9,12 +9,11 @@ import AttachEvidence from "./AttachEvidence";
 import DisputeCreationSuccess from "./DisputeCreationSuccess";
 
 const defaultValues = {
-  nft_id: "",
-  nft_url: "",
-  marketplace: "",
-  info: "",
-  subject: "",
+  party_details: "",
+  art_id: "",
+  summary: "",
   case_details: "",
+  type: "",
   attached_files: 0,
   files: [],
 };
@@ -30,13 +29,11 @@ const DisputeResolutionForm = () => {
       openBackdrop("Hold on, while we create your dispute...");
       // Object for creating Dispute JSON
       const disputeObject = {
-        nftID: formValues["nft_id"],
-        nftURL: formValues["nft_url"],
-        marketplace: formValues["marketplace"],
-        info: formValues["info"],
-        subject: formValues["subject"],
+        partyDetails: formValues["party_details"],
+        artId: formValues["art_id"],
+        summary: formValues["summary"],
         details: formValues["case_details"],
-        additionalInfo: formValues["additional_details"],
+        type: formValues["type"],
         attachedFiles: formValues["attached_files"],
       };
       // File list for uploading to IPFS
@@ -122,35 +119,35 @@ const DisputeResolutionForm = () => {
           <Grid container spacing={2} direction="column">
             <Grid item>
               <TextField
-                id="nft_id-input"
-                name="nft_id"
-                label="Opposite Party/Parties"
+                id="party_details-input"
+                name="party_details"
+                label="Opposite Party/Parties(persons against whom you’re imitating this dispute)"
                 type="text"
                 required
                 fullWidth
-                value={formValues.nft_id}
+                value={formValues.party_details}
                 onChange={handleInputChange}
               />
             </Grid>
             <Grid item>
               <TextField
-                id="nft_url-input"
-                name="nft_url"
-                label="Art ID"
+                id="art_id-input"
+                name="art_id"
+                label="Art ID (If the art is already recorded on creator armour)"
                 required
                 fullWidth
-                value={formValues.nft_url}
+                value={formValues.art_id}
                 onChange={handleInputChange}
               />
             </Grid>
             <Grid item>
               <TextField
-                id="marketplace-input"
-                name="marketplace"
-                label="Summary of dispute"
+                id="summary-input"
+                name="summary"
+                label="Summary of dispute(250 char.)"
                 type="text"
                 fullWidth
-                value={formValues.marketplace}
+                value={formValues.summary}
                 onChange={handleInputChange}
               />
             </Grid>
@@ -167,9 +164,9 @@ const DisputeResolutionForm = () => {
             </Grid>
             <Grid item>
               <TextField
-                id="subject-input"
-                name="subject"
-                label="Dispute Type"
+                id="type-input"
+                name="type"
+                label="Dispute Type(Drawing, Design, Music, Illustration, Video, Code, Film, Literature)"
                 type="text"
                 fullWidth
                 value={formValues.subject}

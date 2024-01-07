@@ -16,9 +16,9 @@ const AttachEvidence = ({ setFiles }) => {
     <Box sx={{ display: "inline" }} {...getRootProps()}>
       <input {...getInputProps()} />
       <Button variant="contained">Attach Evidence</Button>
-      <span>
+      <div>
         (Add relevant links, IDs and documents into one document and upload it.)
-      </span>
+      </div>
     </Box>
   );
 };
