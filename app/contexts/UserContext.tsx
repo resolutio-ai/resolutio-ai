@@ -1,6 +1,6 @@
 'use client';
 
-import { MagicUserMetadata } from 'magic-sdk';
+import { MagicUserMetadata, RPCError, RPCErrorCode } from 'magic-sdk';
 import React, {
   createContext,
   useCallback,
@@ -83,7 +83,18 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         setUser(userMetadata);
         setIsAuthenticated(true);
       } catch (error) {
-        console.error('Login error:', error);
+        if (error instanceof RPCError) {
+          switch (error.code) {
+            case RPCErrorCode.MagicLinkFailedVerification:
+            case RPCErrorCode.MagicLinkExpired:
+            case RPCErrorCode.MagicLinkRateLimited:
+            case RPCErrorCode.UserAlreadyLoggedIn:
+              // Handle errors accordingly :)
+              break;
+          }
+        } else {
+          console.error('Login error:', error);
+        }
       }
     },
     [magic]
