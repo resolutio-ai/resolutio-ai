@@ -13,6 +13,7 @@ import ResolveDispute from './LinkWithImage/ResolveDispute';
 import UnderstandYourRights from './LinkWithImage/UnderstandYourRights';
 import OurTeam from './OurTeam/OurTeam';
 import RestrictedAccess from './RestrictedAccess/RestrictedAccess';
+import FeedSkeleton from './Skeleton/FeedSkeleton/FeedSkeleton';
 import SmartLink from './SmartLink/SmartLink';
 
 export {
@@ -21,6 +22,7 @@ export {
   EventsAndWorkShop,
   EvidenceLink,
   FeedItem,
+  FeedSkeleton,
   Footer,
   Header,
   LavenderCollectiveLink,
