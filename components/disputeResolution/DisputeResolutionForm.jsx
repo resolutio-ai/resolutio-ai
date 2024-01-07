@@ -124,7 +124,7 @@ const DisputeResolutionForm = () => {
               <TextField
                 id="nft_id-input"
                 name="nft_id"
-                label="NFT (ASSET) ID"
+                label="Opposite Party/Parties"
                 type="text"
                 required
                 fullWidth
@@ -136,10 +136,9 @@ const DisputeResolutionForm = () => {
               <TextField
                 id="nft_url-input"
                 name="nft_url"
-                label="NFT URL"
+                label="Art ID"
                 required
                 fullWidth
-                type="url"
                 value={formValues.nft_url}
                 onChange={handleInputChange}
               />
@@ -148,32 +147,10 @@ const DisputeResolutionForm = () => {
               <TextField
                 id="marketplace-input"
                 name="marketplace"
-                label="Marketplace"
+                label="Summary of dispute"
                 type="text"
                 fullWidth
                 value={formValues.marketplace}
-                onChange={handleInputChange}
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                id="info-input"
-                name="info"
-                label="Information Pertaining to the Concerned Parties"
-                type="text"
-                fullWidth
-                value={formValues.info}
-                onChange={handleInputChange}
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                id="subject-input"
-                name="subject"
-                label="Subject Matter(i.e. Art, Music, Document, etc.)"
-                type="text"
-                fullWidth
-                value={formValues.subject}
                 onChange={handleInputChange}
               />
             </Grid>
@@ -190,13 +167,12 @@ const DisputeResolutionForm = () => {
             </Grid>
             <Grid item>
               <TextField
-                id="additional_details-input"
-                name="additional_details"
-                label="Additional Details"
-                multiline
-                rows={4}
+                id="subject-input"
+                name="subject"
+                label="Dispute Type"
+                type="text"
                 fullWidth
-                value={formValues.additional_details}
+                value={formValues.subject}
                 onChange={handleInputChange}
               />
             </Grid>

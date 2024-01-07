@@ -11,13 +11,8 @@ const DisputeResolutionHeader = () => {
         height="100"
         alt="dispute resolution form image"
       />
-      <Typography variant="h1">
-        Initiate Dispute Resolution against an NFT
-      </Typography>
-      <Typography variant="body1">
-        Provide the NFT Id and the corresponding marketplace namd against which
-        you want to initite the claim.
-      </Typography>
+      <Typography variant="h1">Initiate Dispute</Typography>
+      <Typography variant="body1">Initite the claim.</Typography>
     </Box>
   );
 };

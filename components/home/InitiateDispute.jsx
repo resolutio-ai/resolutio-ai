@@ -6,11 +6,9 @@ const InitiateDispute = () => {
   return (
     <RenderOnAuthenticated>
       <Box sx={{ textAlign: "center", mt: 12 }}>
-        <Typography variant="h5">Create NFT Dispute</Typography>
+        <Typography variant="h5">Initiate Dispute</Typography>
         <Typography variant="body1">
-          Initiate Dispute Resolution against an NFT. Provide the NFT Id and the
-          corresponding marketplace namd against which you want to initite the
-          claim.
+          Raise a dispute about unauthorised use of your art here.
         </Typography>
         <Link href="/initiate-dispute" passHref>
           <Button variant="outlined" sx={{ mt: "1rem" }}>
@@ -19,9 +17,9 @@ const InitiateDispute = () => {
         </Link>
         <br></br>
         <br></br>
-        <Typography variant="h5">Apply to become an arbiter</Typography>
+        <Typography variant="h5">Become an Arbiter</Typography>
         <Typography variant="body1">
-          Adjudicate disputes, Restore justice, and Earn rewards!
+          Adjudicate disputes, restore justice, and earn rewards!
         </Typography>
         <Link href="/arbiter-details" passHref>
           <Button variant="outlined" sx={{ mt: "1rem" }}>
