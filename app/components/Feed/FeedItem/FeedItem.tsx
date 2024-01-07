@@ -11,6 +11,7 @@ import { Feed } from '@/app/services/cms.service';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
+import FeedType from '../FeedType/FeedType';
 
 interface FeedItemProps {
   feed: Feed;
@@ -47,9 +48,7 @@ const FeedItem: FC<FeedItemProps> = ({ feed }) => {
           height={500}
           className='w-[100%] rounded-md'
         />
-        <div className='work-type absolute right-[15px] top-[15px] flex w-[35px] cursor-pointer rounded-md bg-white/25 p-2 backdrop-blur'>
-          <Image src={''} alt={work.description} width={25} height={25} />
-        </div>
+        <FeedType type={work.type} />
       </div>
       <div className='my-4 flex w-[100%] justify-between'>
         <div className='info-container flex gap-5'>

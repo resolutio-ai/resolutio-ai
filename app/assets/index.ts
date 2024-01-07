@@ -1,49 +1,47 @@
 import {
-  Bookmarkicon,
   EvidenceSvg,
   HomeBtnSvg,
   MessageIcon,
   NotificationIcon,
-  PaintbrushSvg,
   SingleUser,
   SupportIcon,
-  booknnarkIcon,
   dropdownIcon,
   evidencForm,
   messageIcon,
-  musicNoteIconSvg,
   notificationIcon,
-  pencilIconSvg,
 } from './icons';
 import AddIcon from './icons/AddIcon';
+import AiIcon from './icons/AiIcon';
 import BookmarkIcon from './icons/BookmarkIcon';
+import BrushIcon from './icons/BrushIcon';
 import ElllipseIcon from './icons/ElllipseIcon';
 import EyeIcon from './icons/EyeIcon';
 import LicenseIcon from './icons/LicenseIcon';
+import MusicIcon from './icons/MusicIcon';
+import PencilIcon from './icons/PencilIcon';
 import SaveIcon from './icons/SaveIcon';
 import SearchIcon from './icons/SearchIcon';
 
 export {
   AddIcon,
+  AiIcon,
   BookmarkIcon,
-  Bookmarkicon,
+  BrushIcon,
   ElllipseIcon,
   EvidenceSvg,
   EyeIcon,
   HomeBtnSvg,
   LicenseIcon,
   MessageIcon,
+  MusicIcon,
   NotificationIcon,
-  PaintbrushSvg,
+  PencilIcon,
   SaveIcon,
   SearchIcon,
   SingleUser,
   SupportIcon,
-  booknnarkIcon,
   dropdownIcon,
   evidencForm,
   messageIcon,
-  musicNoteIconSvg,
   notificationIcon,
-  pencilIconSvg,
 };
