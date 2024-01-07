@@ -27,14 +27,14 @@ const pages = [
     text: "Arbiter Disputes",
     url: "/raised-disputes",
     isExternal: false,
-  }, */
+  }, 
   {
     id: 2,
     text: "Res Ed",
     url: "/res-ed",
     isExternal: false,
     icon: <SchoolIcon color="primary" />,
-  },
+  },*/
   {
     id: 3,
     text: "Community",
