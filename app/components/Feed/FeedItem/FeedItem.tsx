@@ -30,6 +30,7 @@ const FeedItem: FC<FeedItemProps> = ({ feed }) => {
                 width={25}
                 height={25}
                 alt={creator.name}
+                blurDataURL={creator.image}
               />
             </div>
           </div>

@@ -1,10 +1,8 @@
+import { SideImage, SmartLink } from '@/app/components';
 import { getSectionWithImage } from '@/app/services/cms.service';
-import Image from 'next/image';
 import { FC } from 'react';
-import { SmartLink } from '..';
-
 import './AbractLinkWithImage.scss';
-import AuthorLink, { Author } from './AuthorLink/AuthorLink';
+import { Author } from './AuthorLink/AuthorLink';
 
 interface AbractLinkWithImageProps {
   sectionFile: string;
@@ -74,19 +72,13 @@ const AbractLinkWithImage: FC<AbractLinkWithImageProps> = async ({
           </SmartLink>
         </div>
       </div>
-      <div className={`img-container relative ${imgOrder}`}>
-        <a href={imgNavigation} target='_blank' rel='noreferrer'>
-          <Image
-            src={imageURL}
-            alt='Art'
-            className='cover-img h-[calc(100vh-64px)] w-[100%] object-cover'
-            width={500}
-            height={500}
-            unoptimized={isGIF} // Next/image doesn't support GIFs yet so we need to disable optimization
-          />
-        </a>
-        {showAuthor && <AuthorLink author={author} />}
-      </div>
+      <SideImage
+        imageURL={imageURL}
+        additionalClasses={imgOrder}
+        imgNavigation={imgNavigation}
+        showAuthor={showAuthor}
+        author={author}
+      />
     </div>
   );
 };
