@@ -79,7 +79,7 @@ const AbractLinkWithImage: FC<AbractLinkWithImageProps> = async ({
           <Image
             src={imageURL}
             alt='Art'
-            className='cover-img'
+            className='cover-img h-[calc(100vh-64px)] w-[100%] object-cover'
             width={500}
             height={500}
             unoptimized={isGIF} // Next/image doesn't support GIFs yet so we need to disable optimization

@@ -4,11 +4,4 @@ $prefix: link-with-img;
   .content-cta {
     padding: 2rem 10%;
   }
-  .img-container {
-    .cover-img {
-      width: 100%;
-      height: calc(100vh - 64px);
-      object-fit: cover;
-    }
-  }
 }
