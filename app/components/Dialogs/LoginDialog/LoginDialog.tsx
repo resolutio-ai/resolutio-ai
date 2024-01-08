@@ -49,7 +49,7 @@ const LoginDialog: FC<LoginDialogProps> = () => {
             <input
               type='email'
               placeholder='johndoe@example.com'
-              className='input input-bordered w-full'
+              className='input input-bordered input-primary w-full'
               {...register('email', { required: true })}
             />
           </label>
