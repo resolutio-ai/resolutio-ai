@@ -1,6 +1,7 @@
 import { getOurTeam } from '@/app/services/cms.service';
 import Image from 'next/image';
 import { FC } from 'react';
+
 import './OurTeam.scss';
 
 interface Member {
@@ -9,6 +10,7 @@ interface Member {
   profileLink: string;
   imageURL: string;
   mask: string;
+  tags: string[];
 }
 
 interface MemberItemProps {
@@ -41,7 +43,7 @@ const OurTeam: FC = async () => {
     const response: Response = await getOurTeam();
     ourMembers = await response.json();
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 
   return (

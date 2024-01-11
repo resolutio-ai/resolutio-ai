@@ -1,0 +1,40 @@
+
+.group:hover svg g path#Icon {
+    fill: white;
+  }
+.group:hover  .icon path{
+    fill: white;
+  }
+  .group:hover{
+    background-color: #5F437F;
+    color: white;
+  }
+
+.active-group svg g path#Icon {
+    fill: #5F437F ;
+    stroke: #5F437F;
+
+}
+.active-group  .icon path{
+    fill: #5F437F ;
+    stroke: #5F437F;
+
+}
+.active-group:hover svg g path#Icon {
+    fill: white !important;
+    stroke: #5F437F;
+
+  }
+.active-group:hover  .icon path{
+    fill: white !important;
+    stroke: #5F437F;
+
+  }
+  .active-group:hover{
+    background-color: #5F437F;
+    fill: white;
+    color: white;
+
+  }
+  @media (min-width: 769px) and (max-width: 790px) {
+  }

@@ -1,7 +1,9 @@
-$prefix: header;
+$prefix: header-container;
 
 .#{$prefix} {
-  // write your CSS here
+  .vertical-spacing {
+    min-height: 4.25rem;
+  }
 }
 
 .vertical-spacing {

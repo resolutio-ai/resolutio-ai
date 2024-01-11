@@ -1,6 +1,5 @@
-import React, { ChangeEvent } from 'react';
 import Image from 'next/image';
-import fileUpload from '../../../assets/fileUpload.svg';
+import React, { ChangeEvent } from 'react';
 
 interface FileUploadProps {
   handleFileUpload: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -21,8 +20,8 @@ const FileUpload: React.FC<FileUploadProps> = ({ handleFileUpload }) => {
           className='w-full cursor-pointer pl-4 text-left leading-tight text-gray-400 '
         >
           Enter name of work
-          <div className='align-center absolute inset-y-0 right-0 flex flex cursor-pointer items-center justify-between pr-4 pt-5 text-gray-700'>
-            <Image src={fileUpload} alt='tooltip' className='h-5 w-5' />
+          <div className='align-center absolute inset-y-0 right-0 flex cursor-pointer items-center justify-between pr-4 pt-5 text-gray-700'>
+            <Image src={''} alt='tooltip' className='h-5 w-5' />
           </div>
         </label>
 

@@ -1,18 +1,19 @@
 import React, { ChangeEvent } from 'react';
-import tooltip from '../../../assets/tooltip.svg';
-import fileUpload from '../../../assets/fileUpload.svg';
+
 import Image from 'next/image';
 
 interface FileUploadForLicenseProps {
-    handleLicenseUpload: (e: ChangeEvent<HTMLInputElement>) => void;
-    selectedLicense: string;
-
+  handleLicenseUpload: (e: ChangeEvent<HTMLInputElement>) => void;
+  selectedLicense: string;
 }
 
-const FileUploadForLicense: React.FC<FileUploadForLicenseProps> = ({ handleLicenseUpload,selectedLicense }) => {
+const FileUploadForLicense: React.FC<FileUploadForLicenseProps> = ({
+  handleLicenseUpload,
+  selectedLicense,
+}) => {
   return (
     <div>
-    {selectedLicense === 'Your own license' && (
+      {selectedLicense === 'Your own license' && (
         <div className='relative'>
           <label
             htmlFor='fileUpload'
@@ -26,8 +27,8 @@ const FileUploadForLicense: React.FC<FileUploadForLicenseProps> = ({ handleLicen
               className='w-full cursor-pointer pl-4 text-left leading-tight text-gray-400 '
             >
               Upload file
-              <div className='align-center absolute inset-y-0 right-0 flex flex cursor-pointer items-center justify-between pr-4 pt-0 text-gray-700'>
-                <Image src={fileUpload} alt='tooltip' className='h-5 w-5'  />
+              <div className='align-center absolute inset-y-0 right-0 flex cursor-pointer items-center justify-between pr-4 pt-0 text-gray-700'>
+                <Image src={''} alt='tooltip' className='h-5 w-5' />
               </div>
             </label>
 
@@ -40,7 +41,7 @@ const FileUploadForLicense: React.FC<FileUploadForLicenseProps> = ({ handleLicen
             />
           </div>
           <span className='align-center mt-2 flex'>
-            <Image src={tooltip} alt='tooltip' className='h-3 w-3  ' />
+            <Image src={''} alt='tooltip' className='h-3 w-3  ' />
 
             <small className='pl-1 text-[10px]'>
               Create your own license using the Resolutio template{' '}
@@ -54,7 +55,7 @@ const FileUploadForLicense: React.FC<FileUploadForLicenseProps> = ({ handleLicen
           </span>
         </div>
       )}
-      </div>
+    </div>
   );
 };
 

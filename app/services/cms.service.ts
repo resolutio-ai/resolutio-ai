@@ -6,6 +6,10 @@ import {
   TEAM_FILE,
 } from '../settings';
 
+import axios from 'axios';
+
+// NOTE: Fetch is used when the request is SSR other wise axios is used.
+
 export const getBlogs = (): Promise<Response> => {
   return fetch(`${CMS_BASE_URL}/${BLOGS_FILE}`, { cache: 'no-store' });
 };
@@ -23,4 +27,25 @@ export const getSectionWithImage = (sectionFile: string): Promise<Response> => {
   return fetch(`${CMS_BASE_URL}/${LINK_WITH_IMAGE_FOLDER}/${sectionFile}`, {
     cache: 'no-store',
   });
+};
+
+export type Feed = {
+  id: number;
+  creator: {
+    name: string;
+    image: string;
+  };
+  work: {
+    type: string;
+    url: string;
+    description: string;
+  };
+  createdOn: string;
+  views: number;
+  licenses: number;
+  code: string;
+};
+
+export const getFeeds = () => {
+  return axios.get<Feed[]>(`${CMS_BASE_URL}/feeds.json`);
 };

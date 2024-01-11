@@ -1,22 +1,30 @@
+import monalisaart from '@/app/assets/evidence-sideimg.png';
+import { Evidenceform, SideImage } from '@/app/components';
 import { FC } from 'react';
-
-import Evidenceform from '@/app/components/Evidence/form';
-import SideImage from '@/app/components/Evidence/sideImage';
 import "./evidence.scss";
 
 
 
 const Evidence: FC = () => {
-  return  <div> 
-  <div className="sm:flex w-full h-full "> 
-    <div className="lg:w-1/2 lg:pt-10 md:w-full  ">
-      <Evidenceform />
+  const author = {
+    name: 'Leonardo da Vinci',
+    artName: 'Painting',
+    profileLink: 'https://www.google.com',
+  };
+
+  return (
+    <div className='grid md:grid-cols-2'>
+      <div className=''>
+        <Evidenceform />
+      </div>
+      <SideImage
+        imageURL={monalisaart}
+        imgNavigation={author.profileLink}
+        author={author}
+        showAuthor
+      />
     </div>
-    <div className="lg:w-1/2 md:w-full">
-      <SideImage />
-    </div>
-  </div>
-</div>
+  );
 };
 
 export default Evidence;
