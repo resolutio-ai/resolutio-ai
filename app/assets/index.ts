@@ -9,6 +9,9 @@ import {
   evidencForm,
   messageIcon,
   notificationIcon,
+  tooltip,
+  calenderIcon,
+  fileuploadIcon
 } from './icons';
 import AddIcon from './icons/AddIcon';
 import AiIcon from './icons/AiIcon';
@@ -24,6 +27,9 @@ import SearchIcon from './icons/SearchIcon';
 
 export {
   AddIcon,
+  tooltip,
+  calenderIcon,
+  fileuploadIcon,
   AiIcon,
   BookmarkIcon,
   BrushIcon,

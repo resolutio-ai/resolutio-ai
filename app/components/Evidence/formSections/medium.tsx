@@ -1,3 +1,4 @@
+import { dropdownIcon } from '@/app/assets';
 import Image from 'next/image';
 import React from 'react';
 
@@ -22,7 +23,7 @@ const Medium: React.FC = () => {
         <option>Other</option>
       </select>
       <div className=' align-center pointer-events-none absolute inset-y-0 right-0 flex  items-center justify-center pr-4 pt-5 text-gray-700'>
-        <Image src={''} alt='tooltip' className='h-5 w-5' />
+        <Image src={dropdownIcon} alt='tooltip' className='h-5 w-5' />
       </div>
     </div>
   );

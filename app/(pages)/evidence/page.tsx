@@ -1,9 +1,7 @@
 import monalisaart from '@/app/assets/evidence-sideimg.png';
 import { Evidenceform, SideImage } from '@/app/components';
 import { FC } from 'react';
-import "./evidence.scss";
-
-
+import './evidence.scss';
 
 const Evidence: FC = () => {
   const author = {
@@ -17,12 +15,14 @@ const Evidence: FC = () => {
       <div className=''>
         <Evidenceform />
       </div>
-      <SideImage
-        imageURL={monalisaart}
-        imgNavigation={author.profileLink}
-        author={author}
-        showAuthor
-      />
+      <div className=''>
+        <SideImage
+          imageURL={monalisaart}
+          imgNavigation={author.profileLink}
+          author={author}
+          showAuthor
+        />{' '}
+      </div>
     </div>
   );
 };

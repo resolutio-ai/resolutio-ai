@@ -1,6 +1,7 @@
 import React, { ChangeEvent } from 'react';
 
 import Image from 'next/image';
+import { fileuploadIcon } from '@/app/assets';
 
 interface FileUploadForLicenseProps {
   handleLicenseUpload: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -28,7 +29,7 @@ const FileUploadForLicense: React.FC<FileUploadForLicenseProps> = ({
             >
               Upload file
               <div className='align-center absolute inset-y-0 right-0 flex cursor-pointer items-center justify-between pr-4 pt-0 text-gray-700'>
-                <Image src={''} alt='tooltip' className='h-5 w-5' />
+                <Image src={fileuploadIcon} alt='file upload' className='h-5 w-5 '  />
               </div>
             </label>
 

@@ -5,7 +5,7 @@ import monalisaart from '../../assets/unsplash_Kv1hYl9LlxU.png';
 
 const SideImage: FC = () => {
   return (
-    <div className='relative h-full w-full'>
+    <div className='relative h-full w-full '>
       <Image
         src={monalisaart}
         alt='monalisa'
