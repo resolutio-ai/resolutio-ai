@@ -5,13 +5,13 @@ import {
   NotificationIcon,
   SingleUser,
   SupportIcon,
+  calenderIcon,
   dropdownIcon,
   evidencForm,
+  fileuploadIcon,
   messageIcon,
   notificationIcon,
   tooltip,
-  calenderIcon,
-  fileuploadIcon
 } from './icons';
 import AddIcon from './icons/AddIcon';
 import AiIcon from './icons/AiIcon';
@@ -24,12 +24,10 @@ import MusicIcon from './icons/MusicIcon';
 import PencilIcon from './icons/PencilIcon';
 import SaveIcon from './icons/SaveIcon';
 import SearchIcon from './icons/SearchIcon';
+import monalisaart from './images/monalisaart.png';
 
 export {
   AddIcon,
-  tooltip,
-  calenderIcon,
-  fileuploadIcon,
   AiIcon,
   BookmarkIcon,
   BrushIcon,
@@ -46,8 +44,12 @@ export {
   SearchIcon,
   SingleUser,
   SupportIcon,
+  calenderIcon,
   dropdownIcon,
   evidencForm,
+  fileuploadIcon,
   messageIcon,
+  monalisaart,
   notificationIcon,
+  tooltip,
 };
