@@ -7,9 +7,9 @@ import CustomDatePicker from './formSections/dateOfCreation';
 import FileUpload from './formSections/fileUpload';
 import FileUploadForLicense from './formSections/fileUploadforLicence';
 import LicenseSelect from './formSections/licenseSelect';
-import Medium from './formSections/medium';
 import WorkNameInput from './formSections/workNameInpute';
 import { submitEvidence } from '../../adapter/browser/formApiService';
+import Medium from './formSections/medium';
 
 interface Creator {
   id: number;
@@ -131,18 +131,15 @@ const Evidenceform: FC = () => {
             />
 
             <FileUpload handleFileUpload={handleFileUpload} />
-
             <CustomDatePicker
               selectedDate={selectedDate}
               onChange={setSelectedDate}
             />
-
             <LicenseSelect
               selectedLicense={selectedLicense}
               handleLicenseChange={handleLicenseChange}
               handleLicenseUpload={handleLicenseUpload}
             />
-
             <FileUploadForLicense
               handleLicenseUpload={handleLicenseUpload}
               selectedLicense={selectedLicense}

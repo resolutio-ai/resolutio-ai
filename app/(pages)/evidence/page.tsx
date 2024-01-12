@@ -1,4 +1,4 @@
-import monalisaart from '@/app/assets/evidence-sideimg.png';
+import { monalisaart } from '@/app/assets';
 import { Evidenceform, SideImage } from '@/app/components';
 import { FC } from 'react';
 import './evidence.scss';
