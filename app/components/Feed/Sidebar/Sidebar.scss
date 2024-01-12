@@ -1,40 +1,34 @@
-
 .group:hover svg g path#Icon {
-    fill: white;
-  }
-.group:hover  .icon path{
-    fill: white;
-  }
-  .group:hover{
-    background-color: #5F437F;
-    color: white;
-  }
+  fill: white;
+}
+.group:hover .icon path {
+  fill: white;
+}
+.group:hover {
+  background-color: #5f437f;
+  color: white;
+}
 
 .active-group svg g path#Icon {
-    fill: #5F437F ;
-    stroke: #5F437F;
-
+  fill: #5f437f;
+  stroke: #5f437f;
 }
-.active-group  .icon path{
-    fill: #5F437F ;
-    stroke: #5F437F;
-
+.active-group .icon path {
+  fill: #5f437f;
+  stroke: #5f437f;
 }
 .active-group:hover svg g path#Icon {
-    fill: white !important;
-    stroke: #5F437F;
-
-  }
-.active-group:hover  .icon path{
-    fill: white !important;
-    stroke: #5F437F;
-
-  }
-  .active-group:hover{
-    background-color: #5F437F;
-    fill: white;
-    color: white;
-
-  }
-  @media (min-width: 769px) and (max-width: 790px) {
-  }
+  fill: white !important;
+  stroke: #5f437f;
+}
+.active-group:hover .icon path {
+  fill: white !important;
+  stroke: #5f437f;
+}
+.active-group:hover {
+  background-color: #5f437f;
+  fill: white;
+  color: white;
+}
+@media (min-width: 769px) and (max-width: 790px) {
+}

@@ -28,12 +28,12 @@ const FileUploadForLicense: React.FC<FileUploadForLicenseProps> = ({
               htmlFor='licenseUpload'
               className='w-full cursor-pointer pl-4 text-left leading-tight text-gray-400 '
             >
-              Choose file
-              <div className='align-center absolute inset-y-0 right-0 flex cursor-pointer items-center justify-between pr-4  text-gray-700'>
+              Upload file
+              <div className='align-center absolute inset-y-0 right-0 flex cursor-pointer items-center justify-between pr-4 pt-0 text-gray-700'>
                 <Image
                   src={fileuploadIcon}
                   alt='file upload'
-                  className='h-5 w-5'
+                  className='h-5 w-5 '
                 />
               </div>
             </label>

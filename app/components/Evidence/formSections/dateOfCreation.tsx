@@ -28,7 +28,11 @@ const CustomDatePicker: FC<DatePickerProps> = ({ selectedDate, onChange }) => {
         onChange={(date) => onChange(date)}
       />
       <div className=' align-center absolute inset-y-0 right-0 flex items-center justify-center pr-4 pt-5 text-gray-700'>
-        <Image src={calenderIcon} alt='calender' className='h-5 w-5 cursor-pointer' />
+        <Image
+          src={calenderIcon}
+          alt='calender'
+          className='h-5 w-5 cursor-pointer'
+        />
       </div>
     </div>
   );
