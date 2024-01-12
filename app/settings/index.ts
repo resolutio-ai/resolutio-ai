@@ -1,4 +1,4 @@
-import { CMS_BASE_URL, queryClient } from './apiConfig';
+import { CMS_BASE_URL, queryClient } from './api.config';
 import {
   BLOGS_FILE,
   COMMUNITY_LINK_FILE,
@@ -11,13 +11,13 @@ import {
   RESOLVE_DISPUTE_FILE,
   TEAM_FILE,
   UNDERSTAND_YOUR_RIGHTS_FILE,
-} from './dataConfig';
+} from './data.config';
 import {
   GA_TRACKING_ID,
   LOGIN_MODAL_ID,
   MAGIC_SECRET_KEY,
   NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY,
-} from './siteConfig';
+} from './site.config';
 
 export {
   BLOGS_FILE,

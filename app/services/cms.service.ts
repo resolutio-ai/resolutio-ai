@@ -4,8 +4,8 @@ import {
   LINK_FOLDER,
   LINK_WITH_IMAGE_FOLDER,
   TEAM_FILE,
-} from '../settings';
-
+} from '@/app/settings';
+import { FeedItemDto } from '@/app/types';
 import axios from 'axios';
 
 // NOTE: Fetch is used when the request is SSR other wise axios is used.
@@ -29,23 +29,6 @@ export const getSectionWithImage = (sectionFile: string): Promise<Response> => {
   });
 };
 
-export type Feed = {
-  id: number;
-  creator: {
-    name: string;
-    image: string;
-  };
-  work: {
-    type: string;
-    url: string;
-    description: string;
-  };
-  createdOn: string;
-  views: number;
-  licenses: number;
-  code: string;
-};
-
 export const getFeeds = () => {
-  return axios.get<Feed[]>(`${CMS_BASE_URL}/feeds.json`);
+  return axios.get<FeedItemDto[]>(`${CMS_BASE_URL}/feeds.json`);
 };
