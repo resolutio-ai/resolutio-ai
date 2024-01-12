@@ -17,6 +17,7 @@ import AddIcon from './icons/AddIcon';
 import AiIcon from './icons/AiIcon';
 import BookmarkIcon from './icons/BookmarkIcon';
 import BrushIcon from './icons/BrushIcon';
+import DecorationIcon from './icons/DecorationIcon';
 import ElllipseIcon from './icons/ElllipseIcon';
 import EyeIcon from './icons/EyeIcon';
 import LicenseIcon from './icons/LicenseIcon';
@@ -31,6 +32,7 @@ export {
   AiIcon,
   BookmarkIcon,
   BrushIcon,
+  DecorationIcon,
   ElllipseIcon,
   EvidenceSvg,
   EyeIcon,

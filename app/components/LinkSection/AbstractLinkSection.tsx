@@ -1,8 +1,8 @@
+import { DecorationIcon } from '@/app/assets';
+import { SmartLink } from '@/app/components';
+import { getLinkSection } from '@/app/services';
 import { FC } from 'react';
-import { SmartLink } from '..';
-import ButtonDecoration from './ButtonDecoration';
 
-import { getLinkSection } from '@/app/services/cms.service';
 import './AbstractLinkSection.scss';
 
 interface LinkSection {
@@ -47,7 +47,7 @@ export const AbstractLinkSection: FC<AbstractLinkSectionProps> = async ({
           >
             {btnText}
           </SmartLink>
-          <ButtonDecoration />
+          <DecorationIcon />
         </div>
       </div>
     </div>
