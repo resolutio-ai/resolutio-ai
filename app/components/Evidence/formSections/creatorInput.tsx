@@ -35,22 +35,31 @@ interface CreatorsListProps {
   onNameChange: (id: number, value: string) => void;
 }
 
-const CreatorsList: FC<CreatorsListProps> = ({ creators, onAddCreator, onNameChange }) => {
+const CreatorsList: FC<CreatorsListProps> = ({
+  creators,
+  onAddCreator,
+  onNameChange,
+}) => {
   return (
     <div>
       {creators.map((creator) => (
-        <CreatorInput key={creator.id} id={creator.id} value={creator.name} onChange={onNameChange} />
+        <CreatorInput
+          key={creator.id}
+          id={creator.id}
+          value={creator.name}
+          onChange={onNameChange}
+        />
       ))}
       <div onClick={onAddCreator} className='flex cursor-pointer text-right '>
         <p className='font-weight: 400 w-[100%] px-2  text-base  leading-tight'>
-          <span className='align-center px-2 text-lg text-primary  '>&#43;</span>
+          <span className='align-center px-2 text-lg text-primary  '>
+            &#43;
+          </span>
           Add Co-creators
         </p>
       </div>
     </div>
   );
 };
-
-
 
 export default CreatorsList;

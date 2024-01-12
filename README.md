@@ -1,10 +1,13 @@
 ## resolutio: Protection Layer for Creator Economy
-Welcome to *********resolutio*********’s GitHub repository, where innovation meets protection in the dynamic world of digital creation. *resolutio* is a platform dedicated to empowering creators by providing robust solutions in the fields of blockchain, AI, and intellectual property.
+
+Welcome to \***\*\*\*\***resolutio\***\*\*\*\***’s GitHub repository, where innovation meets protection in the dynamic world of digital creation. _resolutio_ is a platform dedicated to empowering creators by providing robust solutions in the fields of blockchain, AI, and intellectual property.
 
 ## Overview
+
 We recognise the challenges faced by creators in the $150 billion creator economy. Major platforms often lack essential protection measures, leaving creators vulnerable to scams and unpaid work. Our mission is to bridge this gap by offering a user-friendly platform fortified with anti-AI protection, blockchain stamps, legal contracts/licenses, and a transparent logbook of licensees/buyers.
 
 ## Key Features
+
 - **Enhanced Copyright Protection:** Enjoy enhanced copyright protection with blockchain stamps, acting as verification tools for third-party platforms. These stamps, linked to smart contract licenses, govern how your work is used. Weed out illegal use and facilitate easy, legal access to art, ensuring fair compensation and proper attribution for creators.
 - **Legal Contracts/Licenses:** Secure your creative assets with robust legal contracts and licenses, providing a clear framework for authorized use and attribution.
 - **Log Book:** Maintain a comprehensive repository of protected work and a track record of its legal use. This log book helps distinguish between genuine and unauthorized users, promoting a secure creative environment.
@@ -35,14 +38,13 @@ D. Chain Flexibility: FIL tokens, created on resolutio, can seamlessly transitio
 
 F. License Integration: Each work stamped on-chain can be linked to licenses, dictating its usage. resolutio provides built-in options, including Creative Commons licenses and resolutio's own license. Additionally, users can incorporate custom licenses to tailor the terms according to their preferences.
 
-G. User-Friendly Transactions: Facilitating easy transactions, interested parties can directly visit the creator's profile to buy or license their work, streamlining the process for both creators and consumers. All transactions are recorded on our respository. 
+G. User-Friendly Transactions: Facilitating easy transactions, interested parties can directly visit the creator's profile to buy or license their work, streamlining the process for both creators and consumers. All transactions are recorded on our respository.
 
 In essence, "Creator Armour" not only addresses the existing gaps in copyright protection but also empowers creators with choices, control, and seamless transactions within the Resolutio ecosystem.
 
 **[res bot](https://github.com/resolutio-ai/resolutio-chatbot-api)**
 
 In the vast digital landscape, creators struggle to find relevant and accessible information on protecting their artistic creations. The sheer volume of resources, coupled with the challenge of identifying essential details, creates a barrier for creators seeking to safeguard their intellectual property (IP). Res Chat Bot emerges as a solution to address this problem, offering a user-centric platform that cuts through the noise and provides clear, actionable insights for artists navigating the complexities of art protection.
-
 
 The primary features of resbot is:
 
@@ -54,7 +56,6 @@ C. Privacy First: Even users who chose to log in and share their data are protec
 
 D. Actionable Message Handling: Send, receive, delete, edit, and resend messages with ease, ensuring effective communication.
 Platform
-
 
 Our team is dedicated to programming the app, crafting an intuitive user interface, and conducting thorough testing to ensure quality. Built on React, ResChatBot ensures compatibility with the current platform, supported by a robust REST API created with Node.js. The integration of a secure database enhances data storage and retrieval capabilities.
 
@@ -96,7 +97,7 @@ A summary of the dispute is then provided to the arbiter community in the platfo
    If an arbiter is interested to take part in adjudication, they shall go to the Arbiter Disputes page which has the open dispute and chose the requisite dispute. Only those persons with arbiter tokens shall have access to this page. There, on reading the case summary, if they are interested to arbiter a case, they shall choose the stake option and stake crypto. Staking is equivalent to applying to arbiter.
 2. **randomised selection**
 
-   Three arbiter’s from the pool is randomly selected to arbiter the dispute. Their likelihood of selection will depend on their experience with the subject matter of the case. For eg. if it is a music  dispute, experience resolving music  disputes will give them a better chance of being selected.
+   Three arbiter’s from the pool is randomly selected to arbiter the dispute. Their likelihood of selection will depend on their experience with the subject matter of the case. For eg. if it is a music dispute, experience resolving music disputes will give them a better chance of being selected.
 
    This is determined by the decision NFTs in their wallet. After each dispute, the final decision is minted as NFTs and transferred to the (majority) arbiters in the case . Each NFT is tagged depending on the subject matter of the dispute. This tag helps the randomisation smart contract identify the subject matter expertise of the applicants
 
