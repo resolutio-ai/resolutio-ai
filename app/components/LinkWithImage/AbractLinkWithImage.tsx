@@ -1,5 +1,5 @@
 import { SideImage, SmartLink } from '@/app/components';
-import { getSectionWithImage } from '@/app/services/cms.service';
+import { getSectionWithImage } from '@/app/services';
 import { FC } from 'react';
 import './AbractLinkWithImage.scss';
 import { Author } from './AuthorLink/AuthorLink';

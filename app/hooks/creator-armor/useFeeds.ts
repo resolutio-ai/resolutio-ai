@@ -1,4 +1,4 @@
-import { getFeeds } from '@/app/services/cms.service';
+import { getFeeds } from '@/app/services';
 import { useQuery } from '@tanstack/react-query';
 
 const useFeeds = () => {

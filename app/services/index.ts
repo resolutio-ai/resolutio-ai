@@ -1,3 +1,9 @@
-import { getFeeds, type Feed } from './cms.service';
+import {
+  getBlogs,
+  getFeeds,
+  getLinkSection,
+  getOurTeam,
+  getSectionWithImage,
+} from './cms.service';
 
-export { Feed, getFeeds };
+export { getBlogs, getFeeds, getLinkSection, getOurTeam, getSectionWithImage };

@@ -1,6 +1,7 @@
-import { getBlogs } from '@/app/services/cms.service';
+import { getBlogs } from '@/app/services';
 import Image from 'next/image';
 import { FC } from 'react';
+
 import './Blogs.scss';
 
 interface BlogItem {

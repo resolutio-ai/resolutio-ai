@@ -7,14 +7,14 @@ import {
   LicenseIcon,
   SaveIcon,
 } from '@/app/assets';
-import { Feed } from '@/app/services/cms.service';
+import { FeedItemDto } from '@/app/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
 import FeedType from '../FeedType/FeedType';
 
 interface FeedItemProps {
-  feed: Feed;
+  feed: FeedItemDto;
 }
 
 const FeedItem: FC<FeedItemProps> = ({ feed }) => {

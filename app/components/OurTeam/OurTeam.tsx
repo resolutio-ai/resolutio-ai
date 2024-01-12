@@ -1,4 +1,4 @@
-import { getOurTeam } from '@/app/services/cms.service';
+import { getOurTeam } from '@/app/services';
 import Image from 'next/image';
 import { FC } from 'react';
 
