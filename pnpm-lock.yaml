@@ -43,15 +43,9 @@ dependencies:
     version: 3.22.4
 
 devDependencies:
-<<<<<<< HEAD
-  '@tailwindcss/forms':
-    specifier: ^0.5.7
-    version: 0.5.7(tailwindcss@3.3.6)
-=======
   '@magic-sdk/types':
     specifier: ^17.3.0
     version: 17.3.0
->>>>>>> 1aa95f1c45a6c24a4a8034e01a25e704a6e3c507
   '@tailwindcss/typography':
     specifier: ^0.5.10
     version: 0.5.10(tailwindcss@3.4.1)
@@ -702,20 +696,7 @@ packages:
       tslib: 2.6.2
     dev: false
 
-<<<<<<< HEAD
-  /@tailwindcss/forms@0.5.7(tailwindcss@3.3.6):
-    resolution: {integrity: sha512-QE7X69iQI+ZXwldE+rzasvbJiyV/ju1FGHH0Qn2W3FKbuYtqp8LKcy6iSw79fVUT5/Vvf+0XgLCeYVG+UV6hOw==}
-    peerDependencies:
-      tailwindcss: '>=3.0.0 || >= 3.0.0-alpha.1'
-    dependencies:
-      mini-svg-data-uri: 1.4.4
-      tailwindcss: 3.3.6
-    dev: true
-
-  /@tailwindcss/typography@0.5.10(tailwindcss@3.3.6):
-=======
   /@tailwindcss/typography@0.5.10(tailwindcss@3.4.1):
->>>>>>> 1aa95f1c45a6c24a4a8034e01a25e704a6e3c507
     resolution: {integrity: sha512-Pe8BuPJQJd3FfRnm6H0ulKIGoMEQS+Vq01R6M5aCrFB/ccR/shT+0kXLjouGC1gFLm9hopTFN+DMP0pfwRWzPw==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
@@ -2769,12 +2750,6 @@ packages:
       picomatch: 2.3.1
     dev: true
 
-<<<<<<< HEAD
-  /mini-svg-data-uri@1.4.4:
-    resolution: {integrity: sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg==}
-    hasBin: true
-    dev: true
-=======
   /mime-db@1.52.0:
     resolution: {integrity: sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg==}
     engines: {node: '>= 0.6'}
@@ -2805,7 +2780,6 @@ packages:
   /minimalistic-crypto-utils@1.0.1:
     resolution: {integrity: sha512-JIYlbt6g8i5jKfJ3xz7rF0LXmv2TkDxBLUkiBeZ7bAx4GnnNMr8xFpGnOxn6GhTEHx3SjRrZEoU+j04prX1ktg==}
     dev: false
->>>>>>> 1aa95f1c45a6c24a4a8034e01a25e704a6e3c507
 
   /minimatch@3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
