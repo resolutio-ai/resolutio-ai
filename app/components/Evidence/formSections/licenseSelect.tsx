@@ -1,7 +1,6 @@
-import React, { ChangeEvent } from 'react';
-//import dropdownicon from '../../../assets/dropdownicon.svg';
-//import tooltip from '../../../assets/tooltip.svg';
+import { dropdownIcon, tooltip } from '@/app/assets';
 import Image from 'next/image';
+import React, { ChangeEvent } from 'react';
 
 interface LicenseSelectProps {
   selectedLicense: string;
@@ -22,7 +21,7 @@ const LicenseSelect: React.FC<LicenseSelectProps> = ({
       >
         License
         <div className=' tooltip relative ml-1 inline-block'>
-          <Image src={''} alt='tooltip' className='h-4 w-4' />
+          <Image src={tooltip} alt='tooltip' className='h-4 w-4' />
           <span className='tooltiptext font-weight-400 leading-18 invisible absolute bottom-full left-1/2 z-10 w-[120px] -translate-x-1/2 transform rounded border bg-white p-[7px] text-center text-xs font-normal text-black'>
             Learn more about Licenses{' '}
             <a href='#' className='text-xs font-bold text-black underline'>
@@ -65,7 +64,7 @@ const LicenseSelect: React.FC<LicenseSelectProps> = ({
       </select>
 
       <div className=' align-center pointer-events-none absolute inset-y-0 right-0 flex items-center justify-center pr-4 pt-5 text-gray-700'>
-        <Image src={''} alt='tooltip' className='h-5 w-5' />
+        <Image src={dropdownIcon} alt='tooltip' className='h-5 w-5' />
       </div>
     </div>
   );

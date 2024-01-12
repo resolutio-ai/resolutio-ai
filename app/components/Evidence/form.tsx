@@ -48,41 +48,37 @@ const Evidenceform: FC = () => {
 
   return (
     <div>
-      <div className=' flex w-[100%] flex-col lg:p-10 p-5 align-center'>
+      <div className=' align-center flex w-[100%] flex-col p-5 lg:p-10'>
         <h3 className=' font-dm-sans pb-4 text-4xl font-bold tracking-tight text-gray-500'>
           Evidence Form
         </h3>
-        <form action='' className='flex sm:w-[328px] flex-col  w-[100%] '>
+        <form action='' className='flex w-[100%] flex-col  sm:w-[328px] '>
           <div className='flex flex-col space-y-4 pb-20'>
             <CreatorsList
               creators={creators}
               onAddCreator={addCreator}
               onNameChange={handleNameChange}
             />
-
             <WorkNameInput />
-
             <Medium />
-
             <FileUpload handleFileUpload={handleFileUpload} />
-
             <CustomDatePicker
               selectedDate={selectedDate}
               onChange={setSelectedDate}
             />
-
             <LicenseSelect
               selectedLicense={selectedLicense}
               handleLicenseChange={handleLicenseChange}
               handleLicenseUpload={handleFileUpload}
             />
-
             <FileUploadForLicense
               handleLicenseUpload={handleLicenseUpload}
               selectedLicense={selectedLicense}
             />
           </div>
-          <button className=' bg-primary  py-4 text-white w-[100%]'> Submit</button>
+          <button className=' w-[100%]  bg-primary py-4 text-white'>
+            Submit
+          </button>
         </form>
       </div>
     </div>

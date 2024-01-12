@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import React, { ChangeEvent } from 'react';
-//import fileUpload from '../../../assets/fileUpload.svg';
 
 interface FileUploadProps {
   handleFileUpload: (e: ChangeEvent<HTMLInputElement>) => void;
