@@ -15,6 +15,15 @@ import WorkNameInput from '../formSections/workNameInpute';
 
 import './Evidenceform.scss';
 
+const defaultValues: EvidenceFromDto = {
+  creators: [{ id: 1, name: '' }],
+  nameOfWork: '',
+  work: null,
+  medium: '',
+  dateOfCreation: new Date(),
+  license: '',
+};
+
 const Evidenceform: FC = () => {
   const {
     register,

@@ -7,7 +7,7 @@ export type EvidenceFromDto = {
   creators: Creator[];
   nameOfWork: string;
   medium: string;
-  work: File;
+  work: File | null;
   dateOfCreation: Date;
   license: string;
 };
