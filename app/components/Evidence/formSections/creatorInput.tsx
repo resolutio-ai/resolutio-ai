@@ -1,15 +1,11 @@
+import { Creator } from '@/app/types';
 import { FC } from 'react';
 
-interface Creator {
-  id: number;
-  name: string;
-}
-
-interface CreatorInputProps {
+type CreatorInputProps = {
   id: number;
   value: string;
   onChange: (id: number, value: string) => void;
-}
+};
 
 const CreatorInput: FC<CreatorInputProps> = ({ id, value, onChange }) => {
   return (

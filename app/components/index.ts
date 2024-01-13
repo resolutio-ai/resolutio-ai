@@ -1,5 +1,5 @@
 import Blogs from './Blogs/Blogs';
-import Evidenceform from './Evidence/form';
+import Evidenceform from './Evidence/Evidenceform/Evidenceform';
 import FeedItem from './Feed/FeedItem/FeedItem';
 import Search from './Feed/Search/Search';
 import Sidebar from './Feed/Sidebar/Sidebar';
