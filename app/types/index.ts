@@ -1,3 +1,4 @@
+import { type Creator, type EvidenceFromDto } from './evidence';
 import { type FeedItemDto } from './feed';
 
-export { FeedItemDto };
+export { Creator, EvidenceFromDto, FeedItemDto };
