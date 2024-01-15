@@ -7,9 +7,10 @@ const evidenceSchema = z.object({
       name: z.string(),
     })
   ),
+  nameOfWork: z.string(),
   medium: z.string(),
   dateOfCreation: z.date(),
-  file: z.object({}),
+  file: z.custom<File>().nullable(),
   license: z.string(),
 });
 

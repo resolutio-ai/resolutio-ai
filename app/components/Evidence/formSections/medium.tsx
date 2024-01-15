@@ -1,8 +1,14 @@
 import { dropdownIcon } from '@/app/assets';
+import { EvidenceFromDto } from '@/app/types';
 import Image from 'next/image';
-import React from 'react';
+import { FC } from 'react';
+import { UseFormRegister } from 'react-hook-form';
 
-const Medium: React.FC = () => {
+type MediumProps = {
+  register: UseFormRegister<EvidenceFromDto>;
+};
+
+const Medium: FC<MediumProps> = ({ register }) => {
   return (
     <div className='relative'>
       <label
@@ -11,7 +17,10 @@ const Medium: React.FC = () => {
       >
         Medium
       </label>
-      <select className=' align-center focus:shadow-outline block w-[100%] appearance-none flex-col items-center justify-center gap-2 rounded-md border border-solid border-[#5F437F] px-4 py-3 leading-tight text-gray-700 shadow focus:outline-none  '>
+      <select
+        className=' align-center focus:shadow-outline block w-[100%] appearance-none flex-col items-center justify-center gap-2 rounded-md border border-solid border-[#5F437F] px-4 py-3 leading-tight text-gray-700 shadow focus:outline-none  '
+        {...register('medium')}
+      >
         <option className=' leading-tight text-gray-400' disabled selected>
           Select{' '}
         </option>

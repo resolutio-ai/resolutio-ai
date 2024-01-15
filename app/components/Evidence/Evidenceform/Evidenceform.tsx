@@ -4,7 +4,7 @@ import { evidenceSchema } from '@/app/schemas';
 import { Creator, EvidenceFromDto } from '@/app/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ChangeEvent, FC, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import CreatorsList from '../formSections/creatorInput';
 import CustomDatePicker from '../formSections/dateOfCreation';
 import FileUpload from '../formSections/fileUpload';
@@ -25,13 +25,9 @@ const defaultValues: EvidenceFromDto = {
 };
 
 const Evidenceform: FC = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<EvidenceFromDto>({
+  const { register, handleSubmit, reset } = useForm<EvidenceFromDto>({
     resolver: zodResolver(evidenceSchema),
-    defaultValues: {},
+    defaultValues: defaultValues,
   });
 
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -63,19 +59,27 @@ const Evidenceform: FC = () => {
     // Your file upload logic here
   };
 
+  const onSubmit: SubmitHandler<EvidenceFromDto> = (data) => {
+    console.log(data);
+    reset();
+  };
+
   return (
     <div className='p-5 lg:p-10'>
       <h3 className='pb-4 text-4xl font-bold tracking-tight text-gray-500'>
         Evidence Form
       </h3>
-      <form className='w-[100%] space-y-6 md:w-[328px]'>
+      <form
+        className='w-[100%] space-y-6 md:w-[328px]'
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <CreatorsList
           creators={creators}
           onAddCreator={addCreator}
           onNameChange={handleNameChange}
         />
-        <WorkNameInput />
-        <Medium />
+        <WorkNameInput register={register} />
+        <Medium register={register} />
         <FileUpload handleFileUpload={handleFileUpload} />
         <CustomDatePicker
           selectedDate={selectedDate}
@@ -90,7 +94,9 @@ const Evidenceform: FC = () => {
           handleLicenseUpload={handleLicenseUpload}
           selectedLicense={selectedLicense}
         />
-        <button className='btn-primary btn w-full'>Submit</button>
+        <button className='btn-primary btn w-full' type='submit'>
+          Submit
+        </button>
       </form>
     </div>
   );

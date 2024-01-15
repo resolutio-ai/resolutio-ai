@@ -1,8 +1,12 @@
+import { EvidenceFromDto } from '@/app/types';
 import { FC } from 'react';
+import { UseFormRegister } from 'react-hook-form';
 
-type WorkNameInputProps = {}
+type WorkNameInputProps = {
+  register: UseFormRegister<EvidenceFromDto>;
+};
 
-const WorkNameInput: FC<WorkNameInputProps> = () => {
+const WorkNameInput: FC<WorkNameInputProps> = ({ register }) => {
   return (
     <div>
       <label
@@ -17,6 +21,7 @@ const WorkNameInput: FC<WorkNameInputProps> = () => {
         id='name1'
         type='text'
         placeholder='Enter name of Work'
+        {...register('nameOfWork')}
       />
     </div>
   );
