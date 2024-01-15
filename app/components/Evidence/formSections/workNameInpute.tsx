@@ -1,6 +1,8 @@
-import React from 'react';
+import { FC } from 'react';
 
-const WorkNameInput: React.FC = () => {
+type WorkNameInputProps = {}
+
+const WorkNameInput: FC<WorkNameInputProps> = () => {
   return (
     <div>
       <label
