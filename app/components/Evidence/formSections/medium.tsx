@@ -1,4 +1,5 @@
 import { dropdownIcon } from '@/app/assets';
+import { EvidenceFromDto } from '@/app/types';
 import Image from 'next/image';
 import React, { ChangeEvent, useState } from 'react';
 
