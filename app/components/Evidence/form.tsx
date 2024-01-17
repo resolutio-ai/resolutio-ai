@@ -89,10 +89,7 @@ const Evidenceform: FC = () => {
       if (licenceFile) {
         formData.append('userpersonalizedlicense', licenceFile);
       }
-      console.log(formData);
-
       const response = await submitEvidence(formData);
-      console.log(formData);
       console.log('API Response:', response);
       setFormSubmissionMessage('Form submission unsucessfull ');
     } catch (error) {
@@ -151,10 +148,7 @@ const Evidenceform: FC = () => {
               selectedLicense={selectedLicense}
             />
           </div>
-          <button
-            className=' w-[100%]  bg-primary py-4 text-white'
-            onSubmit={handleSubmit}
-          >
+          <button className=' w-[100%]  bg-primary py-4 text-white'>
             Submit
           </button>
         </form>
