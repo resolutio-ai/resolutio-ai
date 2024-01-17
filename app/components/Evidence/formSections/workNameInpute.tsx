@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { ChangeEvent, FC } from 'react';
 
-const WorkNameInput: React.FC = () => {
+interface WorkNameProps {
+  workInput:string;
+  onWorkNameChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const WorkNameInput: FC<WorkNameProps> = ({ onWorkNameChange,workInput }) => {
   return (
     <div>
     <label
@@ -14,6 +19,8 @@ const WorkNameInput: React.FC = () => {
       className='focus:shadow-outline flex w-[100%] appearance-none flex-col items-center justify-center gap-2 rounded-md border border-solid border-[#5F437F] px-4 py-3  leading-tight text-gray-700 shadow focus:outline-none '
       id='name1'
       type='text'
+      value={workInput}
+      onChange={(event) => onWorkNameChange(event)}
       placeholder='Enter name of Work'
     />
   </div>

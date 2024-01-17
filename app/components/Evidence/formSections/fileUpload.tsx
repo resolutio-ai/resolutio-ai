@@ -1,3 +1,4 @@
+import { fileuploadIcon } from '@/app/assets';
 import Image from 'next/image';
 import React, { ChangeEvent } from 'react';
 
@@ -21,20 +22,21 @@ const FileUpload: React.FC<FileUploadProps> = ({ handleFileUpload }) => {
         >
           Enter name of work
           <div className='align-center absolute inset-y-0 right-0 flex cursor-pointer items-center justify-between pr-4 pt-5 text-gray-700'>
-            <Image src={''} alt='tooltip' className='h-5 w-5' />
+            <Image src={fileuploadIcon} alt='tooltip' className='h-5 w-5' />
           </div>
         </label>
 
         <input
           type='file'
           id='upload'
-          accept='image/*'
+          accept='.txt'
           onChange={(e) => handleFileUpload(e)}
           className='hidden'
         />
       </div>
     </div>
-  );
-};
-
+      );
+    };
+    
+  
 export default FileUpload;

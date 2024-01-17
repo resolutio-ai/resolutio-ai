@@ -36,7 +36,7 @@ const LicenseSelect: React.FC<LicenseSelectProps> = ({
         onChange={handleLicenseChange}
         className='form-select  align-center focus:shadow-outline	 block w-[100%] appearance-none  flex-col  items-center justify-center gap-2 rounded-md border border-solid border-[#5F437F] px-4 py-3 leading-tight text-gray-700 shadow focus:outline-none  '
       >
-        <option className=' leading-tight text-gray-400' disabled selected>
+        <option className=' leading-tight text-gray-400' disabled >
           Select{' '}
         </option>
         <option className='mb-3	 appearance-none hover:bg-primary '>

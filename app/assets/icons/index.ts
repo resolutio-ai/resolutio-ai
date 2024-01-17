@@ -2,7 +2,7 @@ import EvidenceSvg from './Frame';
 import MessageIcon from './MessageIcon';
 import SupportIcon from './annotation';
 import notificationIcon from './bell-01.svg';
-import dropdownIcon from './dropdown.svg';
+import dropdownIcon from './dropdownicon.svg';
 import evidencForm from './evidenceform.svg';
 import HomeBtnSvg from './home';
 import messageIcon from './messagesicon.svg';
