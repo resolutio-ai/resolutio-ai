@@ -11,3 +11,22 @@ export const LINK_FOLDER = '/link';
 export const COMMUNITY_LINK_FILE = 'communityLink.json';
 export const LAVENDER_LINK_FILE = 'lavenderLink.json';
 export const EVIDENCE_LINK_FILE = 'evidenceLink.json';
+
+export const MEDIUM_OPTIONS = [
+  'Film',
+  'Photo',
+  'Music',
+  'AI',
+  'Art',
+  'Other',
+] as const;
+
+export const LICENSE_OPTIONS = [
+  'CC BY',
+  'CC BY-SA',
+  'CC BY-NC',
+  'CC BY-NC-SA',
+  'CC BY-NC-ND',
+  'resolution License',
+  'Your own license',
+] as const;

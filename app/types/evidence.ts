@@ -1,5 +1,5 @@
 export type Creator = {
-  id: number;
+  id: string;
   name: string;
 };
 
