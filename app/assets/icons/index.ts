@@ -8,9 +8,10 @@ import HomeBtnSvg from './home';
 import messageIcon from './messagesicon.svg';
 import NotificationIcon from './notificationIcon';
 import SingleUser from './singleUser';
-import tooltip from './tooltip.svg';
-import calenderIcon from './calendericon.svg';
-import fileuploadIcon from './fileUpload.svg';
+import tooltip from "./tooltip.svg"
+import calenderIcon from "./calendericon.svg"
+import fileuploadIcon from "./fileUpload.svg"
+
 
 export {
   EvidenceSvg,
@@ -25,5 +26,5 @@ export {
   notificationIcon,
   tooltip,
   calenderIcon,
-  fileuploadIcon,
+  fileuploadIcon
 };
