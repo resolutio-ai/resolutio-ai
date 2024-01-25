@@ -8,11 +8,11 @@ import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 import CreationDate from '../formSections/CreationDate';
 import CreatorsList from '../formSections/CreatorsList';
-import LicenseSelect from '../formSections/LicenseSelect';
 import LicenseUpload from '../formSections/LicenseUpload';
 import MediumSelect from '../formSections/MediumSelect';
 import WorkNameInput from '../formSections/WorkNameInput';
 import WorkUpload from '../formSections/WorkUpload';
+import LicenseSelect from '../formSections/licenseSelect';
 
 import './Evidenceform.scss';
 
