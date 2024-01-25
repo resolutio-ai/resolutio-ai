@@ -3,7 +3,7 @@
 import { evidenceSchema } from '@/app/schemas';
 import { EvidenceFromDto } from '@/app/types';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ChangeEvent, FC, useState } from 'react';
+import { FC, useState } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 import CreationDate from '../formSections/CreationDate';
@@ -42,14 +42,6 @@ const Evidenceform: FC = () => {
 
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedLicense, setSelectedLicense] = useState<string>('');
-
-  const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
-    // setFile(e.target.files[0]);
-  };
-
-  const handleLicenseChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setSelectedLicense(event.target.value);
-  };
 
   const onSubmit: SubmitHandler<EvidenceFromDto> = (data) => {
     console.log(data);
