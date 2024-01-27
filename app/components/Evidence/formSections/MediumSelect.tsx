@@ -1,20 +1,21 @@
-import { dropdownIcon } from '@/app/assets';
-import { EvidenceFromDto } from '@/app/types';
-import Image from 'next/image';
-import React, { ChangeEvent, useState } from 'react';
+import { MEDIUM_OPTIONS } from '@/app/settings';
+import { ChangeEvent, FC, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 
-interface MediumProps {
+type MediumProps = {
   selectedMedium: string;
   handleMediumSelected: (event: ChangeEvent<HTMLSelectElement>) => void;
   alternativeMedium: string;
   handleAlternativeMedium: (event: ChangeEvent<HTMLInputElement>) => void;
-}
+};
 
-const Medium: React.FC<MediumProps> = ({
+const MediumSelect: FC<MediumProps> = ({
   selectedMedium,
   handleMediumSelected,
   handleAlternativeMedium,
 }) => {
+  const { register } = useFormContext();
+
   const [otherMedium, setOtherMedium] = useState('');
 
   const isOtherSelected = selectedMedium === 'Other';
@@ -30,35 +31,27 @@ const Medium: React.FC<MediumProps> = ({
     setOtherMedium(e.target.value);
     handleAlternativeMedium(e);
   };
-
   return (
-    <div className=''>
-      <div className='relative'>
-        <label
-          htmlFor=''
-          className='font-noto-sans text-sm font-bold leading-tight text-gray-600'
-        >
-          Medium
-        </label>
+    <div>
+      <label className='form-control w-full max-w-xs'>
+        <div className='label'>
+          <span className='label-text text-sm font-bold text-gray-600'>
+            Medium
+          </span>
+        </div>
         <select
-          className='form-select align-center focus:shadow-outline block w-[100%] appearance-none flex-col items-center justify-center gap-2 rounded-md border border-solid border-[#5F437F] px-4 py-3 leading-tight text-gray-700 shadow focus:outline-none  '
-          value={selectedMedium}
+          className='select select-primary w-full max-w-xs'
+          {...register('medium')}
           onChange={handleSelectChange}
         >
-          <option className='leading-tight text-gray-400' disabled>
-            Select
+          <option disabled defaultValue={'Select a medium'}>
+            Select a medium
           </option>
-          <option>Film</option>
-          <option>Photo</option>
-          <option>Music</option>
-          <option>AI</option>
-          <option>Art</option>
-          <option>Other</option>
+          {MEDIUM_OPTIONS.map((medium) => (
+            <option key={medium}>{medium}</option>
+          ))}
         </select>
-        <div className='align-center pointer-events-none absolute inset-y-0 right-0 flex items-center justify-center pr-4 pt-5 text-gray-700'>
-          <Image src={dropdownIcon} alt='tooltip' className='h-5 w-5' />
-        </div>
-      </div>
+      </label>
       <div>
         {isOtherSelected && (
           <div className='mt-4'>
@@ -83,4 +76,4 @@ const Medium: React.FC<MediumProps> = ({
   );
 };
 
-export default Medium;
+export default MediumSelect;

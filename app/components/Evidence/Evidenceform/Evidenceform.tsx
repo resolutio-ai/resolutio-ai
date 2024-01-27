@@ -1,41 +1,56 @@
 'use client';
-
+import React from 'react';
 import { evidenceSchema } from '@/app/schemas';
-import { Creator, EvidenceFromDto } from '@/app/types';
+import { EvidenceFromDto } from '@/app/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ChangeEvent, FC, useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import CreatorsList from '../formSections/creatorInput';
-import CustomDatePicker from '../formSections/dateOfCreation';
-import FileUpload from '../formSections/fileUpload';
-import FileUploadForLicense from '../formSections/fileUploadforLicence';
 import LicenseSelect from '../formSections/licenseSelect';
-import Medium from '../formSections/medium';
-import WorkNameInput from '../formSections/workNameInpute';
 import './Evidenceform.scss';
 import { submitEvidence } from '@/app/adapter/browser/formApiService';
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import { v4 as uuidv4 } from 'uuid';
+import {
+  CreationDate,
+  CreatorsList,
+  FileUpload,
+  LicenseUpload,
+  MediumSelect,
+  WorkNameInput,
+} from '../formSections';
 
 const defaultValues: EvidenceFromDto = {
-  creators: [{ id: 1, name: '' }],
+  creators: [{ id: uuidv4(), name: '' }],
   nameOfWork: '',
   work: null,
-  medium: '',
+  medium: 'Select a medium',
+  alternativeMedium: '',
   dateOfCreation: new Date(),
-  license: '',
+  license: 'Select a license',
 };
 
 const Evidenceform: FC = () => {
-  const { register, handleSubmit, reset } = useForm<EvidenceFromDto>({
+  const useFormMethods = useForm<EvidenceFromDto>({
     resolver: zodResolver(evidenceSchema),
     defaultValues: defaultValues,
+    mode: 'onBlur',
   });
+
+  const {
+    formState: { errors, isValid },
+    reset,
+    handleSubmit,
+    getValues,
+    watch,
+  } = useFormMethods;
+
+  const selectedLicense = watch('license');
+  const Medium = watch('medium');
+  const selectedCreators = watch('creators');
+  const workName = watch('nameOfWork');
 
   const [file, setFile] = useState<File | null>(null);
   const [licenceFile, setLicenceFile] = useState<File | null>(null);
-  const [workName, setWorkName] = useState('');
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const [creators, setCreators] = useState<Creator[]>([{ id: 1, name: '' }]);
-  const [selectedLicense, setSelectedLicense] = useState<string>('');
   const [selectedMedium, setSelectedMedium] = useState<string>('');
   const [alternativeMedium, setAlternativeMedium] = useState<string>('');
   const [formSubmissionMessage, setFormSubmissionMessage] =
@@ -55,23 +70,9 @@ const Evidenceform: FC = () => {
   const handleAlternativeMedium = (e: ChangeEvent<HTMLInputElement>) => {
     setAlternativeMedium(e.target.value);
   };
-  const handleWorkName = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setWorkName(event.target.value);
-  };
-  const addCreator = () => {
-    const newId = creators.length + 1;
-    setCreators([...creators, { id: newId, name: '' }]);
-  };
-  const handleCreatorName = (id: number, value: string) => {
-    setCreators((prevCreators) =>
-      prevCreators.map((creator) =>
-        creator.id === id ? { ...creator, name: value } : creator
-      )
-    );
-  };
 
-  const handleLicenseChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setSelectedLicense(event.target.value);
+  const onAddCreator = () => {
+    append({ id: uuidv4(), name: '' });
   };
 
   const handleLicenseUpload = (e: ChangeEvent<HTMLInputElement>) => {
@@ -82,39 +83,38 @@ const Evidenceform: FC = () => {
     }
   };
 
-  const handleFormSubmit: SubmitHandler<EvidenceFromDto> = async () => {
+  const handleFormSubmit: SubmitHandler<EvidenceFromDto> = async (data) => {
     try {
-      const formData = new FormData();
       const metadata = {
         licenseType: selectedLicense,
         alternativeMedium: alternativeMedium,
-        medium: selectedMedium,
+        medium: Medium,
         dateOfCreation: selectedDate?.toISOString(),
         nameOfWork: workName,
-        creatorId: creators,
+        creatorId: selectedCreators,
       };
 
+      const formData = new FormData();
       formData.append('metadata', JSON.stringify(metadata));
       if (file) {
-        formData.append('userworks', file);
+        formData.append('userwork', file);
       }
-
       if (licenceFile) {
         formData.append('userpersonalizedlicense', licenceFile);
       }
+
       const response = await submitEvidence(formData);
+
       console.log('API Response:', response);
-      setFormSubmissionMessage('Form submission was sucessfull ');
+      setFormSubmissionMessage('Form submission was successful ');
     } catch (error) {
       console.error('Error:', error);
       setFormSubmissionMessage(
-        'Form submission unsuccessful .pls try again '
+        'Form submission unsuccessful. Please try again.'
       );
     }
     reset();
   };
-
-
 
   return (
     <div className='p-5 lg:p-10'>
@@ -122,49 +122,49 @@ const Evidenceform: FC = () => {
         Evidence Form
       </h3>
 
-      <form
-        className='w-[100%] space-y-6 md:w-[328px]'
-        onSubmit={handleSubmit(handleFormSubmit)}
-      >
-        <div className='flex flex-col space-y-4 pb-20'>
-          <CreatorsList
-            creators={creators}
-            onAddCreator={addCreator}
-            onNameChange={handleCreatorName}
-          />
+      <FormProvider {...useFormMethods}>
+        <form
+          onSubmit={handleSubmit(handleFormSubmit)}
+          className='w-[100%] space-y-6 md:w-[328px]'
+        >
+          <div className='flex flex-col space-y-4 pb-20'>
+            <CreatorsList onAddCreator={onAddCreator} />
 
-          <WorkNameInput
-            onWorkNameChange={handleWorkName}
-            workInput={workName}
-          />
+            <WorkNameInput workInput={workName} />
 
-          <Medium
-            selectedMedium={selectedMedium}
-            handleMediumSelected={handleMediumSelected}
-            handleAlternativeMedium={handleAlternativeMedium}
-            alternativeMedium={alternativeMedium}
-          />
+            <MediumSelect
+              selectedMedium={selectedMedium}
+              handleMediumSelected={handleMediumSelected}
+              handleAlternativeMedium={handleAlternativeMedium}
+              alternativeMedium={alternativeMedium}
+            />
 
-          <FileUpload handleFileUpload={handleFileUpload} />
-          <CustomDatePicker
-            selectedDate={selectedDate}
-            onChange={setSelectedDate}
-          />
-          <LicenseSelect
-            selectedLicense={selectedLicense}
-            handleLicenseChange={handleLicenseChange}
-            handleLicenseUpload={handleLicenseUpload}
-          />
-          <FileUploadForLicense
-            handleLicenseUpload={handleLicenseUpload}
-            selectedLicense={selectedLicense}
-          />
-        </div>
-        <button className='w-full bg-primary py-4 text-white'>
-          Submit
-        </button>
-      </form>
+            <FileUpload handleFileUpload={handleFileUpload} />
+            <CreationDate
+              selectedDate={selectedDate}
+              onChange={setSelectedDate}
+            />
+
+            <LicenseSelect />
+
+            {selectedLicense === 'Your own license' && (
+              <LicenseUpload handleLicenseUpload={handleLicenseUpload} />
+            )}
+          </div>
+          <button
+            className='w-full bg-primary py-4 text-white'
+            type='submit'
+            disabled={!isValid}
+          >
+            Submit
+          </button>
+        </form>
+      </FormProvider>
     </div>
   );
 };
 export default Evidenceform;
+
+function append(arg0: { id: string; name: string }) {
+  throw new Error('Function not implemented.');
+}

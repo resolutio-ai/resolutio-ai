@@ -25,6 +25,7 @@ import MusicIcon from './icons/MusicIcon';
 import PencilIcon from './icons/PencilIcon';
 import SaveIcon from './icons/SaveIcon';
 import SearchIcon from './icons/SearchIcon';
+import UploadIcon from './icons/UploadIcon';
 import monalisaart from './images/monalisaart.png';
 
 export {
@@ -46,6 +47,7 @@ export {
   SearchIcon,
   SingleUser,
   SupportIcon,
+  UploadIcon,
   calenderIcon,
   dropdownIcon,
   evidencForm,
