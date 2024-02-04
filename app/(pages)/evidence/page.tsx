@@ -1,7 +1,6 @@
 import { monalisaart } from '@/app/assets';
 import { Evidenceform, SideImage } from '@/app/components';
 import { FC } from 'react';
-import './evidence.scss';
 
 const Evidence: FC = () => {
   const author = {
