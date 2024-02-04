@@ -1,22 +1,21 @@
 'use client';
-import React from 'react';
 import { evidenceSchema } from '@/app/schemas';
 import { EvidenceFromDto } from '@/app/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ChangeEvent, FC, useState } from 'react';
-import LicenseSelect from '../formSections/licenseSelect';
-import './Evidenceform.scss';
-import { submitEvidence } from '@/app/adapter/browser/formApiService';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 import {
   CreationDate,
   CreatorsList,
   FileUpload,
+  LicenseSelect,
   LicenseUpload,
   MediumSelect,
   WorkNameInput,
 } from '../formSections';
+
+import './Evidenceform.scss';
 
 const defaultValues: EvidenceFromDto = {
   creators: [{ id: uuidv4(), name: '' }],
@@ -36,16 +35,15 @@ const Evidenceform: FC = () => {
   });
 
   const {
-    formState: { errors, isValid },
+    formState: { isValid },
     reset,
     handleSubmit,
-    getValues,
     watch,
   } = useFormMethods;
 
   const selectedLicense = watch('license');
-  const Medium = watch('medium');
-  const selectedCreators = watch('creators');
+  //const Medium = watch('medium');
+  //const selectedCreators = watch('creators');
   const workName = watch('nameOfWork');
 
   const [file, setFile] = useState<File | null>(null);
@@ -71,10 +69,6 @@ const Evidenceform: FC = () => {
     setAlternativeMedium(e.target.value);
   };
 
-  const onAddCreator = () => {
-    append({ id: uuidv4(), name: '' });
-  };
-
   const handleLicenseUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const uploadedLicenceFile = e.target.files?.[0];
 
@@ -83,8 +77,8 @@ const Evidenceform: FC = () => {
     }
   };
 
-  const handleFormSubmit: SubmitHandler<EvidenceFromDto> = async (data) => {
-    try {
+  const onSubmit: SubmitHandler<EvidenceFromDto> = async (data) => {
+    /*  try {
       const metadata = {
         licenseType: selectedLicense,
         alternativeMedium: alternativeMedium,
@@ -112,7 +106,8 @@ const Evidenceform: FC = () => {
       setFormSubmissionMessage(
         'Form submission unsuccessful. Please try again.'
       );
-    }
+    } */
+    console.log(data);
     reset();
   };
 
@@ -121,38 +116,30 @@ const Evidenceform: FC = () => {
       <h3 className='pb-4 text-4xl font-bold tracking-tight text-gray-500'>
         Evidence Form
       </h3>
-
       <FormProvider {...useFormMethods}>
         <form
-          onSubmit={handleSubmit(handleFormSubmit)}
           className='w-[100%] space-y-6 md:w-[328px]'
+          onSubmit={handleSubmit(onSubmit)}
         >
-          <div className='flex flex-col space-y-4 pb-20'>
-            <CreatorsList onAddCreator={onAddCreator} />
-
-            <WorkNameInput workInput={workName} />
-
-            <MediumSelect
-              selectedMedium={selectedMedium}
-              handleMediumSelected={handleMediumSelected}
-              handleAlternativeMedium={handleAlternativeMedium}
-              alternativeMedium={alternativeMedium}
-            />
-
-            <FileUpload handleFileUpload={handleFileUpload} />
-            <CreationDate
-              selectedDate={selectedDate}
-              onChange={setSelectedDate}
-            />
-
-            <LicenseSelect />
-
-            {selectedLicense === 'Your own license' && (
-              <LicenseUpload handleLicenseUpload={handleLicenseUpload} />
-            )}
-          </div>
+          <CreatorsList />
+          <WorkNameInput workInput={workName} />
+          <MediumSelect
+            selectedMedium={selectedMedium}
+            handleMediumSelected={handleMediumSelected}
+            handleAlternativeMedium={handleAlternativeMedium}
+            alternativeMedium={alternativeMedium}
+          />
+          <FileUpload handleFileUpload={handleFileUpload} />
+          <CreationDate
+            selectedDate={selectedDate}
+            onChange={setSelectedDate}
+          />
+          <LicenseSelect />
+          {selectedLicense === 'Your own license' && (
+            <LicenseUpload handleLicenseUpload={handleLicenseUpload} />
+          )}
           <button
-            className='w-full bg-primary py-4 text-white'
+            className='btn-primary btn w-full'
             type='submit'
             disabled={!isValid}
           >

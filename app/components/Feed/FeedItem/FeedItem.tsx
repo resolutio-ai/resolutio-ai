@@ -1,11 +1,11 @@
 'use client';
 import {
-  AddIcon,
   BookmarkIcon,
-  ElllipseIcon,
+  CursorIcon,
+  EllipseIcon,
   EyeIcon,
   LicenseIcon,
-  SaveIcon,
+  MsgIcon,
 } from '@/app/assets';
 import { FeedItemDto } from '@/app/types';
 import Image from 'next/image';
@@ -38,7 +38,7 @@ const FeedItem: FC<FeedItemProps> = ({ feed }) => {
           <span className='timestamp text-sm text-slate-500'>5h</span>
         </div>
         <div>
-          <ElllipseIcon />
+          <EllipseIcon />
         </div>
       </div>
       <div className='img-container relative w-[100%]'>
@@ -69,9 +69,9 @@ const FeedItem: FC<FeedItemProps> = ({ feed }) => {
           </div>
         </div>
         <div className='action-container flex gap-4'>
+          <MsgIcon />
           <BookmarkIcon />
-          <SaveIcon />
-          <AddIcon />
+          <CursorIcon />
         </div>
       </div>
       <div className='flex w-[100%] flex-wrap items-center justify-between gap-4 sm:flex-nowrap'>

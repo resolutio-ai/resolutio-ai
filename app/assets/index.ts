@@ -1,59 +1,43 @@
 import {
-  EvidenceSvg,
   HomeBtnSvg,
-  MessageIcon,
-  NotificationIcon,
-  SingleUser,
-  SupportIcon,
   calenderIcon,
   dropdownIcon,
-  evidencForm,
   fileuploadIcon,
-  messageIcon,
-  notificationIcon,
   tooltip,
 } from './icons';
-import AddIcon from './icons/AddIcon';
-import AiIcon from './icons/AiIcon';
-import BookmarkIcon from './icons/BookmarkIcon';
-import BrushIcon from './icons/BrushIcon';
 import DecorationIcon from './icons/DecorationIcon';
-import ElllipseIcon from './icons/ElllipseIcon';
-import EyeIcon from './icons/EyeIcon';
-import LicenseIcon from './icons/LicenseIcon';
-import MusicIcon from './icons/MusicIcon';
-import PencilIcon from './icons/PencilIcon';
-import SaveIcon from './icons/SaveIcon';
-import SearchIcon from './icons/SearchIcon';
-import UploadIcon from './icons/UploadIcon';
 import monalisaart from './images/monalisaart.png';
+import AiIcon from './svgs/ai-icon.svg';
+import BookmarkIcon from './svgs/bookmark-icon.svg';
+import BrushIcon from './svgs/brush-icon.svg';
+import CursorIcon from './svgs/cursor-icon.svg';
+import EllipseIcon from './svgs/ellipse-icon.svg';
+import EyeIcon from './svgs/eye-icon.svg';
+import LicenseIcon from './svgs/license-icon.svg';
+import MsgIcon from './svgs/msg-icon.svg';
+import MusicIcon from './svgs/music-icon.svg';
+import PencilIcon from './svgs/pencil-icon.svg';
+import SearchIcon from './svgs/search-icon.svg';
+import UploadIcon from './svgs/upload-icon.svg';
 
 export {
-  AddIcon,
   AiIcon,
   BookmarkIcon,
   BrushIcon,
+  CursorIcon,
   DecorationIcon,
-  ElllipseIcon,
-  EvidenceSvg,
+  EllipseIcon,
   EyeIcon,
   HomeBtnSvg,
   LicenseIcon,
-  MessageIcon,
+  MsgIcon,
   MusicIcon,
-  NotificationIcon,
   PencilIcon,
-  SaveIcon,
   SearchIcon,
-  SingleUser,
-  SupportIcon,
   UploadIcon,
   calenderIcon,
   dropdownIcon,
-  evidencForm,
   fileuploadIcon,
-  messageIcon,
   monalisaart,
-  notificationIcon,
   tooltip,
 };

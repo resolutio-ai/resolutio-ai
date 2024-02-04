@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@magic-sdk/types": "^18.0.0",
+    "@svgr/webpack": "^8.1.0",
     "@tailwindcss/typography": "^0.5.10",
     "@types/node": "^20.11.5",
     "@types/react": "^18.2.48",
