@@ -1,9 +1,11 @@
 import { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
 
-type WorkNameInputProps = {};
+interface WorkNameInputProps {
+  workInput: string;
+}
 
-const WorkNameInput: FC<WorkNameInputProps> = () => {
+const WorkNameInput: FC<WorkNameInputProps> = ({ workInput }) => {
   const { register } = useFormContext();
   return (
     <label className='form-control w-full max-w-xs'>

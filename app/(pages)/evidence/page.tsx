@@ -11,13 +11,17 @@ const Evidence: FC = () => {
 
   return (
     <div className='grid md:grid-cols-2'>
-      <Evidenceform />
-      <SideImage
-        imageURL={monalisaart}
-        imgNavigation={author.profileLink}
-        author={author}
-        showAuthor
-      />
+      <div className=''>
+        <Evidenceform />
+      </div>
+      <div className=''>
+        <SideImage
+          imageURL={monalisaart}
+          imgNavigation={author.profileLink}
+          author={author}
+          showAuthor
+        />{' '}
+      </div>
     </div>
   );
 };

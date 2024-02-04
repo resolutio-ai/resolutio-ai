@@ -5,15 +5,16 @@ import { useFormContext } from 'react-hook-form';
 
 type LicenseSelectProps = {};
 
-const LicenseSelect: React.FC<LicenseSelectProps> = () => {
+const LicenseSelect: React.FC<LicenseSelectProps> = ({}) => {
   const { register } = useFormContext();
   return (
-    <label className='form-control w-full max-w-xs'>
-      <div className='label justify-start'>
-        <span className='label-text text-sm font-bold text-gray-600'>
-          License
-        </span>
-        <div className='tooltip relative ml-1 inline-block'>
+    <div className='relative'>
+      <label
+        htmlFor=''
+        className='font-noto-sans mb-2 flex text-sm font-bold leading-tight text-gray-600 '
+      >
+        License
+        <div className=' tooltip relative ml-1 inline-block'>
           <Image src={tooltip} alt='tooltip' className='h-4 w-4' />
           <span className='tooltiptext font-weight-400 leading-18 invisible absolute bottom-full left-1/2 z-10 w-[120px] -translate-x-1/2 transform rounded border bg-white p-[7px] text-center text-xs font-normal text-black'>
             Learn more about Licenses
@@ -22,7 +23,8 @@ const LicenseSelect: React.FC<LicenseSelectProps> = () => {
             </a>
           </span>
         </div>
-      </div>
+      </label>
+
       <select
         className='select select-primary w-full max-w-xs'
         {...register('license')}
@@ -34,7 +36,7 @@ const LicenseSelect: React.FC<LicenseSelectProps> = () => {
           <option key={license}>{license}</option>
         ))}
       </select>
-    </label>
+    </div>
   );
 };
 
