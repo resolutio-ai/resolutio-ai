@@ -12,6 +12,7 @@ const evidenceSchema = z.object({
   dateOfCreation: z.date(),
   file: z.custom<File>().nullable(),
   license: z.string(),
+  alternativeMedium: z.string()
 });
 
 export default evidenceSchema;

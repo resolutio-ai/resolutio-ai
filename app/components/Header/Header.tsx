@@ -4,6 +4,7 @@ import { FC } from 'react';
 import LoginDialog from '../Dialogs/LoginDialog/LoginDialog';
 import ProfileDropdown from '../ProfileDropdown/ProfileDropdown';
 import './Header.scss';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const Header: FC = () => {
   return (
@@ -62,12 +63,13 @@ const Header: FC = () => {
                 </Link>
               </li>
             </ul>
-            <ProfileDropdown />
+            {/* <ProfileDropdown /> */}
+            <ConnectButton />
           </div>
         </div>
         <div className='vertical-spacing'></div>
       </header>
-      <LoginDialog />
+      {/* <LoginDialog /> */}
     </>
   );
 };

@@ -10,4 +10,5 @@ export type EvidenceFromDto = {
   work: File | null;
   dateOfCreation: Date;
   license: string;
+  alternativeMedium: string;
 };

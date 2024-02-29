@@ -1,0 +1,4 @@
+export const CREATOR_ARMOUR_CA = "0x5c890248B382d91f8c254a91a380750190A9195a";
+
+
+export const TWO = 2;
