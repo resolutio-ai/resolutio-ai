@@ -17,6 +17,7 @@ const CreatorInput: FC<CreatorInputProps> = ({ id, value, onChange }) => {
         className='focus:shadow-outline mb-2 flex w-[100%] appearance-none flex-col items-center justify-center gap-2 rounded-md border border-solid border-[#5F437F] px-4 py-3 leading-tight text-gray-700 shadow focus:outline-none'
         id={`name${id}`}
         type='text'
+        required
         placeholder='Enter name'
         value={value}
         onChange={(e) => onChange(id, e.target.value)}

@@ -1,10 +1,29 @@
 'use client';
 
+import { submitEvidenceLocal } from '@/app/adapter/browser/formApiService';
+import {
+  uploadFile,
+  uploadText,
+  uploadTextEncrypted,
+} from '@/app/integrations/lighthouse/upload';
 import { evidenceSchema } from '@/app/schemas';
 import { Creator, EvidenceFromDto } from '@/app/types';
 import { zodResolver } from '@hookform/resolvers/zod';
+import kavach from '@lighthouse-web3/kavach';
+import { IFileUploadedResponse } from '@lighthouse-web3/sdk/dist/types';
+import { useConnectModal } from '@rainbow-me/rainbowkit';
 import { ChangeEvent, FC, useEffect, useRef, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { recoverMessageAddress } from 'viem';
+import {
+  useAccount,
+  useContractWrite,
+  usePrepareContractWrite,
+  useSignMessage,
+  useWaitForTransaction,
+} from 'wagmi';
 import CreatorsList from '../formSections/creatorInput';
 import CustomDatePicker from '../formSections/dateOfCreation';
 import FileUpload from '../formSections/fileUpload';
@@ -13,21 +32,6 @@ import LicenseSelect from '../formSections/licenseSelect';
 import Medium from '../formSections/medium';
 import WorkNameInput from '../formSections/workNameInpute';
 import './Evidenceform.scss';
-import { submitEvidenceLocal } from '@/app/adapter/browser/formApiService';
-import {
-  usePrepareContractWrite,
-  useContractWrite,
-  useWaitForTransaction,
-  useSignMessage,
-  useAccount
-} from "wagmi";
-import { recoverMessageAddress } from 'viem';
-import { IFileUploadedResponse } from '@lighthouse-web3/sdk/dist/types';
-import { uploadFile, uploadText, uploadTextEncrypted } from '@/app/integrations/lighthouse/upload';
-import kavach from "@lighthouse-web3/kavach";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useConnectModal } from '@rainbow-me/rainbowkit';
 
 const defaultValues: EvidenceFromDto = {
   creators: [{ id: 1, name: '' }],
@@ -36,7 +40,7 @@ const defaultValues: EvidenceFromDto = {
   medium: '',
   dateOfCreation: new Date(),
   license: '',
-  alternativeMedium: ''
+  alternativeMedium: '',
 };
 
 const Evidenceform: FC = () => {
@@ -53,6 +57,9 @@ const Evidenceform: FC = () => {
   const [evidenceBody, setEvidenceBody] = useState<any | null>(null);
   const [cid, setCID] = useState<string | undefined>(undefined);
   const [file, setFile] = useState<FileList | null>(null);
+  const [selectedFileName, setSelectedFileName] = useState<string>('');
+  const [selectedLicenceName, setSelectedLicenceName] = useState<string>('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [licenceFile, setLicenceFile] = useState<File | null>(null);
   const [workName, setWorkName] = useState('');
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -69,32 +76,29 @@ const Evidenceform: FC = () => {
     error: prepareError,
     isError: isPrepareError,
   } = usePrepareContractWrite({
-    address: "0x31Ed4D7dF56Fb6F76dA1DF10B6C400de0E5aECaA",
+    address: '0x31Ed4D7dF56Fb6F76dA1DF10B6C400de0E5aECaA',
     abi: [
       {
         inputs: [
           {
-            internalType: "string",
-            name: "_cid",
-            type: "string",
+            internalType: 'string',
+            name: '_cid',
+            type: 'string',
           },
           {
-            internalType: "address",
-            name: "owner",
-            type: "address",
+            internalType: 'address',
+            name: 'owner',
+            type: 'address',
           },
         ],
-        name: "createTimestamp",
+        name: 'createTimestamp',
         outputs: [],
-        stateMutability: "nonpayable",
-        type: "function",
+        stateMutability: 'nonpayable',
+        type: 'function',
       },
     ],
-    functionName: "createTimestamp",
-    args: [
-      cid,
-      address,
-    ],
+    functionName: 'createTimestamp',
+    args: [cid, address],
     enabled: Boolean(cid),
   });
 
@@ -113,14 +117,18 @@ const Evidenceform: FC = () => {
 
     if (uploadedFile) {
       setFile(uploadedFile);
+      setSelectedFileName(e.target.files?.[0]?.name || '');
     }
   };
 
-  const handleMediumSelected = (e: ChangeEvent<HTMLSelectElement>) => setSelectedMedium(e.target.value);
+  const handleMediumSelected = (e: ChangeEvent<HTMLSelectElement>) =>
+    setSelectedMedium(e.target.value);
 
-  const handleAlternativeMedium = (e: ChangeEvent<HTMLInputElement>) => setAlternativeMedium(e.target.value);
+  const handleAlternativeMedium = (e: ChangeEvent<HTMLInputElement>) =>
+    setAlternativeMedium(e.target.value);
 
-  const handleWorkName = (event: React.ChangeEvent<HTMLInputElement>) => setWorkName(event.target.value);
+  const handleWorkName = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setWorkName(event.target.value);
 
   const addCreator = () => {
     const newId = creators.length + 1;
@@ -135,71 +143,84 @@ const Evidenceform: FC = () => {
     );
   };
 
-  const handleLicenseChange = (event: ChangeEvent<HTMLSelectElement>) => setSelectedLicense(event.target.value);
+  const handleLicenseChange = (event: ChangeEvent<HTMLSelectElement>) =>
+    setSelectedLicense(event.target.value);
 
   const handleLicenseUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const uploadedLicenceFile = e.target.files?.[0];
 
     if (uploadedLicenceFile) {
       setLicenceFile(uploadedLicenceFile);
+      setSelectedLicenceName(e.target.files?.[0]?.name || '');
     }
   };
+const formattedDate = selectedDate?.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+});
 
   const handleFormSubmit: SubmitHandler<EvidenceFromDto> = async () => {
     try {
+      setIsSubmitting(true);
 
       if (!file) {
-        throw new Error("Please Attach A file first");
-      }     
+        throw new Error('Please Attach A file first');
+      }
 
-      const message = await kavach.getAuthMessage(`${address}`);      
+      const message = await kavach.getAuthMessage(`${address}`);
 
       signMessage({ message: message.message as string });
     } catch (error) {
       console.error('Error:', error);
-      setFormSubmissionMessage(
-        'Form submission unsuccessful .pls try again '
-      );
+      setFormSubmissionMessage('Form submission unsuccessful .pls try again ');
     }
+    setIsSubmitting(false);
     reset();
   };
 
   const uploadFiles = async () => {
     if (!file) {
-      throw new Error("No file selected.");
+      throw new Error('No file selected.');
     }
 
     try {
-      const fileUploadResponse: IFileUploadedResponse | undefined = (await uploadFile(file))?.data.find(x => x.Name);
+      const fileUploadResponse: IFileUploadedResponse | undefined = (
+        await uploadFile(file)
+      )?.data.find((x) => x.Name);
 
       if (!fileUploadResponse) {
-        throw new Error("File Upload Failed");
-      }     
+        throw new Error('File Upload Failed');
+      }
 
       let licenseUploadResponse: IFileUploadedResponse | undefined = undefined;
 
       if (licenceFile) {
-        licenseUploadResponse = (await uploadFile(licenceFile))?.data.find(x => x.Name);
+        licenseUploadResponse = (await uploadFile(licenceFile))?.data.find(
+          (x) => x.Name
+        );
       }
 
       return {
         data: { fileUploadResponse, licenseUploadResponse },
         meshUrl: {
           fileUrl: `https://decrypt.mesh3.network/evm/${fileUploadResponse.Hash}`,
-          licenseUrl: licenseUploadResponse ? `https://decrypt.mesh3.network/evm/${licenseUploadResponse.Hash}` : null
-        }
-      }
+          licenseUrl: licenseUploadResponse
+            ? `https://decrypt.mesh3.network/evm/${licenseUploadResponse.Hash}`
+            : null,
+        },
+      };
     } catch (error) {
-      console.error("Error uploading encrypted file:", error)
+      console.error('Error uploading encrypted file:', error);
     }
-  }
+  };
 
   useEffect(() => {
     (async () => {
       if (variables?.message && signMessageData) {
         const recoverAddress = await recoverMessageAddress({
           message: variables.message,
-          signature: signMessageData
+          signature: signMessageData,
         });
 
         recoveredAddress.current = recoverAddress;
@@ -208,27 +229,41 @@ const Evidenceform: FC = () => {
           licenseType: selectedLicense,
           alternativeMedium: alternativeMedium,
           medium: selectedMedium,
-          dateOfCreation: selectedDate?.toISOString(),
+          dateOfCreation: formattedDate,
           nameOfWork: workName,
           creatorId: 1,
         };
-
-        const metadataUploadResponse = await uploadText(JSON.stringify(metadata));
+        const metadataUploadResponse = await uploadText(
+          JSON.stringify(metadata)
+        );
+        console.log('metadate uploaded');
 
         const fileUploadResponse = await uploadFiles();
+        console.log('file uploaded');
 
-        const finalTextUpload = await uploadTextEncrypted(JSON.stringify({ metadataUploadResponse, fileUploadResponse }), signMessageData, recoverAddress);
+        const finalTextUpload = await uploadTextEncrypted(
+          JSON.stringify({ metadataUploadResponse, fileUploadResponse }),
+          signMessageData,
+          recoverAddress
+        );
 
         setCID(finalTextUpload.data.Hash);
+        console.log('cid set');
 
-        const submitEvidenceBody = { metadata, finalCID: finalTextUpload.data.Hash, fileUploadResponse };
+        const submitEvidenceBody = {
+          metadata,
+          finalCID: finalTextUpload.data.Hash,
+          fileUploadResponse,
+        };
 
         setEvidenceBody(submitEvidenceBody);
 
         if (!write) {
+          console.log('write');
+
           return;
         }
-        
+
         write?.();
       }
     })();
@@ -237,17 +272,18 @@ const Evidenceform: FC = () => {
   useEffect(() => {
     (async () => {
       const response = await submitEvidenceLocal(evidenceBody);
+      console.log('submitEidenceLocal on');
 
       if (response?.status !== 200) {
-        throw new Error("Data not saved to backend");
+        throw new Error('Data not saved to backend');
       }
 
       toast('Form submission was sucessfull');
+      console.log('done');
 
       formRef.current?.reset();
     })();
-
-  }, [isSuccess])
+  }, [isSuccess]);
 
   return (
     <div className='p-5 lg:p-10'>
@@ -279,10 +315,14 @@ const Evidenceform: FC = () => {
             alternativeMedium={alternativeMedium}
           />
 
-          <FileUpload handleFileUpload={handleFileUpload} />
+          <FileUpload
+            handleFileUpload={handleFileUpload}
+            selectedFileName={selectedFileName}
+          />
           <CustomDatePicker
             selectedDate={selectedDate}
             onChange={setSelectedDate}
+            
           />
           <LicenseSelect
             selectedLicense={selectedLicense}
@@ -291,11 +331,15 @@ const Evidenceform: FC = () => {
           />
           <FileUploadForLicense
             handleLicenseUpload={handleLicenseUpload}
+            selectedLicenceName={selectedLicenceName}
             selectedLicense={selectedLicense}
           />
         </div>
-        <button className='w-full bg-primary py-4 text-white'>
-          Submit
+        <button
+          className='w-full bg-primary py-4 text-white'
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? 'Submitting...' : 'Submit'}
         </button>
         {isSuccess && (
           <div>

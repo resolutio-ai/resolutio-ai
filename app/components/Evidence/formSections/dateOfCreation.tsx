@@ -24,8 +24,9 @@ const CustomDatePicker: FC<DatePickerProps> = ({ selectedDate, onChange }) => {
         placeholderText='Select date'
         dateFormat="yyyy/MM/dd"
         selected={selectedDate}
+        required
         className=' focus:shadow-outline flex w-[100%] appearance-none items-center justify-between rounded-md border border-solid border-[#5F437F] px-4 py-3 leading-tight text-gray-700 placeholder-gray-400 shadow focus:outline-none'
-        onChange={(date) => onChange(date)}
+        onChange={(date: Date | null) => onChange(date)}
       />
       <div className=' align-center absolute inset-y-0 right-0 flex items-center justify-center pr-4 pt-5 text-gray-700'>
         <Image
