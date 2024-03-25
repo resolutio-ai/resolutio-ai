@@ -1,14 +1,10 @@
 'use client';
 
 import {
-  booknnarkIcon,
   dropdownIcon,
   evidencForm,
-  homeBtnSvg,
   messageIcon,
   notificationIcon,
-  profileIcon,
-  supportIcon,
 } from '@/app/assets/icons';
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
@@ -23,7 +19,7 @@ interface Routes {
 const routes: Routes[] = [
   {
     label: 'Home',
-    icon: homeBtnSvg,
+    icon: messageIcon,
     href: '/feed',
   },
   {
@@ -40,21 +36,6 @@ const routes: Routes[] = [
     label: 'Evidence form',
     icon: evidencForm,
     href: '/EvidenceForm',
-  },
-  {
-    label: 'Saved',
-    icon: booknnarkIcon,
-    href: '/Saves',
-  },
-  {
-    label: 'Support',
-    icon: supportIcon,
-    href: '/Support',
-  },
-  {
-    label: 'Profile',
-    icon: profileIcon,
-    href: '/Profile',
   },
 ];
 

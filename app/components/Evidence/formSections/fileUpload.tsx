@@ -4,10 +4,13 @@ import React, { ChangeEvent } from 'react';
 
 interface FileUploadProps {
   handleFileUpload: (e: ChangeEvent<HTMLInputElement>) => void;
+  selectedFileName: string
 }
 
-const FileUpload: React.FC<FileUploadProps> = ({ handleFileUpload }) => {
+const FileUpload: React.FC<FileUploadProps> = ({ handleFileUpload,selectedFileName }) => {
+  
   return (
+    <div>
     <div className='relative'>
       <label
         htmlFor='fileUpload'
@@ -34,6 +37,13 @@ const FileUpload: React.FC<FileUploadProps> = ({ handleFileUpload }) => {
           className='hidden'
         />
       </div>
+     
+    </div>
+    {selectedFileName ? (
+            <span className=' font-noto-sans text-sm font-bold leading-tight text-gray-600'>{selectedFileName}</span>
+          ) : (
+            ''
+          )}
     </div>
       );
     };

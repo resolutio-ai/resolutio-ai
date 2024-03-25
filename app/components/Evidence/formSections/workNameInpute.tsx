@@ -20,6 +20,7 @@ const WorkNameInput: FC<WorkNameProps> = ({ onWorkNameChange,workInput }) => {
       id='name1'
       type='text'
       value={workInput}
+      required
       onChange={(event) => onWorkNameChange(event)}
       placeholder='Enter name of Work'
     />

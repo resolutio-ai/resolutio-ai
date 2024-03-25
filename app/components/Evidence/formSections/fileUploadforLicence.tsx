@@ -6,14 +6,16 @@ import { fileuploadIcon, tooltip } from '@/app/assets';
 interface FileUploadForLicenseProps {
   handleLicenseUpload: (e: ChangeEvent<HTMLInputElement>) => void;
   selectedLicense: string;
-  
+  selectedLicenceName: string;  
 }
 
 const FileUploadForLicense: React.FC<FileUploadForLicenseProps> = ({
   handleLicenseUpload,
   selectedLicense,
+  selectedLicenceName
 }) => {
   return (
+    <div>
     <div>
       {selectedLicense === 'Your own license' && (
         <div className='relative'>
@@ -62,6 +64,12 @@ const FileUploadForLicense: React.FC<FileUploadForLicenseProps> = ({
           </span>
         </div>
       )}
+    </div>
+    {selectedLicenceName ? (
+      <span className=' font-noto-sans text-sm font-bold leading-tight text-gray-600'>{selectedLicenceName}</span>
+    ) : (
+      ''
+    )}
     </div>
   );
 };
