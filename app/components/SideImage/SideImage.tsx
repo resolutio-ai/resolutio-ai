@@ -10,6 +10,7 @@ type SideImageProps = {
   isGIF?: boolean;
   showAuthor?: boolean;
   author: Author;
+  imgClassName?: string;
 };
 
 const SideImage: FC<SideImageProps> = ({
@@ -19,6 +20,7 @@ const SideImage: FC<SideImageProps> = ({
   isGIF = false,
   showAuthor = false,
   author,
+  imgClassName = 'object-cover',
 }) => {
   const blurDataURL = typeof imageURL === 'string' ? imageURL : '';
 
@@ -29,13 +31,13 @@ const SideImage: FC<SideImageProps> = ({
           src={imageURL}
           blurDataURL={blurDataURL}
           alt='Art'
-          className='cover-img h-[calc(100vh-64px)] w-[100%] object-cover'
+          className={`cover-img ${imgClassName} h-[calc(100vh-64px)] w-[100%]`}
           width={500}
           height={500}
           unoptimized={isGIF} // Next/image doesn't support GIFs yet so we need to disable optimization
         />
+        {showAuthor && <AuthorLink author={author} />}
       </a>
-      {showAuthor && <AuthorLink author={author} />}
     </div>
   );
 };

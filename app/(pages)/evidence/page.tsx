@@ -12,12 +12,15 @@ const Evidence: FC = () => {
   return (
     <div className='grid md:grid-cols-2'>
       <Evidenceform />
-      <SideImage
-        imageURL={monalisaart}
-        imgNavigation={author.profileLink}
-        author={author}
-        showAuthor
-      />
+      <div className='p-5'>
+        <SideImage
+          imageURL={monalisaart}
+          imgNavigation={author.profileLink}
+          author={author}
+          showAuthor
+          imgClassName=''
+        />
+      </div>
     </div>
   );
 };
