@@ -3,6 +3,7 @@
 @tailwind utilities;
 @import 'variables';
 @import 'functions';
+@import 'react-toastify/dist/ReactToastify.min.css';
 
 :root {
   --foreground-rgb: 0, 0, 0;

@@ -1,3 +1,4 @@
+import creatorSchema from './creatorSchema';
 import evidenceSchema from './evidenceSchema';
 
-export { evidenceSchema };
+export { creatorSchema, evidenceSchema };

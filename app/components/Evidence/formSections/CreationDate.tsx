@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { FC } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useFormContext } from 'react-hook-form';
 
 type CreationProps = {
   selectedDate: Date | null;
@@ -10,6 +11,7 @@ type CreationProps = {
 };
 
 const CreationDate: FC<CreationProps> = ({ selectedDate, onChange }) => {
+  const { register, control } = useFormContext();
   return (
     <div className='relative flex flex-col'>
       <label className='form-control w-full max-w-xs'>
@@ -32,6 +34,18 @@ const CreationDate: FC<CreationProps> = ({ selectedDate, onChange }) => {
           />
         </div>
       </label>
+      {/*       <Controller
+        name='dateOfBirth'
+        control={control}
+        defaultValue={date}
+        render={() => (
+          <DatePicker
+            selected={date}
+            placeholderText='Select date'
+            onChange={handleChange}
+          />
+        )}
+      /> */}
     </div>
   );
 };

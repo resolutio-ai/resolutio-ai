@@ -1,8 +1,10 @@
 import { Footer, Header } from '@/app/components';
 import { MagicProvider, UserProvider } from '@/app/contexts';
+import { ReactQueryClientProvider } from '@/app/providers';
 import type { Metadata } from 'next';
 import { DM_Sans, Montserrat } from 'next/font/google';
 import { FC, PropsWithChildren } from 'react';
+import { ToastContainer } from 'react-toastify';
 
 import './theme/globals.scss';
 
@@ -35,13 +37,16 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
       className={`${montserrat.variable} ${dm_sans.variable}`}
       data-theme='resolutioTheme'
     >
+      <ToastContainer />
       <MagicProvider>
         <UserProvider>
-          <body>
-            <Header />
-            <main className='content'>{children}</main>
-            <Footer />
-          </body>
+          <ReactQueryClientProvider>
+            <body>
+              <Header />
+              <main className='content'>{children}</main>
+              <Footer />
+            </body>
+          </ReactQueryClientProvider>
         </UserProvider>
       </MagicProvider>
     </html>

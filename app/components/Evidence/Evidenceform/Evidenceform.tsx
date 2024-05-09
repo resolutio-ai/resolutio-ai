@@ -1,19 +1,14 @@
 'use client';
 
-import { evidenceSchema } from '@/app/schemas';
+import { useEvidenceForm } from '@/app/providers/EvidenceFormProvider/EvidenceFromProvider';
 import { EvidenceFromDto } from '@/app/types';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { FC, useState } from 'react';
-import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import { FC, useMemo } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import CreationDate from '../formSections/CreationDate';
-import CreatorsList from '../formSections/CreatorsList';
-import LicenseUpload from '../formSections/LicenseUpload';
-import MediumSelect from '../formSections/MediumSelect';
-import WorkNameInput from '../formSections/WorkNameInput';
-import WorkUpload from '../formSections/WorkUpload';
-import LicenseSelect from '../formSections/licenseSelect';
 
+import CreatorInformation from '../CreatorInformation/CreatorInformation';
+import License from '../License/License';
+import Review from '../Review/Review';
+import WorkDetails from '../WorkDetails/WorkDetails';
 import './Evidenceform.scss';
 
 const defaultValues: EvidenceFromDto = {
@@ -25,58 +20,62 @@ const defaultValues: EvidenceFromDto = {
   license: 'Select a license',
 };
 
+const EvidenceSteps = [
+  {
+    id: 1,
+    label: 'Creators Information',
+  },
+  {
+    id: 2,
+    label: 'Work Details',
+  },
+  {
+    id: 3,
+    label: 'License',
+  },
+  {
+    id: 4,
+    label: 'Review',
+  },
+];
+
 const Evidenceform: FC = () => {
-  const useFormMethods = useForm<EvidenceFromDto>({
-    resolver: zodResolver(evidenceSchema),
-    defaultValues: defaultValues,
-    mode: 'onBlur',
-  });
+  const { currentStep } = useEvidenceForm();
 
-  const {
-    formState: { errors, isValid },
-    reset,
-    handleSubmit,
-  } = useFormMethods;
-
-  console.log(errors, isValid);
-
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const [selectedLicense, setSelectedLicense] = useState<string>('');
-
-  const onSubmit: SubmitHandler<EvidenceFromDto> = (data) => {
-    console.log(data);
-    reset();
-  };
+  const formSection = useMemo(() => {
+    switch (currentStep) {
+      case 1:
+        return <CreatorInformation />;
+      case 2:
+        return <WorkDetails />;
+      case 3:
+        return <License />;
+      case 4:
+        return <Review />;
+      default:
+        return null;
+    }
+  }, [currentStep]);
+  console.log('currentStep', currentStep);
 
   return (
     <div className='p-5 lg:p-10'>
       <h3 className='pb-4 text-4xl font-bold tracking-tight text-gray-500'>
         Evidence Form
       </h3>
-      <FormProvider {...useFormMethods}>
-        <form
-          className='w-[100%] space-y-6 md:w-[328px]'
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <CreatorsList />
-          <WorkNameInput />
-          <MediumSelect />
-          <WorkUpload />
-          <CreationDate
-            selectedDate={selectedDate}
-            onChange={setSelectedDate}
-          />
-          <LicenseSelect />
-          <LicenseUpload selectedLicense={selectedLicense} />
-          <button
-            className='btn-primary btn w-full'
-            type='submit'
-            disabled={!isValid}
-          >
-            Submit
-          </button>
-        </form>
-      </FormProvider>
+      <div className='my-4 flex justify-center'>
+        <ul className='steps'>
+          {EvidenceSteps.map(({ id, label }) => (
+            <li
+              key={id}
+              className={`step ${id <= currentStep ? 'step-primary' : ''}`}
+            >
+              {label}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className='mx-auto max-w-xl'>{formSection}</div>
     </div>
   );
 };

@@ -1,24 +1,18 @@
-import { UploadIcon } from '@/app/assets';
 import React from 'react';
+import { useFormContext } from 'react-hook-form';
 
-type WorkUploadProps = {};
-
-const WorkUpload: React.FC<WorkUploadProps> = () => {
+const WorkUpload: React.FC = () => {
+  const { register } = useFormContext();
   return (
-    <label className='form-control w-full max-w-xs cursor-pointer'>
+    <label className='form-control mt-4 w-full cursor-pointer'>
       <div className='label'>
         <span className='label-text text-sm font-bold text-gray-600'>File</span>
       </div>
-
-      <div className='focus:shadow-outline relative rounded-md border border-[#5F437F] py-3 text-gray-700 shadow'>
-        <div className='pl-4 text-gray-400'>
-          Upload file
-          <div className='absolute right-4 top-4'>
-            <UploadIcon />
-          </div>
-          <input type='file' id='upload' accept='image/*' className='hidden' />
-        </div>
-      </div>
+      <input
+        type='file'
+        className='file-input file-input-bordered file-input-primary w-full '
+        {...register('file')}
+      />
     </label>
   );
 };

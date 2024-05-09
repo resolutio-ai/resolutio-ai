@@ -1,12 +1,10 @@
 import { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
 
-type WorkNameInputProps = {};
-
-const WorkNameInput: FC<WorkNameInputProps> = () => {
+const WorkNameInput: FC = () => {
   const { register } = useFormContext();
   return (
-    <label className='form-control w-full max-w-xs'>
+    <label className='form-control w-full'>
       <div className='label'>
         <span className='label-text text-sm font-bold  text-gray-600'>
           Name of Work
@@ -14,7 +12,7 @@ const WorkNameInput: FC<WorkNameInputProps> = () => {
       </div>
       <input
         type='text'
-        className='input input-bordered input-primary w-full max-w-xs'
+        className='input input-bordered input-primary w-full'
         {...register('nameOfWork')}
         placeholder='Enter name of Work'
       />
