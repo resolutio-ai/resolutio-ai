@@ -4,14 +4,19 @@ import { licenseSchema } from '@/app/schemas';
 import { LICENSE_OPTIONS } from '@/app/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
-import { FormProvider, useForm } from 'react-hook-form';
+import { FormProvider, useForm, useFormContext } from 'react-hook-form';
 import { z } from 'zod';
 
 type Licensing = z.infer<typeof licenseSchema>;
 
 const LicenseSelector = () => {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<Licensing>();
+
   return (
-    <label className='form-control w-full max-w-xs'>
+    <label className='form-control w-full'>
       <div className='label justify-start'>
         <span className='label-text text-sm font-bold text-gray-600'>
           License
@@ -26,7 +31,7 @@ const LicenseSelector = () => {
           </span>
         </div>
       </div>
-      <select className='select select-primary w-full max-w-xs'>
+      <select className='select select-primary w-full' {...register('license')}>
         <option disabled defaultValue={'Select a license'}>
           Select a license
         </option>

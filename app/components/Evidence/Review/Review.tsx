@@ -9,6 +9,11 @@ const Review = () => {
 
   return (
     <div>
+      <div className='mockup-code bg-primary text-primary-content'>
+        <pre>
+          <code>{JSON.stringify(formData, null, ' ')}</code>
+        </pre>
+      </div>
       <div className='mt-8 flex justify-end'>
         <button
           className='btn-secondary btn mr-8'
