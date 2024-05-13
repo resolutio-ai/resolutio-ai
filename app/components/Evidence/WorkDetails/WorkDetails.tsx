@@ -59,11 +59,7 @@ const WorkDetails = () => {
     },
     resolver: zodResolver(workDetailsSchema),
   });
-  const {
-    handleSubmit,
-    formState: { errors },
-  } = methods;
-  console.log(errors);
+  const { handleSubmit } = methods;
 
   const onSubmit = (data: WorkDetails) => {
     console.log(data);
