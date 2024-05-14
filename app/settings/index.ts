@@ -2,6 +2,8 @@ import { CMS_BASE_URL, queryClient } from './api.config';
 import {
   BLOGS_FILE,
   COMMUNITY_LINK_FILE,
+  DEFAULT_LICENSE,
+  DEFAULT_MEDIUM,
   EVENTS_WORKSHOPS_FILE,
   EVIDENCE_LINK_FILE,
   LAVENDER_LINK_FILE,
@@ -42,3 +44,5 @@ export {
   UNDERSTAND_YOUR_RIGHTS_FILE,
   queryClient,
 };
+
+export { DEFAULT_LICENSE, DEFAULT_MEDIUM };

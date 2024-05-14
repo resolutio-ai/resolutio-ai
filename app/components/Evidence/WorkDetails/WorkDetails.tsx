@@ -1,12 +1,17 @@
-import { useEvidenceForm } from '@/app/providers/EvidenceFormProvider/EvidenceFromProvider';
+import {
+  EvidenceFromData,
+  useEvidenceForm,
+} from '@/app/providers/EvidenceFormProvider/EvidenceFromProvider';
 import { workDetailsSchema } from '@/app/schemas';
-import { MEDIUM_OPTIONS } from '@/app/settings';
+import { DEFAULT_MEDIUM, MEDIUM_OPTIONS } from '@/app/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FC } from 'react';
 import { FormProvider, useForm, useFormContext } from 'react-hook-form';
-import { z } from 'zod';
 
-type WorkDetails = z.infer<typeof workDetailsSchema>;
+type WorkDetails = Pick<
+  EvidenceFromData,
+  'nameOfWork' | 'medium' | 'dateOfCreation' | 'file'
+>;
 
 const MediumSelector: FC = () => {
   const { register } = useFormContext();
@@ -18,9 +23,7 @@ const MediumSelector: FC = () => {
         </span>
       </div>
       <select className='select select-primary w-full' {...register('medium')}>
-        <option disabled defaultValue={'Select a medium'}>
-          Select a medium
-        </option>
+        <option disabled>{DEFAULT_MEDIUM}</option>
         {MEDIUM_OPTIONS.map((medium) => (
           <option key={medium}>{medium}</option>
         ))}

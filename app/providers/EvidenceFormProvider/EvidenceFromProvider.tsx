@@ -1,6 +1,7 @@
 'use client';
 
 import { evidenceSchema } from '@/app/schemas';
+import { DEFAULT_LICENSE, DEFAULT_MEDIUM } from '@/app/settings';
 import {
   FC,
   PropsWithChildren,
@@ -12,29 +13,40 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 import { z } from 'zod';
 
-export type EvidenceFromData = z.infer<typeof evidenceSchema>;
+export type EvidenceFromData = Pick<
+  z.infer<typeof evidenceSchema>,
+  'creators' | 'nameOfWork' | 'dateOfCreation'
+> & {
+  file: File | null;
+  ownLicense: File | null;
+  medium: string;
+  license: string;
+};
+
+type PartialEvidenceFromData = Partial<EvidenceFromData>;
 
 type EvidenceFormContext = {
   formData: EvidenceFromData;
   currentStep: number;
   nextStep: () => void;
   previousStep: () => void;
-  updateForm: (updatedData: Partial<EvidenceFromData>) => void;
+  updateForm: (updatedData: PartialEvidenceFromData) => void;
 };
 
 const defaultValues: EvidenceFormContext = {
   formData: {
     creators: [{ id: uuidv4(), name: '' }],
     nameOfWork: '',
-    medium: 'Art',
+    medium: DEFAULT_MEDIUM,
+    license: DEFAULT_LICENSE,
     dateOfCreation: new Date(),
     file: null,
-    license: '',
+    ownLicense: null,
   },
   currentStep: 0,
   nextStep: () => {},
   previousStep: () => {},
-  updateForm: (updatedData: Partial<EvidenceFromData>) => {},
+  updateForm: (updatedData: PartialEvidenceFromData) => {},
 };
 
 const EvidenceFormContext = createContext<EvidenceFormContext>(defaultValues);
@@ -44,15 +56,13 @@ export const useEvidenceForm = () => {
 };
 
 export const EvidenceFormProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [formData, setFormData] = useState<EvidenceFromData>(
-    defaultValues.formData
-  );
+  const [formData, setFormData] = useState(defaultValues.formData);
   const [currentStep, setCurrentStep] = useState<number>(1);
 
   const nextStep = () => setCurrentStep((prevStep) => prevStep + 1);
   const previousStep = () => setCurrentStep((prevStep) => prevStep - 1);
 
-  const updateForm = (updatedData: Partial<EvidenceFromData>) => {
+  const updateForm = (updatedData: PartialEvidenceFromData) => {
     setFormData((prevData) => ({ ...prevData, ...updatedData }));
   };
 

@@ -21,6 +21,8 @@ export const MEDIUM_OPTIONS = [
   'Other',
 ] as const;
 
+export const DEFAULT_MEDIUM = 'Select a Medium';
+
 export const LICENSE_OPTIONS = [
   'CC BY',
   'CC BY-SA',
@@ -30,3 +32,5 @@ export const LICENSE_OPTIONS = [
   'resolution License',
   'Your own license',
 ] as const;
+
+export const DEFAULT_LICENSE = 'Select a License';

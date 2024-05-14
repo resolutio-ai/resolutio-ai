@@ -1,13 +1,15 @@
 import { tooltip } from '@/app/assets';
-import { useEvidenceForm } from '@/app/providers/EvidenceFormProvider/EvidenceFromProvider';
+import {
+  EvidenceFromData,
+  useEvidenceForm,
+} from '@/app/providers/EvidenceFormProvider/EvidenceFromProvider';
 import { licenseSchema } from '@/app/schemas';
-import { LICENSE_OPTIONS } from '@/app/settings';
+import { DEFAULT_LICENSE, LICENSE_OPTIONS } from '@/app/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
 import { FormProvider, useForm, useFormContext } from 'react-hook-form';
-import { z } from 'zod';
 
-type Licensing = z.infer<typeof licenseSchema>;
+type Licensing = Pick<EvidenceFromData, 'license' | 'ownLicense'>;
 
 const LicenseSelector = () => {
   const {
@@ -32,9 +34,7 @@ const LicenseSelector = () => {
         </div>
       </div>
       <select className='select select-primary w-full' {...register('license')}>
-        <option disabled defaultValue={'Select a license'}>
-          Select a license
-        </option>
+        <option disabled>{DEFAULT_LICENSE}</option>
         {LICENSE_OPTIONS.map((license) => (
           <option key={license}>{license}</option>
         ))}
