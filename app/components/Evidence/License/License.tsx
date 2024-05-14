@@ -12,7 +12,7 @@ type Licensing = z.infer<typeof licenseSchema>;
 const LicenseSelector = () => {
   const {
     register,
-    formState: { errors },
+    //formState,
   } = useFormContext<Licensing>();
 
   return (
@@ -55,7 +55,7 @@ const License = () => {
 
   const {
     handleSubmit,
-    formState: { errors },
+    //formState: { errors },
   } = methods;
 
   const onSubmit = (data: Licensing) => {

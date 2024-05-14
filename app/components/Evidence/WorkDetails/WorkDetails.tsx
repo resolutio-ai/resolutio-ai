@@ -52,10 +52,10 @@ const WorkDetails = () => {
   const { previousStep, formData, nextStep, updateForm } = useEvidenceForm();
   const methods = useForm<WorkDetails>({
     defaultValues: {
-      nameOfWork: formData.nameOfWork,
-      medium: formData.medium,
-      dateOfCreation: formData.dateOfCreation,
-      file: formData.file,
+      nameOfWork: formData?.nameOfWork,
+      medium: formData?.medium,
+      dateOfCreation: formData?.dateOfCreation,
+      file: formData?.file,
     },
     resolver: zodResolver(workDetailsSchema),
   });

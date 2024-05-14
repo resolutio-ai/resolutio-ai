@@ -14,7 +14,7 @@ import { z } from 'zod';
 
 export type EvidenceFromData = z.infer<typeof evidenceSchema>;
 
-type EvidenceFormContextType = {
+type EvidenceFormContext = {
   formData: EvidenceFromData;
   currentStep: number;
   nextStep: () => void;
@@ -22,7 +22,7 @@ type EvidenceFormContextType = {
   updateForm: (updatedData: Partial<EvidenceFromData>) => void;
 };
 
-const defaultValues: EvidenceFormContextType = {
+const defaultValues: EvidenceFormContext = {
   formData: {
     creators: [{ id: uuidv4(), name: '' }],
     nameOfWork: '',
@@ -37,8 +37,7 @@ const defaultValues: EvidenceFormContextType = {
   updateForm: (updatedData: Partial<EvidenceFromData>) => {},
 };
 
-const EvidenceFormContext =
-  createContext<EvidenceFormContextType>(defaultValues);
+const EvidenceFormContext = createContext<EvidenceFormContext>(defaultValues);
 
 export const useEvidenceForm = () => {
   return useContext(EvidenceFormContext);
