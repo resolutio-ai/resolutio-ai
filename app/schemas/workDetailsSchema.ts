@@ -7,7 +7,7 @@ const workDetailsSchema = z.object({
     required_error:
       'Medium is required and must be one of: Film, Photo, Music, AI, Art, Other',
   }),
-  dateOfCreation: z.date().optional(),
+  dateOfCreation: z.date(),
   file: z.custom<File>().nullable(),
 });
 
