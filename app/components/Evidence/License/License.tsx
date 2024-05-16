@@ -7,57 +7,68 @@ import { licenseSchema } from '@/app/schemas';
 import { DEFAULT_LICENSE, LICENSE_OPTIONS } from '@/app/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
+import { FC } from 'react';
 import { FormProvider, useForm, useFormContext } from 'react-hook-form';
+import OwnLicenseUpload from './OwnLicenseUpload/OwnLicenseUpload';
 
 type Licensing = Pick<EvidenceFromData, 'license' | 'ownLicense'>;
 
-const LicenseSelector = () => {
+const LicenseSelector: FC = () => {
   const {
     register,
-    //formState,
+    formState: { errors },
   } = useFormContext<Licensing>();
 
   return (
-    <label className='form-control w-full'>
-      <div className='label justify-start'>
-        <span className='label-text text-sm font-bold text-gray-600'>
-          License
-        </span>
-        <div className='tooltip relative ml-1 inline-block'>
-          <Image src={tooltip} alt='tooltip' className='h-4 w-4' />
-          <span className='tooltiptext font-weight-400 leading-18 invisible absolute bottom-full left-1/2 z-10 w-[120px] -translate-x-1/2 transform rounded border bg-white p-[7px] text-center text-xs font-normal text-black'>
-            <span>Learn more about Licenses</span>
-            <a href='#' className='ml-1 text-xs font-bold text-black underline'>
-              here
-            </a>
+    <>
+      <label className='form-control w-full'>
+        <div className='label justify-start'>
+          <span className='label-text text-sm font-bold text-gray-600'>
+            License
           </span>
+          <div className='tooltip relative ml-1 inline-block'>
+            <Image src={tooltip} alt='tooltip' className='h-4 w-4' />
+            <span className='tooltiptext font-weight-400 leading-18 invisible absolute bottom-full left-1/2 z-10 w-[120px] -translate-x-1/2 transform rounded border bg-white p-[7px] text-center text-xs font-normal text-black'>
+              <span>Learn more about Licenses</span>
+              <a
+                href='#'
+                className='ml-1 text-xs font-bold text-black underline'
+              >
+                here
+              </a>
+            </span>
+          </div>
         </div>
+        <select
+          className='select select-primary w-full'
+          {...register('license')}
+        >
+          <option disabled>{DEFAULT_LICENSE}</option>
+          {LICENSE_OPTIONS.map((license) => (
+            <option key={license}>{license}</option>
+          ))}
+        </select>
+      </label>
+      <div className='mt-1 min-h-6'>
+        {errors.license && (
+          <span className='text-xs text-red-500'>
+            {errors.license?.message}
+          </span>
+        )}
       </div>
-      <select className='select select-primary w-full' {...register('license')}>
-        <option disabled>{DEFAULT_LICENSE}</option>
-        {LICENSE_OPTIONS.map((license) => (
-          <option key={license}>{license}</option>
-        ))}
-      </select>
-    </label>
+    </>
   );
 };
 
-const License = () => {
+const License: FC = () => {
   const { previousStep, formData, nextStep, updateForm } = useEvidenceForm();
-
   const methods = useForm<Licensing>({
     defaultValues: {
       license: formData.license,
     },
     resolver: zodResolver(licenseSchema),
   });
-
-  const {
-    handleSubmit,
-    //formState: { errors },
-  } = methods;
-
+  const { handleSubmit } = methods;
   const onSubmit = (data: Licensing) => {
     console.log(data);
     updateForm(data);
@@ -69,6 +80,7 @@ const License = () => {
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <LicenseSelector />
+          <OwnLicenseUpload />
           <div className='mt-8 flex justify-end'>
             <button
               className='btn-secondary btn mr-8'

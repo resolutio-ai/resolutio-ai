@@ -3,7 +3,7 @@ import { LICENSE_OPTIONS } from '../settings';
 
 const licenseSchema = z.object({
   license: z.enum([...LICENSE_OPTIONS], {
-    required_error: 'Please select a license for your work.',
+    errorMap: () => ({ message: 'Please select a license for your work.' }),
   }),
   ownLicense: z.custom<File>().nullable(),
 });

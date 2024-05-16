@@ -103,7 +103,7 @@ const CreatorsList: FC<CreatorsListProps> = () => {
   );
 };
 
-const CreatorInformation = () => {
+const CreatorInformation: FC = () => {
   const { formData, updateForm, nextStep } = useEvidenceForm();
   const methods = useForm<CreatorData>({
     defaultValues: {

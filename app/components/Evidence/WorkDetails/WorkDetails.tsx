@@ -5,8 +5,15 @@ import {
 import { workDetailsSchema } from '@/app/schemas';
 import { DEFAULT_MEDIUM, MEDIUM_OPTIONS } from '@/app/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { FC } from 'react';
-import { FormProvider, useForm, useFormContext } from 'react-hook-form';
+import { FC, useState } from 'react';
+import DatePicker from 'react-datepicker';
+import {
+  Controller,
+  FormProvider,
+  useForm,
+  useFormContext,
+} from 'react-hook-form';
+import WorkUpload from './WorkUpload/WorkUpload';
 
 type WorkDetails = Pick<
   EvidenceFromData,
@@ -19,7 +26,7 @@ const WorkName: FC = () => {
     formState: { errors },
   } = useFormContext<WorkDetails>();
   return (
-    <div>
+    <>
       <label className='form-control w-full'>
         <div className='label'>
           <span className='label-text text-sm font-bold  text-gray-600'>
@@ -40,10 +47,9 @@ const WorkName: FC = () => {
           </span>
         )}
       </div>
-    </div>
+    </>
   );
 };
-
 const MediumSelector: FC = () => {
   const {
     register,
@@ -75,8 +81,69 @@ const MediumSelector: FC = () => {
     </div>
   );
 };
+const DateOfCreation: FC = () => {
+  const {
+    control,
+    setValue,
+    getValues,
+    formState: { errors },
+  } = useFormContext<WorkDetails>();
 
-const WorkDetails = () => {
+  const [date, setDate] = useState<Date>(getValues('dateOfCreation'));
+
+  const handleDateChange = (
+    date: Date | null,
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    if (!date) return;
+
+    // This is close the react-datepicker when a date is selected(Know Issue when inside a label element)
+    if (e && typeof e.preventDefault === 'function') {
+      e.preventDefault();
+    }
+
+    setValue('dateOfCreation', date, {
+      shouldDirty: true,
+    });
+    setDate(date);
+  };
+
+  return (
+    <>
+      <label className='form-control w-full'>
+        <div className='label'>
+          <span className='label-text text-sm font-bold text-gray-600'>
+            Date of Creation
+          </span>
+        </div>
+        <Controller
+          name='dateOfCreation'
+          control={control}
+          defaultValue={date}
+          render={() => (
+            <DatePicker
+              selected={date}
+              id='dateOfCreation'
+              dateFormat='dd/MM/yyyy'
+              className='input input-bordered input-primary w-full'
+              placeholderText='Select date'
+              maxDate={new Date()}
+              onChange={handleDateChange}
+            />
+          )}
+        />
+      </label>
+      <div className='mt-1 min-h-6'>
+        {errors.dateOfCreation && (
+          <span className='text-xs text-red-500'>
+            {errors.dateOfCreation?.message}
+          </span>
+        )}
+      </div>
+    </>
+  );
+};
+const WorkDetails: FC = () => {
   const { previousStep, formData, nextStep, updateForm } = useEvidenceForm();
   const methods = useForm<WorkDetails>({
     defaultValues: {
@@ -100,6 +167,8 @@ const WorkDetails = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <WorkName />
           <MediumSelector />
+          <DateOfCreation />
+          <WorkUpload />
           <div className='mt-8 flex justify-end'>
             <button
               className='btn-secondary btn mr-8'
