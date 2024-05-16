@@ -13,7 +13,7 @@ import {
   useForm,
   useFormContext,
 } from 'react-hook-form';
-import WorkUpload from './WorkUpload/WorkUpload';
+import FileUpload from '../../FileUpload/FileUpload';
 
 type WorkDetails = Pick<
   EvidenceFromData,
@@ -143,6 +143,24 @@ const DateOfCreation: FC = () => {
     </>
   );
 };
+const WorkUpload: FC = () => {
+  const {
+    formState: { errors },
+  } = useFormContext<WorkDetails>();
+  return (
+    <>
+      <FileUpload name='file' label='Upload Work' />
+      <div className='mt-1 min-h-6'>
+        {errors.dateOfCreation && (
+          <span className='text-xs text-red-500'>
+            {errors.dateOfCreation?.message}
+          </span>
+        )}
+      </div>
+    </>
+  );
+};
+
 const WorkDetails: FC = () => {
   const { previousStep, formData, nextStep, updateForm } = useEvidenceForm();
   const methods = useForm<WorkDetails>({

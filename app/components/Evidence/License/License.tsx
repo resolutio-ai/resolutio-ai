@@ -9,7 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
 import { FC } from 'react';
 import { FormProvider, useForm, useFormContext } from 'react-hook-form';
-import OwnLicenseUpload from './OwnLicenseUpload/OwnLicenseUpload';
+import FileUpload from '../../FileUpload/FileUpload';
 
 type Licensing = Pick<EvidenceFromData, 'license' | 'ownLicense'>;
 
@@ -60,11 +60,30 @@ const LicenseSelector: FC = () => {
   );
 };
 
+const OwnLicenseUpload = () => {
+  const {
+    formState: { errors },
+  } = useFormContext<Licensing>();
+  return (
+    <>
+      <FileUpload name='file' label='Upload Work' />
+      <div className='mt-1 min-h-6'>
+        {errors.ownLicense && (
+          <span className='text-xs text-red-500'>
+            {errors.ownLicense?.message}
+          </span>
+        )}
+      </div>
+    </>
+  );
+};
+
 const License: FC = () => {
   const { previousStep, formData, nextStep, updateForm } = useEvidenceForm();
   const methods = useForm<Licensing>({
     defaultValues: {
       license: formData.license,
+      ownLicense: formData.ownLicense,
     },
     resolver: zodResolver(licenseSchema),
   });
