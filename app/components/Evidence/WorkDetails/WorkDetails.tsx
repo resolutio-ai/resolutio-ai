@@ -13,41 +13,66 @@ type WorkDetails = Pick<
   'nameOfWork' | 'medium' | 'dateOfCreation' | 'file'
 >;
 
-const MediumSelector: FC = () => {
-  const { register } = useFormContext();
+const WorkName: FC = () => {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<WorkDetails>();
   return (
-    <label className='form-control mt-4 w-full'>
-      <div className='label'>
-        <span className='label-text text-sm font-bold text-gray-600'>
-          Medium
-        </span>
+    <div>
+      <label className='form-control w-full'>
+        <div className='label'>
+          <span className='label-text text-sm font-bold  text-gray-600'>
+            Name of Work
+          </span>
+        </div>
+        <input
+          type='text'
+          className='input input-bordered input-primary w-full'
+          placeholder='Enter name of Work'
+          {...register('nameOfWork')}
+        />
+      </label>
+      <div className='mt-1 min-h-6'>
+        {errors.nameOfWork && (
+          <span className='text-xs text-red-500'>
+            {errors.nameOfWork?.message}
+          </span>
+        )}
       </div>
-      <select className='select select-primary w-full' {...register('medium')}>
-        <option disabled>{DEFAULT_MEDIUM}</option>
-        {MEDIUM_OPTIONS.map((medium) => (
-          <option key={medium}>{medium}</option>
-        ))}
-      </select>
-    </label>
+    </div>
   );
 };
 
-const WorkName: FC = () => {
-  const { register } = useFormContext();
+const MediumSelector: FC = () => {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<WorkDetails>();
   return (
-    <label className='form-control w-full'>
-      <div className='label'>
-        <span className='label-text text-sm font-bold  text-gray-600'>
-          Name of Work
-        </span>
+    <div>
+      <label className='mt-2w-full form-control'>
+        <div className='label'>
+          <span className='label-text text-sm font-bold text-gray-600'>
+            Medium
+          </span>
+        </div>
+        <select
+          className='select select-primary w-full'
+          {...register('medium')}
+        >
+          <option disabled>{DEFAULT_MEDIUM}</option>
+          {MEDIUM_OPTIONS.map((medium) => (
+            <option key={medium}>{medium}</option>
+          ))}
+        </select>
+      </label>
+      <div className='mt-1 min-h-6'>
+        {errors.medium && (
+          <span className='text-xs text-red-500'>{errors.medium?.message}</span>
+        )}
       </div>
-      <input
-        type='text'
-        className='input input-bordered input-primary w-full'
-        placeholder='Enter name of Work'
-        {...register('nameOfWork')}
-      />
-    </label>
+    </div>
   );
 };
 
