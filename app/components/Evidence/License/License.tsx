@@ -89,7 +89,6 @@ const License: FC = () => {
   });
   const { handleSubmit, watch, setValue } = methods;
   const onSubmit = (data: Licensing) => {
-    console.log(data);
     updateForm(data);
     nextStep();
   };

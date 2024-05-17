@@ -54,12 +54,9 @@ const BlogItem: FC<BlogItemProps> = ({ blog }) => {
 
 const Blogs: FC = async () => {
   let blog: Blog | null = null;
-  try {
-    const response: Response = await getBlogs();
-    blog = await response.json();
-  } catch (error) {
-    console.error(error);
-  }
+
+  const response: Response = await getBlogs();
+  blog = await response.json();
 
   if (!blog) return null;
 

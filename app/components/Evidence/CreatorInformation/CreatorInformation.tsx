@@ -114,7 +114,6 @@ const CreatorInformation: FC = () => {
   const { handleSubmit } = methods;
 
   const onSubmitCreators = (data: CreatorData) => {
-    console.log(data);
     updateForm(data);
     nextStep();
   };

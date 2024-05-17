@@ -4,7 +4,7 @@ const Review = () => {
   const { previousStep, formData } = useEvidenceForm();
 
   const onSubmit = () => {
-    console.log(formData);
+    // TODO: Submit the form data to the server
   };
 
   return (

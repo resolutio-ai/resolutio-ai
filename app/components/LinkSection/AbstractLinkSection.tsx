@@ -22,12 +22,8 @@ export const AbstractLinkSection: FC<AbstractLinkSectionProps> = async ({
 }) => {
   let linkSection: LinkSection | null = null;
 
-  try {
-    const response: Response = await getLinkSection(sectionFile);
-    linkSection = await response.json();
-  } catch (error) {
-    console.log(error);
-  }
+  const response: Response = await getLinkSection(sectionFile);
+  linkSection = await response.json();
 
   // If section is null, return null
   if (!linkSection) return null;

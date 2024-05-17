@@ -56,7 +56,6 @@ const Evidenceform: FC = () => {
         return null;
     }
   }, [currentStep]);
-  console.log('currentStep', currentStep);
 
   return (
     <div className='p-5 lg:p-10'>

@@ -39,12 +39,9 @@ const MemberItem: FC<MemberItemProps> = ({ member }) => {
 
 const OurTeam: FC = async () => {
   let ourMembers: Member[] = [];
-  try {
-    const response: Response = await getOurTeam();
-    ourMembers = await response.json();
-  } catch (error) {
-    console.error(error);
-  }
+
+  const response: Response = await getOurTeam();
+  ourMembers = await response.json();
 
   return (
     <div className='our-team-container'>

@@ -15,7 +15,6 @@ const FileUpload: FC<FileUploadProps> = (props) => {
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
-      console.log(acceptedFiles);
       setValue(name, acceptedFiles, { shouldValidate: true });
     },
     [name, setValue]

@@ -176,7 +176,6 @@ const WorkDetails: FC = () => {
   const { handleSubmit } = methods;
 
   const onSubmit = (data: WorkDetails) => {
-    console.log(data);
     updateForm(data);
     nextStep();
   };

@@ -26,12 +26,8 @@ const AbractLinkWithImage: FC<AbractLinkWithImageProps> = async ({
 }) => {
   let section: ImageSection | null = null;
 
-  try {
-    const response: Response = await getSectionWithImage(sectionFile);
-    section = await response.json();
-  } catch (error) {
-    console.error(error);
-  }
+  const response: Response = await getSectionWithImage(sectionFile);
+  section = await response.json();
 
   // If section is null, return null
   if (!section) return null;
