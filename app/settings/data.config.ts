@@ -34,3 +34,12 @@ export const LICENSE_OPTIONS = [
 ] as const;
 
 export const DEFAULT_LICENSE = 'Select a License';
+
+export const ACCEPTED_WORK_TYPES = [
+  'image/jpeg',
+  'image/jpg',
+  'image/png',
+  'image/webp',
+];
+
+export const ACCEPTED_LICENSE_TYPES = ['pdf'];

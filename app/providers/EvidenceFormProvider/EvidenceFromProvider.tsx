@@ -17,8 +17,8 @@ export type EvidenceFromData = Pick<
   z.infer<typeof evidenceSchema>,
   'creators' | 'nameOfWork' | 'dateOfCreation'
 > & {
-  file: File | null;
-  ownLicense: File | null;
+  file: File[];
+  ownLicense: File[];
   medium: string;
   license: string;
 };
@@ -40,8 +40,8 @@ const defaultValues: EvidenceFormContext = {
     medium: DEFAULT_MEDIUM,
     license: DEFAULT_LICENSE,
     dateOfCreation: new Date(),
-    file: null,
-    ownLicense: null,
+    file: [],
+    ownLicense: [],
   },
   currentStep: 0,
   nextStep: () => {},

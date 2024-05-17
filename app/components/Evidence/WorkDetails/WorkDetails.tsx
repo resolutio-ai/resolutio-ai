@@ -146,15 +146,16 @@ const DateOfCreation: FC = () => {
 const WorkUpload: FC = () => {
   const {
     formState: { errors },
+    setValue,
+    watch,
   } = useFormContext<WorkDetails>();
+
   return (
     <>
       <FileUpload name='file' label='Upload Work' />
       <div className='mt-1 min-h-6'>
-        {errors.dateOfCreation && (
-          <span className='text-xs text-red-500'>
-            {errors.dateOfCreation?.message}
-          </span>
+        {errors.file && (
+          <span className='text-xs text-red-500'>{errors.file?.message}</span>
         )}
       </div>
     </>

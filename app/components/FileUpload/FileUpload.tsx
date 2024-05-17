@@ -1,3 +1,4 @@
+import { XCircleIcon } from '@heroicons/react/24/outline';
 import { FC, useCallback, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useFormContext } from 'react-hook-form';
@@ -14,18 +15,24 @@ const FileUpload: FC<FileUploadProps> = (props) => {
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
+      console.log(acceptedFiles);
       setValue(name, acceptedFiles, { shouldValidate: true });
     },
     [name, setValue]
   );
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
-  const files: File[] = watch(name);
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    multiple: false,
+  });
+
+  const removeFile = () => {
+    setValue(name, []);
+  };
+
+  const uploads: File[] = watch(name) ?? [];
 
   useEffect(() => {
     register(name);
-    return () => {
-      unregister(name);
-    };
   }, [register, unregister, name]);
 
   return (
@@ -56,26 +63,30 @@ const FileUpload: FC<FileUploadProps> = (props) => {
             </p>
           )}
         </div>
-        <div>
-          {!!files?.length && (
-            <div className='mt-2 grid grid-cols-4 gap-1'>
-              {files.map((file) => {
-                return (
-                  <div key={file.name}>
-                    {/* <img
-                      src={URL.createObjectURL(file)}
-                      alt={file.name}
-                      style={{ width: '100px', height: '100px' }}
-                    /> */}
-                  </div>
-                );
-              })}
-            </div>
-          )}
+      </div>
+      <div>
+        <div className='mt-2'>
+          {uploads.map((file) => {
+            return (
+              <div key={file.name} className='flex'>
+                <span className='mr-2'>{file.name}</span>
+                <button className='mr-2' onClick={removeFile}>
+                  <XCircleIcon height='24' className=' text-red-500' />
+                </button>
+              </div>
+            );
+          })}
         </div>
       </div>
     </>
   );
 };
+{
+  /* <img
+                      src={URL.createObjectURL(file)}
+                      alt={file.name}
+                      style={{ width: '100px', height: '100px' }}
+                    /> */
+}
 
 export default FileUpload;

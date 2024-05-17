@@ -9,7 +9,9 @@ const workDetailsSchema = z.object({
     errorMap: () => ({ message: 'Please select a medium of your artwork.' }),
   }),
   dateOfCreation: z.date(),
-  file: z.custom<File>().nullable(),
+  file: z.any().refine((files) => files?.length >= 1, {
+    message: 'Please upload your work.',
+  }),
 });
 
 export default workDetailsSchema;
