@@ -42,4 +42,4 @@ export const ACCEPTED_WORK_TYPES = [
   'image/webp',
 ];
 
-export const ACCEPTED_LICENSE_TYPES = ['pdf'];
+export const ACCEPTED_LICENSE_TYPES = ['application/pdf'];
