@@ -31,6 +31,7 @@ type EvidenceFormContext = {
   nextStep: () => void;
   previousStep: () => void;
   updateForm: (updatedData: PartialEvidenceFromData) => void;
+  resetForm: () => void;
 };
 
 const defaultValues: EvidenceFormContext = {
@@ -47,6 +48,7 @@ const defaultValues: EvidenceFormContext = {
   nextStep: () => {},
   previousStep: () => {},
   updateForm: (updatedData: PartialEvidenceFromData) => {},
+  resetForm: () => {},
 };
 
 const EvidenceFormContext = createContext<EvidenceFormContext>(defaultValues);
@@ -66,8 +68,20 @@ export const EvidenceFormProvider: FC<PropsWithChildren> = ({ children }) => {
     setFormData((prevData) => ({ ...prevData, ...updatedData }));
   };
 
+  const resetForm = () => {
+    setFormData(defaultValues.formData);
+    setCurrentStep(1);
+  };
+
   const contextValues = useMemo(
-    () => ({ formData, currentStep, nextStep, previousStep, updateForm }),
+    () => ({
+      formData,
+      currentStep,
+      nextStep,
+      previousStep,
+      updateForm,
+      resetForm,
+    }),
     [currentStep, formData]
   );
 
