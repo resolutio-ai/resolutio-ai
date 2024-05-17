@@ -7,7 +7,7 @@ import { licenseSchema } from '@/app/schemas';
 import { DEFAULT_LICENSE, LICENSE_OPTIONS } from '@/app/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { FormProvider, useForm, useFormContext } from 'react-hook-form';
 import FileUpload from '../../FileUpload/FileUpload';
 
@@ -87,19 +87,27 @@ const License: FC = () => {
     },
     resolver: zodResolver(licenseSchema),
   });
-  const { handleSubmit } = methods;
+  const { handleSubmit, watch, setValue } = methods;
   const onSubmit = (data: Licensing) => {
     console.log(data);
     updateForm(data);
     nextStep();
   };
 
+  const license = watch('license');
+
+  useEffect(() => {
+    if (license !== LICENSE_OPTIONS[6]) {
+      setValue('ownLicense', []);
+    }
+  }, [license, setValue]);
+
   return (
     <div>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <LicenseSelector />
-          <OwnLicenseUpload />
+          {license === LICENSE_OPTIONS[6] && <OwnLicenseUpload />}
           <div className='mt-8 flex justify-end'>
             <button
               className='btn-secondary btn mr-8'
