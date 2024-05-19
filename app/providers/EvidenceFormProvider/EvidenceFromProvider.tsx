@@ -44,7 +44,7 @@ const defaultValues: EvidenceFormContext = {
     file: [],
     ownLicense: [],
   },
-  currentStep: 0,
+  currentStep: 1,
   nextStep: () => {},
   previousStep: () => {},
   updateForm: (updatedData: PartialEvidenceFromData) => {},
@@ -59,7 +59,9 @@ export const useEvidenceForm = () => {
 
 export const EvidenceFormProvider: FC<PropsWithChildren> = ({ children }) => {
   const [formData, setFormData] = useState(defaultValues.formData);
-  const [currentStep, setCurrentStep] = useState<number>(1);
+  const [currentStep, setCurrentStep] = useState<number>(
+    defaultValues.currentStep
+  );
 
   const nextStep = () => setCurrentStep((prevStep) => prevStep + 1);
   const previousStep = () => setCurrentStep((prevStep) => prevStep - 1);

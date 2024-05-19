@@ -14,6 +14,7 @@ import {
   useFormContext,
 } from 'react-hook-form';
 import FileUpload from '../../FileUpload/FileUpload';
+import FormNavigator from '../FormNavigator/FormNavigator';
 
 type WorkDetails = Pick<
   EvidenceFromData,
@@ -187,18 +188,7 @@ const WorkDetails: FC = () => {
           <MediumSelector />
           <DateOfCreation />
           <WorkUpload />
-          <div className='mt-8 flex justify-end'>
-            <button
-              className='btn-secondary btn mr-8'
-              type='button'
-              onClick={previousStep}
-            >
-              Previous
-            </button>
-            <button className='btn-primary btn' type='submit'>
-              Next
-            </button>
-          </div>
+          <FormNavigator />
         </form>
       </FormProvider>
     </div>

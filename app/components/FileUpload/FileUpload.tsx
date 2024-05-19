@@ -64,7 +64,7 @@ const FileUpload: FC<FileUploadProps> = (props) => {
         </div>
       </div>
       <div>
-        <div className='mt-2'>
+        <div className='mt-2 min-h-6'>
           {uploads.map((file) => {
             return (
               <div key={file.name} className='flex'>

@@ -10,6 +10,7 @@ import Image from 'next/image';
 import { FC, useEffect } from 'react';
 import { FormProvider, useForm, useFormContext } from 'react-hook-form';
 import FileUpload from '../../FileUpload/FileUpload';
+import FormNavigator from '../FormNavigator/FormNavigator';
 
 type Licensing = Pick<EvidenceFromData, 'license' | 'ownLicense'>;
 
@@ -107,18 +108,7 @@ const License: FC = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <LicenseSelector />
           {license === LICENSE_OPTIONS[6] && <OwnLicenseUpload />}
-          <div className='mt-8 flex justify-end'>
-            <button
-              className='btn-secondary btn mr-8'
-              type='button'
-              onClick={previousStep}
-            >
-              Previous
-            </button>
-            <button className='btn-primary btn' type='submit'>
-              Next
-            </button>
-          </div>
+          <FormNavigator />
         </form>
       </FormProvider>
     </div>

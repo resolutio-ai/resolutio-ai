@@ -14,6 +14,7 @@ import {
   useFormContext,
 } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
+import FormNavigator from '../FormNavigator/FormNavigator';
 import './CreatorInformation.scss';
 
 type CreatorData = Pick<EvidenceFromData, 'creators'>;
@@ -123,11 +124,7 @@ const CreatorInformation: FC = () => {
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmitCreators)}>
           <CreatorsList />
-          <div className='mt-8 flex justify-end'>
-            <button className='btn-primary btn' type='submit'>
-              Next
-            </button>
-          </div>
+          <FormNavigator />
         </form>
       </FormProvider>
     </div>
