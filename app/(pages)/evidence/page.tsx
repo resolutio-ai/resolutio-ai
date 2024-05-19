@@ -1,5 +1,10 @@
 import { monalisaart } from '@/app/assets';
-import { Evidenceform, SideImage } from '@/app/components';
+import {
+  Evidenceform,
+  RenderOnAuthenticated,
+  SideImage,
+  Unauthorized,
+} from '@/app/components';
 import { EvidenceFormProvider } from '@/app/providers';
 import { FC } from 'react';
 
@@ -11,18 +16,23 @@ const Evidence: FC = () => {
   };
 
   return (
-    <div className='grid md:grid-cols-2'>
-      <EvidenceFormProvider>
-        <Evidenceform />
-      </EvidenceFormProvider>
-      <SideImage
-        imageURL={monalisaart}
-        imgNavigation={author.profileLink}
-        author={author}
-        showAuthor
-        imgClassName=''
-      />
-    </div>
+    <>
+      <RenderOnAuthenticated>
+        <div className='grid md:grid-cols-2'>
+          <EvidenceFormProvider>
+            <Evidenceform />
+          </EvidenceFormProvider>
+          <SideImage
+            imageURL={monalisaart}
+            imgNavigation={author.profileLink}
+            author={author}
+            showAuthor
+            imgClassName=''
+          />
+        </div>
+      </RenderOnAuthenticated>
+      <Unauthorized />
+    </>
   );
 };
 

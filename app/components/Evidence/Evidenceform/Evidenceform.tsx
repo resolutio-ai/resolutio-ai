@@ -1,24 +1,13 @@
 'use client';
-
 import { useEvidenceForm } from '@/app/providers/EvidenceFormProvider/EvidenceFromProvider';
-import { EvidenceFromDto } from '@/app/types';
 import { FC, useMemo } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
+import { useUserContext } from '@/app/contexts';
 import CreatorInformation from '../CreatorInformation/CreatorInformation';
 import License from '../License/License';
 import Review from '../Review/Review';
 import WorkDetails from '../WorkDetails/WorkDetails';
 import './Evidenceform.scss';
-
-const defaultValues: EvidenceFromDto = {
-  creators: [{ id: uuidv4(), name: '' }],
-  nameOfWork: '',
-  work: null,
-  medium: 'Select a medium',
-  dateOfCreation: new Date(),
-  license: 'Select a license',
-};
 
 const EvidenceSteps = [
   {
@@ -41,6 +30,7 @@ const EvidenceSteps = [
 
 const Evidenceform: FC = () => {
   const { currentStep } = useEvidenceForm();
+  const { isAuthenticated } = useUserContext();
 
   const formSection = useMemo(() => {
     switch (currentStep) {

@@ -1,3 +1,6 @@
+'use client';
+
+import { useUserContext } from '@/app/contexts';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
@@ -6,6 +9,7 @@ import ProfileDropdown from '../ProfileDropdown/ProfileDropdown';
 import './Header.scss';
 
 const Header: FC = () => {
+  const { isAuthenticated } = useUserContext();
   return (
     <>
       <header className='header-container'>
@@ -32,9 +36,11 @@ const Header: FC = () => {
                 tabIndex={0}
                 className='menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow'
               >
-                <li>
-                  <a>Feed</a>
-                </li>
+                {isAuthenticated && (
+                  <li>
+                    <a>Feed</a>
+                  </li>
+                )}
               </ul>
             </div>
             <Link className='desktop-logo hidden lg:inline-flex' href='/'>
@@ -56,11 +62,13 @@ const Header: FC = () => {
           </div>
           <div className='navbar-end'>
             <ul className='menu menu-horizontal mx-2 hidden px-1 text-primary lg:flex'>
-              <li>
-                <Link href='/feed' className='link-hover link'>
-                  Feed
-                </Link>
-              </li>
+              {isAuthenticated && (
+                <li>
+                  <Link href='/feed' className='link-hover link'>
+                    Feed
+                  </Link>
+                </li>
+              )}
             </ul>
             <ProfileDropdown />
           </div>
