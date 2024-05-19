@@ -1,6 +1,6 @@
 import { Footer, Header } from '@/app/components';
-import { MagicProvider, UserProvider } from '@/app/contexts';
-import { ReactQueryClientProvider } from '@/app/providers';
+import { MagicProvider } from '@/app/contexts';
+import { ReactQueryClientProvider, UserProvider } from '@/app/providers';
 import type { Metadata } from 'next';
 import { DM_Sans, Montserrat } from 'next/font/google';
 import { FC, PropsWithChildren } from 'react';
