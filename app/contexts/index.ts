@@ -1,4 +1,4 @@
-import { MagicProvider, useMagicContext } from './MagicContext';
+import { MagicContext, useMagicContext } from './MagicContext';
 import { UserContext, useUserContext, type User } from './UserContext';
 
-export { MagicProvider, User, UserContext, useMagicContext, useUserContext };
+export { MagicContext, User, UserContext, useMagicContext, useUserContext };

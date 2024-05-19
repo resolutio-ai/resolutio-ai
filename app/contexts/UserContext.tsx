@@ -1,7 +1,7 @@
 'use client';
 
 import { MagicUserMetadata } from 'magic-sdk';
-import React, { createContext, useContext } from 'react';
+import { createContext, useContext } from 'react';
 
 /**
  * Type representing the user's metadata.
