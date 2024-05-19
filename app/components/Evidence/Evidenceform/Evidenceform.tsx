@@ -50,7 +50,7 @@ const Evidenceform: FC = () => {
   return (
     <div className='p-5 lg:p-10'>
       <h3 className='pb-4 text-4xl font-bold tracking-tight text-gray-500'>
-        Evidence Form
+        Creator Protection Form
       </h3>
       <div className='my-4 flex justify-center'>
         <ul className='steps'>
