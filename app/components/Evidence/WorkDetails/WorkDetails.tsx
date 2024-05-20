@@ -147,8 +147,6 @@ const DateOfCreation: FC = () => {
 const WorkUpload: FC = () => {
   const {
     formState: { errors },
-    setValue,
-    watch,
   } = useFormContext<WorkDetails>();
 
   return (
@@ -164,7 +162,7 @@ const WorkUpload: FC = () => {
 };
 
 const WorkDetails: FC = () => {
-  const { previousStep, formData, nextStep, updateForm } = useEvidenceForm();
+  const { formData, nextStep, updateForm } = useEvidenceForm();
   const methods = useForm<WorkDetails>({
     defaultValues: {
       nameOfWork: formData?.nameOfWork,
