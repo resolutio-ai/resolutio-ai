@@ -3,6 +3,7 @@ import {
   EvidenceFromData,
   useEvidenceForm,
 } from '@/app/providers/EvidenceFormProvider/EvidenceFromProvider';
+import { IUploadProgressCallback } from '@lighthouse-web3/sdk/dist/types';
 import Image from 'next/image';
 import { FC } from 'react';
 
@@ -70,8 +71,21 @@ const Review = () => {
   const { mutate } = useUploadToLighthouse();
   const { creators, file, nameOfWork, dateOfCreation, medium } = formData;
 
+  const progressCallback = (progressData: IUploadProgressCallback) => {
+    if (!progressData) return;
+    let percentageDone: number =
+      100 - progressData.total / progressData.uploaded;
+    console.log(percentageDone);
+  };
+
   const onSubmit = () => {
     // TODO: Submit the form data to the server
+
+    console.log('Submitting the form data to the server');
+    mutate({
+      files: formData.file,
+      progressCallback,
+    });
   };
 
   return (
@@ -91,7 +105,7 @@ const Review = () => {
         >
           Previous
         </button>
-        <button className='btn-primary btn' onSubmit={onSubmit}>
+        <button className='btn-primary btn' onClick={onSubmit}>
           Submit
         </button>
       </div>
