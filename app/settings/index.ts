@@ -1,4 +1,4 @@
-import { CMS_BASE_URL, queryClient } from './api.config';
+import { CMS_BASE_URL, LIGHTHOUSE_API_KEY, queryClient } from './api.config';
 import {
   BLOGS_FILE,
   COMMUNITY_LINK_FILE,
@@ -46,3 +46,5 @@ export {
 };
 
 export { DEFAULT_LICENSE, DEFAULT_MEDIUM };
+
+export { LIGHTHOUSE_API_KEY };
