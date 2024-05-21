@@ -115,7 +115,9 @@ const Review = () => {
           const {
             data: { Hash: cid },
           } = data;
-          //https://gateway.lighthouse.storage/ipfs/${cid}
+          //Lighthouse Gateway https://gateway.lighthouse.storage/ipfs/${cid}
+          console.log('Uploaded to Lighthouse');
+          console.log(`https://gateway.lighthouse.storage/ipfs/${cid}`);
           mint(cid, {
             onSuccess: () => {
               console.log('NFT Minted');
