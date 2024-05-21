@@ -4,6 +4,6 @@ import {
   getLinkSection,
   getOurTeam,
   getSectionWithImage,
-} from './cms.service';
+} from './CMS/cms.service';
 
 export { getBlogs, getFeeds, getLinkSection, getOurTeam, getSectionWithImage };

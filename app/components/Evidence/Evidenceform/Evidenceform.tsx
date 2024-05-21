@@ -1,9 +1,9 @@
 'use client';
+
 import { useEvidenceForm } from '@/app/providers/EvidenceFormProvider/EvidenceFromProvider';
 import { FC, useMemo } from 'react';
-
 import CreatorInformation from '../CreatorInformation/CreatorInformation';
-import License from '../License/License';
+//import License from '../License/License';
 import Review from '../Review/Review';
 import WorkDetails from '../WorkDetails/WorkDetails';
 import './Evidenceform.scss';
@@ -25,11 +25,11 @@ const EvidenceSteps = [
     label: 'Review',
     view: <Review />,
   },
-  {
+  /* {
     id: 4,
     label: 'License',
     view: <License />,
-  },
+  }, */
 ];
 
 const Evidenceform: FC = () => {
