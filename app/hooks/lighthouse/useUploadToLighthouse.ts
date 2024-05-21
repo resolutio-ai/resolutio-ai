@@ -17,9 +17,6 @@ const useUploadToLighthouse = () => {
         progressCallback
       );
     },
-    onSuccess: (data) => {
-      console.log('Upload success', data);
-    },
   });
 };
 

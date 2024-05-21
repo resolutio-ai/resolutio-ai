@@ -1,4 +1,4 @@
-import { useUploadToLighthouse } from '@/app/hooks';
+import { useMintNFT, useUploadToLighthouse } from '@/app/hooks';
 import {
   EvidenceFromData,
   useEvidenceForm,
@@ -69,7 +69,8 @@ const DisplayWork: FC<DisplayWorkProps> = ({
 
 const Review = () => {
   const { previousStep, formData } = useEvidenceForm();
-  const { mutate } = useUploadToLighthouse();
+  const { mutate: uploadToLighthouse } = useUploadToLighthouse();
+  const { mutate: mint } = useMintNFT();
   const { creators, file, nameOfWork, dateOfCreation, medium } = formData;
 
   const progressCallback = (progressData: IUploadProgressCallback) => {
@@ -104,10 +105,31 @@ const Review = () => {
       }),
     ];
 
-    mutate({
-      files: filesToUpload,
-      progressCallback,
-    });
+    uploadToLighthouse(
+      {
+        files: filesToUpload,
+        progressCallback,
+      },
+      {
+        onSuccess: (data) => {
+          const {
+            data: { Hash: cid },
+          } = data;
+          //https://gateway.lighthouse.storage/ipfs/${cid}
+          mint(cid, {
+            onSuccess: () => {
+              console.log('NFT Minted');
+            },
+            onError: () => {
+              console.log('Error Minting NFT');
+            },
+          });
+        },
+        onError: () => {
+          console.log('Error');
+        },
+      }
+    );
   };
 
   return (
