@@ -1,7 +1,10 @@
 import useFeeds from './creator-armor/useFeeds';
-import useUploadToLighthouse from './lighthouse/useUpload';
+import useMintNFT from './creator-armor/useMintNFT';
+import useUploadToLighthouse from './lighthouse/useUploadToLighthouse';
 import { queryKeys } from './queryKeys';
 
-export { queryKeys, useFeeds };
+export { queryKeys };
+
+export { useFeeds, useMintNFT };
 
 export { useUploadToLighthouse };

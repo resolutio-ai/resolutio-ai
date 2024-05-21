@@ -1,8 +1,10 @@
-import { useUploadToLighthouse } from '@/app/hooks';
+import { useMintNFT, useUploadToLighthouse } from '@/app/hooks';
 import {
   EvidenceFromData,
   useEvidenceForm,
 } from '@/app/providers/EvidenceFormProvider/EvidenceFromProvider';
+import { IUploadProgressCallback } from '@lighthouse-web3/sdk/dist/types';
+import { createId } from '@paralleldrive/cuid2';
 import Image from 'next/image';
 import { FC } from 'react';
 
@@ -67,11 +69,67 @@ const DisplayWork: FC<DisplayWorkProps> = ({
 
 const Review = () => {
   const { previousStep, formData } = useEvidenceForm();
-  const { mutate } = useUploadToLighthouse();
+  const { mutate: uploadToLighthouse } = useUploadToLighthouse();
+  const { mutate: mint } = useMintNFT();
   const { creators, file, nameOfWork, dateOfCreation, medium } = formData;
 
+  const progressCallback = (progressData: IUploadProgressCallback) => {
+    if (!progressData) return;
+    let percentageDone: number =
+      100 - progressData.total / progressData.uploaded;
+    console.log(percentageDone);
+  };
+
   const onSubmit = () => {
-    // TODO: Submit the form data to the server
+    const { creators, file, nameOfWork, dateOfCreation, medium } = formData;
+    const directory = createId();
+
+    const formValues = {
+      creators,
+      nameOfWork,
+      dateOfCreation,
+      medium,
+      fileName: file[0].name,
+    };
+
+    const filesToUpload = [
+      new File(
+        [JSON.stringify(formValues, null, 2)],
+        `${directory}/work.json`,
+        {
+          type: 'application/json',
+        }
+      ),
+      new File([file[0]], `${directory}/${file[0].name}`, {
+        type: file[0].type,
+      }),
+    ];
+
+    uploadToLighthouse(
+      {
+        files: filesToUpload,
+        progressCallback,
+      },
+      {
+        onSuccess: (data) => {
+          const {
+            data: { Hash: cid },
+          } = data;
+          //https://gateway.lighthouse.storage/ipfs/${cid}
+          mint(cid, {
+            onSuccess: () => {
+              console.log('NFT Minted');
+            },
+            onError: () => {
+              console.log('Error Minting NFT');
+            },
+          });
+        },
+        onError: () => {
+          console.log('Error');
+        },
+      }
+    );
   };
 
   return (
@@ -91,7 +149,7 @@ const Review = () => {
         >
           Previous
         </button>
-        <button className='btn-primary btn' onSubmit={onSubmit}>
+        <button className='btn-primary btn' onClick={onSubmit}>
           Submit
         </button>
       </div>
