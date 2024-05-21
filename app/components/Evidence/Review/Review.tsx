@@ -4,6 +4,7 @@ import {
   useEvidenceForm,
 } from '@/app/providers/EvidenceFormProvider/EvidenceFromProvider';
 import { IUploadProgressCallback } from '@lighthouse-web3/sdk/dist/types';
+import { createId } from '@paralleldrive/cuid2';
 import Image from 'next/image';
 import { FC } from 'react';
 
@@ -79,11 +80,32 @@ const Review = () => {
   };
 
   const onSubmit = () => {
-    // TODO: Submit the form data to the server
+    const { creators, file, nameOfWork, dateOfCreation, medium } = formData;
+    const directory = createId();
 
-    console.log('Submitting the form data to the server');
+    const formValues = {
+      creators,
+      nameOfWork,
+      dateOfCreation,
+      medium,
+      fileName: file[0].name,
+    };
+
+    const filesToUpload = [
+      new File(
+        [JSON.stringify(formValues, null, 2)],
+        `${directory}/work.json`,
+        {
+          type: 'application/json',
+        }
+      ),
+      new File([file[0]], `${directory}/${file[0].name}`, {
+        type: file[0].type,
+      }),
+    ];
+
     mutate({
-      files: formData.file,
+      files: filesToUpload,
       progressCallback,
     });
   };

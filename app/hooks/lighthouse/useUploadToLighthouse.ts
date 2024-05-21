@@ -5,14 +5,14 @@ import { useMutation } from '@tanstack/react-query';
 const useUploadToLighthouse = () => {
   return useMutation({
     mutationFn: (requestParam: {
-      files: File[];
+      files: any;
       progressCallback: Parameters<typeof lighthouse.upload>[4];
     }) => {
       const { files, progressCallback } = requestParam;
       return lighthouse.upload(
         files,
         LIGHTHOUSE_API_KEY,
-        true,
+        false,
         undefined,
         progressCallback
       );
