@@ -1,8 +1,12 @@
+import { useMagicContext } from '@/app/contexts';
+import { mintNFT } from '@/app/services';
 import { useMutation } from '@tanstack/react-query';
 
 const useMintNFT = () => {
+  const { magic } = useMagicContext();
+
   return useMutation({
-    //mutationFn: (uri) => mintNFT(uri),
+    mutationFn: (uri: string) => mintNFT(uri, magic),
   });
 };
 

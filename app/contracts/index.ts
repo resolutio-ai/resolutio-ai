@@ -1,3 +1,3 @@
-import CreatorArmourNFT from './CreatorArmourNFT/CreatorArmourNFT.json';
+import creatorArmourNFT from './CreatorArmourNFT/CreatorArmourNFT.json';
 
-export { CreatorArmourNFT };
+export { creatorArmourNFT };

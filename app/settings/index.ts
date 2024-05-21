@@ -1,4 +1,9 @@
-import { CMS_BASE_URL, LIGHTHOUSE_API_KEY, queryClient } from './api.config';
+import {
+  CMS_BASE_URL,
+  CREATOR_ARMOUR_CONTRACT_ADDR,
+  LIGHTHOUSE_API_KEY,
+  queryClient,
+} from './api.config';
 import {
   BLOGS_FILE,
   COMMUNITY_LINK_FILE,
@@ -25,7 +30,6 @@ import {
 
 export {
   BLOGS_FILE,
-  CMS_BASE_URL,
   COMMUNITY_LINK_FILE,
   EVENTS_WORKSHOPS_FILE,
   EVIDENCE_LINK_FILE,
@@ -42,9 +46,13 @@ export {
   RESOLVE_DISPUTE_FILE,
   TEAM_FILE,
   UNDERSTAND_YOUR_RIGHTS_FILE,
-  queryClient,
 };
 
 export { DEFAULT_LICENSE, DEFAULT_MEDIUM };
 
-export { LIGHTHOUSE_API_KEY };
+export {
+  CMS_BASE_URL,
+  CREATOR_ARMOUR_CONTRACT_ADDR,
+  LIGHTHOUSE_API_KEY,
+  queryClient,
+};
