@@ -1,5 +1,6 @@
 'use client';
 
+import { EvidenceDialog } from '@/app/components';
 import { evidenceSchema } from '@/app/schemas';
 import { DEFAULT_LICENSE, DEFAULT_MEDIUM } from '@/app/settings';
 import { createId } from '@paralleldrive/cuid2';
@@ -89,6 +90,7 @@ export const EvidenceFormProvider: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <EvidenceFormContext.Provider value={contextValues}>
+      <EvidenceDialog />
       {children}
     </EvidenceFormContext.Provider>
   );

@@ -1,4 +1,5 @@
 import Blogs from './Blogs/Blogs';
+import EvidenceDialog from './Dialogs/EvidenceDialog/EvidenceDialog';
 import Evidenceform from './Evidence/Evidenceform/Evidenceform';
 import FeedItem from './Feed/FeedItem/FeedItem';
 import Search from './Feed/Search/Search';
@@ -47,3 +48,5 @@ export {
   Unauthorized,
   UnderstandYourRights,
 };
+
+export { EvidenceDialog };

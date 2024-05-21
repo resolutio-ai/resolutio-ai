@@ -4,9 +4,9 @@ import {
   useEvidenceForm,
 } from '@/app/providers/EvidenceFormProvider/EvidenceFromProvider';
 import { IUploadProgressCallback } from '@lighthouse-web3/sdk/dist/types';
-import { createId } from '@paralleldrive/cuid2';
 import Image from 'next/image';
 import { FC } from 'react';
+import { EVIDENCE_MODAL_ID } from '../../Dialogs/EvidenceDialog/EvidenceDialog';
 
 type DisplayCreatorsProps = {
   creators: EvidenceFromData['creators'];
@@ -80,8 +80,18 @@ const Review = () => {
     console.log(percentageDone);
   };
 
+  const openModal = () => {
+    const modal = document.getElementById(
+      EVIDENCE_MODAL_ID
+    ) as HTMLDialogElement;
+    if (modal) {
+      modal.showModal();
+    }
+  };
+
   const onSubmit = () => {
-    const { creators, file, nameOfWork, dateOfCreation, medium } = formData;
+    openModal();
+    /*   const { creators, file, nameOfWork, dateOfCreation, medium } = formData;
     const directory = createId();
 
     const formValues = {
@@ -131,7 +141,7 @@ const Review = () => {
           console.log('Error');
         },
       }
-    );
+    ); */
   };
 
   return (
