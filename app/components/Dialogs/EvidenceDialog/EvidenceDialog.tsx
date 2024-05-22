@@ -24,6 +24,7 @@ const EvidenceDialog: FC = () => {
   const [evidenceState, setEvidenceState] = useState<
     keyof typeof EVIDENCE_STATE
   >(EVIDENCE_STATE.OPEN);
+  const [isPending, setIsPending] = useState(false);
 
   const closeModal = useCallback(() => {
     const modal = document.getElementById(
@@ -67,7 +68,7 @@ const EvidenceDialog: FC = () => {
         type: file[0].type,
       }),
     ];
-
+    setIsPending(true);
     uploadToLighthouse(
       {
         files: filesToUpload,
@@ -88,6 +89,9 @@ const EvidenceDialog: FC = () => {
             onError: () => {
               console.log('Error Minting NFT');
               setEvidenceState(EVIDENCE_STATE.ERROR);
+            },
+            onSettled: () => {
+              setIsPending(false);
             },
           });
         },
@@ -119,7 +123,9 @@ const EvidenceDialog: FC = () => {
               <button
                 className='btn-primary btn w-5/6'
                 onClick={handleEternalizeWork}
+                disabled={isPending}
               >
+                {isPending && <span className='loading loading-spinner'></span>}
                 Stamp your work
               </button>
             </div>
@@ -139,7 +145,9 @@ const EvidenceDialog: FC = () => {
               <button
                 className='btn-primary btn w-5/6'
                 onClick={handleEternalizeWork}
+                disabled={isPending}
               >
+                {isPending && <span className='loading loading-spinner'></span>}
                 Try Again
               </button>
             </div>
@@ -164,7 +172,7 @@ const EvidenceDialog: FC = () => {
       default:
         return null;
     }
-  }, [closeModal, evidenceState, handleEternalizeWork]);
+  }, [closeModal, evidenceState, handleEternalizeWork, isPending]);
 
   return (
     <dialog id={EVIDENCE_MODAL_ID} className='modal'>
