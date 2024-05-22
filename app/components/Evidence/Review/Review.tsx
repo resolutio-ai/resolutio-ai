@@ -69,16 +69,8 @@ const DisplayWork: FC<DisplayWorkProps> = ({
 
 const Review = () => {
   const { previousStep, formData } = useEvidenceForm();
-  const { mutate: uploadToLighthouse } = useUploadToLighthouse();
-  const { mutate: mint } = useMintNFT();
-  const { creators, file, nameOfWork, dateOfCreation, medium } = formData;
 
-  const progressCallback = (progressData: IUploadProgressCallback) => {
-    if (!progressData) return;
-    let percentageDone: number =
-      100 - progressData.total / progressData.uploaded;
-    console.log(percentageDone);
-  };
+  const { creators, file, nameOfWork, dateOfCreation, medium } = formData;
 
   const openModal = () => {
     const modal = document.getElementById(
