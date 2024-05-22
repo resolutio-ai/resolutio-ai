@@ -2,8 +2,10 @@
 
 import { useMintNFT, useUploadToLighthouse } from '@/app/hooks';
 import { useEvidenceForm } from '@/app/providers/EvidenceFormProvider/EvidenceFromProvider';
+import { ShieldCheckIcon, XCircleIcon } from '@heroicons/react/24/solid';
 import { IUploadProgressCallback } from '@lighthouse-web3/sdk/dist/types';
 import { createId } from '@paralleldrive/cuid2';
+import { useRouter } from 'next/navigation';
 import { FC, useCallback, useMemo, useState } from 'react';
 
 export const EVIDENCE_MODAL_ID = 'evidence-modal';
@@ -15,22 +17,24 @@ const EVIDENCE_STATE = {
 } as const;
 
 const EvidenceDialog: FC = () => {
+  const router = useRouter();
   const { formData, resetForm } = useEvidenceForm();
   const { mutate: uploadToLighthouse } = useUploadToLighthouse();
   const { mutate: mint } = useMintNFT();
   const [evidenceState, setEvidenceState] = useState<
     keyof typeof EVIDENCE_STATE
-  >(EVIDENCE_STATE.ERROR);
+  >(EVIDENCE_STATE.OPEN);
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     const modal = document.getElementById(
       EVIDENCE_MODAL_ID
     ) as HTMLDialogElement;
     if (modal) {
+      router.push('/');
       modal.close();
       resetForm();
     }
-  };
+  }, [resetForm, router]);
 
   const progressCallback = (progressData: IUploadProgressCallback) => {
     if (!progressData) return;
@@ -124,8 +128,11 @@ const EvidenceDialog: FC = () => {
       case EVIDENCE_STATE.ERROR:
         return (
           <div>
-            <h3 className='text-lg font-bold'>Error</h3>
-            <p className='py-4'>
+            <div className='flex flex-col justify-center'>
+              <XCircleIcon height='56' className=' text-red-500' />
+              <h3 className='mt-2 text-center text-lg font-bold'>Error</h3>
+            </div>
+            <p className='py-4 text-center'>
               An error occurred while submitting your evidence
             </p>
             <div className='mt-4 flex justify-center '>
@@ -141,11 +148,15 @@ const EvidenceDialog: FC = () => {
       case EVIDENCE_STATE.SUBMITTED:
         return (
           <div>
-            <h3 className='text-lg font-bold'>Submitted</h3>
-            <p className='py-4'>Your evidence has been submitted</p>
+            <div className='flex flex-col justify-center'>
+              <ShieldCheckIcon height='56' className='text-green-400' />
+              <h3 className='my-8 text-center text-lg font-bold'>
+                Art Eternalized!
+              </h3>
+            </div>
             <div className='mt-4 flex justify-center '>
               <button className='btn-primary btn w-5/6' onClick={closeModal}>
-                Close
+                Done
               </button>
             </div>
           </div>
