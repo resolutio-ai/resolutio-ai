@@ -1,6 +1,6 @@
 import Blogs from './Blogs/Blogs';
 import EvidenceDialog from './Dialogs/EvidenceDialog/EvidenceDialog';
-import Evidenceform from './Evidence/Evidenceform/Evidenceform';
+import EvidenceForm from './Evidence/EvidenceForm/EvidenceForm';
 import FeedItem from './Feed/FeedItem/FeedItem';
 import Search from './Feed/Search/Search';
 import Sidebar from './Feed/Sidebar/Sidebar';
@@ -28,8 +28,8 @@ export {
   Blogs,
   CommunityLink,
   EventsAndWorkShop,
+  EvidenceForm,
   EvidenceLink,
-  Evidenceform,
   FeedItem,
   FeedSkeleton,
   Footer,

@@ -1,6 +1,6 @@
 import { monalisaart } from '@/app/assets';
 import {
-  Evidenceform,
+  EvidenceForm,
   RenderOnAuthenticated,
   SideImage,
   Unauthorized,
@@ -20,7 +20,7 @@ const Evidence: FC = () => {
       <RenderOnAuthenticated>
         <div className='grid md:grid-cols-2'>
           <EvidenceFormProvider>
-            <Evidenceform />
+            <EvidenceForm />
           </EvidenceFormProvider>
           <SideImage
             imageURL={monalisaart}

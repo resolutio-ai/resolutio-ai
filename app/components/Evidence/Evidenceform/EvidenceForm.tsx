@@ -6,7 +6,7 @@ import CreatorInformation from '../CreatorInformation/CreatorInformation';
 //import License from '../License/License';
 import Review from '../Review/Review';
 import WorkDetails from '../WorkDetails/WorkDetails';
-import './Evidenceform.scss';
+import './EvidenceForm.scss';
 
 // Define steps with corresponding components
 const EvidenceSteps = [
@@ -32,7 +32,7 @@ const EvidenceSteps = [
   }, */
 ];
 
-const Evidenceform: FC = () => {
+const EvidenceForm: FC = () => {
   const { currentStep } = useEvidenceForm();
 
   // Get the current form section based on the current step
@@ -62,4 +62,4 @@ const Evidenceform: FC = () => {
     </div>
   );
 };
-export default Evidenceform;
+export default EvidenceForm;
