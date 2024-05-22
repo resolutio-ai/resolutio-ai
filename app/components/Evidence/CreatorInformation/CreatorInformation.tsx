@@ -5,6 +5,7 @@ import {
 import { creatorSchema } from '@/app/schemas';
 import { PlusCircleIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { createId } from '@paralleldrive/cuid2';
 import { FC } from 'react';
 import {
   FormProvider,
@@ -13,7 +14,6 @@ import {
   useForm,
   useFormContext,
 } from 'react-hook-form';
-import { v4 as uuidv4 } from 'uuid';
 import FormNavigator from '../FormNavigator/FormNavigator';
 import './CreatorInformation.scss';
 
@@ -82,7 +82,7 @@ const CreatorsList: FC<CreatorsListProps> = () => {
 
   const addCreator = () => {
     append(
-      { id: uuidv4(), name: '' },
+      { id: createId(), name: '' },
       {
         shouldFocus: true,
       }

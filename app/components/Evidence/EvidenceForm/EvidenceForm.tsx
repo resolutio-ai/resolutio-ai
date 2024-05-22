@@ -1,50 +1,44 @@
 'use client';
+
 import { useEvidenceForm } from '@/app/providers/EvidenceFormProvider/EvidenceFromProvider';
 import { FC, useMemo } from 'react';
-
-import { useUserContext } from '@/app/contexts';
 import CreatorInformation from '../CreatorInformation/CreatorInformation';
-import License from '../License/License';
+//import License from '../License/License';
 import Review from '../Review/Review';
 import WorkDetails from '../WorkDetails/WorkDetails';
-import './Evidenceform.scss';
+import './EvidenceForm.scss';
 
+// Define steps with corresponding components
 const EvidenceSteps = [
   {
     id: 1,
     label: 'Creators Information',
+    view: <CreatorInformation />,
   },
   {
     id: 2,
     label: 'Work Details',
+    view: <WorkDetails />,
   },
   {
     id: 3,
-    label: 'License',
-  },
-  {
-    id: 4,
     label: 'Review',
+    view: <Review />,
   },
+  /* {
+    id: 4,
+    label: 'License',
+    view: <License />,
+  }, */
 ];
 
-const Evidenceform: FC = () => {
+const EvidenceForm: FC = () => {
   const { currentStep } = useEvidenceForm();
-  const { isAuthenticated } = useUserContext();
 
+  // Get the current form section based on the current step
   const formSection = useMemo(() => {
-    switch (currentStep) {
-      case 1:
-        return <CreatorInformation />;
-      case 2:
-        return <WorkDetails />;
-      case 3:
-        return <License />;
-      case 4:
-        return <Review />;
-      default:
-        return null;
-    }
+    const step = EvidenceSteps.find((step) => step.id === currentStep);
+    return step ? step.view : null;
   }, [currentStep]);
 
   return (
@@ -68,4 +62,4 @@ const Evidenceform: FC = () => {
     </div>
   );
 };
-export default Evidenceform;
+export default EvidenceForm;

@@ -4,6 +4,9 @@ import {
   getLinkSection,
   getOurTeam,
   getSectionWithImage,
-} from './cms.service';
+} from './CMS/cms.service';
+import { mintNFT } from './blockchain/blockchain.service';
 
 export { getBlogs, getFeeds, getLinkSection, getOurTeam, getSectionWithImage };
+
+export { mintNFT };

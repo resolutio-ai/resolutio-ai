@@ -1,7 +1,9 @@
 'use client';
 
+import { EvidenceDialog } from '@/app/components';
 import { evidenceSchema } from '@/app/schemas';
 import { DEFAULT_LICENSE, DEFAULT_MEDIUM } from '@/app/settings';
+import { createId } from '@paralleldrive/cuid2';
 import {
   FC,
   PropsWithChildren,
@@ -10,7 +12,6 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { z } from 'zod';
 
 export type EvidenceFromData = Pick<
@@ -36,7 +37,7 @@ type EvidenceFormContext = {
 
 const defaultValues: EvidenceFormContext = {
   formData: {
-    creators: [{ id: uuidv4(), name: '' }],
+    creators: [{ id: createId(), name: '' }],
     nameOfWork: '',
     medium: DEFAULT_MEDIUM,
     license: DEFAULT_LICENSE,
@@ -89,6 +90,7 @@ export const EvidenceFormProvider: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <EvidenceFormContext.Provider value={contextValues}>
+      <EvidenceDialog />
       {children}
     </EvidenceFormContext.Provider>
   );
