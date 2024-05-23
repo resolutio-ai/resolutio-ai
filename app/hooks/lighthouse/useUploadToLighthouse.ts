@@ -6,7 +6,7 @@ const useUploadToLighthouse = () => {
   return useMutation({
     mutationFn: (requestParam: {
       files: any;
-      progressCallback: Parameters<typeof lighthouse.upload>[4];
+      progressCallback?: Parameters<typeof lighthouse.upload>[4];
     }) => {
       const { files, progressCallback } = requestParam;
       return lighthouse.upload(

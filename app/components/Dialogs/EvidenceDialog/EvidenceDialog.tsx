@@ -3,7 +3,6 @@
 import { useMintNFT, useUploadToLighthouse } from '@/app/hooks';
 import { useEvidenceForm } from '@/app/providers/EvidenceFormProvider/EvidenceFromProvider';
 import { ShieldCheckIcon, XCircleIcon } from '@heroicons/react/24/solid';
-import { IUploadProgressCallback } from '@lighthouse-web3/sdk/dist/types';
 import { createId } from '@paralleldrive/cuid2';
 import { useRouter } from 'next/navigation';
 import { FC, useCallback, useMemo, useState } from 'react';
@@ -31,18 +30,16 @@ const EvidenceDialog: FC = () => {
       EVIDENCE_MODAL_ID
     ) as HTMLDialogElement;
     if (modal) {
-      router.push('/');
       modal.close();
-      resetForm();
+      setEvidenceState(EVIDENCE_STATE.OPEN);
     }
-  }, [resetForm, router]);
+  }, []);
 
-  const progressCallback = (progressData: IUploadProgressCallback) => {
-    if (!progressData) return;
-    let percentageDone: number =
-      100 - progressData.total / progressData.uploaded;
-    console.log(percentageDone);
-  };
+  const handleComplete = useCallback(() => {
+    router.push('/');
+    closeModal();
+    resetForm();
+  }, [closeModal, resetForm, router]);
 
   const handleEternalizeWork = useCallback(() => {
     const { creators, file, nameOfWork, dateOfCreation, medium } = formData;
@@ -72,7 +69,6 @@ const EvidenceDialog: FC = () => {
     uploadToLighthouse(
       {
         files: filesToUpload,
-        progressCallback,
       },
       {
         onSuccess: (data) => {
@@ -134,6 +130,12 @@ const EvidenceDialog: FC = () => {
       case EVIDENCE_STATE.ERROR:
         return (
           <div>
+            <button
+              className='btn-circle btn-ghost btn-sm absolute right-2 top-2'
+              onClick={closeModal}
+            >
+              ✕
+            </button>
             <div className='flex flex-col justify-center'>
               <XCircleIcon height='56' className=' text-red-500' />
               <h3 className='mt-2 text-center text-lg font-bold'>Error</h3>
@@ -163,7 +165,10 @@ const EvidenceDialog: FC = () => {
               </h3>
             </div>
             <div className='mt-4 flex justify-center '>
-              <button className='btn-primary btn w-5/6' onClick={closeModal}>
+              <button
+                className='btn-primary btn w-5/6'
+                onClick={handleComplete}
+              >
                 Done
               </button>
             </div>
@@ -172,7 +177,13 @@ const EvidenceDialog: FC = () => {
       default:
         return null;
     }
-  }, [closeModal, evidenceState, handleEternalizeWork, isPending]);
+  }, [
+    closeModal,
+    evidenceState,
+    handleComplete,
+    handleEternalizeWork,
+    isPending,
+  ]);
 
   return (
     <dialog id={EVIDENCE_MODAL_ID} className='modal'>
