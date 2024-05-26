@@ -3,12 +3,12 @@ import {
   AddIcon,
   BookmarkIcon,
   ElllipseIcon,
-  EyeIcon,
   LicenseIcon,
-  SaveIcon,
+  SaveIcon
 } from '@/app/assets';
 import { FeedItemDto } from '@/app/types';
 // import Image from 'next/image';
+import { format } from 'date-fns';
 import Link from 'next/link';
 import { FC } from 'react';
 import FeedType from '../FeedType/FeedType';
@@ -18,7 +18,8 @@ interface FeedItemProps {
 }
 
 const FeedItem: FC<FeedItemProps> = ({ feed }) => {
-  const { creator, work } = feed;
+  // const { creator, work } = feed;
+  const date = new Date();
   return (
     <div className='flex shrink-0 flex-col items-start justify-start border-b border-gray-400'>
       <div className='creator-container mb-2 flex w-[100%] items-center justify-between'>
@@ -35,7 +36,7 @@ const FeedItem: FC<FeedItemProps> = ({ feed }) => {
             </div>
           </div>
           <span className='name mr-2 font-bold'>{feed.nameOfWork}</span>
-          <span className='timestamp text-sm text-slate-500'>{feed.createdAt}</span>
+          <span className='timestamp text-sm text-slate-500'>{format(feed.createdAt, 'MM/dd/yyyy')}</span>
         </div>
         <div>
           <ElllipseIcon />
@@ -53,13 +54,13 @@ const FeedItem: FC<FeedItemProps> = ({ feed }) => {
       </div>
       <div className='my-4 flex w-[100%] justify-between'>
         <div className='info-container flex gap-5'>
-          <div className='views-container flex items-center'>
+          {/* <div className='views-container flex items-center'>
             <EyeIcon />
             <span className='ml-2 text-[13px]'>
               {feed.views}
               <span className='ml-1 hidden sm:hidden md:inline'>views</span>
             </span>
-          </div>
+          </div> */}
           <div className='license-container flex items-center'>
             <LicenseIcon />
             <span className='ml-2 text-[13px]'>
@@ -78,12 +79,12 @@ const FeedItem: FC<FeedItemProps> = ({ feed }) => {
         <p className='description text-sm text-gray-700 sm:w-[50%]'>
           {feed.nameOfWork}
         </p>
-        <Link
+        {/* <Link
           href='#'
           className='code-link rounded-md border border-primary bg-[#5F437F] px-3 py-1 text-sm leading-6 tracking-tight text-white'
         >
           {feed.code}
-        </Link>
+        </Link> */}
       </div>
       <Link
         href='#'

@@ -15,7 +15,7 @@ const FeedPage: FC = () => {
         <FeedSkeleton />
       ) : (
         <div className='my-8 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-10 xl:grid-cols-3'>
-          {feeds?.map((feed) => <FeedItem key={feed.id} feed={feed} />)}
+          {feeds?.map((feed) => <FeedItem key={feed._id} feed={feed} />)}
         </div>
       )}
     </div>

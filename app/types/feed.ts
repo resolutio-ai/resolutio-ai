@@ -16,6 +16,7 @@
 // };
 
 export interface FeedItemDto {
+  _id:                   string;
   userId:                string;
   nameOfWork:            string;
   medium:                string;
