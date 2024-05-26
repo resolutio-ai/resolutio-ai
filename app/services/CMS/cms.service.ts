@@ -30,5 +30,5 @@ export const getSectionWithImage = (sectionFile: string): Promise<Response> => {
 };
 
 export const getFeeds = () => {
-  return axios.get<FeedItemDto[]>(`${CMS_BASE_URL}/feeds.json`);
+  return axios.get<FeedItemDto[]>(`${CMS_BASE_URL}/feedsMock.json`);
 };

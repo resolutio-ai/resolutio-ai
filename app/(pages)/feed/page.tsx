@@ -6,6 +6,8 @@ import { FC } from 'react';
 
 const FeedPage: FC = () => {
   const { feeds, isFeedLoading } = useFeeds();
+  console.log('In feed page', feeds);
+  
   return (
     <div className='w-5/6 flex-1'>
       <Search />

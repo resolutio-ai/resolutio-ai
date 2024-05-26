@@ -8,7 +8,7 @@ import {
   SaveIcon,
 } from '@/app/assets';
 import { FeedItemDto } from '@/app/types';
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
 import FeedType from '../FeedType/FeedType';
@@ -25,31 +25,31 @@ const FeedItem: FC<FeedItemProps> = ({ feed }) => {
         <div className='flex items-center'>
           <div className='avatar mr-2'>
             <div className='w-8 rounded-full'>
-              <Image
-                src={creator.image}
+              {/* <Image
+                src={feed..fileUploadResponse.name}
                 width={25}
                 height={25}
                 alt={creator.name}
-                blurDataURL={creator.image}
-              />
+                blurDataURL={feed.nameOfWork}
+              /> */}
             </div>
           </div>
-          <span className='name mr-2 font-bold'>{creator.name}</span>
-          <span className='timestamp text-sm text-slate-500'>5h</span>
+          <span className='name mr-2 font-bold'>{feed.nameOfWork}</span>
+          <span className='timestamp text-sm text-slate-500'>{feed.createdAt}</span>
         </div>
         <div>
           <ElllipseIcon />
         </div>
       </div>
       <div className='img-container relative w-[100%]'>
-        <Image
+        {/* <Image
           src={work.url}
           alt={work.description}
           width={500}
           height={500}
           className='w-[100%] rounded-md'
-        />
-        <FeedType type={work.type} />
+        /> */}
+        <FeedType type={feed.medium} />
       </div>
       <div className='my-4 flex w-[100%] justify-between'>
         <div className='info-container flex gap-5'>
@@ -63,7 +63,7 @@ const FeedItem: FC<FeedItemProps> = ({ feed }) => {
           <div className='license-container flex items-center'>
             <LicenseIcon />
             <span className='ml-2 text-[13px]'>
-              {feed.licenses}
+              {feed.licenseUploadResponse.name}
               <span className='ml-1 hidden sm:hidden md:inline'>licenses</span>
             </span>
           </div>
@@ -76,7 +76,7 @@ const FeedItem: FC<FeedItemProps> = ({ feed }) => {
       </div>
       <div className='flex w-[100%] flex-wrap items-center justify-between gap-4 sm:flex-nowrap'>
         <p className='description text-sm text-gray-700 sm:w-[50%]'>
-          {work.description}
+          {feed.nameOfWork}
         </p>
         <Link
           href='#'

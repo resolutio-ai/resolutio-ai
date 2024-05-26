@@ -10,6 +10,9 @@ const FeedTypes: Record<string, ReactElement> = {
   music: <MusicIcon />,
   drawing: <PencilIcon />,
   painting: <BrushIcon />,
+  // Optimize: Have general umbrella term
+  Photo: <BrushIcon />,
+  Art: <BrushIcon />,
 };
 
 const FeedType: FC<FeedTypeProps> = ({ type }) => {
