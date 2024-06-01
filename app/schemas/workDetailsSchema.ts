@@ -7,17 +7,17 @@ const workDetailsSchema = z.object({
     .string()
     .min(1, { message: 'Please add the name of your work.' }),
   medium: z.enum([...MEDIUM_OPTIONS], {
-    errorMap: () => ({ message: 'Please select a medium of your artwork.' }),
+    errorMap: () => ({ message: 'Please select a medium of your artwork.' })
   }),
   dateOfCreation: z.date(),
   file: z
     .any()
     .refine((files) => files?.length >= 1, {
-      message: 'Please upload your work.',
+      message: 'Please upload your work.'
     })
     .refine((files) => ACCEPTED_WORK_TYPES.includes(files?.[0]?.type), {
-      message: '.jpg, .jpeg, .png and .webp files are accepted.',
-    }),
+      message: '.jpg, .jpeg, .png and .webp files are accepted.'
+    })
 });
 
 export default workDetailsSchema;

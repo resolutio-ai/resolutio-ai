@@ -7,7 +7,7 @@ const Footer: FC = () => {
   return (
     <footer className='footer flex flex-col bg-black p-10 text-neutral-content'>
       <div className='flex w-full flex-col items-center gap-5 md:flex-row'>
-        <aside className='flex-0 '>
+        <aside className='flex-0'>
           <Image
             src='/logo_linear_rectangle.svg'
             alt='resolution logo'
@@ -19,7 +19,7 @@ const Footer: FC = () => {
           {"Want to learn more ? Let's talk."}
         </div>
         <nav className='flex-0 justify-end'>
-          <div className='grid grid-flow-col gap-4 '>
+          <div className='grid grid-flow-col gap-4'>
             <a
               target='_blank'
               rel='noopener'
@@ -85,7 +85,7 @@ const Footer: FC = () => {
       </div>
 
       <aside className='flex w-full flex-row justify-center'>
-        <p className='justify-center text-center '>
+        <p className='justify-center text-center'>
           resolutio © Copyright {new Date().getFullYear()}. All Rights
           Reserved.
         </p>

@@ -46,7 +46,7 @@ export {
   Sidebar,
   SmartLink,
   Unauthorized,
-  UnderstandYourRights,
+  UnderstandYourRights
 };
 
 export { EvidenceDialog };

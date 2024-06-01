@@ -12,7 +12,7 @@ const SmartLink: FC<SmartLinkProps> = ({
   href,
   isExternal,
   children,
-  className = '',
+  className = ''
 }) => {
   return isExternal ? (
     <a href={href} target='_blank' rel='noreferrer' className={className}>

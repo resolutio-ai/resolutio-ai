@@ -1,7 +1,7 @@
 import { useMintNFT, useUploadToLighthouse } from '@/app/hooks';
 import {
   EvidenceFromData,
-  useEvidenceForm,
+  useEvidenceForm
 } from '@/app/providers/EvidenceFormProvider/EvidenceFromProvider';
 import { IUploadProgressCallback } from '@lighthouse-web3/sdk/dist/types';
 import Image from 'next/image';
@@ -38,7 +38,7 @@ const DisplayWork: FC<DisplayWorkProps> = ({
   work,
   nameOfWork,
   dateOfCreation,
-  medium,
+  medium
 }) => {
   return (
     <div className='mt-4'>

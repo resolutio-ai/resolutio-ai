@@ -7,7 +7,7 @@ import {
   OurStory,
   OurTeam,
   ResolveDispute,
-  UnderstandYourRights,
+  UnderstandYourRights
 } from '@/app/components';
 import { GA_TRACKING_ID } from '@/app/settings';
 import Script from 'next/script';

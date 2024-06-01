@@ -12,7 +12,7 @@ export const EVIDENCE_MODAL_ID = 'evidence-modal';
 const EVIDENCE_STATE = {
   OPEN: 'OPEN',
   ERROR: 'ERROR',
-  SUBMITTED: 'SUBMITTED',
+  SUBMITTED: 'SUBMITTED'
 } as const;
 
 const EvidenceDialog: FC = () => {
@@ -50,7 +50,7 @@ const EvidenceDialog: FC = () => {
       nameOfWork,
       dateOfCreation,
       medium,
-      fileName: file[0].name,
+      fileName: file[0].name
     };
 
     const filesToUpload = [
@@ -58,22 +58,22 @@ const EvidenceDialog: FC = () => {
         [JSON.stringify(formValues, null, 2)],
         `${directory}/work.json`,
         {
-          type: 'application/json',
+          type: 'application/json'
         }
       ),
       new File([file[0]], `${directory}/${file[0].name}`, {
-        type: file[0].type,
-      }),
+        type: file[0].type
+      })
     ];
     setIsPending(true);
     uploadToLighthouse(
       {
-        files: filesToUpload,
+        files: filesToUpload
       },
       {
         onSuccess: (data) => {
           const {
-            data: { Hash: cid },
+            data: { Hash: cid }
           } = data;
           //Lighthouse Gateway https://gateway.lighthouse.storage/ipfs/${cid}
           console.log('Uploaded to Lighthouse');
@@ -88,13 +88,13 @@ const EvidenceDialog: FC = () => {
             },
             onSettled: () => {
               setIsPending(false);
-            },
+            }
           });
         },
         onError: () => {
           console.log('Error');
           setEvidenceState(EVIDENCE_STATE.ERROR);
-        },
+        }
       }
     );
   }, [formData, mint, uploadToLighthouse]);
@@ -115,7 +115,7 @@ const EvidenceDialog: FC = () => {
             <p className='mt-6 text-center text-xs font-bold text-primary'>
               {"Focus on your craft, not fees! We've got you covered."}
             </p>
-            <div className='mt-4 flex justify-center '>
+            <div className='mt-4 flex justify-center'>
               <button
                 className='btn-primary btn w-5/6'
                 onClick={handleEternalizeWork}
@@ -137,13 +137,13 @@ const EvidenceDialog: FC = () => {
               ✕
             </button>
             <div className='flex flex-col justify-center'>
-              <XCircleIcon height='56' className=' text-red-500' />
+              <XCircleIcon height='56' className='text-red-500' />
               <h3 className='mt-2 text-center text-lg font-bold'>Error</h3>
             </div>
             <p className='py-4 text-center'>
               An error occurred while submitting your evidence
             </p>
-            <div className='mt-4 flex justify-center '>
+            <div className='mt-4 flex justify-center'>
               <button
                 className='btn-primary btn w-5/6'
                 onClick={handleEternalizeWork}
@@ -164,7 +164,7 @@ const EvidenceDialog: FC = () => {
                 Art Eternalized!
               </h3>
             </div>
-            <div className='mt-4 flex justify-center '>
+            <div className='mt-4 flex justify-center'>
               <button
                 className='btn-primary btn w-5/6'
                 onClick={handleComplete}
@@ -182,7 +182,7 @@ const EvidenceDialog: FC = () => {
     evidenceState,
     handleComplete,
     handleEternalizeWork,
-    isPending,
+    isPending
   ]);
 
   return (

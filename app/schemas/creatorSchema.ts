@@ -7,10 +7,10 @@ const creatorSchema = z.object({
         id: z.string(),
         name: z
           .string()
-          .min(1, { message: 'Please enter the name of the creator' }),
+          .min(1, { message: 'Please enter the name of the creator' })
       })
     )
-    .min(1, { message: 'At least one creator is required' }),
+    .min(1, { message: 'At least one creator is required' })
 });
 
 export default creatorSchema;

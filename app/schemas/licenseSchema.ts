@@ -4,9 +4,9 @@ import { LICENSE_OPTIONS } from '../settings';
 const licenseSchema = z
   .object({
     license: z.enum([...LICENSE_OPTIONS], {
-      errorMap: () => ({ message: 'Please select a license for your work.' }),
+      errorMap: () => ({ message: 'Please select a license for your work.' })
     }),
-    ownLicense: z.any().optional(),
+    ownLicense: z.any().optional()
   })
   .refine(
     (data) =>
@@ -14,7 +14,7 @@ const licenseSchema = z
       (data.license === LICENSE_OPTIONS[6] && data.ownLicense.length >= 1),
     {
       message: 'Please upload your license.',
-      path: ['ownLicense'], // Pointing out which field is invalid
+      path: ['ownLicense'] // Pointing out which field is invalid
     }
   );
 

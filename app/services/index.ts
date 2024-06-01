@@ -3,7 +3,7 @@ import {
   getFeeds,
   getLinkSection,
   getOurTeam,
-  getSectionWithImage,
+  getSectionWithImage
 } from './CMS/cms.service';
 import { mintNFT } from './blockchain/blockchain.service';
 

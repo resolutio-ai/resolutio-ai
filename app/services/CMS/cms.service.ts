@@ -3,7 +3,7 @@ import {
   CMS_BASE_URL,
   LINK_FOLDER,
   LINK_WITH_IMAGE_FOLDER,
-  TEAM_FILE,
+  TEAM_FILE
 } from '@/app/settings';
 import { FeedItemDto } from '@/app/types';
 import axios from 'axios';
@@ -19,13 +19,13 @@ export const getOurTeam = (): Promise<Response> => {
 
 export const getLinkSection = (sectionFile: string): Promise<Response> => {
   return fetch(`${CMS_BASE_URL}/${LINK_FOLDER}/${sectionFile}`, {
-    cache: 'no-store',
+    cache: 'no-store'
   });
 };
 
 export const getSectionWithImage = (sectionFile: string): Promise<Response> => {
   return fetch(`${CMS_BASE_URL}/${LINK_WITH_IMAGE_FOLDER}/${sectionFile}`, {
-    cache: 'no-store',
+    cache: 'no-store'
   });
 };
 

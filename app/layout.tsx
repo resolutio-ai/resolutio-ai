@@ -2,7 +2,7 @@ import { Footer, Header } from '@/app/components';
 import {
   MagicProvider,
   ReactQueryClientProvider,
-  UserProvider,
+  UserProvider
 } from '@/app/providers';
 import type { Metadata } from 'next';
 import { DM_Sans, Montserrat } from 'next/font/google';
@@ -14,12 +14,12 @@ import './theme/globals.scss';
 const montserrat = Montserrat({
   weight: '700',
   subsets: ['latin'],
-  variable: '--font-montserrat',
+  variable: '--font-montserrat'
 });
 
 const dm_sans = DM_Sans({
   subsets: ['latin'],
-  variable: '--font-dm-sans',
+  variable: '--font-dm-sans'
 });
 
 export const metadata: Metadata = {
@@ -29,8 +29,8 @@ export const metadata: Metadata = {
   keywords:
     'NFT theft, NFT search, NFT scam, NFT rights, NFT duplication, NFT disputes, Blockchain dispute resolution, Sneha Vijyan, NFT, resolutio, Zareen Reza, Res Ed, Res Educate, Bestin John, Anish Praveen, Ogubuike Alexandra Ozioma',
   alternates: {
-    canonical: 'https://resolutio.ai/',
-  },
+    canonical: 'https://resolutio.ai/'
+  }
 };
 
 const RootLayout: FC<PropsWithChildren> = ({ children }) => {

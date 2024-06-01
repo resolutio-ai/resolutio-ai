@@ -6,7 +6,7 @@ const manifest = (): MetadataRoute.Manifest => {
     short_name: 'resolutio',
     description: 'Application to empower artist in the digital age.',
     start_url: '/',
-    display: 'standalone',
+    display: 'standalone'
   };
 };
 

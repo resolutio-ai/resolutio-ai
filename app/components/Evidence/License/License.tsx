@@ -1,7 +1,7 @@
 import { tooltip } from '@/app/assets';
 import {
   EvidenceFromData,
-  useEvidenceForm,
+  useEvidenceForm
 } from '@/app/providers/EvidenceFormProvider/EvidenceFromProvider';
 import { licenseSchema } from '@/app/schemas';
 import { DEFAULT_LICENSE, LICENSE_OPTIONS } from '@/app/settings';
@@ -17,7 +17,7 @@ type Licensing = Pick<EvidenceFromData, 'license' | 'ownLicense'>;
 const LicenseSelector: FC = () => {
   const {
     register,
-    formState: { errors },
+    formState: { errors }
   } = useFormContext<Licensing>();
 
   return (
@@ -63,7 +63,7 @@ const LicenseSelector: FC = () => {
 
 const OwnLicenseUpload = () => {
   const {
-    formState: { errors },
+    formState: { errors }
   } = useFormContext<Licensing>();
   return (
     <>
@@ -84,9 +84,9 @@ const License: FC = () => {
   const methods = useForm<Licensing>({
     defaultValues: {
       license: formData.license,
-      ownLicense: formData.ownLicense,
+      ownLicense: formData.ownLicense
     },
-    resolver: zodResolver(licenseSchema),
+    resolver: zodResolver(licenseSchema)
   });
   const { handleSubmit, watch, setValue } = methods;
   const onSubmit = (data: Licensing) => {

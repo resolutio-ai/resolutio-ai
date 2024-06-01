@@ -22,7 +22,7 @@ interface ImageSection {
 }
 
 const AbractLinkWithImage: FC<AbractLinkWithImageProps> = async ({
-  sectionFile,
+  sectionFile
 }) => {
   let section: ImageSection | null = null;
 
@@ -42,7 +42,7 @@ const AbractLinkWithImage: FC<AbractLinkWithImageProps> = async ({
     isGIF = false,
     imagePosition,
     showAuthor,
-    author,
+    author
   } = section;
 
   const imgOrder = imagePosition === 'left' ? 'order-1' : 'order-2';

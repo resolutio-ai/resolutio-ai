@@ -1,6 +1,6 @@
 import {
   EvidenceFromData,
-  useEvidenceForm,
+  useEvidenceForm
 } from '@/app/providers/EvidenceFormProvider/EvidenceFromProvider';
 import { creatorSchema } from '@/app/schemas';
 import { PlusCircleIcon, XCircleIcon } from '@heroicons/react/24/outline';
@@ -12,7 +12,7 @@ import {
   UseFieldArrayRemove,
   useFieldArray,
   useForm,
-  useFormContext,
+  useFormContext
 } from 'react-hook-form';
 import FormNavigator from '../FormNavigator/FormNavigator';
 import './CreatorInformation.scss';
@@ -27,7 +27,7 @@ type CreatorInputProps = {
 const CreatorInput: FC<CreatorInputProps> = ({ id, remove }) => {
   const {
     register,
-    formState: { errors },
+    formState: { errors }
   } = useFormContext<CreatorData>();
 
   const removeCreator = () => {
@@ -40,7 +40,7 @@ const CreatorInput: FC<CreatorInputProps> = ({ id, remove }) => {
         <div className='mr-4 flex-1'>
           <label className='form-control min-w-full'>
             <div className='label'>
-              <span className='label-text text-sm font-bold  text-gray-600'>
+              <span className='label-text text-sm font-bold text-gray-600'>
                 Name of Creator
               </span>
             </div>
@@ -56,7 +56,7 @@ const CreatorInput: FC<CreatorInputProps> = ({ id, remove }) => {
           {id > 0 && (
             <div className='tooltip' data-tip='delete'>
               <button className='mr-2' onClick={removeCreator}>
-                <XCircleIcon height='36' className=' text-red-500' />
+                <XCircleIcon height='36' className='text-red-500' />
               </button>
             </div>
           )}
@@ -77,14 +77,14 @@ type CreatorsListProps = {};
 
 const CreatorsList: FC<CreatorsListProps> = () => {
   const { fields, append, remove } = useFieldArray({
-    name: 'creators',
+    name: 'creators'
   });
 
   const addCreator = () => {
     append(
       { id: createId(), name: '' },
       {
-        shouldFocus: true,
+        shouldFocus: true
       }
     );
   };
@@ -108,9 +108,9 @@ const CreatorInformation: FC = () => {
   const { formData, updateForm, nextStep } = useEvidenceForm();
   const methods = useForm<CreatorData>({
     defaultValues: {
-      creators: formData.creators,
+      creators: formData.creators
     },
-    resolver: zodResolver(creatorSchema),
+    resolver: zodResolver(creatorSchema)
   });
   const { handleSubmit } = methods;
 

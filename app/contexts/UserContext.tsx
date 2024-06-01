@@ -39,7 +39,7 @@ export const UserContext = createContext<UserContextType>({
   isAuthenticated: false,
   isLoading: true,
   login: async (email: string) => {},
-  logout: async () => {},
+  logout: async () => {}
 });
 
 /**

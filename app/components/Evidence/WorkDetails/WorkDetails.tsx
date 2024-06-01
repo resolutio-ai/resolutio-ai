@@ -1,6 +1,6 @@
 import {
   EvidenceFromData,
-  useEvidenceForm,
+  useEvidenceForm
 } from '@/app/providers/EvidenceFormProvider/EvidenceFromProvider';
 import { workDetailsSchema } from '@/app/schemas';
 import { DEFAULT_MEDIUM, MEDIUM_OPTIONS } from '@/app/settings';
@@ -11,7 +11,7 @@ import {
   Controller,
   FormProvider,
   useForm,
-  useFormContext,
+  useFormContext
 } from 'react-hook-form';
 import FileUpload from '../../FileUpload/FileUpload';
 import FormNavigator from '../FormNavigator/FormNavigator';
@@ -24,13 +24,13 @@ type WorkDetails = Pick<
 const WorkName: FC = () => {
   const {
     register,
-    formState: { errors },
+    formState: { errors }
   } = useFormContext<WorkDetails>();
   return (
     <>
       <label className='form-control w-full'>
         <div className='label'>
-          <span className='label-text text-sm font-bold  text-gray-600'>
+          <span className='label-text text-sm font-bold text-gray-600'>
             Name of Work
           </span>
         </div>
@@ -54,7 +54,7 @@ const WorkName: FC = () => {
 const MediumSelector: FC = () => {
   const {
     register,
-    formState: { errors },
+    formState: { errors }
   } = useFormContext<WorkDetails>();
   return (
     <div>
@@ -87,7 +87,7 @@ const DateOfCreation: FC = () => {
     control,
     setValue,
     getValues,
-    formState: { errors },
+    formState: { errors }
   } = useFormContext<WorkDetails>();
 
   const [date, setDate] = useState<Date>(getValues('dateOfCreation'));
@@ -104,7 +104,7 @@ const DateOfCreation: FC = () => {
     }
 
     setValue('dateOfCreation', date, {
-      shouldDirty: true,
+      shouldDirty: true
     });
     setDate(date);
   };
@@ -146,7 +146,7 @@ const DateOfCreation: FC = () => {
 };
 const WorkUpload: FC = () => {
   const {
-    formState: { errors },
+    formState: { errors }
   } = useFormContext<WorkDetails>();
 
   return (
@@ -168,9 +168,9 @@ const WorkDetails: FC = () => {
       nameOfWork: formData?.nameOfWork,
       medium: formData?.medium,
       dateOfCreation: formData?.dateOfCreation,
-      file: formData?.file,
+      file: formData?.file
     },
-    resolver: zodResolver(workDetailsSchema),
+    resolver: zodResolver(workDetailsSchema)
   });
   const { handleSubmit } = methods;
 

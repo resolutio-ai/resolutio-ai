@@ -16,7 +16,7 @@ const useUploadToLighthouse = () => {
         undefined,
         progressCallback
       );
-    },
+    }
   });
 };
 

@@ -1,10 +1,11 @@
-export interface EUploadResponse {
+export type EUploadResponse = {
   hash: string;
   name: string;
   size: string;
   _id: string;
-}
-export interface FeedItemDto {
+};
+
+export type FeedItemDto = {
   _id: string;
   userId: string;
   nameOfWork: string;
@@ -16,4 +17,4 @@ export interface FeedItemDto {
   licenseUploadResponse: EUploadResponse;
   createdAt: Date;
   updatedAt: Date;
-}
+};

@@ -20,7 +20,7 @@ const SideImage: FC<SideImageProps> = ({
   isGIF = false,
   showAuthor = false,
   author,
-  imgClassName = 'object-cover',
+  imgClassName = 'object-cover'
 }) => {
   const blurDataURL = typeof imageURL === 'string' ? imageURL : '';
 

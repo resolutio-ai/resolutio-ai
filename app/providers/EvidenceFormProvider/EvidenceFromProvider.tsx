@@ -10,7 +10,7 @@ import {
   createContext,
   useContext,
   useMemo,
-  useState,
+  useState
 } from 'react';
 import { z } from 'zod';
 
@@ -43,13 +43,13 @@ const defaultValues: EvidenceFormContext = {
     license: DEFAULT_LICENSE,
     dateOfCreation: new Date(),
     file: [],
-    ownLicense: [],
+    ownLicense: []
   },
   currentStep: 1,
   nextStep: () => {},
   previousStep: () => {},
   updateForm: (updatedData: PartialEvidenceFromData) => {},
-  resetForm: () => {},
+  resetForm: () => {}
 };
 
 const EvidenceFormContext = createContext<EvidenceFormContext>(defaultValues);
@@ -83,7 +83,7 @@ export const EvidenceFormProvider: FC<PropsWithChildren> = ({ children }) => {
       nextStep,
       previousStep,
       updateForm,
-      resetForm,
+      resetForm
     }),
     [currentStep, formData]
   );

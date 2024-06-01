@@ -25,7 +25,7 @@ const MagicProvider = ({ children }: { children: ReactNode }) => {
     if (NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY) {
       // Create a new instance of Magic and set it in the state.
       const magicInstance = new Magic(NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY, {
-        deferPreload: true,
+        deferPreload: true
       });
       setMagic(magicInstance);
     }
@@ -37,7 +37,7 @@ const MagicProvider = ({ children }: { children: ReactNode }) => {
    */
   const magicContextValue = useMemo(() => {
     return {
-      magic,
+      magic
     };
   }, [magic]);
 

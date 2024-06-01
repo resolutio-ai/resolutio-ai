@@ -13,18 +13,18 @@ const EvidenceSteps = [
   {
     id: 1,
     label: 'Creators Information',
-    view: <CreatorInformation />,
+    view: <CreatorInformation />
   },
   {
     id: 2,
     label: 'Work Details',
-    view: <WorkDetails />,
+    view: <WorkDetails />
   },
   {
     id: 3,
     label: 'Review',
-    view: <Review />,
-  },
+    view: <Review />
+  }
   /* {
     id: 4,
     label: 'License',

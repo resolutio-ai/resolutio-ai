@@ -11,7 +11,7 @@ import {
   fileuploadIcon,
   messageIcon,
   notificationIcon,
-  tooltip,
+  tooltip
 } from './icons';
 import AddIcon from './icons/AddIcon';
 import AiIcon from './icons/AiIcon';
@@ -55,5 +55,5 @@ export {
   messageIcon,
   monalisaart,
   notificationIcon,
-  tooltip,
+  tooltip
 };

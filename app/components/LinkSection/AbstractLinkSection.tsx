@@ -18,7 +18,7 @@ interface AbstractLinkSectionProps {
 }
 
 export const AbstractLinkSection: FC<AbstractLinkSectionProps> = async ({
-  sectionFile,
+  sectionFile
 }) => {
   let linkSection: LinkSection | null = null;
 

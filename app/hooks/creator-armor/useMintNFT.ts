@@ -6,7 +6,7 @@ const useMintNFT = () => {
   const { magic } = useMagicContext();
 
   return useMutation({
-    mutationFn: (uri: string) => mintNFT(uri, magic),
+    mutationFn: (uri: string) => mintNFT(uri, magic)
   });
 };
 

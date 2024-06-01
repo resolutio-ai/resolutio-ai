@@ -12,12 +12,12 @@ const FeedTypes: Record<string, ReactElement> = {
   painting: <BrushIcon />,
   // Optimize: Have general umbrella term
   Photo: <BrushIcon />,
-  Art: <BrushIcon />,
+  Art: <BrushIcon />
 };
 
 const FeedType: FC<FeedTypeProps> = ({ type }) => {
   return (
-    <div className='work-type absolute right-[15px] top-[15px] flex cursor-pointer rounded-md bg-white/25 p-2  backdrop-blur'>
+    <div className='work-type absolute right-[15px] top-[15px] flex cursor-pointer rounded-md bg-white/25 p-2 backdrop-blur'>
       {FeedTypes[type]}
     </div>
   );

@@ -18,7 +18,7 @@ export const MEDIUM_OPTIONS = [
   'Music',
   'AI',
   'Art',
-  'Other',
+  'Other'
 ] as const;
 
 export const DEFAULT_MEDIUM = 'Select a Medium';
@@ -30,7 +30,7 @@ export const LICENSE_OPTIONS = [
   'CC BY-NC-SA',
   'CC BY-NC-ND',
   'resolution License',
-  'Your own license',
+  'Your own license'
 ] as const;
 
 export const DEFAULT_LICENSE = 'Select a License';
@@ -39,7 +39,7 @@ export const ACCEPTED_WORK_TYPES = [
   'image/jpeg',
   'image/jpg',
   'image/png',
-  'image/webp',
+  'image/webp'
 ];
 
 export const ACCEPTED_LICENSE_TYPES = ['application/pdf'];

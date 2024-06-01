@@ -2,7 +2,7 @@ import {
   CMS_BASE_URL,
   CREATOR_ARMOUR_CONTRACT_ADDR,
   LIGHTHOUSE_API_KEY,
-  queryClient,
+  queryClient
 } from './api.config';
 import {
   BLOGS_FILE,
@@ -19,13 +19,13 @@ import {
   OUR_STORY_FILE,
   RESOLVE_DISPUTE_FILE,
   TEAM_FILE,
-  UNDERSTAND_YOUR_RIGHTS_FILE,
+  UNDERSTAND_YOUR_RIGHTS_FILE
 } from './data.config';
 import {
   GA_TRACKING_ID,
   LOGIN_MODAL_ID,
   MAGIC_SECRET_KEY,
-  NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY,
+  NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY
 } from './site.config';
 
 export {
@@ -45,7 +45,7 @@ export {
   OUR_STORY_FILE,
   RESOLVE_DISPUTE_FILE,
   TEAM_FILE,
-  UNDERSTAND_YOUR_RIGHTS_FILE,
+  UNDERSTAND_YOUR_RIGHTS_FILE
 };
 
 export { DEFAULT_LICENSE, DEFAULT_MEDIUM };
@@ -54,5 +54,5 @@ export {
   CMS_BASE_URL,
   CREATOR_ARMOUR_CONTRACT_ADDR,
   LIGHTHOUSE_API_KEY,
-  queryClient,
+  queryClient
 };

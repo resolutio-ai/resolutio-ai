@@ -17,7 +17,7 @@ type MagicContextType = {
  * @type {React.Context<MagicContextType>}
  */
 export const MagicContext = createContext<MagicContextType>({
-  magic: null,
+  magic: null
 });
 
 /**

@@ -7,5 +7,5 @@ export {
   EvidenceFormProvider,
   MagicProvider,
   ReactQueryClientProvider,
-  UserProvider,
+  UserProvider
 };

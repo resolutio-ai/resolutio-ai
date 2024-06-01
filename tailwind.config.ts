@@ -4,16 +4,16 @@ const config: Config = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}'
   ],
   theme: {
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
-    },
+          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
+      }
+    }
   },
   plugins: [require('@tailwindcss/typography'), require('daisyui')],
   daisyui: {
@@ -31,14 +31,14 @@ const config: Config = {
           warning: '#fbbd23',
           error: '#f87272',
           '.btn-primary': {
-            color: '#ffffff',
+            color: '#ffffff'
           },
           '.btn-secondary': {
-            color: '#5F437F',
-          },
-        },
-      },
-    ],
-  },
+            color: '#5F437F'
+          }
+        }
+      }
+    ]
+  }
 };
 export default config;

@@ -36,7 +36,9 @@ const FeedItem: FC<FeedItemProps> = ({ feed }) => {
             </div>
           </div>
           <span className='name mr-2 font-bold'>{feed.nameOfWork}</span>
-          <span className='timestamp text-sm text-slate-500'>{format(feed.createdAt, 'MM/dd/yyyy')}</span>
+          <span className='timestamp text-sm text-slate-500'>
+            {format(feed.createdAt, 'MM/dd/yyyy')}
+          </span>
         </div>
         <div>
           <ElllipseIcon />

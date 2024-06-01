@@ -25,5 +25,5 @@ export {
   notificationIcon,
   tooltip,
   calenderIcon,
-  fileuploadIcon,
+  fileuploadIcon
 };

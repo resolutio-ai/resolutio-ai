@@ -3,7 +3,7 @@ import {
   EvidenceForm,
   RenderOnAuthenticated,
   SideImage,
-  Unauthorized,
+  Unauthorized
 } from '@/app/components';
 import { EvidenceFormProvider } from '@/app/providers';
 import { FC } from 'react';
@@ -12,7 +12,7 @@ const Evidence: FC = () => {
   const author = {
     name: 'Leonardo da Vinci',
     artName: 'Painting',
-    profileLink: 'https://www.google.com',
+    profileLink: 'https://www.google.com'
   };
 
   return (

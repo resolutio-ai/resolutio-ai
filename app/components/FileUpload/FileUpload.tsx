@@ -21,7 +21,7 @@ const FileUpload: FC<FileUploadProps> = (props) => {
   );
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    multiple: false,
+    multiple: false
   });
 
   const removeFile = () => {
@@ -51,7 +51,7 @@ const FileUpload: FC<FileUploadProps> = (props) => {
         />
         <div
           className={
-            'flex h-32 w-full items-center justify-center rounded border border-dashed border-primary p-2 '
+            'flex h-32 w-full items-center justify-center rounded border border-dashed border-primary p-2'
           }
         >
           {isDragActive ? (
@@ -70,7 +70,7 @@ const FileUpload: FC<FileUploadProps> = (props) => {
               <div key={file.name} className='flex'>
                 <span className='mr-2'>{file.name}</span>
                 <button className='mr-2' onClick={removeFile}>
-                  <XCircleIcon height='24' className=' text-red-500' />
+                  <XCircleIcon height='24' className='text-red-500' />
                 </button>
               </div>
             );
