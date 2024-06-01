@@ -4,5 +4,6 @@
     "source.organizeImports": "explicit",
     "editor.formatOnSave": "explicit"
   },
+  "typescript.tsdk": "./node_modules/typescript/lib",
   "prettier.configPath": ".prettierrc.json"
 }
