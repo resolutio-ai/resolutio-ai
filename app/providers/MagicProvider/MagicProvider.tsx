@@ -22,7 +22,7 @@ const MagicProvider = ({ children }: { children: ReactNode }) => {
    * Effect to initialize the Magic SDK instance on component mount.
    */
   useEffect(() => {
-    if (NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY) {
+    if (typeof window !== 'undefined' && NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY) {
       // Create a new instance of Magic and set it in the state.
       const magicInstance = new Magic(NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY, {
         deferPreload: true

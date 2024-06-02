@@ -4,10 +4,12 @@ import {
   ReactQueryClientProvider,
   UserProvider
 } from '@/app/providers';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 import { DM_Sans, Montserrat } from 'next/font/google';
 import { FC, PropsWithChildren } from 'react';
 import { ToastContainer } from 'react-toastify';
+import { GA_TRACKING_ID } from './settings';
 
 import './theme/globals.scss';
 
@@ -52,6 +54,7 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => {
           </ReactQueryClientProvider>
         </UserProvider>
       </MagicProvider>
+      <GoogleAnalytics gaId={GA_TRACKING_ID} />
     </html>
   );
 };

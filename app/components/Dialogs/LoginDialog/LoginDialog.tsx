@@ -51,6 +51,7 @@ const LoginDialog: FC<LoginDialogProps> = () => {
               placeholder='johndoe@example.com'
               className='input input-bordered input-primary w-full'
               {...register('email', { required: true })}
+              autoComplete='email'
             />
           </label>
           <div className='flex flex-row-reverse'>
