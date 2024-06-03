@@ -122,7 +122,10 @@ const CreatorInformation: FC = () => {
   return (
     <div className='mt-8'>
       <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(onSubmitCreators)}>
+        <form
+          onSubmit={handleSubmit(onSubmitCreators)}
+          className='animate-fadeIn'
+        >
           <CreatorsList />
           <FormNavigator />
         </form>

@@ -4,13 +4,13 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "format": "prettier --check --ignore-path .gitignore .",
     "format:fix": "prettier --write --ignore-path .gitignore .",
     "preinstall": "npx only-allow pnpm",
     "lint": "next lint",
     "preview": "next start",
-    "start": "next dev"
+    "start": "next dev --turbo"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.3",

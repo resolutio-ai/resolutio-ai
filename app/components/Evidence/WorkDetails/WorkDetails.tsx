@@ -181,7 +181,7 @@ const WorkDetails: FC = () => {
   return (
     <div>
       <FormProvider {...methods}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className='animate-fadeIn'>
           <WorkName />
           <MediumSelector />
           <DateOfCreation />

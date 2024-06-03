@@ -1,9 +1,7 @@
-import { useMintNFT, useUploadToLighthouse } from '@/app/hooks';
 import {
   EvidenceFromData,
   useEvidenceForm
 } from '@/app/providers/EvidenceFormProvider/EvidenceFromProvider';
-import { IUploadProgressCallback } from '@lighthouse-web3/sdk/dist/types';
 import Image from 'next/image';
 import { FC } from 'react';
 import { EVIDENCE_MODAL_ID } from '../../Dialogs/EvidenceDialog/EvidenceDialog';
@@ -83,61 +81,10 @@ const Review = () => {
 
   const onSubmit = () => {
     openModal();
-    /*   const { creators, file, nameOfWork, dateOfCreation, medium } = formData;
-    const directory = createId();
-
-    const formValues = {
-      creators,
-      nameOfWork,
-      dateOfCreation,
-      medium,
-      fileName: file[0].name,
-    };
-
-    const filesToUpload = [
-      new File(
-        [JSON.stringify(formValues, null, 2)],
-        `${directory}/work.json`,
-        {
-          type: 'application/json',
-        }
-      ),
-      new File([file[0]], `${directory}/${file[0].name}`, {
-        type: file[0].type,
-      }),
-    ];
-
-    uploadToLighthouse(
-      {
-        files: filesToUpload,
-        progressCallback,
-      },
-      {
-        onSuccess: (data) => {
-          const {
-            data: { Hash: cid },
-          } = data;
-          //Lighthouse Gateway https://gateway.lighthouse.storage/ipfs/${cid}
-          console.log('Uploaded to Lighthouse');
-          console.log(`https://gateway.lighthouse.storage/ipfs/${cid}`);
-          mint(cid, {
-            onSuccess: () => {
-              console.log('NFT Minted');
-            },
-            onError: () => {
-              console.log('Error Minting NFT');
-            },
-          });
-        },
-        onError: () => {
-          console.log('Error');
-        },
-      }
-    ); */
   };
 
   return (
-    <div className='mt-8'>
+    <div className='mt-8 animate-fadeIn'>
       <DisplayCreators creators={creators} />
       <DisplayWork
         work={file}
