@@ -15,7 +15,7 @@
     "ts:watch": "pnpm ts --watch"
   },
   "dependencies": {
-    "@heroicons/react": "^2.1.3",
+    "@heroicons/react": "^2.1.4",
     "@hookform/resolvers": "^3.6.0",
     "@lighthouse-web3/sdk": "^0.3.3",
     "@magic-sdk/admin": "^2.4.1",
@@ -23,13 +23,13 @@
     "@paralleldrive/cuid2": "^2.2.2",
     "@tanstack/react-query": "^5.45.1",
     "axios": "^1.7.2",
-    "daisyui": "^4.12.2",
+    "daisyui": "^4.12.7",
     "date-fns": "^3.6.0",
-    "ethers": "^6.13.0",
-    "magic-sdk": "^28.0.6",
+    "ethers": "^6.13.1",
+    "magic-sdk": "^28.0.7",
     "next": "14.2.4",
     "react": "^18.3.1",
-    "react-datepicker": "^7.0.0",
+    "react-datepicker": "^7.1.0",
     "react-dom": "^18.3.1",
     "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.52.0",
@@ -38,13 +38,13 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@magic-sdk/types": "^24.0.4",
+    "@magic-sdk/types": "^24.0.5",
     "@tailwindcss/typography": "^0.5.13",
-    "@types/node": "^20.14.2",
+    "@types/node": "^20.14.8",
     "@types/react": "^18.3.3",
     "@types/react-datepicker": "^6.2.0",
     "@types/react-dom": "^18.3.0",
-    "@types/uuid": "^9.0.8",
+    "@types/uuid": "^10.0.0",
     "autoprefixer": "^10.4.19",
     "eslint": "^8.57.0",
     "eslint-config-next": "14.2.4",
@@ -53,10 +53,10 @@
     "lint-staged": "^15.2.7",
     "postcss": "^8.4.38",
     "prettier": "^3.3.2",
-    "prettier-plugin-tailwindcss": "^0.6.4",
-    "sass": "^1.77.5",
+    "prettier-plugin-tailwindcss": "^0.6.5",
+    "sass": "^1.77.6",
     "tailwindcss": "^3.4.4",
-    "typescript": "^5.4.5"
+    "typescript": "^5.5.2"
   },
-  "packageManager": "pnpm@9.3.0+sha256.e1f9e8d1a16607a46dd3c158b5f7a7dc7945501d1c6222d454d63d033d1d918f"
+  "packageManager": "pnpm@9.4.0+sha256.b6fd0bfda555e7e584ad7e56b30c68b01d5a04f9ee93989f4b93ca8473c49c74"
 }
