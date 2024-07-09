@@ -1,13 +1,13 @@
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
-import { NFTStorage } from "nft.storage";
 import { useSnackbar } from "notistack";
 /* import CountDownTimer from "../../components/CountDownTimer"; */
 import { useCallback, useState } from "react";
-import { NFT_STORAGE_IPFS_KEY } from "../../config";
+import { LIGHTHOUSE_KEY_DISPUTE } from "../../config";
 import { useResolutioBackdropContext } from "../../context/ResolutioBackdropContext";
 import DisputeNFT from "../../integrations/DisputeNFT";
 import DisputePool from "../../integrations/DisputePool";
 import AdminDecisionSuccess from "./AdminDecisionSuccess";
+import lighthouse from '@lighthouse-web3/sdk';
 
 const defaultValues = {
   additional_details: "",
@@ -18,10 +18,7 @@ const AdminDecision = ({ disputeID }) => {
 
   console.log('inside AdminDecision', disputeID);
 
-
-
   // const [mintAmount, setmintAmount] = useState(0);
-
 
   const { enqueueSnackbar } = useSnackbar();
   const { openBackdrop, closeBackdrop } = useResolutioBackdropContext();
@@ -47,15 +44,27 @@ const AdminDecision = ({ disputeID }) => {
       ];
 
       try {
-        const client = new NFTStorage({
-          endpoint: "https://api.nft.storage",
-          token: NFT_STORAGE_IPFS_KEY,
-        });
+
+        const progressCallback = (progressData) => {
+          let percentageDone =
+            100 - (progressData?.total / progressData?.uploaded)?.toFixed(2)
+          console.log(percentageDone)
+        };
+
+        const response = await lighthouse.upload(
+          fileList, LIGHTHOUSE_KEY_DISPUTE, FILE_UPLOAD,
+          null,
+          progressCallback);
+        console.log("response", response);
+        const folderHash = response.data.find(item => item.Name === "").Hash;
+        // const ipfsURL = `https://gateway.lighthouse.storage/ipfs/${folderHash}`;
+        console.log('ipfs', ipfsURL);
+
         const disputePoolInstance = new DisputeNFT();
         // Store Evidence on IPFS
         const cid = await client.storeDirectory(fileList);
         // let cid = 'asd'
-        const ipfsURL = `${cid}`;
+        const ipfsURL = `${folderHash}`;
         console.log('ipfsURL', ipfsURL);
 
         // Create dispute on Blockchain

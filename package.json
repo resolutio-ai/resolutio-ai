@@ -16,6 +16,7 @@
     "@fontsource/roboto": "^4.5.8",
     "@huddle01/huddle01-client": "^0.0.10",
     "@huddle01/huddle01-iframe": "^0.0.8",
+    "@lighthouse-web3/sdk": "^0.3.3",
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.5",
     "@openzeppelin/contracts": "^4.8.0",

@@ -6,6 +6,9 @@ export const IMG_VERIFICATION_API_KEY =
 export const NFT_STORAGE_IPFS_KEY =
   process.env.NEXT_PUBLIC_NFT_STORAGE_IPFS_KEY;
 
+export const LIGHTHOUSE_KEY_DISPUTE =
+  process.env.NEXT_PUBLIC_LIGHTHOUSE_KEY_DISPUTE;
+
 export const INFURA_ID_ETH = process.env.NEXT_PUBLIC_INFURA_ID_ETH;
 
 export const INFURA_ID_IPFS = process.env.NEXT_PUBLIC_INFURA_ID_IPFS;

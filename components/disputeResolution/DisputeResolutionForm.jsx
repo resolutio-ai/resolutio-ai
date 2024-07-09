@@ -1,12 +1,12 @@
 import { Box, Button, Grid, TextField } from "@mui/material";
-import { File, NFTStorage } from "nft.storage";
 import { useSnackbar } from "notistack";
 import { useCallback, useState } from "react";
-import { NFT_STORAGE_IPFS_KEY } from "../../config";
+import { LIGHTHOUSE_KEY_DISPUTE } from "../../config";
 import { useResolutioBackdropContext } from "../../context/ResolutioBackdropContext";
 import DisputePool from "../../integrations/DisputePool";
 import AttachEvidence from "./AttachEvidence";
 import DisputeCreationSuccess from "./DisputeCreationSuccess";
+import lighthouse from '@lighthouse-web3/sdk';
 
 const defaultValues = {
   party_details: "",
@@ -18,11 +18,14 @@ const defaultValues = {
   files: [],
 };
 
+const FILE_UPLOAD = true;
+
 const DisputeResolutionForm = () => {
   const { enqueueSnackbar } = useSnackbar();
   const { openBackdrop, closeBackdrop } = useResolutioBackdropContext();
   const [formValues, setFormValues] = useState(defaultValues);
   const [isDisputeCreated, setDisputeCreated] = useState(false);
+
 
   const createDispute = useCallback(() => {
     const createDisputeAsync = async () => {
@@ -47,16 +50,25 @@ const DisputeResolutionForm = () => {
       ];
 
       try {
-        const client = new NFTStorage({
-          endpoint: "https://api.nft.storage",
-          token: NFT_STORAGE_IPFS_KEY,
-        });
+        const progressCallback = (progressData) => {
+          let percentageDone =
+            100 - (progressData?.total / progressData?.uploaded)?.toFixed(2)
+          // console.log(percentageDone)
+        };
+
+        const response = await lighthouse.upload(
+          fileList, LIGHTHOUSE_KEY_DISPUTE, FILE_UPLOAD,
+          null,
+          progressCallback);
+        console.log("response", response);
+        const folderHash = response.data.find(item => item.Name === "").Hash;
+        const ipfsURL = `https://gateway.lighthouse.storage/ipfs/${folderHash}`;
+        console.log('ipfs lighthouse', ipfsURL);
+
         const disputePoolInstance = new DisputePool();
         // Store Evidence on IPFS
-        const cid = await client.storeDirectory(fileList);
-        const ipfsURL = `https://ipfs.io/ipfs/${cid}`;
         // Create dispute on Blockchain
-        await disputePoolInstance.createDispute(cid);
+        await disputePoolInstance.createDispute(folderHash);
 
         setDisputeCreated(true);
         clearForm();
