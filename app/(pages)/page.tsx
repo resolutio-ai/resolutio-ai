@@ -33,8 +33,8 @@ const Home = () => {
       <CommunityLink />
       <UnderstandYourRights />
       <EventsAndWorkShop />
-      <LavenderCollectiveLink />
-      <Blogs />
+      {/* <LavenderCollectiveLink /> */}
+      {/*  <Blogs /> */}
       <OurTeam />
     </>
   );
