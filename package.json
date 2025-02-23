@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
-    "@hookform/resolvers": "^4.1.1",
+    "@hookform/resolvers": "^3.8.0",
     "@lighthouse-web3/sdk": "^0.3.7",
     "@magic-sdk/admin": "^2.4.1",
     "@next/third-parties": "^14.2.4",
