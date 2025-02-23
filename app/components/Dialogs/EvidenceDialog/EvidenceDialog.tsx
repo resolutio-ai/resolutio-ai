@@ -6,6 +6,7 @@ import { ShieldCheckIcon, XCircleIcon } from '@heroicons/react/24/solid';
 import { createId } from '@paralleldrive/cuid2';
 import { useRouter } from 'next/navigation';
 import { FC, useCallback, useMemo, useState } from 'react';
+import { toast } from 'react-toastify';
 
 export const EVIDENCE_MODAL_ID = 'evidence-modal';
 
@@ -91,9 +92,13 @@ const EvidenceDialog: FC = () => {
             }
           });
         },
-        onError: () => {
+        onError: (error) => {
           console.log('Error');
           setEvidenceState(EVIDENCE_STATE.ERROR);
+          toast.error(error.message);
+        },
+        onSettled: () => {
+          setIsPending(false);
         }
       }
     );
