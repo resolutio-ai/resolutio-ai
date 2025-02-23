@@ -94,13 +94,16 @@ const DateOfCreation: FC = () => {
 
   const handleDateChange = (
     date: Date | null,
-    e: React.ChangeEvent<HTMLInputElement>
+    event:
+      | React.MouseEvent<HTMLElement>
+      | React.KeyboardEvent<HTMLElement>
+      | undefined
   ) => {
     if (!date) return;
 
     // This is close the react-datepicker when a date is selected(Know Issue when inside a label element)
-    if (e && typeof e.preventDefault === 'function') {
-      e.preventDefault();
+    if (event && typeof event.preventDefault === 'function') {
+      event.preventDefault();
     }
 
     setValue('dateOfCreation', date, {
