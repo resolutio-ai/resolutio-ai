@@ -80,7 +80,7 @@ const OwnLicenseUpload = () => {
 };
 
 const License: FC = () => {
-  const { previousStep, formData, nextStep, updateForm } = useEvidenceForm();
+  const { formData, nextStep, updateForm } = useEvidenceForm();
   const methods = useForm<Licensing>({
     defaultValues: {
       license: formData.license,

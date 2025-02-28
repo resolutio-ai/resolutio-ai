@@ -2,11 +2,9 @@
 
 import { useUserContext } from '@/app/contexts';
 import { LOGIN_MODAL_ID } from '@/app/settings';
-import { FC, useMemo } from 'react';
+import { useMemo } from 'react';
 
-type ProfileDropdownProps = {};
-
-const ProfileDropdown: FC<ProfileDropdownProps> = () => {
+const ProfileDropdown = () => {
   const { user, logout, isAuthenticated, isLoading } = useUserContext();
 
   const openLoginModal = () => {

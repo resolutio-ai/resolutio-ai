@@ -39,7 +39,7 @@ const AbractLinkWithImage: FC<AbractLinkWithImageProps> = async ({
     btnText,
     link,
     isExternal = false,
-    isGIF = false,
+    //isGIF = false,
     imagePosition,
     showAuthor,
     author

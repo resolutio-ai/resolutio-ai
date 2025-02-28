@@ -2,16 +2,13 @@
 
 import { useUserContext } from '@/app/contexts';
 import { LOGIN_MODAL_ID } from '@/app/settings';
-import { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-
-type LoginDialogProps = {};
 
 type LoginFormInput = {
   email: string;
 };
 
-const LoginDialog: FC<LoginDialogProps> = () => {
+const LoginDialog = () => {
   const { login } = useUserContext();
   const { register, handleSubmit, reset } = useForm<LoginFormInput>();
 

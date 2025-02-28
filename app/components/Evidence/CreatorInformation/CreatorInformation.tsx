@@ -73,9 +73,7 @@ const CreatorInput: FC<CreatorInputProps> = ({ id, remove }) => {
   );
 };
 
-type CreatorsListProps = {};
-
-const CreatorsList: FC<CreatorsListProps> = () => {
+const CreatorsList = () => {
   const { fields, append, remove } = useFieldArray({
     name: 'creators'
   });

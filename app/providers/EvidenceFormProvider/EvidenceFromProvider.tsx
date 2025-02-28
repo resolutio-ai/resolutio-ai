@@ -48,7 +48,7 @@ const defaultValues: EvidenceFormContext = {
   currentStep: 1,
   nextStep: () => {},
   previousStep: () => {},
-  updateForm: (updatedData: PartialEvidenceFromData) => {},
+  updateForm: () => {},
   resetForm: () => {}
 };
 

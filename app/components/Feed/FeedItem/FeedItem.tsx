@@ -19,7 +19,7 @@ interface FeedItemProps {
 
 const FeedItem: FC<FeedItemProps> = ({ feed }) => {
   // const { creator, work } = feed;
-  const date = new Date();
+  // const date = new Date();
   return (
     <div className='flex shrink-0 flex-col items-start justify-start border-b border-gray-400'>
       <div className='creator-container mb-2 flex w-[100%] items-center justify-between'>

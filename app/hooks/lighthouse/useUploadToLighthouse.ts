@@ -5,7 +5,7 @@ import { useMutation } from '@tanstack/react-query';
 const useUploadToLighthouse = () => {
   return useMutation({
     mutationFn: (requestParam: {
-      files: any;
+      files: File[];
       progressCallback?: Parameters<typeof lighthouse.upload>[3];
     }) => {
       const { files, progressCallback } = requestParam;

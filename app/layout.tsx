@@ -8,9 +8,9 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 import { DM_Sans, Montserrat } from 'next/font/google';
 import { FC, PropsWithChildren } from 'react';
+import 'react-datepicker/dist/react-datepicker.css';
 import { ToastContainer } from 'react-toastify';
 import { GA_TRACKING_ID } from './settings';
-
 import './theme/globals.scss';
 
 const montserrat = Montserrat({
