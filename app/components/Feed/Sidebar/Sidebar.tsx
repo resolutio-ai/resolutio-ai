@@ -3,15 +3,14 @@
 import { dropdownIcon, HomeBtnSvg } from '@/app/assets/icons';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FC, useState } from 'react';
+import { useState } from 'react';
+import styles from './Sidebar.module.css';
 
-import './Sidebar.scss';
-
-interface Routes {
+type Routes = {
   label: string;
   icon: React.ReactElement;
   href: string;
-}
+};
 
 const routes: Routes[] = [
   {
@@ -50,7 +49,7 @@ const routes: Routes[] = [
     href: '/Profile',
   }, */
 ];
-const Sidebar: FC = () => {
+const Sidebar = () => {
   const [activeLink, setActiveLink] = useState<number>(0);
 
   const handleActiveLink = (index: number) => {
@@ -60,15 +59,15 @@ const Sidebar: FC = () => {
   return (
     <div className='flex flex-col space-y-4 text-black'>
       <div className='flex-1'>
-        <div className='item-center mb-5 flex w-[100%]'>
-          <div className='relative lg:w-[100%]'>
-            <div className='dropdown dropdown-bottom w-[100%] hover:text-white'>
+        <div className='item-center mb-5 flex w-full'>
+          <div className='relative lg:w-full'>
+            <div className='dropdown dropdown-bottom w-full hover:text-white'>
               <div
                 tabIndex={0}
                 role='button'
-                className='flex w-[100%] items-center justify-between rounded-md border-none bg-primary px-5 py-4 text-center text-sm font-medium text-white hover:bg-primary focus:outline-none focus:ring-4 focus:ring-primary lg:gap-5'
+                className='flex w-full items-center justify-between rounded-md border-none bg-primary px-5 py-4 text-center text-sm font-medium text-white hover:bg-primary focus:outline-none focus:ring-4 focus:ring-primary lg:gap-5'
               >
-                <p className='hidden sm:hidden md:inline'>Categories</p>
+                <p className='hidden md:inline'>Categories</p>
                 <Image
                   src={dropdownIcon}
                   className='ms-3 h-2.5 w-2.5'
@@ -97,16 +96,16 @@ const Sidebar: FC = () => {
               href={route.href}
               onClick={() => handleActiveLink(index)}
               className={`flex w-full cursor-pointer justify-start rounded-lg bg-white/10 p-3 text-sm font-medium text-black transition md:p-4 ${
-                activeLink === index ? 'active-group' : 'group'
-              } `}
+                activeLink === index ? styles.activeGroup : styles.group
+              }`}
             >
               <div className='flex flex-1 items-center'>
-                <span className='icon mr-3 h-5 w-5 transition duration-300 ease-in-out md:h-6 md:w-6'>
+                <span
+                  className={`mr-3 h-5 w-5 transition duration-300 ease-in-out md:h-6 md:w-6 ${styles.icon}`}
+                >
                   {route.icon}
                 </span>
-                <span className='hidden sm:hidden md:inline'>
-                  {route.label}
-                </span>
+                <span className='hidden md:inline'>{route.label}</span>
               </div>
             </Link>
           ))}

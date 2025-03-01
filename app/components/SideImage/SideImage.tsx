@@ -1,6 +1,5 @@
 import { AuthorLink } from '@/app/components';
 import Image, { StaticImageData } from 'next/image';
-import { FC } from 'react';
 import { Author } from '../LinkWithImage/AuthorLink/AuthorLink';
 
 type SideImageProps = {
@@ -13,7 +12,7 @@ type SideImageProps = {
   imgClassName?: string;
 };
 
-const SideImage: FC<SideImageProps> = ({
+const SideImage = ({
   additionalClasses = '',
   imgNavigation,
   imageURL,
@@ -21,7 +20,7 @@ const SideImage: FC<SideImageProps> = ({
   showAuthor = false,
   author,
   imgClassName = 'object-cover'
-}) => {
+}: SideImageProps) => {
   const blurDataURL = typeof imageURL === 'string' ? imageURL : '';
 
   return (

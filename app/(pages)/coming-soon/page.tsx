@@ -1,7 +1,6 @@
-import { FC } from 'react';
 import { RestrictedAccess } from '../../components';
 
-const ComingSoon: FC = () => {
+const ComingSoon = () => {
   return <RestrictedAccess />;
 };
 

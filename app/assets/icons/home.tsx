@@ -1,7 +1,6 @@
 'use client';
-import { FC } from 'react';
 
-const HomeBtnSvg: FC = () => {
+const HomeBtnSvg = () => {
   return (
     <div>
       <svg

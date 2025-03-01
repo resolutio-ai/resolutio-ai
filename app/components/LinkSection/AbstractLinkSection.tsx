@@ -1,25 +1,22 @@
 import { DecorationIcon } from '@/app/assets';
 import { SmartLink } from '@/app/components';
 import { getLinkSection } from '@/app/services';
-import { FC } from 'react';
 
-import './AbstractLinkSection.scss';
-
-interface LinkSection {
+type LinkSection = {
   heading: string;
   description: string;
   btnText: string;
   link: string;
   isExternal: boolean;
-}
+};
 
-interface AbstractLinkSectionProps {
+type AbstractLinkSectionProps = {
   sectionFile: string;
-}
+};
 
-export const AbstractLinkSection: FC<AbstractLinkSectionProps> = async ({
+export const AbstractLinkSection = async ({
   sectionFile
-}) => {
+}: AbstractLinkSectionProps) => {
   let linkSection: LinkSection | null = null;
 
   const response: Response = await getLinkSection(sectionFile);
@@ -31,7 +28,7 @@ export const AbstractLinkSection: FC<AbstractLinkSectionProps> = async ({
   const { heading, description, btnText, link, isExternal } = linkSection;
 
   return (
-    <div className='abstract-link-section py-16'>
+    <div className='bg-[#f4f4f4] py-16'>
       <div className='res-container'>
         <h1 className='font-primary-heading mb-4'>{heading}</h1>
         <p>{description}</p>

@@ -7,14 +7,14 @@ import { licenseSchema } from '@/app/schemas';
 import { DEFAULT_LICENSE, LICENSE_OPTIONS } from '@/app/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
-import { FC, useEffect } from 'react';
+import { useEffect } from 'react';
 import { FormProvider, useForm, useFormContext } from 'react-hook-form';
 import FileUpload from '../../FileUpload/FileUpload';
 import FormNavigator from '../FormNavigator/FormNavigator';
 
 type Licensing = Pick<EvidenceFromData, 'license' | 'ownLicense'>;
 
-const LicenseSelector: FC = () => {
+const LicenseSelector = () => {
   const {
     register,
     formState: { errors }
@@ -79,7 +79,7 @@ const OwnLicenseUpload = () => {
   );
 };
 
-const License: FC = () => {
+const License = () => {
   const { formData, nextStep, updateForm } = useEvidenceForm();
   const methods = useForm<Licensing>({
     defaultValues: {

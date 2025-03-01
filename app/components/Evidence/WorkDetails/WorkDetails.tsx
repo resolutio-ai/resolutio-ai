@@ -5,7 +5,7 @@ import {
 import { workDetailsSchema } from '@/app/schemas';
 import { DEFAULT_MEDIUM, MEDIUM_OPTIONS } from '@/app/settings';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import {
   Controller,
@@ -21,7 +21,7 @@ type WorkDetails = Pick<
   'nameOfWork' | 'medium' | 'dateOfCreation' | 'file'
 >;
 
-const WorkName: FC = () => {
+const WorkName = () => {
   const {
     register,
     formState: { errors }
@@ -51,7 +51,7 @@ const WorkName: FC = () => {
     </>
   );
 };
-const MediumSelector: FC = () => {
+const MediumSelector = () => {
   const {
     register,
     formState: { errors }
@@ -82,7 +82,7 @@ const MediumSelector: FC = () => {
     </div>
   );
 };
-const DateOfCreation: FC = () => {
+const DateOfCreation = () => {
   const {
     control,
     setValue,
@@ -147,7 +147,7 @@ const DateOfCreation: FC = () => {
     </>
   );
 };
-const WorkUpload: FC = () => {
+const WorkUpload = () => {
   const {
     formState: { errors }
   } = useFormContext<WorkDetails>();
@@ -164,7 +164,7 @@ const WorkUpload: FC = () => {
   );
 };
 
-const WorkDetails: FC = () => {
+const WorkDetails = () => {
   const { formData, nextStep, updateForm } = useEvidenceForm();
   const methods = useForm<WorkDetails>({
     defaultValues: {

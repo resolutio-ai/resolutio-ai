@@ -1,8 +1,7 @@
 import { LAVENDER_LINK_FILE } from '@/app/settings';
-import { FC } from 'react';
 import { AbstractLinkSection } from './AbstractLinkSection';
 
-const LavenderCollectiveLink: FC = () => {
+const LavenderCollectiveLink = () => {
   return <AbstractLinkSection sectionFile={LAVENDER_LINK_FILE} />;
 };
 

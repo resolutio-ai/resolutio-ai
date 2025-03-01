@@ -1,6 +1,4 @@
-import { FC } from 'react';
-
-const FeedItemSkeleton: FC = () => {
+const FeedItemSkeleton = () => {
   return (
     <div className='flex flex-col gap-3'>
       <div className='flex items-center gap-4'>
@@ -21,7 +19,7 @@ const FeedItemSkeleton: FC = () => {
   );
 };
 
-const FeedSkeleton: FC = () => {
+const FeedSkeleton = () => {
   return (
     <div className='my-8 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-10 xl:grid-cols-3'>
       {[1, 2, 3].map((id) => (

@@ -1,7 +1,7 @@
 import { useUserContext } from '@/app/contexts';
-import { FC, PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 
-const RenderOnAnonymous: FC<PropsWithChildren> = ({ children }) => {
+const RenderOnAnonymous = ({ children }: PropsWithChildren) => {
   const { isAuthenticated } = useUserContext();
   return !isAuthenticated ? children : null;
 };

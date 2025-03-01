@@ -1,14 +1,12 @@
 import { SideImage, SmartLink } from '@/app/components';
 import { getSectionWithImage } from '@/app/services';
-import { FC } from 'react';
-import './AbractLinkWithImage.scss';
-import { Author } from './AuthorLink/AuthorLink';
+import type { Author } from './AuthorLink/AuthorLink';
 
-interface AbractLinkWithImageProps {
+type AbractLinkWithImageProps = {
   sectionFile: string;
-}
+};
 
-interface ImageSection {
+type ImageSection = {
   heading: string;
   description?: string;
   imageURL: string;
@@ -19,11 +17,11 @@ interface ImageSection {
   imagePosition?: 'left' | 'right';
   showAuthor: boolean;
   author: Author;
-}
+};
 
-const AbractLinkWithImage: FC<AbractLinkWithImageProps> = async ({
+const AbractLinkWithImage = async ({
   sectionFile
-}) => {
+}: AbractLinkWithImageProps) => {
   let section: ImageSection | null = null;
 
   const response: Response = await getSectionWithImage(sectionFile);
@@ -56,7 +54,7 @@ const AbractLinkWithImage: FC<AbractLinkWithImageProps> = async ({
       <div
         className={`content-container flex items-center justify-center ${contentOrder}`}
       >
-        <div className='content-cta'>
+        <div className='px-[10%] py-[2rem]'>
           <h1 className='font-secondary-heading mb-4'>{heading}</h1>
           {description && <p className='description'>{description}</p>}
           <SmartLink

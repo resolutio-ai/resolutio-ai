@@ -1,8 +1,7 @@
 import { EVENTS_WORKSHOPS_FILE } from '@/app/settings';
-import { FC } from 'react';
 import AbractLinkWithImage from './AbractLinkWithImage';
 
-const EventsAndWorkShop: FC = () => {
+const EventsAndWorkShop = () => {
   return <AbractLinkWithImage sectionFile={EVENTS_WORKSHOPS_FILE} />;
 };
 

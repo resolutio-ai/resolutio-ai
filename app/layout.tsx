@@ -7,11 +7,11 @@ import {
 import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 import { DM_Sans, Montserrat } from 'next/font/google';
-import { FC, PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import { ToastContainer } from 'react-toastify';
 import { GA_TRACKING_ID } from './settings';
-import './theme/globals.scss';
+import './theme/globals.css';
 
 const montserrat = Montserrat({
   weight: '700',
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   }
 };
 
-const RootLayout: FC<PropsWithChildren> = ({ children }) => {
+const RootLayout = ({ children }: PropsWithChildren) => {
   return (
     <html
       lang='en'

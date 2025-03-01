@@ -1,33 +1,33 @@
 import { getBlogs } from '@/app/services';
 import Image from 'next/image';
-import { FC } from 'react';
+import styles from './Blogs.module.css';
 
-import './Blogs.scss';
-
-interface BlogItem {
+type BlogItem = {
   id: number;
   title: string;
   link: string;
   description: string;
   imageURL: string;
-}
+};
 
-interface Blog {
+type Blog = {
   heading: string;
   link: string;
   btnText: string;
   blogList: BlogItem[];
-}
+};
 
-interface BlogItemProps {
+type BlogItemProps = {
   blog: BlogItem;
-}
+};
 
-const BlogItem: FC<BlogItemProps> = ({ blog }) => {
+const BlogItem = ({ blog }: BlogItemProps) => {
   const { title, description, link, imageURL } = blog;
   return (
-    <div className='blog-item mb-10 grid gap-6 md:grid-cols-2'>
-      <div className='blog-image-container justify-self-end md:order-2 md:mb-0'>
+    <div className='mb-10 grid gap-6 md:grid-cols-2'>
+      <div
+        className={`justify-self-end md:order-2 md:mb-0 ${styles.blogImageContainer}`}
+      >
         <Image
           src={imageURL}
           alt={title}
@@ -52,7 +52,7 @@ const BlogItem: FC<BlogItemProps> = ({ blog }) => {
   );
 };
 
-const Blogs: FC = async () => {
+const Blogs = async () => {
   let blog: Blog | null = null;
 
   const response: Response = await getBlogs();

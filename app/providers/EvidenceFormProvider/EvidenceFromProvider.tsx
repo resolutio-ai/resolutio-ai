@@ -5,7 +5,6 @@ import { evidenceSchema } from '@/app/schemas';
 import { DEFAULT_LICENSE, DEFAULT_MEDIUM } from '@/app/settings';
 import { createId } from '@paralleldrive/cuid2';
 import {
-  FC,
   PropsWithChildren,
   createContext,
   useContext,
@@ -58,7 +57,7 @@ export const useEvidenceForm = () => {
   return useContext(EvidenceFormContext);
 };
 
-export const EvidenceFormProvider: FC<PropsWithChildren> = ({ children }) => {
+export const EvidenceFormProvider = ({ children }: PropsWithChildren) => {
   const [formData, setFormData] = useState(defaultValues.formData);
   const [currentStep, setCurrentStep] = useState<number>(
     defaultValues.currentStep

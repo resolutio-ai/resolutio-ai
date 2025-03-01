@@ -1,5 +1,5 @@
 import { XCircleIcon } from '@heroicons/react/24/outline';
-import { FC, useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useFormContext } from 'react-hook-form';
 
@@ -9,7 +9,7 @@ type FileUploadProps = {
   React.InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
 >;
-const FileUpload: FC<FileUploadProps> = (props) => {
+const FileUpload = (props: FileUploadProps) => {
   const { name = '', label = name } = props;
   const { register, unregister, setValue, watch } = useFormContext();
 

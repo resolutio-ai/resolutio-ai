@@ -9,26 +9,24 @@
   color: white;
 }
 
-.active-group svg g path#Icon {
+.activeGroup svg g path#Icon {
   fill: #5f437f;
   stroke: #5f437f;
 }
-.active-group .icon path {
+.activeGroup .icon path {
   fill: #5f437f;
   stroke: #5f437f;
 }
-.active-group:hover svg g path#Icon {
+.activeGroup:hover svg g path#Icon {
   fill: white !important;
   stroke: #5f437f;
 }
-.active-group:hover .icon path {
+.activeGroup:hover .icon path {
   fill: white !important;
   stroke: #5f437f;
 }
-.active-group:hover {
+.activeGroup:hover {
   background-color: #5f437f;
   fill: white;
   color: white;
-}
-@media (min-width: 769px) and (max-width: 790px) {
 }

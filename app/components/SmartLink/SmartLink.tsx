@@ -1,24 +1,26 @@
 import Link from 'next/link';
-import { FC, PropsWithChildren } from 'react';
-import './SmartLink.scss';
+import { PropsWithChildren } from 'react';
 
-interface SmartLinkProps extends PropsWithChildren {
+type SmartLinkProps = {
   href: string;
   isExternal: boolean;
   className?: string;
-}
+} & PropsWithChildren;
 
-const SmartLink: FC<SmartLinkProps> = ({
+const SmartLink = ({
   href,
   isExternal,
   children,
   className = ''
-}) => {
-  return isExternal ? (
-    <a href={href} target='_blank' rel='noreferrer' className={className}>
-      {children}
-    </a>
-  ) : (
+}: SmartLinkProps) => {
+  if (isExternal) {
+    return (
+      <a href={href} target='_blank' rel='noreferrer' className={className}>
+        {children}
+      </a>
+    );
+  }
+  return (
     <Link href={href} passHref className={className}>
       {children}
     </Link>

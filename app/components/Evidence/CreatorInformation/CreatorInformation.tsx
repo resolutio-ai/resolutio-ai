@@ -6,7 +6,6 @@ import { creatorSchema } from '@/app/schemas';
 import { PlusCircleIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createId } from '@paralleldrive/cuid2';
-import { FC } from 'react';
 import {
   FormProvider,
   UseFieldArrayRemove,
@@ -15,7 +14,7 @@ import {
   useFormContext
 } from 'react-hook-form';
 import FormNavigator from '../FormNavigator/FormNavigator';
-import './CreatorInformation.scss';
+import styles from './CreatorInformation.module.css';
 
 type CreatorData = Pick<EvidenceFromData, 'creators'>;
 
@@ -24,7 +23,7 @@ type CreatorInputProps = {
   remove: UseFieldArrayRemove;
 };
 
-const CreatorInput: FC<CreatorInputProps> = ({ id, remove }) => {
+const CreatorInput = ({ id, remove }: CreatorInputProps) => {
   const {
     register,
     formState: { errors }
@@ -90,7 +89,11 @@ const CreatorsList = () => {
   return (
     <div className='creator-information'>
       <div className='flex justify-end'>
-        <button onClick={addCreator} className='add-creator btn' type='button'>
+        <button
+          onClick={addCreator}
+          className={`add-creator btn ${styles.addCreator}`}
+          type='button'
+        >
           <PlusCircleIcon height='24' className='text-primary' />
           <span>Add Creator</span>
         </button>
@@ -102,7 +105,7 @@ const CreatorsList = () => {
   );
 };
 
-const CreatorInformation: FC = () => {
+const CreatorInformation = () => {
   const { formData, updateForm, nextStep } = useEvidenceForm();
   const methods = useForm<CreatorData>({
     defaultValues: {

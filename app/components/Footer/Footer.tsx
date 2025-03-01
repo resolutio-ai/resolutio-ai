@@ -1,9 +1,6 @@
 import Image from 'next/image';
-import { FC } from 'react';
 
-import './Footer.scss';
-
-const Footer: FC = () => {
+const Footer = () => {
   return (
     <footer className='footer flex flex-col bg-black p-10 text-neutral-content'>
       <div className='flex w-full flex-col items-center gap-5 md:flex-row'>

@@ -3,14 +3,13 @@ import {
   useEvidenceForm
 } from '@/app/providers/EvidenceFormProvider/EvidenceFromProvider';
 import Image from 'next/image';
-import { FC } from 'react';
 import { EVIDENCE_MODAL_ID } from '../../Dialogs/EvidenceDialog/EvidenceDialog';
 
 type DisplayCreatorsProps = {
   creators: EvidenceFromData['creators'];
 };
 
-const DisplayCreators: FC<DisplayCreatorsProps> = ({ creators }) => {
+const DisplayCreators = ({ creators }: DisplayCreatorsProps) => {
   return (
     <div>
       <h2 className='text-lg font-bold'>Creators Information:</h2>
@@ -32,12 +31,12 @@ type DisplayWorkProps = {
   medium: EvidenceFromData['medium'];
 };
 
-const DisplayWork: FC<DisplayWorkProps> = ({
+const DisplayWork = ({
   work,
   nameOfWork,
   dateOfCreation,
   medium
-}) => {
+}: DisplayWorkProps) => {
   return (
     <div className='mt-4'>
       <h2 className='text-lg font-bold'>Work Details:</h2>

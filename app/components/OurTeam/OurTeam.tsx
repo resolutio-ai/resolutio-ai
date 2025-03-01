@@ -1,28 +1,29 @@
 import { getOurTeam } from '@/app/services';
 import Image from 'next/image';
-import { FC } from 'react';
+import styles from './OurTeam.module.css';
 
-import './OurTeam.scss';
-
-interface Member {
+type Member = {
   id: number;
   name: string;
   profileLink: string;
   imageURL: string;
   mask: string;
   tags: string[];
-}
+};
 
-interface MemberItemProps {
+type MemberItemProps = {
   member: Member;
-}
+};
 
-const MemberItem: FC<MemberItemProps> = ({ member }) => {
+const MemberItem = ({ member }: MemberItemProps) => {
   const { name, imageURL, mask, profileLink } = member;
   return (
     <div className='our-team-member text-center'>
       <a href={profileLink} target='_blank' rel='noreferrer'>
-        <div className='mask' style={{ backgroundColor: mask }}>
+        <div
+          className={`mask ${styles.maskImage}`}
+          style={{ backgroundColor: mask }}
+        >
           <Image
             src={imageURL}
             alt={`${name}'s picture`}
@@ -37,14 +38,14 @@ const MemberItem: FC<MemberItemProps> = ({ member }) => {
   );
 };
 
-const OurTeam: FC = async () => {
+const OurTeam = async () => {
   let ourMembers: Member[] = [];
 
   const response: Response = await getOurTeam();
   ourMembers = await response.json();
 
   return (
-    <div className='our-team-container'>
+    <div className={styles.teamContainer}>
       <div className='res-container py-16'>
         <h1 className='font-primary-heading mb-4'>Meet our Team</h1>
         <div className='our-team grid gap-4 py-4 md:grid-cols-3'>

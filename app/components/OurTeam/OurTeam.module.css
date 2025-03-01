@@ -1,0 +1,8 @@
+.teamContainer {
+  background-color: #f4f4f4;
+}
+
+.maskImage {
+  -webkit-mask-image: url('../../assets/icons/mask.svg');
+  mask-image: url('../../assets/icons/mask.svg');
+}

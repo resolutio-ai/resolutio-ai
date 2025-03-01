@@ -1,11 +1,10 @@
 import { useEvidenceForm } from '@/app/providers/EvidenceFormProvider/EvidenceFromProvider';
-import { FC } from 'react';
 
 type FormNavigatorProps = {
   nextBtnText?: string;
 };
 
-const FormNavigator: FC<FormNavigatorProps> = ({ nextBtnText = 'Next' }) => {
+const FormNavigator = ({ nextBtnText = 'Next' }: FormNavigatorProps) => {
   const { previousStep, currentStep } = useEvidenceForm();
 
   const showPrevious = currentStep > 1;

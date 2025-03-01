@@ -5,7 +5,7 @@ import { useEvidenceForm } from '@/app/providers/EvidenceFormProvider/EvidenceFr
 import { ShieldCheckIcon, XCircleIcon } from '@heroicons/react/24/solid';
 import { createId } from '@paralleldrive/cuid2';
 import { useRouter } from 'next/navigation';
-import { FC, useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 
 export const EVIDENCE_MODAL_ID = 'evidence-modal';
@@ -16,7 +16,7 @@ const EVIDENCE_STATE = {
   SUBMITTED: 'SUBMITTED'
 } as const;
 
-const EvidenceDialog: FC = () => {
+const EvidenceDialog = () => {
   const router = useRouter();
   const { formData, resetForm } = useEvidenceForm();
   const { mutate: uploadToLighthouse } = useUploadToLighthouse();

@@ -1,7 +1,6 @@
 import Image from 'next/image';
-import { FC } from 'react';
 
-const RestrictedAccess: FC = () => {
+const RestrictedAccess = () => {
   return (
     <div className='res-container'>
       <div className='my-10 flex justify-center'>

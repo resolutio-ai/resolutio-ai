@@ -1,9 +1,9 @@
 'use client';
 
 import { RenderOnAuthenticated, Sidebar, Unauthorized } from '@/app/components';
-import { FC, PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 
-const FeedLayout: FC<PropsWithChildren> = ({ children }) => {
+const FeedLayout = ({ children }: PropsWithChildren) => {
   return (
     <>
       <RenderOnAuthenticated>

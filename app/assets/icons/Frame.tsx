@@ -1,6 +1,4 @@
-import { FC } from 'react';
-
-const EvidenceSvg: FC = () => {
+const EvidenceSvg = () => {
   return (
     <svg
       width='24'

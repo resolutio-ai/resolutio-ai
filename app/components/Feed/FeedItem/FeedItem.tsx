@@ -10,14 +10,13 @@ import { FeedItemDto } from '@/app/types';
 // import Image from 'next/image';
 import { format } from 'date-fns';
 import Link from 'next/link';
-import { FC } from 'react';
 import FeedType from '../FeedType/FeedType';
 
-interface FeedItemProps {
+type FeedItemProps = {
   feed: FeedItemDto;
-}
+};
 
-const FeedItem: FC<FeedItemProps> = ({ feed }) => {
+const FeedItem = ({ feed }: FeedItemProps) => {
   // const { creator, work } = feed;
   // const date = new Date();
   return (

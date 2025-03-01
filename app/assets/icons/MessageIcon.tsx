@@ -1,6 +1,4 @@
-import { FC } from 'react';
-
-const MessageIcon: FC = () => {
+const MessageIcon = () => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'

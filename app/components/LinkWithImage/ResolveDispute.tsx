@@ -1,8 +1,7 @@
 import { RESOLVE_DISPUTE_FILE } from '@/app/settings';
-import { FC } from 'react';
 import AbractLinkWithImage from './AbractLinkWithImage';
 
-const ResolveDispute: FC = () => {
+const ResolveDispute = () => {
   return <AbractLinkWithImage sectionFile={RESOLVE_DISPUTE_FILE} />;
 };
 

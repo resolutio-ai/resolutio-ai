@@ -1,12 +1,11 @@
 'use client';
 
 import { useEvidenceForm } from '@/app/providers/EvidenceFormProvider/EvidenceFromProvider';
-import { FC, useMemo } from 'react';
+import { useMemo } from 'react';
 import CreatorInformation from '../CreatorInformation/CreatorInformation';
 //import License from '../License/License';
 import Review from '../Review/Review';
 import WorkDetails from '../WorkDetails/WorkDetails';
-import './EvidenceForm.scss';
 
 // Define steps with corresponding components
 const EvidenceSteps = [
@@ -32,7 +31,7 @@ const EvidenceSteps = [
   }, */
 ];
 
-const EvidenceForm: FC = () => {
+const EvidenceForm = () => {
   const { currentStep } = useEvidenceForm();
 
   // Get the current form section based on the current step

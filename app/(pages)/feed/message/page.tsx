@@ -1,8 +1,6 @@
 'use client';
 
-import { FC } from 'react';
-
-const MessagePage: FC = () => {
+const MessagePage = () => {
   return <div className=''>content</div>;
 };
 

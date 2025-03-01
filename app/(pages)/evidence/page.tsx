@@ -6,9 +6,8 @@ import {
   Unauthorized
 } from '@/app/components';
 import { EvidenceFormProvider } from '@/app/providers';
-import { FC } from 'react';
 
-const Evidence: FC = () => {
+const Evidence = () => {
   const author = {
     name: 'Leonardo da Vinci',
     artName: 'Painting',

@@ -3,12 +3,10 @@
 import { useUserContext } from '@/app/contexts';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FC } from 'react';
 import LoginDialog from '../Dialogs/LoginDialog/LoginDialog';
 import ProfileDropdown from '../ProfileDropdown/ProfileDropdown';
-import './Header.scss';
 
-const Header: FC = () => {
+const Header = () => {
   const { isAuthenticated } = useUserContext();
   return (
     <>
@@ -45,7 +43,7 @@ const Header: FC = () => {
             <ProfileDropdown />
           </div>
         </div>
-        <div className='vertical-spacing'></div>
+        <div className='vertical-spacing min-h-[4.25rem]'></div>
       </header>
       <LoginDialog />
     </>

@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #5f437f;
+  --primary-50: #7e639e;
+  --primary-100: #b7acd3;
+  --primary-200: #ffca70;
+
+  --secondary: #974164;
+  --secondary-50: #e76b5d;
+  --secondary-100: #d5c364;
+  --secondary-200: #f0ceb2;
+
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+
+  --font-montserrat: 'Montserrat', 'Montserrat Fallback';
+  --font-dm-sans: 'DM Sans', 'DM Sans Fallback';
+}
+
+body {
+  @apply flex h-screen flex-col;
+  font-family: var(--font-dm-sans);
+}
+
+.content {
+  @apply flex-grow;
+}
+
+.heading-style {
+  @apply text-4xl;
+}
+
+.font-secondary-heading {
+  @apply text-4xl;
+  font-family: var(--font-montserrat);
+}
+
+.font-primary-heading {
+  @apply text-4xl font-bold text-[var(--primary)];
+}
+
+.res-container {
+  @apply mx-auto w-full px-4 sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-6xl 2xl:max-w-7xl;
+}
+
+.btn {
+  @apply h-10 min-h-[2.5rem] rounded px-8 normal-case;
+}

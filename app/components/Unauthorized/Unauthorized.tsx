@@ -2,9 +2,8 @@
 
 import { RenderOnAnonymous } from '@/app/components';
 import Image from 'next/image';
-import { FC } from 'react';
 
-const Unauthorized: FC = () => {
+const Unauthorized = () => {
   return (
     <RenderOnAnonymous>
       <div className='res-container my-10'>

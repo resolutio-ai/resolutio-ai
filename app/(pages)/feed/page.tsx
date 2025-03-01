@@ -2,9 +2,8 @@
 
 import { FeedItem, FeedSkeleton, Search } from '@/app/components';
 import { useFeeds } from '@/app/hooks';
-import { FC } from 'react';
 
-const FeedPage: FC = () => {
+const FeedPage = () => {
   const { feeds, isFeedLoading } = useFeeds();
   console.log('In feed page', feeds);
 

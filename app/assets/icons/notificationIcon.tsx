@@ -1,6 +1,4 @@
-import { FC } from 'react';
-
-const NotificationIcon: FC = () => {
+const NotificationIcon = () => {
   return (
     <svg
       width='24'

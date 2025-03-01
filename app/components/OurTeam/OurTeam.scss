@@ -1,9 +1,0 @@
-$prefix: our-team-container;
-
-.#{$prefix} {
-  background-color: #f4f4f4;
-  .mask {
-    -webkit-mask-image: url('../../assets/icons/mask.svg');
-    mask-image: url('../../assets/icons/mask.svg');
-  }
-}
