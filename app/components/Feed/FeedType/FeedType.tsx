@@ -17,7 +17,7 @@ const FeedTypes: Record<string, ReactElement> = {
 
 const FeedType = ({ type }: FeedTypeProps) => {
   return (
-    <div className='work-type absolute right-[15px] top-[15px] flex cursor-pointer rounded-md bg-white/25 p-2 backdrop-blur'>
+    <div className='work-type absolute right-[15px] top-[15px] flex cursor-pointer rounded-md bg-white/25 p-2 backdrop-blur-sm'>
       {FeedTypes[type]}
     </div>
   );

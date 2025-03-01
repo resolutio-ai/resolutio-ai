@@ -4,6 +4,13 @@
     "source.organizeImports": "explicit",
     "editor.formatOnSave": "explicit"
   },
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
   "typescript.tsdk": "./node_modules/typescript/lib",
-  "prettier.configPath": ".prettierrc.json"
+  "prettier.configPath": ".prettierrc.json",
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "tailwindCSS.experimental.configFile": "app/theme/tailwind.config.css"
 }

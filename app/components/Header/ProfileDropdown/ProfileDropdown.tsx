@@ -5,7 +5,7 @@ import { LOGIN_MODAL_ID } from '@/app/settings';
 import { useMemo } from 'react';
 
 const ProfileDropdown = () => {
-  const { user, logout, isAuthenticated, isLoading } = useUserContext();
+  const { user, logout, isAuthenticated, isProfileLoading } = useUserContext();
 
   const openLoginModal = () => {
     const modal = document.getElementById(LOGIN_MODAL_ID) as HTMLDialogElement;
@@ -16,18 +16,18 @@ const ProfileDropdown = () => {
 
   const initails = useMemo(() => user?.email?.charAt(0), [user?.email]);
 
-  if (isLoading) {
+  if (isProfileLoading) {
     return (
-      <div className='skeleton h-8 w-8 shrink-0 rounded-full ring ring-slate-300'></div>
+      <div className='skeleton h-8 w-8 shrink-0 rounded-full ring-3 ring-slate-300'></div>
     );
   }
   return (
     <>
       {isAuthenticated ? (
         <div className='dropdown dropdown-end'>
-          <div className='avatar placeholder'>
+          <div className='avatar avatar-placeholder'>
             <div
-              className='w-8 rounded-full bg-neutral text-neutral-content ring ring-primary'
+              className='bg-neutral text-neutral-content ring-primary w-8 rounded-full ring-3'
               tabIndex={0}
               role='button'
             >
@@ -36,13 +36,20 @@ const ProfileDropdown = () => {
           </div>
           <ul
             tabIndex={0}
-            className='menu dropdown-content z-[1] mt-1 w-52 rounded border bg-base-100 p-2 shadow'
+            className='dropdown-content menu bg-base-100 rounded-box text-primary z-1 w-50 font-bold shadow-sm'
           >
             <li className='disabled'>
-              <span>Profile</span>
+              <button
+                className='cursor-not-allowed disabled:opacity-50'
+                disabled
+              >
+                Profile
+              </button>
             </li>
             <li>
-              <span onClick={logout}>Logout</span>
+              <button className='' onClick={logout}>
+                Logout
+              </button>
             </li>
           </ul>
         </div>

@@ -25,7 +25,7 @@ export type User = MagicUserMetadata | null;
 type UserContextType = {
   user: User;
   isAuthenticated: boolean;
-  isLoading: boolean;
+  isProfileLoading: boolean;
   login?: (email: string) => Promise<void>;
   logout?: () => Promise<void>;
 };
@@ -37,7 +37,7 @@ type UserContextType = {
 export const UserContext = createContext<UserContextType>({
   user: null,
   isAuthenticated: false,
-  isLoading: true,
+  isProfileLoading: true,
   login: async () => {},
   logout: async () => {}
 });

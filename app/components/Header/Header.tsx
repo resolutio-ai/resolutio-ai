@@ -4,14 +4,14 @@ import { useUserContext } from '@/app/contexts';
 import Image from 'next/image';
 import Link from 'next/link';
 import LoginDialog from '../Dialogs/LoginDialog/LoginDialog';
-import ProfileDropdown from '../ProfileDropdown/ProfileDropdown';
+import ProfileDropdown from './ProfileDropdown/ProfileDropdown';
 
 const Header = () => {
   const { isAuthenticated } = useUserContext();
   return (
     <>
       <header className='header-container'>
-        <div className='header navbar fixed top-0 z-50 bg-base-100 shadow md:px-10'>
+        <div className='header navbar bg-base-100 fixed top-0 z-50 shadow-sm md:px-10'>
           <div className='navbar-start'>
             <Link className='desktop-logo hidden lg:inline-flex' href='/'>
               <Image
@@ -31,7 +31,7 @@ const Header = () => {
             </Link>
           </div>
           <div className='navbar-end'>
-            <ul className='menu menu-horizontal mx-2 hidden px-1 text-primary lg:flex'>
+            <ul className='menu menu-horizontal text-primary mx-2 hidden px-1 lg:flex'>
               {isAuthenticated && (
                 <li>
                   <Link href='/feed' className='link-hover link'>

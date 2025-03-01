@@ -1,4 +1,5 @@
 import { XCircleIcon } from '@heroicons/react/24/outline';
+import { PhotoIcon } from '@heroicons/react/24/solid';
 import { useCallback, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useFormContext } from 'react-hook-form';
@@ -37,39 +38,54 @@ const FileUpload = (props: FileUploadProps) => {
   return (
     <>
       <label
-        className='mb-2 block text-sm font-bold capitalize text-gray-700'
+        className='mb-2 block text-sm font-bold text-gray-700 capitalize'
         htmlFor={name}
       >
         {label}
       </label>
-      <div {...getRootProps()}>
-        <input
-          {...props}
-          {...getInputProps()}
-          id={name}
-          className='focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none'
-        />
-        <div
-          className={
-            'flex h-32 w-full items-center justify-center rounded border border-dashed border-primary p-2'
-          }
-        >
-          {isDragActive ? (
-            <p>Drop the files here ...</p>
-          ) : (
-            <p className='my-2 text-center'>
-              {"Drag 'n' drop file here, or click to select files"}
-            </p>
-          )}
+      <div
+        className='mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10'
+        {...getRootProps()}
+      >
+        <div className='text-center'>
+          <PhotoIcon
+            aria-hidden='true'
+            className='mx-auto size-12 text-gray-300'
+          />
+          <div className='mt-4 flex flex-col text-sm text-gray-600'>
+            <input
+              {...props}
+              {...getInputProps()}
+              id={name}
+              className='hidden'
+            />
+
+            {isDragActive ? (
+              <p className='pl-1 font-semibold text-indigo-600'>
+                {"Drag 'n' drop file here"}
+              </p>
+            ) : (
+              <>
+                <span className='relative cursor-pointer rounded-md bg-white px-3 font-semibold text-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500'>
+                  Upload a file
+                </span>
+                <span>or</span>
+                <p>drag and drop</p>
+              </>
+            )}
+          </div>
+          <p className='mt-2 text-xs text-gray-600'>
+            PNG, JPG, JPEG, WEBP up to 10MB
+          </p>
         </div>
       </div>
       <div>
-        <div className='mt-2 min-h-6'>
+        <div className='mt-2'>
           {uploads.map((file) => {
             return (
               <div key={file.name} className='flex'>
                 <span className='mr-2'>{file.name}</span>
-                <button className='mr-2' onClick={removeFile}>
+                <button className='mr-2 cursor-pointer' onClick={removeFile}>
                   <XCircleIcon height='24' className='text-red-500' />
                 </button>
               </div>
@@ -80,12 +96,5 @@ const FileUpload = (props: FileUploadProps) => {
     </>
   );
 };
-{
-  /* <img
-                      src={URL.createObjectURL(file)}
-                      alt={file.name}
-                      style={{ width: '100px', height: '100px' }}
-                    /> */
-}
 
 export default FileUpload;

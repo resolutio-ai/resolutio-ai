@@ -2,7 +2,7 @@
 
 import { EvidenceDialog } from '@/app/components';
 import { evidenceSchema } from '@/app/schemas';
-import { DEFAULT_LICENSE, DEFAULT_MEDIUM } from '@/app/settings';
+import { DEFAULT_MEDIUM } from '@/app/settings';
 import { createId } from '@paralleldrive/cuid2';
 import {
   PropsWithChildren,
@@ -13,15 +13,7 @@ import {
 } from 'react';
 import { z } from 'zod';
 
-export type EvidenceFromData = Pick<
-  z.infer<typeof evidenceSchema>,
-  'creators' | 'nameOfWork' | 'dateOfCreation'
-> & {
-  file: File[];
-  ownLicense: File[];
-  medium: string;
-  license: string;
-};
+export type EvidenceFromData = z.infer<typeof evidenceSchema>;
 
 type PartialEvidenceFromData = Partial<EvidenceFromData>;
 
@@ -39,9 +31,9 @@ const defaultValues: EvidenceFormContext = {
     creators: [{ id: createId(), name: '' }],
     nameOfWork: '',
     medium: DEFAULT_MEDIUM,
-    license: DEFAULT_LICENSE,
     dateOfCreation: new Date(),
     file: [],
+    license: '',
     ownLicense: []
   },
   currentStep: 1,

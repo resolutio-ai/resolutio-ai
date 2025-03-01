@@ -40,7 +40,7 @@ const RootLayout = ({ children }: PropsWithChildren) => {
     <html
       lang='en'
       className={`${montserrat.variable} ${dm_sans.variable}`}
-      data-theme='resolutioTheme'
+      data-theme='light'
     >
       <ToastContainer />
       <MagicProvider>

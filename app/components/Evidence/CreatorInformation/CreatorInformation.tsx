@@ -37,19 +37,19 @@ const CreatorInput = ({ id, remove }: CreatorInputProps) => {
     <>
       <div className='flex'>
         <div className='mr-4 flex-1'>
-          <label className='form-control min-w-full'>
-            <div className='label'>
-              <span className='label-text text-sm font-bold text-gray-600'>
-                Name of Creator
-              </span>
-            </div>
-            <input
-              type='text'
-              className='input input-bordered input-primary w-full'
-              placeholder='Enter name'
-              {...register(`creators.${id}.name`)}
-            />
+          <label
+            className='text-sm font-bold text-gray-600'
+            htmlFor={`creators.${id}.name`}
+          >
+            Name of Creator
           </label>
+          <input
+            type='text'
+            className='input input-primary mt-2 w-full'
+            placeholder='Enter name'
+            id={`creators.${id}.name`}
+            {...register(`creators.${id}.name`)}
+          />
         </div>
         <div className='flex w-10 items-end'>
           {id > 0 && (

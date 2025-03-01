@@ -7,7 +7,7 @@ const Search = () => {
       <input
         type='text'
         placeholder='Search from the world of creativity'
-        className='bg-danger relative w-full border-none bg-transparent font-normal text-gray-700 outline-none md:py-1'
+        className='bg-danger relative w-full border-none bg-transparent font-normal text-gray-700 outline-hidden md:py-1'
       />
     </div>
   );

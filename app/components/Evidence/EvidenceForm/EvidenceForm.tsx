@@ -41,8 +41,8 @@ const EvidenceForm = () => {
   }, [currentStep]);
 
   return (
-    <div className='p-5 lg:p-10'>
-      <h3 className='pb-4 text-4xl font-bold tracking-tight text-gray-500'>
+    <div className='card xs:w-100 bg-white p-10 shadow-sm md:w-2xl'>
+      <h3 className='pb-4 text-center text-4xl font-bold tracking-tight text-gray-500'>
         Creator Protection Form
       </h3>
       <div className='my-4 flex justify-center'>
@@ -57,7 +57,7 @@ const EvidenceForm = () => {
           ))}
         </ul>
       </div>
-      <div className='mx-auto max-w-xl'>{formSection}</div>
+      <div>{formSection}</div>
     </div>
   );
 };

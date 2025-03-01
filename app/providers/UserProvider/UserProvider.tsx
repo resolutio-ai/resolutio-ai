@@ -13,7 +13,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const { magic } = useMagicContext();
   const [user, setUser] = useState<User>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isProfileLoading, setProfileLoading] = useState<boolean>(true);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
   /**
@@ -69,7 +69,7 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
      * Check the authentication status and load user data on component mount.
      */
     const checkAuthentication = async () => {
-      setIsLoading(true);
+      setProfileLoading(true);
       if (!magic) {
         return;
       }
@@ -88,7 +88,7 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
         console.error('Authentication check error:', error);
         setIsAuthenticated(false);
       } finally {
-        setIsLoading(false);
+        setProfileLoading(false);
       }
     };
     checkAuthentication();
@@ -99,8 +99,14 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
    * @type {UserContextType}
    */
   const userContextValue = useMemo(() => {
-    return { user, isAuthenticated, isLoading, login, logout };
-  }, [user, isAuthenticated, isLoading, login, logout]);
+    return {
+      user,
+      isAuthenticated,
+      isProfileLoading,
+      login,
+      logout
+    };
+  }, [user, isAuthenticated, isProfileLoading, login, logout]);
 
   /**
    * Render the user context provider with the provided context value.

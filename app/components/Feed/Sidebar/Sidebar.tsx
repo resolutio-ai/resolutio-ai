@@ -65,7 +65,7 @@ const Sidebar = () => {
               <div
                 tabIndex={0}
                 role='button'
-                className='flex w-full items-center justify-between rounded-md border-none bg-primary px-5 py-4 text-center text-sm font-medium text-white hover:bg-primary focus:outline-none focus:ring-4 focus:ring-primary lg:gap-5'
+                className='flex w-full items-center justify-between rounded-md border-none bg-primary px-5 py-4 text-center text-sm font-medium text-white hover:bg-primary focus:outline-hidden focus:ring-4 focus:ring-primary lg:gap-5'
               >
                 <p className='hidden md:inline'>Categories</p>
                 <Image
@@ -76,7 +76,7 @@ const Sidebar = () => {
               </div>
               <ul
                 tabIndex={0}
-                className='menu dropdown-content z-[1] w-44 divide-y divide-gray-100 rounded-md bg-white text-primary shadow'
+                className='menu dropdown-content z-1 w-44 divide-y divide-gray-100 rounded-md bg-white text-primary shadow-sm'
               >
                 <li>
                   <a>Item 1</a>

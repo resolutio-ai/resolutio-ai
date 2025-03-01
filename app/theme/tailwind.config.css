@@ -1,0 +1,48 @@
+@import 'tailwindcss';
+@plugin "@tailwindcss/typography";
+@plugin "daisyui";
+
+@theme {
+  --animate-fade-in: fadeIn 1s ease-in-out;
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@plugin "daisyui/theme" {
+  name: 'light';
+  default: true;
+  --color-primary: #5f437f;
+  --color-primary-content: #ffffff;
+  --color-secondary: #ffca70;
+  --color-secondary-content: #5f437f;
+  --color-neutral: '#7F61A0';
+  --color-info: '#3abff8';
+  --color-success: '#36d399';
+  --color-warning: '#fbbd23';
+  --color-error: '#f87272';
+}

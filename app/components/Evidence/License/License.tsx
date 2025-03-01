@@ -9,7 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
 import { useEffect } from 'react';
 import { FormProvider, useForm, useFormContext } from 'react-hook-form';
-import FileUpload from '../../FileUpload/FileUpload';
+import FileUpload from '../FileUpload/FileUpload';
 import FormNavigator from '../FormNavigator/FormNavigator';
 
 type Licensing = Pick<EvidenceFromData, 'license' | 'ownLicense'>;
@@ -29,7 +29,7 @@ const LicenseSelector = () => {
           </span>
           <div className='tooltip relative ml-1 inline-block'>
             <Image src={tooltip} alt='tooltip' className='h-4 w-4' />
-            <span className='tooltiptext font-weight-400 leading-18 invisible absolute bottom-full left-1/2 z-10 w-[120px] -translate-x-1/2 transform rounded border bg-white p-[7px] text-center text-xs font-normal text-black'>
+            <span className='tooltiptext font-weight-400 invisible absolute bottom-full left-1/2 z-10 w-[120px] -translate-x-1/2 transform rounded-sm border bg-white p-[7px] text-center text-xs leading-18 font-normal text-black'>
               <span>Learn more about Licenses</span>
               <a
                 href='#'

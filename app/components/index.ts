@@ -42,8 +42,8 @@ export {
   ResolveDispute,
   RestrictedAccess,
   Search,
-  SideImage,
   Sidebar,
+  SideImage,
   SmartLink,
   Unauthorized,
   UnderstandYourRights
