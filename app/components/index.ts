@@ -9,7 +9,6 @@ import Header from './Header/Header';
 import CommunityLink from './LinkSection/CommunityLink';
 import EvidenceLink from './LinkSection/EvidenceLink';
 import LavenderCollectiveLink from './LinkSection/LavenderCollectiveLink';
-import AuthorLink from './LinkWithImage/AuthorLink/AuthorLink';
 import EventsAndWorkShop from './LinkWithImage/EventsAndWorkShop';
 import OurStory from './LinkWithImage/OurStory';
 import ResolveDispute from './LinkWithImage/ResolveDispute';
@@ -18,13 +17,13 @@ import OurTeam from './OurTeam/OurTeam';
 import RenderOnAnonymous from './RenderOnAnonymous/RenderOnAnonymous';
 import RenderOnAuthenticated from './RenderOnAuthenticated/RenderOnAuthenticated';
 import RestrictedAccess from './RestrictedAccess/RestrictedAccess';
-import SideImage from './SideImage/SideImage';
 import FeedSkeleton from './Skeleton/FeedSkeleton/FeedSkeleton';
-import SmartLink from './SmartLink/SmartLink';
 import Unauthorized from './Unauthorized/Unauthorized';
 
+export { RenderOnAnonymous, Unauthorized };
+
+// Components used in pages.
 export {
-  AuthorLink,
   Blogs,
   CommunityLink,
   EventsAndWorkShop,
@@ -37,15 +36,11 @@ export {
   LavenderCollectiveLink,
   OurStory,
   OurTeam,
-  RenderOnAnonymous,
   RenderOnAuthenticated,
   ResolveDispute,
   RestrictedAccess,
   Search,
   Sidebar,
-  SideImage,
-  SmartLink,
-  Unauthorized,
   UnderstandYourRights
 };
 

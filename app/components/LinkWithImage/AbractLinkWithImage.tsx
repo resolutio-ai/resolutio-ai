@@ -1,6 +1,7 @@
-import { SideImage, SmartLink } from '@/app/components';
 import { getSectionWithImage } from '@/app/services';
-import type { Author } from './AuthorLink/AuthorLink';
+import type { Author } from '../AuthorLink/AuthorLink';
+import SideImage from '../SideImage/SideImage';
+import SmartLink from '../SmartLink/SmartLink';
 
 type AbractLinkWithImageProps = {
   sectionFile: string;

@@ -1,4 +1,4 @@
-import { RestrictedAccess } from '../../components';
+import { RestrictedAccess } from '@/app/components';
 
 const ComingSoon = () => {
   return <RestrictedAccess />;

@@ -11,7 +11,7 @@ type AuthorLinkProps = {
 const AuthorLink = ({ author }: AuthorLinkProps) => {
   const { name, artName } = author;
   return (
-    <div className='author-link absolute bottom-4 right-4 rounded-sm border p-2 text-sm text-white'>
+    <div className='author-link absolute right-4 bottom-4 rounded-sm border p-2 text-sm text-white'>
       <span>{`${artName} by ${name}`}</span>
     </div>
   );

@@ -1,6 +1,6 @@
 import { DecorationIcon } from '@/app/assets';
-import { SmartLink } from '@/app/components';
 import { getLinkSection } from '@/app/services';
+import SmartLink from '../SmartLink/SmartLink';
 
 type LinkSection = {
   heading: string;

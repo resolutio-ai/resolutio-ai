@@ -1,6 +1,5 @@
-import { AuthorLink } from '@/app/components';
 import Image, { StaticImageData } from 'next/image';
-import { Author } from '../LinkWithImage/AuthorLink/AuthorLink';
+import AuthorLink, { Author } from '../AuthorLink/AuthorLink';
 
 type SideImageProps = {
   additionalClasses?: string;
