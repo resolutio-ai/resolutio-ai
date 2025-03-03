@@ -1,5 +1,7 @@
+import { RestrictedAccess } from '@/app/components';
+
 const page = () => {
-  return <div>page</div>;
+  return <RestrictedAccess />;
 };
 
 export default page;

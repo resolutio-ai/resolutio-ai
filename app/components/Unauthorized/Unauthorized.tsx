@@ -1,26 +1,21 @@
 'use client';
 
 import Image from 'next/image';
+import AlignCenter from '../AlignCenter/AlignCenter';
 import RenderOnAnonymous from '../RenderOnAnonymous/RenderOnAnonymous';
 
 const Unauthorized = () => {
   return (
     <RenderOnAnonymous>
-      <div className='res-container my-10'>
-        <div className='flex justify-center'>
-          <Image
-            src='401.svg'
-            alt='401 Not authorized!'
-            width={500}
-            height={500}
-          />
-        </div>
-        <div className='text-center'>
-          <h1 className='my-10 text-3xl font-bold'>
-            {'Please login to access this page!'}
-          </h1>
-        </div>
-      </div>
+      <AlignCenter>
+        <Image
+          src='401.svg'
+          alt='401 Not authorized!'
+          width={400}
+          height={400}
+        />
+        <h1 className='my-10 text-xl'>{'Please login to access this page!'}</h1>
+      </AlignCenter>
     </RenderOnAnonymous>
   );
 };
