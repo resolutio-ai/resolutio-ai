@@ -1,17 +1,16 @@
 import Image from 'next/image';
+import AlignCenter from '../AlignCenter/AlignCenter';
 
 const RestrictedAccess = () => {
   return (
-    <div className='res-container'>
-      <div className='my-10 flex justify-center'>
-        <Image
-          src='restricted.svg'
-          alt='Restricted Access Image'
-          width={500}
-          height={500}
-        />
-      </div>
-      <h2 className='mb-8 text-center text-2xl font-bold'>
+    <AlignCenter>
+      <Image
+        src='restricted.svg'
+        alt='Restricted Access Image'
+        width={400}
+        height={400}
+      />
+      <h2 className='my-10 text-xl'>
         {
           'Restricted for early access pass holders. Apply for early access pass '
         }
@@ -24,7 +23,7 @@ const RestrictedAccess = () => {
         </a>
         {'.'}
       </h2>
-    </div>
+    </AlignCenter>
   );
 };
 
