@@ -1,7 +1,7 @@
 'use client';
 
-import { RenderOnAnonymous } from '@/app/components';
 import Image from 'next/image';
+import RenderOnAnonymous from '../RenderOnAnonymous/RenderOnAnonymous';
 
 const Unauthorized = () => {
   return (

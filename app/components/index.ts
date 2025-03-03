@@ -14,13 +14,9 @@ import OurStory from './LinkWithImage/OurStory';
 import ResolveDispute from './LinkWithImage/ResolveDispute';
 import UnderstandYourRights from './LinkWithImage/UnderstandYourRights';
 import OurTeam from './OurTeam/OurTeam';
-import RenderOnAnonymous from './RenderOnAnonymous/RenderOnAnonymous';
 import RenderOnAuthenticated from './RenderOnAuthenticated/RenderOnAuthenticated';
 import RestrictedAccess from './RestrictedAccess/RestrictedAccess';
 import FeedSkeleton from './Skeleton/FeedSkeleton/FeedSkeleton';
-import Unauthorized from './Unauthorized/Unauthorized';
-
-export { RenderOnAnonymous, Unauthorized };
 
 // Components used in pages.
 export {
