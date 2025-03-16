@@ -1,13 +1,13 @@
-import { DisputeRsolutionForm, RenderOnAuthenticated } from '@/app/components';
+import { DisputeResolutionForm, RenderOnAuthenticated } from '@/app/components';
 
-const page = () => {
+const DisputeResolutionPage = () => {
   return (
     <RenderOnAuthenticated>
       <div className='flex h-[100%] items-center justify-center bg-[#f6f6f6] p-10'>
-        <DisputeRsolutionForm />
+        <DisputeResolutionForm />
       </div>
     </RenderOnAuthenticated>
   );
 };
 
-export default page;
+export default DisputeResolutionPage;
