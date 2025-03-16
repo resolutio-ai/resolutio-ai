@@ -4,11 +4,16 @@ import { disputeFormSchema } from '@/app/schemas/disputeFormSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { ErrorMsg } from '../error-msg/ErrorMsg';
 
 type DisputeData = z.infer<typeof disputeFormSchema>;
 
 export const DisputeRsolutionForm = () => {
-  const { handleSubmit, register } = useForm<DisputeData>({
+  const {
+    handleSubmit,
+    register,
+    formState: { errors }
+  } = useForm<DisputeData>({
     resolver: zodResolver(disputeFormSchema)
   });
 
@@ -37,8 +42,9 @@ export const DisputeRsolutionForm = () => {
               id='oppositePartyName'
               {...register('oppositePartyName')}
             />
+            <ErrorMsg name={'oppositePartyName'} errors={errors} />
           </div>
-          <div className='mt-4'>
+          <div className='mt-1'>
             <label className='text-sm font-bold text-gray-600' htmlFor='artId'>
               Art Id
             </label>
@@ -49,8 +55,9 @@ export const DisputeRsolutionForm = () => {
               id='artId'
               {...register('artId')}
             />
+            <ErrorMsg name={'artId'} errors={errors} />
           </div>
-          <div className='mt-4'>
+          <div className='mt-1'>
             <label
               className='text-sm font-bold text-gray-600'
               htmlFor='summary'
@@ -64,8 +71,9 @@ export const DisputeRsolutionForm = () => {
               placeholder='Briefly describe the dispute(250 Charatrers).'
               {...register('summary')}
             />
+            <ErrorMsg name={'summary'} errors={errors} />
           </div>
-          <div className='mt-4'>
+          <div className='mt-1'>
             <label
               className='text-sm font-bold text-gray-600'
               htmlFor='caseDetails'
@@ -79,8 +87,9 @@ export const DisputeRsolutionForm = () => {
               id='caseDetails'
               {...register('caseDetails')}
             />
+            <ErrorMsg name={'caseDetails'} errors={errors} />
           </div>
-          <div className='mt-4'>
+          <div className='mt-1'>
             <label className='text-sm font-bold text-gray-600' htmlFor='type'>
               Type
             </label>
@@ -91,6 +100,7 @@ export const DisputeRsolutionForm = () => {
               id='type'
               {...register('type')}
             />
+            <ErrorMsg name={'type'} errors={errors} />
           </div>
           <button type='submit' className='btn btn-primary mt-4 w-full'>
             Submit
