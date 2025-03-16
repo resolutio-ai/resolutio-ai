@@ -30,8 +30,8 @@ importers:
         specifier: ^4.0.14
         version: 4.0.14
       '@tanstack/react-query':
-        specifier: ^5.67.3
-        version: 5.67.3(react@19.0.0)
+        specifier: ^5.68.0
+        version: 5.68.0(react@19.0.0)
       axios:
         specifier: ^1.8.3
         version: 1.8.3
@@ -97,8 +97,8 @@ importers:
         specifier: ^10.0.0
         version: 10.0.0
       daisyui:
-        specifier: ^5.0.3
-        version: 5.0.3
+        specifier: ^5.0.4
+        version: 5.0.4
       eslint:
         specifier: ^9.22.0
         version: 9.22.0(jiti@2.4.2)
@@ -618,11 +618,11 @@ packages:
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders || >=4.0.0-alpha.20 || >=4.0.0-beta.1'
 
-  '@tanstack/query-core@5.67.3':
-    resolution: {integrity: sha512-pq76ObpjcaspAW4OmCbpXLF6BCZP2Zr/J5ztnyizXhSlNe7fIUp0QKZsd0JMkw9aDa+vxDX/OY7N+hjNY/dCGg==}
+  '@tanstack/query-core@5.68.0':
+    resolution: {integrity: sha512-r8rFYYo8/sY/LNaOqX84h12w7EQev4abFXDWy4UoDVUJzJ5d9Fbmb8ayTi7ScG+V0ap44SF3vNs/45mkzDGyGw==}
 
-  '@tanstack/react-query@5.67.3':
-    resolution: {integrity: sha512-u/n2HsQeH1vpZIOzB/w2lqKlXUDUKo6BxTdGXSMvNzIq5MHYFckRMVuFABp+QB7RN8LFXWV6X1/oSkuDq+MPIA==}
+  '@tanstack/react-query@5.68.0':
+    resolution: {integrity: sha512-mMOdGDKlwTP/WV72QqSNf4PAMeoBp/DqBHQ222wBfb51Looi8QUqnCnb9O98ZgvNISmy6fzxRGBJdZ+9IBvX2Q==}
     peerDependencies:
       react: ^18 || ^19
 
@@ -1012,8 +1012,8 @@ packages:
     resolution: {integrity: sha512-MOqHvMWF9/9MX6nza0KgvFH4HpMU0EF5uUDXqX/BtxtU8NfB0QzRtJ8Oe/6SuS4kbhyzVJwjd97EA4PKrzJ8bw==}
     engines: {node: '>=0.12'}
 
-  daisyui@5.0.3:
-    resolution: {integrity: sha512-27dou80uFNgxVcmQNzS8QFBoE1/01u7N0smdGqA2pHbaRPTFoHdJfXNzilpvt/0jAVu8cMEhrVPoYxpdxLwumA==}
+  daisyui@5.0.4:
+    resolution: {integrity: sha512-9X3oX/k9hPBCslAECk8kYfvwgrz6Grs0lN7VI0/ZTM/hUfq1uFREHxCcBCCq0QROpN183N19B1hTNRWGipO2Eg==}
 
   damerau-levenshtein@1.0.8:
     resolution: {integrity: sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==}
@@ -3266,11 +3266,11 @@ snapshots:
       postcss-selector-parser: 6.0.10
       tailwindcss: 4.0.14
 
-  '@tanstack/query-core@5.67.3': {}
+  '@tanstack/query-core@5.68.0': {}
 
-  '@tanstack/react-query@5.67.3(react@19.0.0)':
+  '@tanstack/react-query@5.68.0(react@19.0.0)':
     dependencies:
-      '@tanstack/query-core': 5.67.3
+      '@tanstack/query-core': 5.68.0
       react: 19.0.0
 
   '@types/bn.js@4.11.6':
@@ -3721,7 +3721,7 @@ snapshots:
       es5-ext: 0.10.64
       type: 2.7.3
 
-  daisyui@5.0.3: {}
+  daisyui@5.0.4: {}
 
   damerau-levenshtein@1.0.8: {}
 
