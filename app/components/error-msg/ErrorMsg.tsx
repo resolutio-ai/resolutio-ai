@@ -2,6 +2,7 @@ import { get, useFormContext } from 'react-hook-form';
 
 type ErrorMsgProps = {
   name: string;
+  /* eslint-disable  @typescript-eslint/no-explicit-any */
   errors: any;
 };
 
