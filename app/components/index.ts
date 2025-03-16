@@ -1,6 +1,6 @@
 import Blogs from './Blogs/Blogs';
 import EvidenceDialog from './Dialogs/EvidenceDialog/EvidenceDialog';
-import { DisputeRsolutionForm } from './dispute-resolution-form/DisputeRsolutionForm';
+import { DisputeResolutionForm } from './dispute-resolution-form/DisputeResolutionForm';
 import EvidenceForm from './Evidence/EvidenceForm/EvidenceForm';
 import FeedItem from './Feed/FeedItem/FeedItem';
 import Search from './Feed/Search/Search';
@@ -23,7 +23,7 @@ import FeedSkeleton from './Skeleton/FeedSkeleton/FeedSkeleton';
 export {
   Blogs,
   CommunityLink,
-  DisputeRsolutionForm,
+  DisputeResolutionForm,
   EventsAndWorkShop,
   EvidenceForm,
   EvidenceLink,
