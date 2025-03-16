@@ -11,6 +11,5 @@
   "prettier.configPath": ".prettierrc.json",
   "files.associations": {
     "*.css": "tailwindcss"
-  },
-  "tailwindCSS.experimental.configFile": "app/theme/tailwind.config.css"
+  }
 }
