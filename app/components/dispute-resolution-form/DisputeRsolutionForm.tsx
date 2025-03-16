@@ -1,15 +1,12 @@
-'use client';
+//import { disputeFormSchema } from '@/app/schemas/disputeFormSchema';
+/* import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form'; */
+//import { z } from 'zod';
 
-import { disputeFormSchema } from '@/app/schemas/disputeFormSchema';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { ErrorMsg } from '../error-msg/ErrorMsg';
-
-type DisputeData = z.infer<typeof disputeFormSchema>;
+//type DisputeData = z.infer<typeof disputeFormSchema>;
 
 export const DisputeRsolutionForm = () => {
-  const {
+  /*   const {
     handleSubmit,
     register,
     formState: { errors }
@@ -19,14 +16,14 @@ export const DisputeRsolutionForm = () => {
 
   const onSubmit = (data: DisputeData) => {
     console.log(data);
-  };
+  }; */
 
   return (
     <div className='card xs:w-100 bg-white p-10 shadow-sm md:w-2xl'>
       <h3 className='pb-4 text-center text-4xl font-bold tracking-tight text-gray-500'>
         Initiate Dispute
       </h3>
-      <div>
+      {/*       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className='mt-4'>
             <label
@@ -106,7 +103,7 @@ export const DisputeRsolutionForm = () => {
             Submit
           </button>
         </form>
-      </div>
+      </div> */}
     </div>
   );
 };
