@@ -14,11 +14,7 @@ export const DisputeResolutionForm = () => {
     resolver: zodResolver(disputeFormSchema)
   });
 
-  const {
-    handleSubmit,
-    register,
-    formState: { errors }
-  } = methods;
+  const { handleSubmit, register } = methods;
 
   const onSubmit = (data: DisputeData) => {
     console.log(data);
@@ -46,7 +42,7 @@ export const DisputeResolutionForm = () => {
                 id='oppositePartyName'
                 {...register('oppositePartyName')}
               />
-              <ErrorMsg name={'oppositePartyName'} errors={errors} />
+              <ErrorMsg name='oppositePartyName' />
             </div>
             <div className='mt-1'>
               <label
@@ -62,7 +58,7 @@ export const DisputeResolutionForm = () => {
                 id='artId'
                 {...register('artId')}
               />
-              <ErrorMsg name={'artId'} errors={errors} />
+              <ErrorMsg name={'artId'} />
             </div>
             <div className='mt-1'>
               <label
@@ -78,7 +74,7 @@ export const DisputeResolutionForm = () => {
                 placeholder='Briefly describe the dispute(250 Charatrers).'
                 {...register('summary')}
               />
-              <ErrorMsg name={'summary'} errors={errors} />
+              <ErrorMsg name={'summary'} />
             </div>
             <div className='mt-1'>
               <label
@@ -94,7 +90,7 @@ export const DisputeResolutionForm = () => {
                 id='caseDetails'
                 {...register('caseDetails')}
               />
-              <ErrorMsg name={'caseDetails'} errors={errors} />
+              <ErrorMsg name={'caseDetails'} />
             </div>
             <div className='mt-1'>
               <label className='text-sm font-bold text-gray-600' htmlFor='type'>
@@ -107,14 +103,14 @@ export const DisputeResolutionForm = () => {
                 id='type'
                 {...register('type')}
               />
-              <ErrorMsg name={'type'} errors={errors} />
+              <ErrorMsg name={'type'} />
             </div>
             <div>
               <FileUpload
                 name='evidenceAttachments'
                 label='Attach your evidence'
               />
-              <ErrorMsg name='evidenceAttachments' errors={errors} />
+              <ErrorMsg name='evidenceAttachments' />
             </div>
             <button type='submit' className='btn btn-primary mt-4 w-full'>
               Submit
