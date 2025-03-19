@@ -52,7 +52,7 @@ const BlogItem = ({ blog }: BlogItemProps) => {
   );
 };
 
-const Blogs = async () => {
+export const Blogs = async () => {
   let blog: Blog | null = null;
 
   const response: Response = await getBlogs();
@@ -83,5 +83,3 @@ const Blogs = async () => {
     </div>
   );
 };
-
-export default Blogs;

@@ -1,11 +1,11 @@
-import Blogs from './Blogs/Blogs';
+import { Blogs } from './blogs/Blogs';
 import EvidenceDialog from './Dialogs/EvidenceDialog/EvidenceDialog';
 import { DisputeResolutionForm } from './dispute-resolution-form/DisputeResolutionForm';
 import EvidenceForm from './Evidence/EvidenceForm/EvidenceForm';
 import FeedItem from './Feed/FeedItem/FeedItem';
 import Search from './Feed/Search/Search';
 import Sidebar from './Feed/Sidebar/Sidebar';
-import Footer from './Footer/Footer';
+import { Footer } from './footer/Footer';
 import Header from './Header/Header';
 import CommunityLink from './LinkSection/CommunityLink';
 import EvidenceLink from './LinkSection/EvidenceLink';
