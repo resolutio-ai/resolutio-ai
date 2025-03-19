@@ -10,7 +10,7 @@ type FileUploadProps = {
   React.InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
 >;
-const FileUpload = (props: FileUploadProps) => {
+export const FileUpload = (props: FileUploadProps) => {
   const { name = '', label = name } = props;
   const { register, unregister, setValue, watch } = useFormContext();
 
@@ -96,5 +96,3 @@ const FileUpload = (props: FileUploadProps) => {
     </>
   );
 };
-
-export default FileUpload;

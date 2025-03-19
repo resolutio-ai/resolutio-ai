@@ -13,7 +13,7 @@ import {
   useForm,
   useFormContext
 } from 'react-hook-form';
-import FileUpload from '../FileUpload/FileUpload';
+import { FileUpload } from '../../file-upload/FileUpload';
 import FormNavigator from '../FormNavigator/FormNavigator';
 
 type WorkDetails = Pick<

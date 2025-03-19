@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { FormProvider, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { ErrorMsg } from '../error-msg/ErrorMsg';
-import FileUpload from '../Evidence/FileUpload/FileUpload';
+import { FileUpload } from '../file-upload/FileUpload';
 
 type DisputeData = z.infer<typeof disputeFormSchema>;
 
