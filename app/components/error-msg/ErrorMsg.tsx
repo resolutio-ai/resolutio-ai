@@ -10,7 +10,7 @@ export const ErrorMsg = ({ name }: ErrorMsgProps) => {
   } = useFormContext();
   const error = get(errors, name);
   return (
-    <div className='mt-1 min-h-6'>
+    <div className='min-h-7'>
       {error && <span className='text-xs text-red-500'>{error.message}</span>}
     </div>
   );

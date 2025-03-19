@@ -105,7 +105,7 @@ export const DisputeResolutionForm = () => {
               />
               <ErrorMsg name={'type'} />
             </div>
-            <div>
+            <div className='mt-1'>
               <FileUpload
                 name='evidenceAttachments'
                 label='Attach your evidence'
