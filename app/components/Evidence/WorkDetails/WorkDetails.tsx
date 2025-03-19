@@ -13,6 +13,7 @@ import {
   useForm,
   useFormContext
 } from 'react-hook-form';
+import { ErrorMsg } from '../../error-msg/ErrorMsg';
 import { FileUpload } from '../../file-upload/FileUpload';
 import FormNavigator from '../FormNavigator/FormNavigator';
 
@@ -22,10 +23,7 @@ type WorkDetails = Pick<
 >;
 
 const WorkName = () => {
-  const {
-    register,
-    formState: { errors }
-  } = useFormContext<WorkDetails>();
+  const { register } = useFormContext<WorkDetails>();
   return (
     <div>
       <label className='text-sm font-bold text-gray-600' htmlFor='nameOfWork'>
@@ -38,21 +36,12 @@ const WorkName = () => {
         placeholder='Enter name of work'
         {...register('nameOfWork')}
       />
-      <div className='mt-1 min-h-6'>
-        {errors.nameOfWork && (
-          <span className='text-xs text-red-500'>
-            {errors.nameOfWork?.message}
-          </span>
-        )}
-      </div>
+      <ErrorMsg name='nameOfWork' />
     </div>
   );
 };
 const MediumSelector = () => {
-  const {
-    register,
-    formState: { errors }
-  } = useFormContext<WorkDetails>();
+  const { register } = useFormContext<WorkDetails>();
   return (
     <div>
       <label className='text-sm font-bold text-gray-600' htmlFor='medium'>
@@ -68,21 +57,12 @@ const MediumSelector = () => {
           <option key={medium}>{medium}</option>
         ))}
       </select>
-      <div className='mt-1 min-h-6'>
-        {errors.medium && (
-          <span className='text-xs text-red-500'>{errors.medium?.message}</span>
-        )}
-      </div>
+      <ErrorMsg name='medium' />
     </div>
   );
 };
 const DateOfCreation = () => {
-  const {
-    control,
-    setValue,
-    getValues,
-    formState: { errors }
-  } = useFormContext<WorkDetails>();
+  const { control, setValue, getValues } = useFormContext<WorkDetails>();
 
   const [date, setDate] = useState<Date>(getValues('dateOfCreation'));
 
@@ -130,29 +110,15 @@ const DateOfCreation = () => {
           />
         )}
       />
-      <div className='mt-1 min-h-6'>
-        {errors.dateOfCreation && (
-          <span className='text-xs text-red-500'>
-            {errors.dateOfCreation?.message}
-          </span>
-        )}
-      </div>
+      <ErrorMsg name='dateOfCreation' />
     </>
   );
 };
 const WorkUpload = () => {
-  const {
-    formState: { errors }
-  } = useFormContext<WorkDetails>();
-
   return (
     <>
       <FileUpload name='file' label='Upload Work' />
-      <div className='mt-1 min-h-6'>
-        {errors.file && (
-          <span className='text-xs text-red-500'>{errors.file?.message}</span>
-        )}
-      </div>
+      <ErrorMsg name='file' />
     </>
   );
 };

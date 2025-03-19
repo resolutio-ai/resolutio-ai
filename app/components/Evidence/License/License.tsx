@@ -9,7 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
 import { useEffect } from 'react';
 import { FormProvider, useForm, useFormContext } from 'react-hook-form';
-import FileUpload from '../../file-upload/FileUpload';
+import { FileUpload } from '../../file-upload/FileUpload';
 import FormNavigator from '../FormNavigator/FormNavigator';
 
 type Licensing = Pick<EvidenceFromData, 'license' | 'ownLicense'>;
