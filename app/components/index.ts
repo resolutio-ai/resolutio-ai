@@ -6,7 +6,7 @@ import FeedItem from './Feed/FeedItem/FeedItem';
 import Search from './Feed/Search/Search';
 import Sidebar from './Feed/Sidebar/Sidebar';
 import { Footer } from './footer/Footer';
-import Header from './Header/Header';
+import { Header } from './Header/Header';
 import CommunityLink from './LinkSection/CommunityLink';
 import EvidenceLink from './LinkSection/EvidenceLink';
 import LavenderCollectiveLink from './LinkSection/LavenderCollectiveLink';

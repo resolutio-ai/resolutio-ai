@@ -4,9 +4,9 @@ import { useUserContext } from '@/app/contexts';
 import Image from 'next/image';
 import Link from 'next/link';
 import LoginDialog from '../Dialogs/LoginDialog/LoginDialog';
-import ProfileDropdown from './ProfileDropdown/ProfileDropdown';
+import { ProfileDropdown } from './profile-dropdown/ProfileDropdown';
 
-const Header = () => {
+export const Header = () => {
   const { isAuthenticated } = useUserContext();
   return (
     <>
@@ -49,5 +49,3 @@ const Header = () => {
     </>
   );
 };
-
-export default Header;

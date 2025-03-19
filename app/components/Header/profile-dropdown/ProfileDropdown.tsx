@@ -4,7 +4,7 @@ import { useUserContext } from '@/app/contexts';
 import { LOGIN_MODAL_ID } from '@/app/settings';
 import { useMemo } from 'react';
 
-const ProfileDropdown = () => {
+export const ProfileDropdown = () => {
   const { user, logout, isAuthenticated, isProfileLoading } = useUserContext();
 
   const openLoginModal = () => {
@@ -61,5 +61,3 @@ const ProfileDropdown = () => {
     </>
   );
 };
-
-export default ProfileDropdown;
