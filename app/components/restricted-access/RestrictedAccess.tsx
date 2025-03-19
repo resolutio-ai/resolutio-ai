@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import AlignCenter from '../AlignCenter/AlignCenter';
+import { AlignCenter } from '../align-center/AlignCenter';
 
-const RestrictedAccess = () => {
+export const RestrictedAccess = () => {
   return (
     <AlignCenter>
       <Image
@@ -26,5 +26,3 @@ const RestrictedAccess = () => {
     </AlignCenter>
   );
 };
-
-export default RestrictedAccess;

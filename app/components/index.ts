@@ -14,10 +14,10 @@ import EventsAndWorkShop from './LinkWithImage/EventsAndWorkShop';
 import OurStory from './LinkWithImage/OurStory';
 import ResolveDispute from './LinkWithImage/ResolveDispute';
 import UnderstandYourRights from './LinkWithImage/UnderstandYourRights';
-import OurTeam from './OurTeam/OurTeam';
-import RenderOnAuthenticated from './RenderOnAuthenticated/RenderOnAuthenticated';
-import RestrictedAccess from './RestrictedAccess/RestrictedAccess';
-import FeedSkeleton from './Skeleton/FeedSkeleton/FeedSkeleton';
+import { OurTeam } from './our-team/OurTeam';
+import { RenderOnAuthenticated } from './render-on-authenticated/RenderOnAuthenticated';
+import { RestrictedAccess } from './restricted-access/RestrictedAccess';
+import { FeedSkeleton } from './Skeleton/feed-skeleton/FeedSkeleton';
 
 // Components used in pages.
 export {

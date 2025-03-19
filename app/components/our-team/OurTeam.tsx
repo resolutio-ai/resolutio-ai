@@ -38,7 +38,7 @@ const MemberItem = ({ member }: MemberItemProps) => {
   );
 };
 
-const OurTeam = async () => {
+export const OurTeam = async () => {
   let ourMembers: Member[] = [];
 
   const response: Response = await getOurTeam();
@@ -57,5 +57,3 @@ const OurTeam = async () => {
     </div>
   );
 };
-
-export default OurTeam;

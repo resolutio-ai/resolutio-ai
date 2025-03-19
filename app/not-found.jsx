@@ -1,7 +1,7 @@
-import AlignCenter from '@/app/components/AlignCenter/AlignCenter';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import { AlignCenter } from './components/align-center/AlignCenter';
 
 const NotFound = () => {
   return (

@@ -19,7 +19,7 @@ const FeedItemSkeleton = () => {
   );
 };
 
-const FeedSkeleton = () => {
+export const FeedSkeleton = () => {
   return (
     <div className='my-8 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-10 xl:grid-cols-3'>
       {[1, 2, 3].map((id) => (
@@ -28,5 +28,3 @@ const FeedSkeleton = () => {
     </div>
   );
 };
-
-export default FeedSkeleton;

@@ -1,10 +1,10 @@
 'use client';
 
 import Image from 'next/image';
-import AlignCenter from '../AlignCenter/AlignCenter';
-import RenderOnAnonymous from '../RenderOnAnonymous/RenderOnAnonymous';
+import { AlignCenter } from '../align-center/AlignCenter';
+import { RenderOnAnonymous } from '../render-on-anonymous/RenderOnAnonymous';
 
-const Unauthorized = () => {
+export const Unauthorized = () => {
   return (
     <RenderOnAnonymous>
       <AlignCenter>
@@ -19,5 +19,3 @@ const Unauthorized = () => {
     </RenderOnAnonymous>
   );
 };
-
-export default Unauthorized;

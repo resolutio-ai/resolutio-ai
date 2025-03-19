@@ -2,15 +2,13 @@
 
 import { useUserContext } from '@/app/contexts';
 import { PropsWithChildren } from 'react';
-import Loader from '../Loader/Loader';
-import Unauthorized from '../Unauthorized/Unauthorized';
+import { Loader } from '../loader/Loader';
+import { Unauthorized } from '../unauthorized/Unauthorized';
 
-const RenderOnAuthenticated = ({ children }: PropsWithChildren) => {
+export const RenderOnAuthenticated = ({ children }: PropsWithChildren) => {
   const { isAuthenticated, isProfileLoading } = useUserContext();
 
   if (isProfileLoading) return <Loader />;
 
   return isAuthenticated ? children : <Unauthorized />;
 };
-
-export default RenderOnAuthenticated;
