@@ -42,7 +42,7 @@ export const DisputeResolutionForm = () => {
                 id='oppositePartyName'
                 {...register('oppositePartyName')}
               />
-              <ErrorMsg name='oppositePartyName' />
+              <ErrorMsg<DisputeData> name='oppositePartyName' />
             </div>
             <div className='mt-1'>
               <label
@@ -58,7 +58,7 @@ export const DisputeResolutionForm = () => {
                 id='artId'
                 {...register('artId')}
               />
-              <ErrorMsg name={'artId'} />
+              <ErrorMsg<DisputeData> name='artId' />
             </div>
             <div className='mt-1'>
               <label
@@ -74,7 +74,7 @@ export const DisputeResolutionForm = () => {
                 placeholder='Briefly describe the dispute(250 Charatrers).'
                 {...register('summary')}
               />
-              <ErrorMsg name={'summary'} />
+              <ErrorMsg<DisputeData> name='summary' />
             </div>
             <div className='mt-1'>
               <label
@@ -90,7 +90,7 @@ export const DisputeResolutionForm = () => {
                 id='caseDetails'
                 {...register('caseDetails')}
               />
-              <ErrorMsg name={'caseDetails'} />
+              <ErrorMsg<DisputeData> name='caseDetails' />
             </div>
             <div className='mt-1'>
               <label className='text-sm font-bold text-gray-600' htmlFor='type'>
@@ -103,14 +103,14 @@ export const DisputeResolutionForm = () => {
                 id='type'
                 {...register('type')}
               />
-              <ErrorMsg name={'type'} />
+              <ErrorMsg<DisputeData> name='type' />
             </div>
             <div className='mt-1'>
               <FileUpload
                 name='evidenceAttachments'
                 label='Attach your evidence'
               />
-              <ErrorMsg name='evidenceAttachments' />
+              <ErrorMsg<DisputeData> name='evidenceAttachments' />
             </div>
             <button type='submit' className='btn btn-primary mt-4 w-full'>
               Submit
